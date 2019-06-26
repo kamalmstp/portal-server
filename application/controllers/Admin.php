@@ -16,7 +16,7 @@ class Admin extends CI_Controller
 		$this->load->database();
         $this->load->library('session');
         $this->load->library('form_validation');
-        $this->load->model('Fingerprint');
+        $this->load->model('Fingerprint','finger');
         $this->load->model('Barcode_model');
         $this->load->model(array('Ajaxdataload_model' => 'ajaxload'));
 
@@ -1518,6 +1518,7 @@ class Admin extends CI_Controller
             redirect(site_url('login'), 'refresh');
         }
 
+        $page_data['attendance'] = $this->db->get('last_attendance')->result_array();
         $page_data['page_name']  =  'daily_attendance';
         $page_data['page_title'] =  get_phrase('daily_attendance_of_class');
         $this->load->view('backend/index', $page_data);
@@ -1525,6 +1526,9 @@ class Admin extends CI_Controller
 
     function daily_attendance_selector()
     {   if($this->input->post('class_id') == '') {
+            
+            $this->finger->get_data_absen('');
+
             $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_selected'));
             redirect(site_url('admin/daily_attendance'), 'refresh');
         }

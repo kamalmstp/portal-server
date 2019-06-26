@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('class'); ?></label>
                         <select class="form-control selectboxit" name="class_id" onchange="select_section(this.value)">
-                            <option value=""><?php echo get_phrase('select_class'); ?></option>
+                            <option value=""><?php echo get_phrase('all'); ?></option>
                             <?php foreach ($class as $row): ?>
                             <option value="<?php echo $row['class_id']; ?>" ><?php echo $row['name']; ?></option>
                             <?php endforeach; ?>
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('section'); ?></label>
                         <select class="form-control selectboxit" name="section_id">
-                            <option value=""><?php echo get_phrase('select_class_first') ?></option>
+                            <option value=""><?php echo get_phrase('all') ?></option>
 
                         </select>
                     </div>
@@ -68,23 +68,20 @@
                             <td style="text-align: center;" rowspan="2">
                                 <?php echo get_phrase('student'); ?>
                             </td>
-                            <td style="text-align: center;" colspan="2">
-                                <?php echo get_phrase('schedule'); ?>
+                            <td style="text-align: center;" rowspan="2">
+                                <?php echo get_phrase('nisn'); ?>
+                            </td>
+                            <td style="text-align: center;" rowspan="2">
+                                <?php echo get_phrase('class'); ?>
+                            </td>
+                            <td style="text-align: center;" rowspan="2">
+                                <?php echo get_phrase('section'); ?>
                             </td>
                             <td style="text-align: center;" colspan="3">
                                 <?php echo get_phrase('attendance'); ?>
                             </td>
-                            <td style="text-align: center;" rowspan="2">
-                                <?php echo get_phrase(' '); ?>
-                            </td>
                         </tr>
                         <tr>
-                            <td style="text-align: center;">
-                                <?php echo get_phrase('coming'); ?>
-                            </td>
-                            <td style="text-align: center;">
-                                <?php echo get_phrase('home'); ?>
-                            </td>
                             <td style="text-align: center;">
                                 <?php echo get_phrase('coming'); ?>
                             </td>
@@ -97,7 +94,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                    
+                        <?php $no = 1;
+                            foreach ($attendance as $attend): 
+                            ?>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <?php echo $no++ ?>
+                                </td>
+                                <td>
+                                    <?php echo $attend['name'] ?>
+                                </td>
+                                <td style="text-align: center;">
+                                    <?php echo $attend['student_code'] ?>
+                                </td>
+                                <td style="text-align: center;">
+                                    <?php echo $attend['class'] ?>
+                                </td>
+                                <td style="text-align: center;">
+                                    <?php echo $attend['section'] ?>
+                                </td>
+                                <td style="text-align: center;">
+                                <?php if ($attend['status'] == 0) {
+                                    # code...
+                                    echo date('H:i:s', strtotime($attend['date_time']));
+                                } else {
+                                    # code...
+                                    echo "-";
+                                } ?>
+                                </td>
+                                <td style="text-align: center;">
+                                    
+                                </td>
+                                <td style="text-align: center;"><?php if ($attend['status'] == 1) {
+                                    # code...
+                                    echo date('H:i:s', strtotime($attend['date_time']));
+                                } else {
+                                    # code...
+                                    echo "-";
+                                } ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

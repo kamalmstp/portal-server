@@ -37,6 +37,12 @@ class Crud_model extends CI_Model {
         return $query;
     }
 
+    /////////FINGERPRINT//////////
+    function get_attendance(Type $var = null)
+    {
+        # code...
+    }
+
     /////////TEACHER/////////////
     function get_teachers() {
         $query = $this->db->get('teacher');

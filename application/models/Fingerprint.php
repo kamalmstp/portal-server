@@ -59,12 +59,20 @@ class Fingerprint extends CI_Model {
                     }
                 }
             
-                if($buffer){
-                    $this->session->set_flashdata('flash_message' , get_phrase('fingerprint_connected'));
-                } else {
-                    $this->session->set_flashdata('error_message' , get_phrase('fingerprint_not_connected'));
-                }
+                // if($buffer){
+                // 	return '<div class="alert alert-success alert-dismissable">
+        		// 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        		// 		<h4><i class="icon fa fa-check"></i> Success !</h4>
+        		// 		Anda terhubung dengan mesin.
+        		// 	</div>';
+                // } else {
+                // 	return '<div class="alert alert-danger alert-dismissable">
+        		// 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        		// 		<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+        		// 		Anda tidak terhubung dengan mesin !
+        		// 	</div>';
+                // }
             }
-        } 
+        }
     }
 }
