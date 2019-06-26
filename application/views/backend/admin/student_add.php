@@ -23,7 +23,7 @@
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('NISN');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="student_code" value="<?php echo substr("NISN"); ?>" data-validate="required" id="class_id"
+							<input type="text" class="form-control" name="nisn" value="<?php echo substr("NISN"); ?>" data-validate="required" id="class_id"
 								data-message-required="<?php echo get_phrase('value_required');?>">
 						</div>
 					</div>
@@ -81,6 +81,14 @@
 					</div>
 
 					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('birthplace');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="birthplace" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('birthday');?></label>
 
 						<div class="col-sm-5">
@@ -101,6 +109,20 @@
 					</div>
 
 					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('blood type');?></label>
+
+						<div class="col-sm-5">
+							<select name="blood" class="form-control selectboxit">
+                              <option value=""><?php echo get_phrase('select');?></option>
+                              <option value="a"><?php echo get_phrase('a');?></option>
+                              <option value="b"><?php echo get_phrase('b');?></option>
+							  <option value="ab"><?php echo get_phrase('ab');?></option>
+							  <option value="o"><?php echo get_phrase('o');?></option>
+                          </select>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('address');?></label>
 
 						<div class="col-sm-5">
@@ -116,12 +138,6 @@
 						</div>
 					</div>
 
-					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('email').'/'.get_phrase('username');?></label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="email" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="">
-						</div>
-					</div>
 
 					<div class="form-group">
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('password');?></label>
@@ -131,7 +147,55 @@
 						</div>
 					</div>
 
+					<!-- orang tua -->
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('father name');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="father" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('father profession');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="fatherwork" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+						</div>
+					</div>
 					
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother name');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="mother" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother profession');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="motherwork" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parents address');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="perentsaddress" value="" >
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parents contact');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="parentcontact" value="" >
+						</div>
+					</div>
+
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('photo');?></label>

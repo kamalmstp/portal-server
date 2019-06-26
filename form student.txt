@@ -1,0 +1,21 @@
+identitas siswa
+nama*name
+nisn*nisn
+tempat lahir*birthplace
+tanggal lahir *birthday
+jenis kelamin*sex
+gol darah*blood
+alamat*address
+phone*phone
+
+
+
+
+
+identitas orangtua murid
+nama ayah*father
+perkerjaan*fatherwork
+nama ibu*mother
+pekerjaan*motherwok
+alamat orngtua murid*parentsaddres
+no.hp orng tua*parentcontact
