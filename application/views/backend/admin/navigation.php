@@ -103,11 +103,11 @@
                 </li>
 
                 <!-- STUDENT PROMOTION -->
-                <li class="<?php if ($page_name == 'student_promotion') echo 'active'; ?> ">
+                <!-- <li class="<?php if ($page_name == 'student_promotion') echo 'active'; ?> ">
                     <a href="<?php echo site_url('admin/student_promotion'); ?>">
                         <span><i class="entypo-dot"></i> <?php echo get_phrase('student_promotion'); ?></span>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </li>
@@ -139,12 +139,12 @@
                     </a>
                 </li>
                 <!-- manage parents -->
-                <li class="<?php if ($page_name == 'parent') echo 'active'; ?> ">
+                <!-- <li class="<?php if ($page_name == 'parent') echo 'active'; ?> ">
                     <a href="<?php echo site_url('admin/parent'); ?>">
                         <i class="entypo-dot"></i>
                         <span><?php echo get_phrase('parents'); ?></span>
                     </a>
-                </li>
+                </li> -->
                 <!-- librarian -->
                 <li class="<?php if ($page_name == 'librarian') echo 'active'; ?> ">
                     <a href="<?php echo site_url('admin/librarian'); ?>">
@@ -255,13 +255,22 @@
                                     echo 'opened active'; ?> ">
             <a href="#">
                 <i class="flaticon-clipboard"></i>
-                <span><?php echo get_phrase('daily_attendance'); ?></span>
+                <span><?php echo get_phrase('attendance'); ?></span>
             </a>
+            <ul>
+
+                    <li class="<?php if (($page_name == 'daily_attendance' || $page_name == 'daily_attendance_view')) echo 'active'; ?>">
+                        <a href="<?php echo site_url('admin/daily_attendance'); ?>">
+                            <span><i class="entypo-dot"></i><?php echo get_phrase('daily_atendance'); ?></span>
+                        </a>
+                    </li>
+
+            </ul>
             <ul>
 
                     <li class="<?php if (($page_name == 'manage_attendance' || $page_name == 'manage_attendance_view')) echo 'active'; ?>">
                         <a href="<?php echo site_url('admin/manage_attendance'); ?>">
-                            <span><i class="entypo-dot"></i><?php echo get_phrase('daily_atendance'); ?></span>
+                            <span><i class="entypo-dot"></i><?php echo get_phrase('manage_atendance'); ?></span>
                         </a>
                     </li>
 

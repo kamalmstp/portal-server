@@ -15,6 +15,8 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->database();
         $this->load->library('session');
+        $this->load->library('form_validation');
+        $this->load->model('Fingerprint');
         $this->load->model('Barcode_model');
         $this->load->model(array('Ajaxdataload_model' => 'ajaxload'));
 
@@ -39,6 +41,8 @@ class Admin extends CI_Controller
             redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'dashboard';
         $page_data['page_title'] = get_phrase('admin_dashboard');
+        
+
         $this->load->view('backend/index', $page_data);
     }
 
@@ -268,16 +272,6 @@ class Admin extends CI_Controller
             $data['email']        = html_escape($this->input->post('email'));
             $data['password']     = sha1($this->input->post('password'));
 
-
-            if($this->input->post('parent_id') != null){
-                $data['parent_id']    = $this->input->post('parent_id');
-            }
-            if($this->input->post('dormitory_id') != null){
-                $data['dormitory_id'] = $this->input->post('dormitory_id');
-            }
-            if($this->input->post('transport_id') != null){
-                $data['transport_id'] = $this->input->post('transport_id');
-            }
             $validation = email_validation($data['email']);
             if($validation == 1) {
                 $this->db->insert('student', $data);
@@ -310,7 +304,6 @@ class Admin extends CI_Controller
         if ($param1 == 'do_update') {
             $data['name']           = html_escape($this->input->post('name'));
             $data['email']          = html_escape($this->input->post('email'));
-            $data['parent_id']      = $this->input->post('parent_id');
             if (html_escape($this->input->post('birthday')) != null) {
                 $data['birthday']   = html_escape($this->input->post('birthday'));
             }
@@ -322,12 +315,6 @@ class Admin extends CI_Controller
             }
             if (html_escape($this->input->post('phone')) != null) {
                 $data['phone']          = html_escape($this->input->post('phone'));
-            }
-            if ($this->input->post('dormitory_id') != null) {
-               $data['dormitory_id']   = $this->input->post('dormitory_id');
-            }
-            if ($this->input->post('transport_id') != null) {
-                $data['transport_id']   = $this->input->post('transport_id');
             }
 
             //student id
@@ -1523,6 +1510,28 @@ class Admin extends CI_Controller
         $page_data['class_id']          =   $class_id;
         $page_data['class_routine_id']  =   $class_routine_id;
         $this->load->view('backend/admin/class_routine_section_subject_edit' , $page_data);
+    }
+
+    function daily_attendance()
+    {
+        if($this->session->userdata('admin_login')!=1){
+            redirect(site_url('login'), 'refresh');
+        }
+
+        $page_data['page_name']  =  'daily_attendance';
+        $page_data['page_title'] =  get_phrase('daily_attendance_of_class');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function daily_attendance_selector()
+    {   if($this->input->post('class_id') == '') {
+            $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_selected'));
+            redirect(site_url('admin/daily_attendance'), 'refresh');
+        }
+        $data['class_id']       = $this->input->post('class_id');
+        $data['section_id']     = $this->input->post('section_id');
+
+        redirect(site_url('admin/daily_attendance_view/' . $data['class_id'] . '/' . $data['section_id']), 'refresh');
     }
 
     function manage_attendance()

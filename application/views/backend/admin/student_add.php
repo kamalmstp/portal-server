@@ -20,6 +20,15 @@
 					</div>
 
 					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('NISN');?></label>
+
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="student_code" value="<?php echo substr("NISN"); ?>" data-validate="required" id="class_id"
+								data-message-required="<?php echo get_phrase('value_required');?>">
+						</div>
+					</div>
+
+					<!-- <div class="form-group">
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parent');?></label>
 
 						<div class="col-sm-5">
@@ -37,7 +46,7 @@
 							  ?>
                           </select>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="form-group">
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('class');?></label>
@@ -69,15 +78,6 @@
 
 			                    </select>
 			                </div>
-					</div>
-
-					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('id_no');?></label>
-
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="student_code" value="<?php echo substr(md5(uniqid(rand(), true)), 0, 7); ?>" data-validate="required" id="class_id"
-								data-message-required="<?php echo get_phrase('value_required');?>">
-						</div>
 					</div>
 
 					<div class="form-group">
@@ -131,37 +131,7 @@
 						</div>
 					</div>
 
-					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('dormitory');?></label>
-
-						<div class="col-sm-5">
-							<select name="dormitory_id" class="form-control selectboxit">
-                              <option value=""><?php echo get_phrase('select');?></option>
-	                              <?php
-	                              	$dormitories = $this->db->get('dormitory')->result_array();
-	                              	foreach($dormitories as $row):
-	                              ?>
-                              		<option value="<?php echo $row['dormitory_id'];?>"><?php echo $row['name'];?></option>
-                          		<?php endforeach;?>
-                          </select>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('transport_route');?></label>
-
-						<div class="col-sm-5">
-							<select name="transport_id" class="form-control selectboxit">
-                              <option value=""><?php echo get_phrase('select');?></option>
-	                              <?php
-	                              	$transports = $this->db->get('transport')->result_array();
-	                              	foreach($transports as $row):
-	                              ?>
-                              		<option value="<?php echo $row['transport_id'];?>"><?php echo $row['route_name'];?></option>
-                          		<?php endforeach;?>
-                          </select>
-						</div>
-					</div>
+					
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('photo');?></label>
