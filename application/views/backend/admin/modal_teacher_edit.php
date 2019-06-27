@@ -43,13 +43,20 @@ foreach ( $edit_data as $row):
                                     <input type="text" class="form-control" name="name" value="<?php echo $row['name'];?>" data-validate="required"/>
                                 </div>
                             </div>
-														<div class="form-group">
-															<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('designation');?></label>
-															<div class="col-sm-5">
-																<input type="text" class="form-control" name="designation"
-																	value="<?php echo $row['designation'] == null ? '' : $row['designation'];?>" >
-															</div>
-														</div>
+								<div class="form-group">
+									<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('NIP');?></label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" name="nip" value="<?php echo $row['nip'] == null ? '' : $row['nip'];?>" >
+									</div>
+								</div>
+
+                                <div class="form-group">
+									<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('position');?></label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" name="position" value="<?php echo $row['position'] == null ? '' : $row['position'];?>" >
+									</div>
+								</div>
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('birthday');?></label>
                                 <div class="col-sm-5">

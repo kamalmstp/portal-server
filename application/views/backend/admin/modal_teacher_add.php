@@ -20,9 +20,16 @@
 					</div>
 
 					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('designation');?></label>
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('NIP');?></label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="designation" value="" >
+							<input type="text" class="form-control" name="nip" value="" >
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('position');?></label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="position" value="" >
 						</div>
 					</div>
 
