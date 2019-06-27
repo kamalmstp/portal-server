@@ -80,7 +80,7 @@ foreach ($edit_data as $row):
                         
 						<div class="col-sm-5">
 							<input type="text" class="form-control" name="roll"
-								value="<?php echo $this->db->get_where('student',array('student_id'=>$row['student_id']))->row()->student_code;?><">
+								value="<?php echo $this->db->get_where('student',array('student_id'=>$row['student_id']))->row()->nisn;?><">
 						</div>
 					</div>
 

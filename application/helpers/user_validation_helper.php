@@ -135,11 +135,11 @@ if ( ! function_exists('duplication_of_class_routine_on_edit')){
 
 //student id duplication on insert
 if ( ! function_exists('code_validation_insert')){
-    function code_validation_insert($student_code){
+    function code_validation_insert($nisn){
         $ci=& get_instance();
         $num_rows = 0;
 
-        $num_rows = $ci->db->get_where('student',array('student_code'=>$student_code))->num_rows();
+        $num_rows = $ci->db->get_where('student',array('nisn'=>$nisn))->num_rows();
         if($num_rows == 0){
             return true;
         }
@@ -152,11 +152,11 @@ if ( ! function_exists('code_validation_insert')){
 //student id duplication in update
 
 if ( ! function_exists('code_validation_update')){
-    function code_validation_update($student_code,$student_id){
+    function code_validation_update($nisn,$student_id){
         $ci=& get_instance();
         $num_rows = 0;
         $ci->db->where('student_id !=', $student_id);
-        $ci->db->where('student_code', $student_code);
+        $ci->db->where('nisn', $nisn);
         $num_rows = $ci->db->get('student')->num_rows();
         if($num_rows == 0){
             return true;

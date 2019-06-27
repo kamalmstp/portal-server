@@ -113,7 +113,7 @@
 							<tr>
 								<td><?php echo $count++;?></td>
 								<td>
-		                            <?php echo $this->db->get_where('student', array('student_id' => $row['student_id']))->row()->student_code; ?>
+		                            <?php echo $this->db->get_where('student', array('student_id' => $row['student_id']))->row()->nisn; ?>
 								</td>
 								<td>
 									<?php echo $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->name;?>

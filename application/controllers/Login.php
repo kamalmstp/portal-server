@@ -51,9 +51,13 @@ class Login extends CI_Controller {
 
     //Validating login from ajax request
     function validate_login() {
-      $email = $this->input->post('email');
+      $username = $this->input->post('username');
       $password = $this->input->post('password');
-      $credential = array('email' => $email, 'password' => sha1($password));
+      $credential = array('username' => $username, 'password' => sha1($password));
+      $credential1 = array('nip' => $username, 'password' => sha1($password));
+      $credential2 = array('nisn' => $username, 'password' => sha1($password));
+      $credential3 = array('nisn_student' => $username, 'password' => sha1($password));
+      $credential4 = array('email' => $username, 'password' => sha1($password));
       // Checking login credential for admin
       $query = $this->db->get_where('admin', $credential);
       if ($query->num_rows() > 0) {
@@ -67,7 +71,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for teacher
-      $query = $this->db->get_where('teacher', $credential);
+      $query = $this->db->get_where('teacher', $credential1);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('teacher_login', '1');
@@ -79,7 +83,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for student
-      $query = $this->db->get_where('student', $credential);
+      $query = $this->db->get_where('student', $credential2);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('student_login', '1');
@@ -91,7 +95,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for parent
-      $query = $this->db->get_where('parent', $credential);
+      $query = $this->db->get_where('parent', $credential3);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('parent_login', '1');
@@ -103,7 +107,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for librarian
-      $query = $this->db->get_where('librarian', $credential);
+      $query = $this->db->get_where('librarian', $credential4);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('librarian_login', '1');
@@ -115,7 +119,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for accountant
-      $query = $this->db->get_where('accountant', $credential);
+      $query = $this->db->get_where('accountant', $credential4);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('accountant_login', '1');

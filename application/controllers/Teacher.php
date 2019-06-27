@@ -821,7 +821,7 @@ else{
           redirect(base_url(), 'refresh');
 
       $student_identifier = html_escape($this->input->post('student_identifier'));
-      $query_by_code = $this->db->get_where('student', array('student_code' => $student_identifier));
+      $query_by_code = $this->db->get_where('student', array('nisn' => $student_identifier));
 
       if ($query_by_code->num_rows() == 0) {
         $this->db->like('name', $student_identifier);

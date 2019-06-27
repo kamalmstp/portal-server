@@ -143,7 +143,7 @@
         <div class="photo">
             <img class="img-circle" src="<?php echo $this->crud_model->get_image_url('student',$student->student_id);?>" class="img-circle" width="30" />
         </div>
-        <h2><?php echo $student->student_code;?></h2>
+        <h2><?php echo $student->nisn;?></h2>
         <div style="text-align: justify;margin-left: 7px">
            <table class="">
                <tr>
@@ -177,7 +177,7 @@
         </div>
 
         <hr>
-            <img style="-webkit-user-select: none;max-width:200px;background-position: 0px 0px, 10px 10px;background-size: 20px 20px;background-image:linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);" src="<?php echo site_url('admin/create_barcode/'.$student->student_code);?>">
+            <img style="-webkit-user-select: none;max-width:200px;background-position: 0px 0px, 10px 10px;background-size: 20px 20px;background-image:linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);" src="<?php echo site_url('admin/create_barcode/'.$student->nisn);?>">
 
 
 

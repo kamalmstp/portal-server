@@ -59,7 +59,7 @@ foreach($student_info as $row):?>
 
                     <tr>
                         <td><?php echo get_phrase('ids');?></td>
-                        <td><b><?php echo $this->db->get_where('student',array('student_id'=>$row['student_id']))->row()->student_code;?><</b></td>
+                        <td><b><?php echo $this->db->get_where('student',array('student_id'=>$row['student_id']))->row()->nisn;?><</b></td>
                     </tr>
 
                     <tr>

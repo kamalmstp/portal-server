@@ -79,10 +79,10 @@ foreach ($edit_data as $row):
 						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('id');?></label>
                         
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="student_code"
+							<input type="text" class="form-control" name="nisn"
 								value="<?php echo $this->db->get_where('student' , array(
                                     'student_id' => $row['student_id']
-                                ))->row()->student_code;?>">
+                                ))->row()->nisn;?>">
 						</div>
 					</div>
 

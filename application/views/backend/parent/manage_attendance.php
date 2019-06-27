@@ -124,7 +124,7 @@
 			{
 				?>
 				<tr class="gradeA">
-                    <td><?php echo $this->db->get_where('student',array('student_id'=>$row['student_id']))->row()->student_code;?></td>
+                    <td><?php echo $this->db->get_where('student',array('student_id'=>$row['student_id']))->row()->nisn;?></td>
 					<td><?php echo $row['name'];?></td>
 					<td align="center">
 						<?php 

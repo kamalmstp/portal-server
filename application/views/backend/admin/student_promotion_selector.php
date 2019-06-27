@@ -46,7 +46,7 @@
 							</td>
 		                    <td align="center"><?php echo $this->db->get_where('student' , array(
 		                            'student_id' => $row['student_id']
-		                        ))->row()->student_code;?></td>
+		                        ))->row()->nisn;?></td>
 							<td align="center">
 							<button type="button" class="btn btn-default"
 								onclick="showAjaxModal('<?php echo site_url('modal/popup/student_promotion_performance/'.$row['student_id'].'/'.$class_id_from);?>');">

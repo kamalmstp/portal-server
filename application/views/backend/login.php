@@ -55,8 +55,8 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                             <h3 class="mb-30"><?php echo get_phrase('login'); ?></h3>
                             <form action="<?php echo site_url('login/validate_login'); ?>" method="post">
                                 <div class="section-field mb-20">
-                                    <label class="mb-10" for="name"><?php echo get_phrase('email'); ?>* </label>
-                                    <input id="email" class="web form-control" type="email" placeholder="<?php echo get_phrase('email'); ?>" name="email" required>
+                                    <label class="mb-10" for="name"><?php echo get_phrase('username'); ?>* </label>
+                                    <input id="username" class="web form-control" type="text" placeholder="<?php echo get_phrase('username/nisn/nip'); ?>" name="username" required>
                                 </div>
                                 <div class="section-field mb-20">
                                     <label class="mb-10" for="Password"><?php echo get_phrase('password'); ?>* </label>
@@ -67,7 +67,7 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
 
                             <div class="section-field">
                                 <div class="remember-checkbox mb-30">
-                                    <a href="#" class="float-right" id = "forgot_password_button" onclick="toggleView(this)"><?php echo get_phrase('forgot_password'); ?>?</a>
+                                    <!-- <a href="#" class="float-right" id = "forgot_password_button" onclick="toggleView(this)"><?php echo get_phrase('forgot_password'); ?>?</a> -->
                                 
                                     <a href="<?php echo base_url();?>" class="float-left">
                                         <i class="entypo-left-open"></i><?php echo get_phrase('back_to_website'); ?></a>
@@ -75,7 +75,7 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                             </div>
                         </div>
 
-                        <div class="login-fancy pb-40 clearfix" id = "forgot_password_area" style="display: none;">
+                        <!-- <div class="login-fancy pb-40 clearfix" id = "forgot_password_area" style="display: none;">
                             <h3 class="mb-30"><?php echo get_phrase('forgot_password'); ?></h3>
                             <form class="" action="<?php echo site_url('login/reset_password');?>" method="post">
                                 <div class="section-field mb-20">
@@ -90,7 +90,7 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                                     <a href="#" class="float-right" id = "login_button" onclick="toggleView(this)"><?php echo get_phrase('back_to_login'); ?>?</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

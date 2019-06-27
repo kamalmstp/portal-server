@@ -21,7 +21,7 @@
               <tr>
                   <td><?php echo $this->db->get_where('student' , array(
                           'student_id' => $row['student_id']
-                      ))->row()->student_code;?></td>
+                      ))->row()->nisn;?></td>
                   <td><img src="<?php echo $this->crud_model->get_image_url('student',$row['student_id']);?>" class="img-circle" width="30" /></td>
                   <td>
                       <?php

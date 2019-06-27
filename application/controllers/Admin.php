@@ -260,9 +260,9 @@ class Admin extends CI_Controller
             if(html_escape($this->input->post('phone')) != null){
               $data['phone']        = html_escape($this->input->post('phone'));
             }
-            if(html_escape($this->input->post('student_code')) != null){
-                $data['student_code'] = html_escape($this->input->post('student_code'));
-                $code_validation = code_validation_insert(html_escape($data['student_code']));
+            if(html_escape($this->input->post('nisn')) != null){
+                $data['nisn'] = html_escape($this->input->post('nisn'));
+                $code_validation = code_validation_insert(html_escape($data['nisn']));
                 if(!$code_validation) {
                     $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
                     redirect(site_url('admin/student_add'), 'refresh');
@@ -318,9 +318,9 @@ class Admin extends CI_Controller
             }
 
             //student id
-            if(html_escape($this->input->post('student_code')) != null){
-                $data['student_code'] = html_escape($this->input->post('student_code'));
-                $code_validation = code_validation_update($data['student_code'],$param2);
+            if(html_escape($this->input->post('nisn')) != null){
+                $data['nisn'] = html_escape($this->input->post('nisn'));
+                $code_validation = code_validation_update($data['nisn'],$param2);
                 if(!$code_validation){
                     $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
                     redirect(site_url('admin/student_information/' . $param3), 'refresh');
@@ -1518,7 +1518,7 @@ class Admin extends CI_Controller
             redirect(site_url('login'), 'refresh');
         }
 
-        $page_data['attendance'] = $this->db->get('last_attendance')->result_array();
+        $page_data['attendance'] = $this->db->get('last_attendance_0')->result_array();
         $page_data['page_name']  =  'daily_attendance';
         $page_data['page_title'] =  get_phrase('daily_attendance_of_class');
         $this->load->view('backend/index', $page_data);
@@ -1526,9 +1526,10 @@ class Admin extends CI_Controller
 
     function daily_attendance_selector()
     {   if($this->input->post('class_id') == '') {
-            
-            $this->finger->get_data_absen('');
-
+            if ($this->finger->get_data_absen('')) {
+                $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_selected'));
+                redirect(site_url('admin/daily_attendance'), 'refresh');
+            }
             $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_selected'));
             redirect(site_url('admin/daily_attendance'), 'refresh');
         }
@@ -3348,7 +3349,7 @@ class Admin extends CI_Controller
                   $password = $row[3];
 
                   $data['name']      = $row[0];
-                  $data['student_code']  = $row[1];
+                  $data['nisn']  = $row[1];
                   $data['email']     = $row[2];
                   $data['password']  = sha1($row[3]);
                   $data['phone']     = $row[4];
@@ -3356,7 +3357,7 @@ class Admin extends CI_Controller
                   $data['parent_id'] = $row[6];
                   $data['sex']       = strtolower($row[7]);
                  //student id (code) validation
-                 $code_validation = code_validation_insert($data['student_code']);
+                 $code_validation = code_validation_insert($data['nisn']);
                  if(!$code_validation){
                      $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
                      redirect(site_url('admin/student_add'), 'refresh');
@@ -3455,7 +3456,7 @@ class Admin extends CI_Controller
           redirect(site_url('login'), 'refresh');
 
       $student_identifier = html_escape($this->input->post('student_identifier'));
-      $query_by_code = $this->db->get_where('student', array('student_code' => $student_identifier));
+      $query_by_code = $this->db->get_where('student', array('nisn' => $student_identifier));
 
       if ($query_by_code->num_rows() == 0) {
         $this->db->like('name', $student_identifier);

@@ -105,7 +105,7 @@
                                     <?php echo $attend['name'] ?>
                                 </td>
                                 <td style="text-align: center;">
-                                    <?php echo $attend['student_code'] ?>
+                                    <?php echo $attend['nisn'] ?>
                                 </td>
                                 <td style="text-align: center;">
                                     <?php echo $attend['class'] ?>
