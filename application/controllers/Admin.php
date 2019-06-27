@@ -262,23 +262,20 @@ class Admin extends CI_Controller
             }
             if(html_escape($this->input->post('nisn')) != null){
                 $data['nisn'] = html_escape($this->input->post('nisn'));
-                $code_validation = code_validation_insert(html_escape($data['nisn']));
-                if(!$code_validation) {
-                    $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
-                    redirect(site_url('admin/student_add'), 'refresh');
-                }
             }
 
             $data['email']        = html_escape($this->input->post('email'));
             $data['password']     = sha1($this->input->post('password'));
 
             $validation = email_validation($data['email']);
+
             if($validation == 1) {
                 $this->db->insert('student', $data);
                 $student_id = $this->db->insert_id();
 
                 $data2['student_id']     = $student_id;
                 $data2['enroll_code']    = substr(md5(rand(0, 1000000)), 0, 7);
+
                 if($this->input->post('class_id') != null){
                   $data2['class_id']       = $this->input->post('class_id');
                 }
@@ -290,14 +287,10 @@ class Admin extends CI_Controller
                 }
                 $data2['date_added']     = strtotime(date("Y-m-d H:i:s"));
                 $data2['year']           = $running_year;
+                
                 $this->db->insert('enroll', $data2);
                 move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
-
                 $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-                $this->email_model->account_opening_email('student', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
-            }
-            else {
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
             }
             redirect(site_url('admin/student_add'), 'refresh');
         }
@@ -1518,7 +1511,7 @@ class Admin extends CI_Controller
             redirect(site_url('login'), 'refresh');
         }
 
-        $page_data['attendance'] = $this->db->get('last_attendance_0')->result_array();
+        $page_data['attendance'] = $this->db->get_where('last_attendance_0', array(date('Y-m-d', 'date_time') => date('Y-m-d')))->result_array();
         $page_data['page_name']  =  'daily_attendance';
         $page_data['page_title'] =  get_phrase('daily_attendance_of_class');
         $this->load->view('backend/index', $page_data);
@@ -1526,11 +1519,11 @@ class Admin extends CI_Controller
 
     function daily_attendance_selector()
     {   if($this->input->post('class_id') == '') {
-            if ($this->finger->get_data_absen('')) {
-                $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_selected'));
+            if ($this->finger->get_data_absen('') == FALSE) {
+                $this->session->set_flashdata('error_message' , get_phrase('fingerprint_is_not_connected'));
                 redirect(site_url('admin/daily_attendance'), 'refresh');
             }
-            $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_selected'));
+            $this->session->set_flashdata('flash_message' , get_phrase('success'));
             redirect(site_url('admin/daily_attendance'), 'refresh');
         }
         $data['class_id']       = $this->input->post('class_id');
