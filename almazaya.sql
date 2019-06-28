@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jun 2019 pada 16.22
--- Versi server: 10.1.35-MariaDB
--- Versi PHP: 7.2.9
+-- Generation Time: Jun 28, 2019 at 09:14 AM
+-- Server version: 5.7.12-log
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `almajaya`
+-- Database: `almazaya`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `academic_syllabus`
+-- Table structure for table `academic_syllabus`
 --
 
 CREATE TABLE `academic_syllabus` (
@@ -43,7 +41,7 @@ CREATE TABLE `academic_syllabus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `academic_syllabus`
+-- Dumping data for table `academic_syllabus`
 --
 
 INSERT INTO `academic_syllabus` (`academic_syllabus_id`, `academic_syllabus_code`, `title`, `description`, `class_id`, `uploader_type`, `uploader_id`, `year`, `timestamp`, `file_name`, `subject_id`) VALUES
@@ -52,7 +50,7 @@ INSERT INTO `academic_syllabus` (`academic_syllabus_id`, `academic_syllabus_code
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `accountant`
+-- Table structure for table `accountant`
 --
 
 CREATE TABLE `accountant` (
@@ -65,7 +63,7 @@ CREATE TABLE `accountant` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -81,7 +79,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`admin_id`, `name`, `email`, `username`, `password`, `level`, `authentication_key`, `phone`, `address`) VALUES
@@ -90,7 +88,7 @@ INSERT INTO `admin` (`admin_id`, `name`, `email`, `username`, `password`, `level
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `attendance`
+-- Table structure for table `attendance`
 --
 
 CREATE TABLE `attendance` (
@@ -105,7 +103,7 @@ CREATE TABLE `attendance` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `attendance`
+-- Dumping data for table `attendance`
 --
 
 INSERT INTO `attendance` (`attendance_id`, `timestamp`, `year`, `class_id`, `section_id`, `student_id`, `class_routine_id`, `status`) VALUES
@@ -118,7 +116,7 @@ INSERT INTO `attendance` (`attendance_id`, `timestamp`, `year`, `class_id`, `sec
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `book`
+-- Table structure for table `book`
 --
 
 CREATE TABLE `book` (
@@ -137,7 +135,7 @@ CREATE TABLE `book` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `book_request`
+-- Table structure for table `book_request`
 --
 
 CREATE TABLE `book_request` (
@@ -152,7 +150,7 @@ CREATE TABLE `book_request` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ci_sessions`
+-- Table structure for table `ci_sessions`
 --
 
 CREATE TABLE `ci_sessions` (
@@ -163,17 +161,22 @@ CREATE TABLE `ci_sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `ci_sessions`
+-- Dumping data for table `ci_sessions`
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('82v29ol1s7gjpo580fper96kq907bo2k', '::1', 1561700732, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313730303733323b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a31333a2241646d696e6973747261746f72223b6c6f67696e5f747970657c733a353a2261646d696e223b),
+('d9ipfn3a6t2r2c7nto9ojk4hjs9ola5r', '::1', 1561703750, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313730333735303b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a31333a2241646d696e6973747261746f72223b6c6f67696e5f747970657c733a353a2261646d696e223b),
+('fu5qfdnn83vsjvauiq3j92cb469ukf2c', '::1', 1561684800, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313638343538333b),
 ('upjimsujbcnteo42mmjacp197npgaq6c', '::1', 1561585837, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313538353833373b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a31333a2241646d696e6973747261746f72223b6c6f67696e5f747970657c733a353a2261646d696e223b6572726f725f6d6573736167657c733a33313a22506c65617365204d616b65205375726520436c6173732053656c6563746564223b5f5f63695f766172737c613a313a7b733a31333a226572726f725f6d657373616765223b733a333a226f6c64223b7d),
-('v3js3lg2skr64m72b1obthmk0tkll30j', '::1', 1561495259, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313439353235393b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a31333a2241646d696e6973747261746f72223b6c6f67696e5f747970657c733a353a2261646d696e223b);
+('v3js3lg2skr64m72b1obthmk0tkll30j', '::1', 1561495259, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313439353235393b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a31333a2241646d696e6973747261746f72223b6c6f67696e5f747970657c733a353a2261646d696e223b),
+('vhj96tuah34rgrh3codpn8p8mb4qubcv', '::1', 1561703865, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313730333735303b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a31333a2241646d696e6973747261746f72223b6c6f67696e5f747970657c733a353a2261646d696e223b),
+('vln2vc7k4e9tm998m6sooo3lnatl1t89', '::1', 1561702560, 0x5f5f63695f6c6173745f726567656e65726174657c693a313536313730323536303b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a31333a2241646d696e6973747261746f72223b6c6f67696e5f747970657c733a353a2261646d696e223b);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `class`
+-- Table structure for table `class`
 --
 
 CREATE TABLE `class` (
@@ -184,7 +187,7 @@ CREATE TABLE `class` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `class`
+-- Dumping data for table `class`
 --
 
 INSERT INTO `class` (`class_id`, `name`, `name_numeric`, `teacher_id`) VALUES
@@ -195,7 +198,7 @@ INSERT INTO `class` (`class_id`, `name`, `name_numeric`, `teacher_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `class_routine`
+-- Table structure for table `class_routine`
 --
 
 CREATE TABLE `class_routine` (
@@ -212,7 +215,7 @@ CREATE TABLE `class_routine` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `class_routine`
+-- Dumping data for table `class_routine`
 --
 
 INSERT INTO `class_routine` (`class_routine_id`, `class_id`, `section_id`, `subject_id`, `time_start`, `time_end`, `time_start_min`, `time_end_min`, `day`, `year`) VALUES
@@ -221,7 +224,7 @@ INSERT INTO `class_routine` (`class_routine_id`, `class_id`, `section_id`, `subj
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `document`
+-- Table structure for table `document`
 --
 
 CREATE TABLE `document` (
@@ -237,7 +240,7 @@ CREATE TABLE `document` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `document`
+-- Dumping data for table `document`
 --
 
 INSERT INTO `document` (`document_id`, `title`, `description`, `file_name`, `file_type`, `class_id`, `teacher_id`, `timestamp`, `subject_id`) VALUES
@@ -246,7 +249,7 @@ INSERT INTO `document` (`document_id`, `title`, `description`, `file_name`, `fil
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dormitory`
+-- Table structure for table `dormitory`
 --
 
 CREATE TABLE `dormitory` (
@@ -259,7 +262,7 @@ CREATE TABLE `dormitory` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `enroll`
+-- Table structure for table `enroll`
 --
 
 CREATE TABLE `enroll` (
@@ -274,7 +277,7 @@ CREATE TABLE `enroll` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `enroll`
+-- Dumping data for table `enroll`
 --
 
 INSERT INTO `enroll` (`enroll_id`, `enroll_code`, `student_id`, `class_id`, `section_id`, `roll`, `date_added`, `year`) VALUES
@@ -288,7 +291,7 @@ INSERT INTO `enroll` (`enroll_id`, `enroll_code`, `student_id`, `class_id`, `sec
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `exam`
+-- Table structure for table `exam`
 --
 
 CREATE TABLE `exam` (
@@ -300,7 +303,7 @@ CREATE TABLE `exam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `exam`
+-- Dumping data for table `exam`
 --
 
 INSERT INTO `exam` (`exam_id`, `name`, `date`, `year`, `comment`) VALUES
@@ -309,7 +312,7 @@ INSERT INTO `exam` (`exam_id`, `name`, `date`, `year`, `comment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `expense_category`
+-- Table structure for table `expense_category`
 --
 
 CREATE TABLE `expense_category` (
@@ -320,7 +323,7 @@ CREATE TABLE `expense_category` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `fingerprint`
+-- Table structure for table `fingerprint`
 --
 
 CREATE TABLE `fingerprint` (
@@ -332,7 +335,7 @@ CREATE TABLE `fingerprint` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `fingerprint`
+-- Dumping data for table `fingerprint`
 --
 
 INSERT INTO `fingerprint` (`id`, `pin`, `date_time`, `ver`, `status`) VALUES
@@ -393,7 +396,7 @@ INSERT INTO `fingerprint` (`id`, `pin`, `date_time`, `ver`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `fingerprint_options`
+-- Table structure for table `fingerprint_options`
 --
 
 CREATE TABLE `fingerprint_options` (
@@ -404,7 +407,7 @@ CREATE TABLE `fingerprint_options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `fingerprint_options`
+-- Dumping data for table `fingerprint_options`
 --
 
 INSERT INTO `fingerprint_options` (`id`, `ip`, `password`, `nama_mesin`) VALUES
@@ -413,7 +416,7 @@ INSERT INTO `fingerprint_options` (`id`, `ip`, `password`, `nama_mesin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `frontend_events`
+-- Table structure for table `frontend_events`
 --
 
 CREATE TABLE `frontend_events` (
@@ -426,7 +429,7 @@ CREATE TABLE `frontend_events` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `frontend_gallery`
+-- Table structure for table `frontend_gallery`
 --
 
 CREATE TABLE `frontend_gallery` (
@@ -441,7 +444,7 @@ CREATE TABLE `frontend_gallery` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `frontend_gallery_image`
+-- Table structure for table `frontend_gallery_image`
 --
 
 CREATE TABLE `frontend_gallery_image` (
@@ -454,7 +457,7 @@ CREATE TABLE `frontend_gallery_image` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `frontend_general_settings`
+-- Table structure for table `frontend_general_settings`
 --
 
 CREATE TABLE `frontend_general_settings` (
@@ -464,14 +467,14 @@ CREATE TABLE `frontend_general_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `frontend_general_settings`
+-- Dumping data for table `frontend_general_settings`
 --
 
 INSERT INTO `frontend_general_settings` (`frontend_general_settings_id`, `type`, `description`) VALUES
 (1, 'about_us', ''),
 (2, 'terms_conditions', ''),
 (3, 'privacy_policy', ''),
-(4, 'social_links', '[{\"facebook\":\"http:\\/\\/facebook.com\",\"twitter\":\"http:\\/\\/twitter.com\",\"linkedin\":\"http:\\/\\/linkedin.com\",\"google\":\"http:\\/\\/google.com\",\"youtube\":\"http:\\/\\/youtube.com\",\"instagram\":\"http:\\/\\/instagram.com\"}]'),
+(4, 'social_links', '[{"facebook":"http:\\/\\/facebook.com","twitter":"http:\\/\\/twitter.com","linkedin":"http:\\/\\/linkedin.com","google":"http:\\/\\/google.com","youtube":"http:\\/\\/youtube.com","instagram":"http:\\/\\/instagram.com"}]'),
 (5, 'school_title', 'SMA Al-Mazaya Islamic School '),
 (6, 'school_logo', ''),
 (7, 'school_location', '51.7548164,-1.2565555'),
@@ -483,7 +486,7 @@ INSERT INTO `frontend_general_settings` (`frontend_general_settings_id`, `type`,
 (13, 'footer_logo', 'footer_almazaya.png'),
 (14, 'copyright_text', ''),
 (15, 'about_us_image', 'about_us.png'),
-(16, 'slider_images', '[{\"title\":\"We rock the big stage\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected \",\"image\":\"1.jpg\"},{\"title\":\"Making this the first true generator on the Internet\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected \",\"image\":\"2.jpg\"},{\"title\":\"There are many variations of passages of Lorem Ipsum\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected \",\"image\":\"3.jpg\"}]'),
+(16, 'slider_images', '[{"title":"We rock the big stage","description":"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected ","image":"1.jpg"},{"title":"Making this the first true generator on the Internet","description":"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected ","image":"2.jpg"},{"title":"There are many variations of passages of Lorem Ipsum","description":"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected ","image":"3.jpg"}]'),
 (17, 'theme', 'ultimate'),
 (18, 'homepage_note_title', ''),
 (19, 'homepage_note_description', ''),
@@ -492,7 +495,7 @@ INSERT INTO `frontend_general_settings` (`frontend_general_settings_id`, `type`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `frontend_news`
+-- Table structure for table `frontend_news`
 --
 
 CREATE TABLE `frontend_news` (
@@ -506,7 +509,7 @@ CREATE TABLE `frontend_news` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `grade`
+-- Table structure for table `grade`
 --
 
 CREATE TABLE `grade` (
@@ -519,7 +522,7 @@ CREATE TABLE `grade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `grade`
+-- Dumping data for table `grade`
 --
 
 INSERT INTO `grade` (`grade_id`, `name`, `grade_point`, `mark_from`, `mark_upto`, `comment`) VALUES
@@ -528,7 +531,7 @@ INSERT INTO `grade` (`grade_id`, `name`, `grade_point`, `mark_from`, `mark_upto`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `group_message`
+-- Table structure for table `group_message`
 --
 
 CREATE TABLE `group_message` (
@@ -544,7 +547,7 @@ CREATE TABLE `group_message` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `group_message_thread`
+-- Table structure for table `group_message_thread`
 --
 
 CREATE TABLE `group_message_thread` (
@@ -559,7 +562,7 @@ CREATE TABLE `group_message_thread` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `invoice`
+-- Table structure for table `invoice`
 --
 
 CREATE TABLE `invoice` (
@@ -581,7 +584,7 @@ CREATE TABLE `invoice` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `language`
+-- Table structure for table `language`
 --
 
 CREATE TABLE `language` (
@@ -612,7 +615,7 @@ CREATE TABLE `language` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `language`
+-- Dumping data for table `language`
 --
 
 INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, `arabic`, `dutch`, `russian`, `chinese`, `turkish`, `portuguese`, `hungarian`, `french`, `greek`, `german`, `italian`, `thai`, `urdu`, `hindi`, `latin`, `indonesian`, `japanese`, `korean`, `indo`) VALUES
@@ -631,20 +634,20 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (13, 'subject', 'Subject', 'বিষয়', 'Tema', 'موضوع', 'Onderwerpen', 'Предмет', '学科', 'konu', 'Sujeito', 'Tantárgy', 'Assujettir', 'Θέμα', 'Fach', 'Soggetto', 'เรื่อง', 'موضوع', 'विषय', 'Subject', 'Subyek', 'テーマ', '제목', NULL),
 (14, 'daily_attendance', 'Daily Attendance', 'দৈনিক এ্যাটেনডেন্স', 'Asistencia diaria', 'الحضور اليومي', 'dagelijkse aanwezigheid', 'Ежедневная посещаемость', '日常考勤', 'günlük Seyirci', 'Presença diária', 'napi látogatottsága', 'présences quotidiennes', 'καθημερινή Συμμετοχή', 'Tägliche Teilnahme', 'La frequenza giornaliera', 'การเข้าร่วมประชุมทุกวัน', 'روزانہ حاضری', 'दैनिक उपस्थिति', 'cotidianarum', 'Kehadiran harian', '毎日の出席', '매일 출석', NULL),
 (15, 'exam', 'Exam', 'পরীক্ষা', 'Examen', 'امتحان', 'tentamen', 'Экзамен', '考试', 'sınav', 'Exame', 'Vizsga', 'Examen', 'Εξέταση', 'Prüfung', 'Esame', 'การสอบ', 'امتحان', 'परीक्षा', 'IV', 'Ujian', '試験', '시험', NULL),
-(16, 'exam_list', 'Exam List', 'পরীক্ষার তালিকা', 'Lista de examen', 'قائمة الامتحان', 'examen Lijst', 'Список экзамен', '考试名单', 'sınav listesi', 'Lista de exame', 'vizsga listája', 'Liste d\'examen', 'Λίστα εξετάσεις', 'Prüfungsliste', 'Lista esame', 'รายการสอบ', 'امتحان کی فہرست', 'परीक्षा सूची', 'IV List', 'Daftar ujian', '試験のリスト', '시험 목록', NULL),
-(17, 'exam_grades', 'Exam Grades', 'পরীক্ষার বাংলাদেশের', 'Niveles de examen', 'درجات الامتحان', 'examen Grades', 'экзамен Сорта', '考试成绩', 'sınav Sınıflar', 'Notas da Prova', 'vizsga fokozat', 'Notes d\'examen', 'κατηγορίες εξετάσεις', 'Prüfungseinstufung', 'Voti di esame', 'สอบเกรด', 'امتحان گریڈز', 'परीक्षा ग्रेड', 'IV gradus', 'Kelas ujian', '試験評価', '시험 성적', NULL),
+(16, 'exam_list', 'Exam List', 'পরীক্ষার তালিকা', 'Lista de examen', 'قائمة الامتحان', 'examen Lijst', 'Список экзамен', '考试名单', 'sınav listesi', 'Lista de exame', 'vizsga listája', 'Liste d''examen', 'Λίστα εξετάσεις', 'Prüfungsliste', 'Lista esame', 'รายการสอบ', 'امتحان کی فہرست', 'परीक्षा सूची', 'IV List', 'Daftar ujian', '試験のリスト', '시험 목록', NULL),
+(17, 'exam_grades', 'Exam Grades', 'পরীক্ষার বাংলাদেশের', 'Niveles de examen', 'درجات الامتحان', 'examen Grades', 'экзамен Сорта', '考试成绩', 'sınav Sınıflar', 'Notas da Prova', 'vizsga fokozat', 'Notes d''examen', 'κατηγορίες εξετάσεις', 'Prüfungseinstufung', 'Voti di esame', 'สอบเกรด', 'امتحان گریڈز', 'परीक्षा ग्रेड', 'IV gradus', 'Kelas ujian', '試験評価', '시험 성적', NULL),
 (18, 'manage_marks', 'Manage Marks', 'মার্কস পরিচালনা', 'Manejo de marcas', 'إدارة العلامات', 'Beheer Marks', 'Управление Marks', '商标管理', 'Marks yönet', 'Gerenciar Marcas', 'Kezelés Marks', 'Gérer les marques', 'διαχειριστείτε σήματα', 'verwalten Marks', 'gestire Marks', 'จัดการ Marks', 'مارکس کو منظم کریں', 'मार्क्स का प्रबंधन करें', 'Manage Marks', 'mengelola Marks', 'マークを管理します', '마크 관리', NULL),
 (19, 'send_marks_by_sms', 'Send Marks By Sms', 'মার্কস পাঠান এসএমএস', 'Enviar por sms Marcas', 'إرسال ماركس عن طريق الرسائل القصيرة', 'Stuur Marks via SMS', 'Отправить Marks По Sms', '马克斯发送短信', 'Sms tarafından Marks gönder', 'Enviar Marcas por SMS', 'Küldj SMS-ben Marks', 'Envoyer Marks Par Sms', 'Αποστολή σημάτων μέσω SMS', 'Senden Marks von Sms', 'Invia Marks via SMS', 'ส่งเครื่องหมายโดยการส่ง SMS', 'SMS کے ذریعے مارکس کا حساب', 'मार्क्स भेजें एसएमएस', 'Send marcas SMS', 'Kirim Marks Dengan Sms', 'SMSでマークを送ります', 'SMS로 마크 보내기', NULL),
 (20, 'tabulation_sheet', 'Tabulation Sheet', 'ট্যাবুলেশন শিট', 'Hoja de Tabulación', 'ورقة تبويب', 'tabel Sheet', 'Табуляционная Sheet', '制表表', 'Çizelge Sayfası', 'Folha de tabulação', 'táblázatrendszer Sheet', 'Tabulation Sheet', 'Φύλλο Υπολογισμού', 'Tabulablatt', 'tabulazione Scheda', 'แผ่นการจัดระเบียบ', 'ٹیبیولیشن شیٹ', 'सारणीकरण शीट', 'tabularia Sheet', 'tabulasi Lembar', '集計シート', '집계 시트', NULL),
 (21, 'accounting', 'Accounting', 'হিসাবরক্ষণ', 'Contabilidad', 'محاسبة', 'Accounting', 'бухгалтерский учет', '会计', 'Muhasebe', 'Contabilidade', 'Számvitel', 'Comptabilité', 'Λογιστική', 'Buchhaltung', 'Contabilità', 'การบัญชี', 'اکاونٹنگ', 'लेखांकन', 'arbitrans', 'Akuntansi', '会計', '회계', NULL),
 (22, 'create_student_payment', 'Create Student Payment', 'স্টুডেন্ট পেমেন্ট তৈরি করুন', 'Crear Pago Estudiante', 'إنشاء طالب الدفع', 'Maak Student Betaling', 'Создать Student Оплата', '建立学生缴付', 'Öğrenci Ödeme oluştur', 'Criar Student pagamento', 'Create Student fizetés', 'Créer Paiement étudiant', 'Δημιουργία Φοιτητών Πληρωμής', 'Erstellen Studenten Zahlung', 'Creare Student pagamento', 'สร้างการชำระเงินนักศึกษา', 'Student کی ادائیگی بنائیں', 'छात्र भुगतान बनाएं', 'Create Discipulus Payment', 'Buat Mahasiswa Pembayaran', '学生の支払いを作成します。', '학생 지불 만들기', NULL),
-(23, 'student_payments', 'Student Payments', 'ছাত্র পেমেন্টস্', 'Los pagos de los estudiantes', 'المدفوعات طالب', 'student Payments', 'Студенческие платежи', '学生付款', 'Öğrenci Ödemeler', 'Pagamentos de estudante', 'Student kifizetések', 'Les paiements d\'étudiants', 'Πληρωμές φοιτητής', 'Studenten Zahlungen', 'Pagamenti studenti', 'การชำระเงินนักศึกษา', 'Student کی ادائیگیاں', 'छात्र भुगतान', 'Discipulus liberate', 'Pembayaran Mahasiswa', '学生の支払い', '학생 지급', NULL),
+(23, 'student_payments', 'Student Payments', 'ছাত্র পেমেন্টস্', 'Los pagos de los estudiantes', 'المدفوعات طالب', 'student Payments', 'Студенческие платежи', '学生付款', 'Öğrenci Ödemeler', 'Pagamentos de estudante', 'Student kifizetések', 'Les paiements d''étudiants', 'Πληρωμές φοιτητής', 'Studenten Zahlungen', 'Pagamenti studenti', 'การชำระเงินนักศึกษา', 'Student کی ادائیگیاں', 'छात्र भुगतान', 'Discipulus liberate', 'Pembayaran Mahasiswa', '学生の支払い', '학생 지급', NULL),
 (24, 'expense', 'Expense', 'খরচ', 'Gastos', 'مصروف', 'Kosten', 'расходы', '费用', 'gider', 'Despesa', 'Költség', 'Frais', 'Δαπάνη', 'Ausgabe', 'Spese', 'ค่าใช้จ่าย', 'خرچہ', 'व्यय', 'expense', 'Biaya', '費用', '비용', NULL),
 (25, 'expense_category', 'Expense Category', 'ব্যায়ের শ্রেণী', 'Categoría del gasto', 'حساب الفئة', 'Expense Categorie', 'Expense Категория', '费用类别', 'gider Kategori', 'Categoria de despesa', 'Költség kategória', 'Catégorie de dépenses', 'εξόδων Κατηγορία', 'Kostenkategorie', 'spesa Categoria', 'ประเภทค่าใช้จ่าย', 'اخراجات زمرہ', 'व्यय श्रेणी', 'expense Category', 'beban Kategori', '経費カテゴリ', '비용 카테고리', NULL),
 (26, 'library', 'Library', 'লাইব্রেরি', 'Biblioteca', 'مكتبة', 'Bibliotheek', 'Библиотека', '图书馆', 'kütüphane', 'Biblioteca', 'Könyvtár', 'Bibliothèque', 'Βιβλιοθήκη', 'Bibliothek', 'Biblioteca', 'ห้องสมุด', 'لائبریری', 'पुस्तकालय', 'Bibliotheca', 'Perpustakaan', 'ライブラリ', '도서관', NULL),
 (27, 'transport', 'Transport', 'পরিবহন', 'Transporte', 'المواصلات', 'Vervoer', 'Транспорт', '运输', 'taşıma', 'Transporte', 'Szállítás', 'Transport', 'Μεταφορά', 'Transport', 'Trasporto', 'ขนส่ง', 'ٹرانسپورٹ', 'ट्रांसपोर्ट', 'Transport', 'Mengangkut', '輸送', '수송', NULL),
 (28, 'dormitory', 'Dormitory', 'ছাত্রাবাস', 'Dormitorio', 'المهجع', 'Slaapzaal', 'Общежитие', '宿舍', 'Yurt', 'Dormitório', 'Hálóterem', 'Dortoir', 'Υπνωτήριο', 'Schlafsaal', 'Dormitorio', 'หอพัก', 'شیناگار', 'छात्रावास', 'dormitory', 'asrama mahasiswa', '寮', '기숙사', NULL),
-(29, 'noticeboard', 'Noticeboard', 'নোটিশ বোর্ড', 'tablón de anuncios', 'اللافتة', 'Notitiebord', 'Доска объявлений', '布告栏', 'noticeboard', 'Quadro de notícias', 'Hirdetőtábla', 'Tableau d\'affichage', 'Πίνακας ανακοινώσεων', 'Schwarzes Brett', 'Bacheca', 'กระดานป้ายติดประกาศ', 'نوٹس بورڈ', 'सूचना पट्ट', 'Noticeboard', 'Papan peringatan', '掲示板', '공지 사항 게시판', NULL),
+(29, 'noticeboard', 'Noticeboard', 'নোটিশ বোর্ড', 'tablón de anuncios', 'اللافتة', 'Notitiebord', 'Доска объявлений', '布告栏', 'noticeboard', 'Quadro de notícias', 'Hirdetőtábla', 'Tableau d''affichage', 'Πίνακας ανακοινώσεων', 'Schwarzes Brett', 'Bacheca', 'กระดานป้ายติดประกาศ', 'نوٹس بورڈ', 'सूचना पट्ट', 'Noticeboard', 'Papan peringatan', '掲示板', '공지 사항 게시판', NULL),
 (30, 'message', 'Message', 'বার্তা', 'Mensaje', 'الرسالة', 'Bericht', 'Сообщение', '信息', 'Mesaj', 'Mensagem', 'Üzenet', 'Message', 'Μήνυμα', 'Nachricht', 'Messaggio', 'ข่าวสาร', 'پیغام', 'संदेश', 'Nuntius', 'Pesan', 'メッセージ', '메시지', NULL),
 (31, 'settings', 'Settings', 'সেটিংস', 'ajustes', 'إعدادات', 'instellingen', 'настройки', '设置', 'Ayarlar', 'Configurações', 'Beállítások', 'Paramètres', 'Ρυθμίσεις', 'Einstellungen', 'impostazioni', 'การตั้งค่า', 'ترتیبات', 'सेटिंग्स', 'occasus', 'pengaturan', '設定', '설정', NULL),
 (32, 'general_settings', 'General Settings', 'সাধারণ সেটিংস', 'Configuración general', 'الإعدادات العامة', 'Algemene instellingen', 'общие настройки', '常规设置', 'Genel Ayarlar', 'Configurações Gerais', 'Általános beállítások', 'réglages généraux', 'Γενικές Ρυθμίσεις', 'Allgemeine Einstellungen', 'impostazioni generali', 'การตั้งค่าทั่วไป', 'عام ترتیبات', 'सामान्य सेटिंग्स', 'General Occasus', 'Pengaturan Umum', '一般設定', '일반 설정', NULL),
@@ -660,7 +663,7 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (42, 'delete', 'Delete', 'মুছে ফেলা', 'Borrar', 'حذف', 'Verwijder', 'Удалить', '删除', 'silmek', 'Excluir', 'Töröl', 'Effacer', 'Διαγράφω', 'Löschen', 'cancellare', 'ลบ', 'حذف کریں', 'मिटाना', 'Delete', 'Menghapus', '削除', '지우다', NULL),
 (43, 'cancel', 'Cancel', 'বাতিল', 'Cancelar', 'إلغاء', 'Annuleer', 'Отмена', '取消', 'İptal', 'Cancelar', 'Törölni', 'Annuler', 'Ματαίωση', 'Stornieren', 'Annulla', 'ยกเลิก', 'منسوخ کریں', 'रद्द करना', 'Cancel', 'Membatalkan', 'キャンセル', '취소', NULL),
 (44, 'admin_dashboard', 'Admin Dashboard', 'অ্যাডমিন ড্যাশবোর্ডের', 'Tablero de instrumentos de administración', 'لوحة المشرف', 'Admin Dashboard', 'Админ Панель приборов', '管理仪表板', 'Yönetici Paneli', 'Painel de administração', 'admin Dashboard', 'Administrateur Dashboard', 'ταμπλό διαχειριστή', 'Admin-Dashboard', 'Dashboard Admin', 'แดชบอร์ดผู้ดูแลระบบ', 'ایڈمن ڈیش بورڈ', 'व्यवस्थापक डैशबोर्ड', 'Sed Dashboard', 'Dashboard Admin', '管理ダッシュボード', '관리 대시 보드', NULL),
-(45, 'event_schedule', 'Event Schedule', 'ইভেন্ট সময়সূচী', 'Programa del evento', 'جدول الفعاليات', 'event Planning', 'Расписание мероприятий', '活动日程', 'Etkinlik Programı', 'Calendário de eventos', 'esemény Menetrend', 'Horaire de l\'événement', 'Πρόγραμμα εκδήλωσης', 'Veranstaltungskalender', 'Programma dell\'evento', 'ตารางกิจกรรม', 'ایونٹ کے شیڈول', 'घटना अनुसूची', 'Event Schedule', 'Jadwal acara', 'イベントスケジュール', '이벤트 일정', NULL),
+(45, 'event_schedule', 'Event Schedule', 'ইভেন্ট সময়সূচী', 'Programa del evento', 'جدول الفعاليات', 'event Planning', 'Расписание мероприятий', '活动日程', 'Etkinlik Programı', 'Calendário de eventos', 'esemény Menetrend', 'Horaire de l''événement', 'Πρόγραμμα εκδήλωσης', 'Veranstaltungskalender', 'Programma dell''evento', 'ตารางกิจกรรม', 'ایونٹ کے شیڈول', 'घटना अनुसूची', 'Event Schedule', 'Jadwal acara', 'イベントスケジュール', '이벤트 일정', NULL),
 (46, 'parent', 'Parent', 'মাতা', 'Padre', 'أصل', 'Ouder', 'родитель', '亲', 'ebeveyn', 'parente', 'Szülő', 'Parent', 'Μητρική εταιρεία', 'Elternteil', 'Genitore', 'ผู้ปกครอง', 'والدین', 'माता-पिता', 'Parent', 'Induk', '親', '부모의', NULL),
 (47, 'attendance', 'Attendance', 'উপস্থিতি', 'Asistencia', 'الحضور', 'opkomst', 'посещаемость', '护理', 'katılım', 'Comparecimento', 'Részvétel', 'Présence', 'Παρουσία', 'Teilnahme', 'partecipazione', 'การดูแลรักษา', 'حاضری', 'उपस्थिति', 'frequentatio', 'Kehadiran', '出席', '출석', NULL),
 (48, 'add_student', 'Add Student', 'স্টুডেন্ট যোগ', 'Añadir Estudiante', 'إضافة طالب', 'Student', 'Добавить Student', '添加学生', 'Öğrenci ekle', 'Adicionar Student', 'Add Student', 'Ajouter étudiant', 'Προσθέστε Φοιτητής', 'In Studenten', 'Aggiungere Student', 'เพิ่มนักศึกษา', 'طالب علم کے لئے شامل کریں', 'छात्र जोड़े', 'Add Student', 'Tambahkan Mahasiswa', '学生を追加', '학생 추가', NULL),
@@ -677,12 +680,12 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (59, 'address', 'Address', 'ঠিকানা', 'Dirección', 'عنوان', 'Adres', 'Адрес', '地址', 'adres', 'Endereço', 'Lakcim', 'Adresse', 'Διεύθυνση', 'Adresse', 'Indirizzo', 'ที่อยู่', 'ایڈریس', 'पता', 'oratio', 'Alamat', '住所', '주소', NULL),
 (60, 'phone', 'Phone', 'ফোন', 'Teléfono', 'هاتف', 'Telefoon', 'Телефон', '电话', 'Telefon', 'Telefone', 'Telefon', 'Téléphone', 'Τηλέφωνο', 'Telefon', 'Telefono', 'โทรศัพท์', 'فون', 'फ़ोन', 'Phone', 'Telepon', '電話', '전화', NULL),
 (61, 'email', 'Email', 'ই-মেইল', 'Email', 'البريد الإلكتروني', 'E-mail', 'Эл. адрес', '电子邮件', 'E-posta', 'O email', 'Email', 'Email', 'E-mail', 'Email', 'E-mail', 'อีเมล์', 'دوستوں کوارسال کریں', 'ईमेल', 'Email', 'E-mail', 'Eメール', '이메일', NULL),
-(62, 'password', 'Password', 'পাসওয়ার্ড', 'Contraseña', 'كلمه السر', 'Wachtwoord', 'пароль', '密码', 'Parola', 'Senha', 'Jelszó', 'Mot de passe', 'Σύνθημα', 'Passwort', 'parola d\'ordine', 'รหัสผ่าน', 'پاس ورڈ', 'पासवर्ड', 'Password', 'Kata sandi', 'パスワード', '암호', NULL),
+(62, 'password', 'Password', 'পাসওয়ার্ড', 'Contraseña', 'كلمه السر', 'Wachtwoord', 'пароль', '密码', 'Parola', 'Senha', 'Jelszó', 'Mot de passe', 'Σύνθημα', 'Passwort', 'parola d''ordine', 'รหัสผ่าน', 'پاس ورڈ', 'पासवर्ड', 'Password', 'Kata sandi', 'パスワード', '암호', NULL),
 (63, 'transport_route', 'Transport Route', 'পরিবহন রুট', 'Ruta de Transporte', 'النقل الطريق', 'transport Route', 'транспортный путь', '运输路线', 'Ulaştırma Rota', 'Itinerários', 'Transport Route', 'Transport Route', 'μεταφορές Διαδρομή', 'Transportweg', 'Transport Route', 'เส้นทางขนส่ง', 'ٹرانسپورٹ روٹ', 'परिवहन मार्ग', 'Transport Route', 'Transportasi Route', '交通ルート', '운송 경로', NULL),
 (64, 'photo', 'Photo', 'ছবি', 'Foto', 'صورة فوتوغرافية', 'Foto', 'Фото', '照片', 'fotoğraf', 'foto', 'Fénykép', 'photo', 'φωτογραφία', 'Foto', 'Foto', 'ภาพถ่าย', 'تصویر', 'तस्वीर', 'Photo', 'Foto', '写真', '사진', NULL),
 (65, 'add_bulk_student', 'Add Bulk Student', 'বাল্ক স্টুডেন্ট যোগ', 'Añadir Estudiante granel', 'إضافة طالب السائبة', 'Voeg Bulk Student', 'Добавить Bulk Student', '批量添加学生', 'Toplu Öğrenci ekle', 'Adicionar Student massa', 'Add Tömeges Student', 'Ajouter étudiant en vrac', 'Προσθέστε Μαζική Φοιτητής', 'In Großstudenten', 'Aggiungere Student Bulk', 'เพิ่มกลุ่มนักศึกษา', 'بلک طالب علم ان کریں', 'थोक छात्र जोड़े', 'Discipulus Add Bulk', 'Tambahkan Mahasiswa Massal', 'バルク学生を追加', '대량 학생 추가', NULL),
 (66, 'select_class', 'Select Class', 'ক্লাস নির্বাচন', 'Seleccionar clase', 'حدد فئة', 'Select Class', 'Выбор класса', '选择类别', 'seçin Sınıf', 'Selecionar classe', 'osztály kiválasztása', 'Sélectionnez la classe', 'Select Class', 'Klasse auswählen', 'Seleziona classe', 'เลือกชั้นเรียน', 'کلاس منتخب', 'वर्ग का चयन', 'Class Select', 'Pilih Kelas', 'クラスを選択します', '선택 클래스', NULL),
-(67, 'add_more_students', 'Add More Students', 'অধিক শিক্ষার্থী যোগ', 'Añadir más estudiantes', 'إضافة المزيد من الطلاب', 'Voeg meer studenten', 'Добавить больше студентов', '添加更多的学生', 'Daha Öğrenciler Ekle', 'Adicionar Mais Estudantes', 'Add több diák', 'Ajouter d\'autres étudiants', 'Προσθέστε περισσότερους φοιτητές', 'In mehr Studenten', 'Aggiungere più studenti', 'เพิ่มนักเรียน', 'زیادہ طالب علموں کو شامل کریں', 'अधिक छात्रों को जोड़ें', 'More Add Students', 'Tambahkan Siswa Lebih', 'より多くの学生を追加', '더 많은 학생들 추가', NULL),
+(67, 'add_more_students', 'Add More Students', 'অধিক শিক্ষার্থী যোগ', 'Añadir más estudiantes', 'إضافة المزيد من الطلاب', 'Voeg meer studenten', 'Добавить больше студентов', '添加更多的学生', 'Daha Öğrenciler Ekle', 'Adicionar Mais Estudantes', 'Add több diák', 'Ajouter d''autres étudiants', 'Προσθέστε περισσότερους φοιτητές', 'In mehr Studenten', 'Aggiungere più studenti', 'เพิ่มนักเรียน', 'زیادہ طالب علموں کو شامل کریں', 'अधिक छात्रों को जोड़ें', 'More Add Students', 'Tambahkan Siswa Lebih', 'より多くの学生を追加', '더 많은 학생들 추가', NULL),
 (68, 'save_students', 'Save Students', 'শিক্ষার্থীরা সংরক্ষণ', 'guardar estudiantes', 'حفظ الطلاب', 'Save Studenten', 'Сохранить студентов', '保存学生', 'Öğrenciler kaydet', 'salve Estudantes', 'Save diákok', 'Enregistrer les étudiants', 'Αποθήκευση Φοιτητές', 'speichern Studenten', 'Salva studenti', 'บันทึกนักเรียน', 'طالب علموں کو محفوظ کریں', 'छात्रों को बचाने के', 'Save Students', 'Simpan Siswa', '学生を保存', '학생 저장', NULL),
 (69, 'select_section', 'Select Section', 'অনুচ্ছেদ নির্বাচন', 'Seleccionar sección', 'حدد القسم', 'Select Section', 'Выберите раздел', '选择部分', 'seç Bölüm', 'Select Section', 'Select szakasz', 'Sélectionnez Section', 'Επιλέξτε Ενότητα', 'Wählen Sie Abschnitt', 'Seleziona sezione', 'เลือกส่วน', 'سیکشن منتخب', 'अनुभाग का चयन', 'Select Section', 'Pilih Bagian', 'セクションを選択します', '선택 섹션', NULL),
 (70, 'add_new_student', 'Add New Student', 'নতুন শিক্ষার্থী যোগ', 'Agregar nuevo Estudiante', 'إضافة جديد للطلاب', 'Voeg Nieuwe Student', 'Добавить новый студент', '新增学生', 'Yeni Öğrenci Ekle', 'Adicionar novo Student', 'Új diák', 'Ajouter un nouvel étudiant', 'Προσθήκη νέου Φοιτητής', 'New Studenten', 'Aggiungi nuovo Student', 'เพิ่มนักเรียนใหม่', 'نیا طالب علم کے لئے شامل کریں', 'नई छात्र जोड़े', 'Add Student', 'Tambahkan Mahasiswa Baru', '新入生を追加', '신입생 추가', NULL),
@@ -699,7 +702,7 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (81, 'select_none', 'Select None', 'কিছুই না', 'Seleccione Ninguno', 'حدد بلا', 'Niets selecteren', 'Не выбирать', '选择无', 'Hiçbir şey seçilmedi', 'Selecione nenhum', 'Select None', 'Ne rien sélectionner', 'Επιλέξτε None', 'Nichts ausgewählt', 'Non selezionare niente', 'เลือกไม่มี', 'کوئی بھی منتخب', 'किसी का चयन न करें', 'non Select', 'Pilih Tidak', '何も選択しません', '선택 없음', NULL),
 (82, 'average', 'Average', 'গড়', 'Promedio', 'متوسط', 'Gemiddelde', 'В среднем', '平均', 'Ortalama', 'Média', 'Átlagos', 'Moyenne', 'Μέσος', 'Durchschnittlich', 'Media', 'เฉลี่ย', 'اوسط', 'औसत', 'Average', 'rata-rata', '平均', '평균', NULL),
 (83, 'promote_slelected_students', 'Promote Slelected Students', 'Slelected ছাত্ররা', 'Promover estudiantes Slelected', 'تشجيع الطلاب Slelected', 'Bevorder Slelected Studenten', 'Содействие Студенты Slelected', '促进学生Slelected', 'Slelected Öğrenciler teşvik', 'Promover Estudantes Slelected', 'Támogassák Slelected diákok', 'Promouvoir les étudiants Slelected', 'Προώθηση μαθητές Slelected', 'Förderung Slelected Studenten', 'Promuovere studenti Slelected', 'ส่งเสริมนักเรียน Slelected', 'Slelected طلبا کو فروغ دینا', 'Slelected छात्र को बढ़ावा देना', 'Suspendisse Slelected Students', 'Promosikan Siswa Slelected', 'Slelected学生を推進', 'Slelected 학생 홍보', NULL),
-(84, 'manage_teacher', 'Manage Teacher', 'গুরু পরিচালনা', 'administrar Maestro', 'إدارة المعلم', 'Beheer Teacher', 'Управление Teacher', '教师管理', 'Öğretmen Yönet', 'Gerenciar professor', 'kezelése tanár', 'Gérer l\'enseignant', 'διαχειριστείτε Δάσκαλος', 'verwalten Lehrer', 'gestire Maestro', 'จัดการครู', 'ٹیچر انتظام کریں', 'शिक्षक की व्यवस्था करें', 'magister Manage', 'mengelola Guru', '教師を管理します', '교사 관리', NULL),
+(84, 'manage_teacher', 'Manage Teacher', 'গুরু পরিচালনা', 'administrar Maestro', 'إدارة المعلم', 'Beheer Teacher', 'Управление Teacher', '教师管理', 'Öğretmen Yönet', 'Gerenciar professor', 'kezelése tanár', 'Gérer l''enseignant', 'διαχειριστείτε Δάσκαλος', 'verwalten Lehrer', 'gestire Maestro', 'จัดการครู', 'ٹیچر انتظام کریں', 'शिक्षक की व्यवस्था करें', 'magister Manage', 'mengelola Guru', '教師を管理します', '교사 관리', NULL),
 (85, 'add_new_teacher', 'Add New Teacher', 'নতুন গুরু যোগ', 'Agregar nuevo Maestro', 'إضافة معلم جديد', 'Add New Teacher', 'Добавить новый учитель', '添加新教师', 'Yeni Öğretmen ekle', 'Adicionar novo professor', 'Új tanár', 'Ajouter un nouvel enseignant', 'Προσθήκη νέου Δάσκαλος', 'New Teacher', 'Aggiungi nuovo insegnante', 'เพิ่มครูคนใหม่', 'نیو ٹیچر شامل کریں', 'नए शिक्षक जोड़े', 'Add New magister', 'Tambahkan New Guru', '新しい先生を追加', '새로운 교사를 추가', NULL),
 (86, 'add_teacher', 'Add Teacher', 'গুরু যোগ', 'Añadir Maestro', 'إضافة المعلم', 'Voeg Teacher', 'Добавить Teacher', '添加教师', 'Öğretmen ekle', 'Adicionar professor', 'Add Tanár', 'Ajouter Teacher', 'Προσθέστε Δάσκαλος', 'Teacher', 'Aggiungere Teacher', 'เพิ่มครู', 'استاد ان کریں', 'शिक्षक जोड़े', 'Add magister', 'Tambahkan Guru', '教師を追加', '교사 추가', NULL),
 (87, 'edit_teacher', 'Edit Teacher', 'গুরু সম্পাদনা', 'Editar Maestro', 'تحرير المعلم', 'Leraar bewerken', 'Изменить Учитель', '编辑老师', 'Düzenleme Öğretmen', 'Editar professor', 'szerkesztés tanár', 'Modifier enseignant', 'Επεξεργασία Δάσκαλος', 'Bearbeiten Lehrer', 'Modifica Maestro', 'แก้ไขครู', 'ٹیچر ترمیم کریں', 'शिक्षक संपादित करें', 'magister Edit', 'mengedit Guru', '編集教師', '편집 교사', NULL),
@@ -746,7 +749,7 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (128, 'manage_attendance', 'Manage Attendance', 'এ্যাটেনডেন্স পরিচালনা', 'Manejo de Asistencia', 'إدارة الحضور', 'Beheer Attendance', 'Управление посещаемости', '考勤管理', 'Seyirci yönet', 'Gerenciar Presença', 'kezelése Részvétel', 'Gérer Participation', 'διαχειριστείτε Συμμετοχή', 'verwalten Teilnahme', 'gestire presenze', 'จัดการเข้าร่วมประชุม', 'حاضری انتظام کریں', 'उपस्थिति प्रबंधित', 'frequentatio Manage', 'mengelola Kehadiran', '出席を管理します', '출석 관리', NULL),
 (129, 'manage_exam', 'Manage Exam', 'পরীক্ষার পরিচালনা', 'Manejo de examen', 'إدارة الامتحانات', 'Beheer Examen', 'Управление экзамен', '考试管理', 'Sınav Yönet', 'Gerenciar Exam', 'kezelése vizsga', 'Gérer examen', 'διαχειριστείτε τις εξετάσεις', 'verwalten Exam', 'gestire esame', 'จัดการสอบ', 'امتحان انتظام کریں', 'परीक्षा की व्यवस्था करें', 'IV Manage', 'mengelola Ujian', '試験を管理します', '시험 관리', NULL),
 (130, 'add_exam', 'Add Exam', 'পরীক্ষার যোগ', 'Añadir Examen', 'إضافة الامتحان', 'Exam toevoegen', 'Добавить экзамен', '添加考试', 'Sınav ekle', 'Adicionar Exam', 'Add vizsga', 'Ajouter examen', 'Προσθέστε Εξετάσεων', 'In Exam', 'aggiungere esame', 'เพิ่มการสอบ', 'امتحان میں شامل کریں', 'परीक्षा जोड़े', 'Add Exam', 'Tambahkan Ujian', '試験を追加', '시험 추가', NULL),
-(131, 'exam_name', 'Exam Name', 'পরীক্ষার নাম', 'Nombre del examen', 'اسم الامتحان', 'examen Naam', 'экзамен Название', '考试名称', 'sınav Adı', 'exame Nome', 'vizsga neve', 'Nom d\'examen', 'εξετάσεις Όνομα', 'Prüfungsname', 'Nome esame', 'ชื่อสอบ', 'امتحان نام', 'परीक्षा का नाम', 'IV Name', 'ujian Nama', '試験名', '시험 이름', NULL),
+(131, 'exam_name', 'Exam Name', 'পরীক্ষার নাম', 'Nombre del examen', 'اسم الامتحان', 'examen Naam', 'экзамен Название', '考试名称', 'sınav Adı', 'exame Nome', 'vizsga neve', 'Nom d''examen', 'εξετάσεις Όνομα', 'Prüfungsname', 'Nome esame', 'ชื่อสอบ', 'امتحان نام', 'परीक्षा का नाम', 'IV Name', 'ujian Nama', '試験名', '시험 이름', NULL),
 (132, 'date', 'Date', 'তারিখ', 'Fecha', 'تاريخ', 'Datum', 'Дата', '日期', 'tarih', 'Encontro', 'Dátum', 'date', 'Ημερομηνία', 'Datum', 'Data', 'วันที่', 'تاریخ', 'तारीख', 'Date', 'Tanggal', '日付', '날짜', NULL),
 (133, 'comment', 'Comment', 'মন্তব্য', 'Comentario', 'التعليق', 'Commentaar', 'Комментарий', '评论', 'Yorum', 'Comente', 'Megjegyzés', 'Commentaire', 'Σχόλιο', 'Kommentar', 'Commento', 'คิดเห็น', 'تبصرہ', 'टिप्पणी', 'Comment', 'Komentar', 'コメント', '논평', NULL),
 (134, 'edit_exam', 'Edit Exam', 'পরীক্ষার সম্পাদনা', 'Editar examen', 'تحرير امتحان', 'Examen bewerken', 'Редактировать экзамен', '编辑考试', 'Düzenleme Sınavı', 'Editar Exame', 'szerkesztés vizsga', 'Modifier examen', 'Επεξεργασία Εξετάσεων', 'Prüfung bearbeiten', 'Modifica esame', 'แก้ไขการสอบ', 'امتحان میں ترمیم کریں', 'परीक्षा संपादित करें', 'Edit Exam', 'mengedit Ujian', '編集試験', '편집 시험', NULL),
@@ -758,7 +761,7 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (140, 'mark_from', 'Mark From', 'মার্ক থেকে', 'mark De', 'علامة من', 'Mark Van', 'Mark От', '马克', 'Gönderen Mark', 'Mark De', 'Mark', 'Mark De', 'Mark Από', 'Mark Von', 'Mark Da', 'Mark จาก', 'سے Mark', 'मार्क से', 'Mark ex', 'Mark Dari', 'からマーク', '에서 마크', NULL);
 INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, `arabic`, `dutch`, `russian`, `chinese`, `turkish`, `portuguese`, `hungarian`, `french`, `greek`, `german`, `italian`, `thai`, `urdu`, `hindi`, `latin`, `indonesian`, `japanese`, `korean`, `indo`) VALUES
 (141, 'mark_upto', 'Mark Upto', 'মার্ক পর্যন্ত', 'hasta mark', 'علامة لغاية', 'Mark Tot', 'Марк Upto', '马克高达', 'Mark Kadar', 'Mark Upto', 'Mark Akár', 'Mark Upto', 'Mark Μέχρι', 'Mark Bis', 'Mark Fino', 'มาร์คไม่เกิน', 'مارک تک', 'निशान तक', 'Mark Upto', 'Mark Upto', 'マーク点で最大', '마크 개까지', NULL),
-(142, 'manage_exam_marks', 'Manage Exam Marks', 'পরীক্ষার মার্কস পরিচালনা', 'Manejo de Marcas del examen', 'إدارة علامات الامتحان', 'Beheer examencijfers', 'Управление экзаменационные Marks', '管理考试马克斯', 'Sınav Marks yönet', 'Gerenciar marcas de exame', 'Kezelése vizsga Marks', 'Gérer les marques d\'examen', 'Διαχειριστείτε τις εξετάσεις σήματα', 'Verwalten Exam Marks', 'Gestire Marks esame', 'จัดการ Marks สอบ', 'امتحان مارکس کو منظم کریں', 'परीक्षा मार्क्स प्रबंधित', 'IV Manage Marks', 'Mengelola Marks Ujian', '試験のマークを管理します', '시험 마크 관리', NULL),
+(142, 'manage_exam_marks', 'Manage Exam Marks', 'পরীক্ষার মার্কস পরিচালনা', 'Manejo de Marcas del examen', 'إدارة علامات الامتحان', 'Beheer examencijfers', 'Управление экзаменационные Marks', '管理考试马克斯', 'Sınav Marks yönet', 'Gerenciar marcas de exame', 'Kezelése vizsga Marks', 'Gérer les marques d''examen', 'Διαχειριστείτε τις εξετάσεις σήματα', 'Verwalten Exam Marks', 'Gestire Marks esame', 'จัดการ Marks สอบ', 'امتحان مارکس کو منظم کریں', 'परीक्षा मार्क्स प्रबंधित', 'IV Manage Marks', 'Mengelola Marks Ujian', '試験のマークを管理します', '시험 마크 관리', NULL),
 (143, 'select_exam', 'Select Exam', 'পরীক্ষার নির্বাচন', 'Elija un examen', 'حدد الامتحان', 'Selecteer Examen', 'Выберите экзамен', '选择考试', 'seç Sınav', 'Select Exam', 'Select vizsga', 'Sélectionnez Exam', 'Επιλέξτε Εξετάσεων', 'Wählen Sie Prüfung', 'Selezionare esame', 'เลือกสอบ', 'امتحان منتخب', 'परीक्षा का चयन', 'Select Exam', 'Pilih Ujian', '試験を選択', '선택의 시험', NULL),
 (144, 'send_marks', 'Send Marks', 'মার্কস পাঠান', 'Enviar marcas', 'إرسال ماركس', 'Stuur Marks', 'Отправить Marks', '发送标志', 'Marks gönder', 'Enviar Marcas', 'Küldj Marks', 'Envoyer Marks', 'Αποστολή σημάτων', 'senden Marks', 'Invia Marks', 'ส่งคะแนน', 'مارکس کا حساب', 'मार्क्स भेजें', 'Send Marks', 'Kirim Marks', 'マークスを送ります', '마크 보내기', NULL),
 (145, 'select_receiver', 'Select Receiver', 'রিসিভার নির্বাচন', 'Seleccione receptor', 'اختر استقبال', 'Selecteer Receiver', 'Выберите приемник', '选择接收', 'Alıcı seçimini', 'Selecione Receiver', 'Válassza Receiver', 'Sélectionnez récepteur', 'Επιλέξτε δέκτης', 'Wählen Sie Receiver', 'selezionare Ricevitore', 'เลือกรับสัญญาณ', 'وصول کریں', 'रिसीवर का चयन करें', 'select receptorem', 'pilih Receiver', 'レシーバーを選択', '수신기를 선택', NULL),
@@ -768,21 +771,21 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (149, 'view_tabulation_sheet', 'View Tabulation Sheet', 'দেখুন ট্যাবুলেশন শিট', 'Ver hoja de tabulación', 'عرض ورقة الجدولة', 'Bekijk Tabelleren Sheet', 'Просмотр Табуляционная Sheet', '查看制表表', 'Görünüm Tablolama Sayfası', 'Ver Folha de Tabulação', 'Részletek táblázatos Sheet', 'Voir Tabulation Sheet', 'Προβολή Φύλλο Υπολογισμού', 'Ansicht Tabulablatt', 'Vista Tabulazione Sheet', 'ดูแผ่นแจกแจง', 'ٹیبیولیشن شیٹ لنک', 'देखें सारणीकरण शीट', 'View tabularia Sheet', 'Lihat Tabulasi Lembar', 'ビュー集計シート', '보기 도표화 시트', NULL),
 (150, 'subjects', 'Subjects', 'প্রজাদের', 'Asignaturas', 'المواضيع', 'vakken', 'Предметы', '主题', 'Konular', 'assuntos', 'Tantárgyak', 'Sujets', 'θέματα', 'Fächer', 'Soggetti', 'อาสาสมัคร', 'مضامین', 'विषयों', 'Subjects', 'subyek', '科目', '주제', NULL),
 (151, 'total', 'Total', 'মোট', 'Total', 'مجموع', 'Totaal', 'Всего', '总', 'Toplam', 'Total', 'Teljes', 'Total', 'Σύνολο', 'Gesamt', 'Totale', 'ทั้งหมด', 'کل', 'कुल', 'summa', 'Total', '合計', '합계', NULL),
-(152, 'create_single_invoice', 'Create Single Invoice', 'একক চালান তৈরি করুন', 'Crear sola factura', 'إنشاء واحدة الفاتورة', 'Maak één factuur', 'Создание одного счета', '创建单发票', 'Tek Fatura Oluşturma', 'Criar factura única', 'Készítsen egyetlen számla', 'Créer facture unique', 'Δημιουργία ενιαίο τιμολόγιο', 'Erstellen von Einzel Rechnung', 'Creare un\'unica fattura', 'สร้างเดี่ยวใบแจ้งหนี้', 'سنگل انوائس بنائیں', 'एकल चालान बनाएं', 'Cautionem singulas', 'Buat Satu Faktur', 'シングル請求書を作成します。', '단일 송장 만들기', NULL),
+(152, 'create_single_invoice', 'Create Single Invoice', 'একক চালান তৈরি করুন', 'Crear sola factura', 'إنشاء واحدة الفاتورة', 'Maak één factuur', 'Создание одного счета', '创建单发票', 'Tek Fatura Oluşturma', 'Criar factura única', 'Készítsen egyetlen számla', 'Créer facture unique', 'Δημιουργία ενιαίο τιμολόγιο', 'Erstellen von Einzel Rechnung', 'Creare un''unica fattura', 'สร้างเดี่ยวใบแจ้งหนี้', 'سنگل انوائس بنائیں', 'एकल चालान बनाएं', 'Cautionem singulas', 'Buat Satu Faktur', 'シングル請求書を作成します。', '단일 송장 만들기', NULL),
 (153, 'create_mass_invoice', 'Create Mass Invoice', 'ভর চালান তৈরি করুন', 'Crear una masa de facturas', 'إنشاء كتلة الفاتورة', 'Maak Mass Factuur', 'Создание счета-фактуры Mass', '建立质量发票', 'Kitle Fatura Oluşturma', 'Criar Mass Invoice', 'Készítsen Mass számla', 'Créer Mass Invoice', 'Δημιουργία Μαζικής Τιμολόγιο', 'Erstellen Masse Rechnung', 'Creare la massa fattura', 'สร้างมวลใบแจ้งหนี้', 'ماس انوائس بنائیں', 'मास चालान बनाएं', 'Create Mass Invoice', 'Buat Massa Faktur', 'マス請求書を作成します。', '질량 송장 만들기', NULL),
 (154, 'invoice_informations', 'Invoice Informations', 'চালান Informations', 'Informaciones de factura', 'معلومات الفاتورة', 'factuur Informations', 'Счет-фактура Информация', '发票信息', 'fatura Bilgileri', 'Informações factura', 'számla Információk', 'Informations de facturation', 'τιμολόγιο Πληροφορίες', 'Rechnungsdaten', 'Informazioni fattura', 'ข้อมูลใบแจ้งหนี้', 'انوائس کی معلومات', 'चालान जानकारी', 'cautionem Informations', 'Informasi faktur', '請求書情報', '송장 정보', NULL),
 (155, 'title', 'Title', 'খেতাব', 'Título', 'عنوان', 'Titel', 'заглавие', '标题', 'başlık', 'Título', 'Cím', 'Titre', 'Τίτλος', 'Titel', 'Titolo', 'หัวข้อ', 'عنوان', 'शीर्षक', 'Title:', 'Judul', 'タイトル', '표제', NULL),
 (156, 'description', 'Description', 'বিবরণ', 'Descripción', 'وصف', 'Beschrijving', 'Описание', '描述', 'tanım', 'Descrição', 'Leírás', 'La description', 'Περιγραφή', 'Beschreibung', 'Descrizione', 'ลักษณะ', 'تفصیل', 'विवरण', 'Description', 'Deskripsi', '説明', '기술', NULL),
 (157, 'payment_informations', 'Payment Informations', 'পেমেন্ট Informations', 'Información sobre el pago', 'معلومات الدفع', 'Payment Informations', 'Информация оплаты', '付款信息', 'Ödeme Bilgileri', 'Informações de pagamento', 'fizetési Információk', 'Informations de paiement', 'Πληροφορίες πληρωμής', 'Bezahlung Informationen', 'Informazioni di pagamento', 'ข้อมูลการชำระเงิน', 'ادائیگی کی معلومات', 'भुगतान जानकारी', 'Payment Informations', 'Informasi Pembayaran', '支払情報', '결제 정보', NULL),
-(158, 'enter_total_amount', 'Enter Total Amount', 'মোট পরিমাণ লিখুন', 'Ingrese monto total', 'أدخل المبلغ الكلي لل', 'Voer Totaal bedrag', 'Введите общую сумму', '输入总金额', 'Toplam Miktar giriniz', 'Digite Valor Total', 'Írja Teljes összeg', 'Entrez Montant total', 'Εισάγετε Συνολικό Ποσό', 'Geben Sie Gesamtbetrag', 'Inserire l\'importo totale', 'ใส่จำนวนเงินรวม', 'کل رقم درج', 'कुल राशि में प्रवेश', 'Enter Total size', 'Masukkan Jumlah Jumlah', '合計金額を入力してください', '전체 금액을 입력', NULL),
+(158, 'enter_total_amount', 'Enter Total Amount', 'মোট পরিমাণ লিখুন', 'Ingrese monto total', 'أدخل المبلغ الكلي لل', 'Voer Totaal bedrag', 'Введите общую сумму', '输入总金额', 'Toplam Miktar giriniz', 'Digite Valor Total', 'Írja Teljes összeg', 'Entrez Montant total', 'Εισάγετε Συνολικό Ποσό', 'Geben Sie Gesamtbetrag', 'Inserire l''importo totale', 'ใส่จำนวนเงินรวม', 'کل رقم درج', 'कुल राशि में प्रवेश', 'Enter Total size', 'Masukkan Jumlah Jumlah', '合計金額を入力してください', '전체 금액을 입력', NULL),
 (159, 'payment', 'Payment', 'প্রদান', 'Pago', 'دفع', 'Betaling', 'Оплата', '付款', 'Ödeme', 'Pagamento', 'Fizetés', 'Paiement', 'Πληρωμή', 'Zahlung', 'Pagamento', 'การชำระเงิน', 'ادائیگی', 'भुगतान', 'Payment', 'Pembayaran', '支払い', '지불', NULL),
-(160, 'enter_payment_amount', 'Enter Payment Amount', 'পেমেন্ট পরিমাণ লিখুন', 'Ingrese monto de pago', 'أدخل دفع المبلغ', 'Voer Betaling Bedrag', 'Введите Сумма платежа', '输入付款金额', 'Ödeme Miktar giriniz', 'Digite Valor do Pagamento', 'Írja Kifizetés összege', 'Entrez le montant du paiement', 'Εισάγετε Ποσό Πληρωμής', 'Geben Sie Zahlungsbetrag', 'Inserire l\'importo di pagamento', 'ป้อนจำนวนเงิน', 'ادائیگی کی رقم درج', 'भुगतान राशि दर्ज', 'Aliquam Payment Enter', 'Masukkan Jumlah Pembayaran', 'お支払い金額を入力します。', '결제 금액을 입력', NULL),
+(160, 'enter_payment_amount', 'Enter Payment Amount', 'পেমেন্ট পরিমাণ লিখুন', 'Ingrese monto de pago', 'أدخل دفع المبلغ', 'Voer Betaling Bedrag', 'Введите Сумма платежа', '输入付款金额', 'Ödeme Miktar giriniz', 'Digite Valor do Pagamento', 'Írja Kifizetés összege', 'Entrez le montant du paiement', 'Εισάγετε Ποσό Πληρωμής', 'Geben Sie Zahlungsbetrag', 'Inserire l''importo di pagamento', 'ป้อนจำนวนเงิน', 'ادائیگی کی رقم درج', 'भुगतान राशि दर्ज', 'Aliquam Payment Enter', 'Masukkan Jumlah Pembayaran', 'お支払い金額を入力します。', '결제 금액을 입력', NULL),
 (161, 'status', 'Status', 'অবস্থা', 'Estado', 'الحالة', 'toestand', 'Положение дел', '状态', 'durum', 'estado', 'Állapot', 'statut', 'Κατάσταση', 'Status', 'Stato', 'สถานะ', 'سٹیٹس', 'स्थिति', 'Status', 'Status', '状態', '지위', NULL),
 (162, 'paid', 'Paid', 'Paid', 'Pagado', 'دفع', 'Betaald', 'оплаченный', '付费', 'ücretli', 'Pago', 'Fizetett', 'Payé', 'Έμμισθος', 'Bezahlt', 'Pagato', 'ต้องจ่าย', 'ادا کی', 'भुगतान किया है', 'Paid', 'dibayar', '支払われました', '유료', NULL),
 (163, 'unpaid', 'Unpaid', 'অবৈতনিক', 'No pagado', 'غير مدفوع', 'onbetaald', 'неоплаченный', '未付', 'ödenmemiş', 'não remunerado', 'Kifizetetlen', 'Non payé', 'Απλήρωτος', 'unbezahlt', 'non pagato', 'ยังไม่ได้ชำระ', 'بلا معاوضہ', 'अवैतनिक', 'unpaid', 'Tunggakan', '未払い', '지불하지 않은', NULL),
 (164, 'method', 'Method', 'পদ্ধতি', 'Método', 'طريقة', 'Methode', 'метод', '方法', 'Yöntem', 'Método', 'Módszer', 'la méthode', 'Μέθοδος', 'Verfahren', 'metodo', 'วิธี', 'طریقہ', 'तरीका', 'ratio', 'Metode', '方法', '방법', NULL),
 (165, 'cash', 'Cash', 'নগদ', 'Efectivo', 'السيولة النقدية', 'geld', 'Денежные средства', '现金', 'Nakit', 'Dinheiro', 'Készpénz', 'Argent liquide', 'Μετρητά', 'Kasse', 'Contanti', 'เงินสด', 'نقد', 'रोकड़', 'Cash', 'Kas', '現金', '현금', NULL),
-(166, 'check', 'Check', 'চেক', 'Comprobar', 'الاختيار', 'check', 'Проверьте', '检查', 'Ara', 'Verifica', 'Jelölje be', 'Vérifier', 'Έλεγχος', 'Prüfen', 'Dai un\'occhiata', 'ตรวจสอบ', 'چیک کریں', 'चेक', 'reprehendo', 'Memeriksa', 'チェック', '검사', NULL),
+(166, 'check', 'Check', 'চেক', 'Comprobar', 'الاختيار', 'check', 'Проверьте', '检查', 'Ara', 'Verifica', 'Jelölje be', 'Vérifier', 'Έλεγχος', 'Prüfen', 'Dai un''occhiata', 'ตรวจสอบ', 'چیک کریں', 'चेक', 'reprehendo', 'Memeriksa', 'チェック', '검사', NULL),
 (167, 'card', 'Card', 'কার্ড', 'Tarjeta', 'بطاقة', 'Kaart', 'Карта', '卡', 'kart', 'Cartão', 'Kártya', 'Carte', 'Κάρτα', 'Karte', 'Carta', 'บัตร', 'کارڈ', 'कार्ड', 'Card', 'Kartu', 'カード', '카드', NULL),
 (168, 'add_invoice', 'Add Invoice', 'চালান যোগ', 'Añadir factura', 'إضافة الفاتورة', 'Voeg Invoice', 'Добавить счет-фактуру', '添加发票', 'Fatura ekle', 'Adicionar Invoice', 'Add számla', 'Ajouter facture', 'Προσθέστε Τιμολόγιο', 'In Rechnung', 'Aggiungere fattura', 'เพิ่มใบแจ้งหนี้', 'انوائس میں شامل کریں', 'चालान जोड़े', 'Add Invoice', 'Tambahkan Faktur', '請求書を追加', '송장 추가', NULL),
 (169, 'unpaid_invoices', 'Unpaid Invoices', 'না মেটানো বিল', 'facturas impagadas', 'فواتير غير مدفوعة', 'Onbetaalde facturen', 'Неоплаченные счета', '未付发票', 'ödenmemiş Faturalar', 'As facturas não pagas', 'Kifizetetlen számlák', 'factures impayées', 'ανεξόφλητα τιμολόγια', 'Unbezahlte Rechnungen', 'Fatture non pagate', 'ใบแจ้งหนี้ที่ค้างชำระ', 'بلا معاوضہ رسید', 'अवैतनिक चालान', 'Invoices unpaid', 'Faktur yang belum dibayar', '未払いの請求書', '미지급 송장', NULL),
@@ -821,8 +824,8 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (202, 'noticeboard_list', 'Noticeboard List', 'নোটিশবোর্ড তালিকা', 'Lista tablón de anuncios', 'قائمة وحة إعلانات', 'prikbord List', 'Список обьявлений', '布告名单', 'noticeboard listesi', 'Lista de avisos', 'üzenőfalán listája', 'Liste de Noticeboard', 'Λίστα ανακοινώσεων', 'Schwarzes Brett Liste', 'Lista bacheca', 'รายการป้ายประกาศ', 'نوٹس کی فہرست', 'noticeboard सूची', 'Noticeboard List', 'Daftar pengumuman', 'Noticeboard一覧', 'noticeboard에 목록', NULL),
 (203, 'add_noticeboard', 'Add Noticeboard', 'নোটিশবোর্ড যোগ', 'Añadir tablón de anuncios', 'إضافة وحة إعلانات', 'Prikbord toevoegen', 'Добавить обьявлений', '添加告示栏', 'noticeboard ekle', 'Adicionar Noticeboard', 'Add üzenőfalán', 'Ajouter Noticeboard', 'Προσθέστε Ανακοινώσεων', 'In Schwarzes Brett', 'Aggiungere Bacheca', 'เพิ่มป้ายประกาศ', 'نوٹس بورڈ میں شامل', 'Noticeboard जोड़े', 'Add Noticeboard', 'Tambahkan Noticeboard', 'Noticeboardを追加', 'noticeboard에 추가', NULL),
 (204, 'notice', 'Notice', 'বিজ্ঞপ্তি', 'darse cuenta', 'إشعار', 'kennisgeving', 'уведомление', '注意', 'ihbar', 'Aviso prévio', 'Értesítés', 'Avis', 'Ειδοποίηση', 'Beachten', 'Avviso', 'แจ้งให้ทราบ', 'نوٹس', 'नोटिस', 'Notice', 'Melihat', '通知', '주의', NULL),
-(205, 'add_notice', 'Add Notice', 'নোটিশ যোগ', 'Añadir Aviso', 'إضافة إشعار', 'Voeg Kennisgeving', 'Добавить уведомление', '添加通知', 'Uyarı ekle', 'Adicionar Notice', 'Add közlemény', 'Ajouter l\'avis', 'Προσθήκη ανακοίνωσης', 'In Hinweis', 'Aggiungere Avviso', 'เพิ่มเวปไซด์', 'نوٹس کا اضافہ کریں', 'सूचना जोड़े', 'Add Notice', 'Tambahkan Pemberitahuan', 'お知らせを追加します。', '공지 사항 추가', NULL),
-(206, 'send_sms_to_all', 'Send Sms To All', 'সকল এসএমএস পাঠাতে', 'Enviar SMS a todos', 'إرسال الرسائل القصيرة إلى جميع', 'Stuur sms\'en naar alle', 'Отправить Sms для всех', '发送短信到所有', 'All To Sms Gönder', 'Enviar SMS a todos os', 'SMS küldése Minden', 'Envoyer Sms Pour Tous', 'Αποστολή SMS προς όλους', 'Senden Sms To All', 'Invia SMS a tutti', 'ส่ง SMS ไปทั้งหมด', 'سب پر SMS بھیجیں', 'सभी के लिए एसएमएस भेजें', 'Omnes ad mittere SMS', 'Kirim Sms Untuk Semua', 'すべてにSMSを送信', '모든 SMS를 보내기', NULL),
+(205, 'add_notice', 'Add Notice', 'নোটিশ যোগ', 'Añadir Aviso', 'إضافة إشعار', 'Voeg Kennisgeving', 'Добавить уведомление', '添加通知', 'Uyarı ekle', 'Adicionar Notice', 'Add közlemény', 'Ajouter l''avis', 'Προσθήκη ανακοίνωσης', 'In Hinweis', 'Aggiungere Avviso', 'เพิ่มเวปไซด์', 'نوٹس کا اضافہ کریں', 'सूचना जोड़े', 'Add Notice', 'Tambahkan Pemberitahuan', 'お知らせを追加します。', '공지 사항 추가', NULL),
+(206, 'send_sms_to_all', 'Send Sms To All', 'সকল এসএমএস পাঠাতে', 'Enviar SMS a todos', 'إرسال الرسائل القصيرة إلى جميع', 'Stuur sms''en naar alle', 'Отправить Sms для всех', '发送短信到所有', 'All To Sms Gönder', 'Enviar SMS a todos os', 'SMS küldése Minden', 'Envoyer Sms Pour Tous', 'Αποστολή SMS προς όλους', 'Senden Sms To All', 'Invia SMS a tutti', 'ส่ง SMS ไปทั้งหมด', 'سب پر SMS بھیجیں', 'सभी के लिए एसएमएस भेजें', 'Omnes ad mittere SMS', 'Kirim Sms Untuk Semua', 'すべてにSMSを送信', '모든 SMS를 보내기', NULL),
 (207, 'yes', 'Yes', 'হাঁ', 'Sí', 'نعم فعلا', 'Ja', 'да', '是', 'Evet', 'sim', 'Igen', 'Oui', 'Ναί', 'ja', 'sì', 'ใช่', 'جی ہاں', 'हाँ', 'Etiam', 'iya nih', 'はい', '예', NULL),
 (208, 'no', 'No', 'না', 'No', 'لا', 'Nee', 'Нет', '没有', 'hayır', 'Não', 'Nem', 'Non', 'Όχι', 'Nein', 'No', 'ไม่', 'نہیں', 'नहीं', 'No', 'Tidak', 'いいえ', '아니', NULL),
 (209, 'sms_service_not_activated', 'Sms Service Not Activated', 'এসএমএস পরিষেবা সক্রিয় করা', 'El servicio de SMS no activado', 'خدمة الرسائل القصيرة لم ينشط', 'SMS-dienst Niet Geactiveerd', 'Sms Сервис не активирован', '短信服务未激活', 'Sms Servisi Aktif Değil', 'Serviço de SMS Não Activado', 'SMS szolgáltatás nincs aktiválva', 'Service Sms non activé', 'Υπηρεσία SMS δεν Ενεργός', 'Sms Service nicht aktiviert', 'Servizio SMS non attivato', 'บริการ SMS ไม่เปิดใช้งาน', 'ایس ایم ایس سروس چالو نہیں', 'एसएमएस सेवा सक्रिय नहीं', 'Activated sms service', 'Sms Layanan Tidak Aktif', 'SMSサービスが活性化されません', 'SMS 서비스가 활성화되지 않음', NULL),
@@ -856,7 +859,7 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (237, 'select_a_service', 'Select A Service', 'একটি পরিষেবা নির্বাচন', 'Seleccione un servicio', 'أختر الخدمة', 'Kies een service', 'Выберите службу', '选择服务', 'Bir Hizmet Seçin', 'Seleccione um serviço', 'Válasszon egy szolgáltatást', 'Sélectionnez un service', 'Επιλέξτε μια υπηρεσία', 'Wählen Sie einen Dienst', 'Selezionare un servizio', 'เลือกบริการ', 'ایک خدمت کریں', 'एक सेवा का चयन', 'Select a Service', 'Pilih Sebuah Layanan', 'サービスを選択', '서비스를 선택', NULL),
 (238, 'not_selected', 'Not Selected', 'অনির্বাচিত', 'No seleccionado', 'لم يتم اختياره', 'Niet geselecteerd', 'Не выбран', '未选择', 'Seçilmedi', 'Não selecionado', 'nincs kiválasztva', 'Non séléctionné', 'Χωρίς επιλογή', 'Nicht ausgewählt', 'Non selezionato', 'ไม่ได้เลือก', 'منتخب نہیں', 'नहीं चुने गए', 'Non Selected', 'Tidak terpilih', '選択されていません', '선택되지 않음', NULL),
 (239, 'disabled', 'Disabled', 'অক্ষম', 'Discapacitado', 'معاق', 'invalide', 'Отключено', '残', 'engelli', 'Desativado', 'Tiltva', 'désactivé', 'Ανάπηρος', 'Behindert', 'Disabilitato', 'พิการ', 'معذور', 'विकलांग', 'disabled', 'Cacat', '使用禁止', '장애인', NULL),
-(240, 'clickatell_username', 'Clickatell Username', 'Clickatell ব্যবহারকারীর নাম', 'Nombre de usuario Clickatell', 'Clickatell اسم المستخدم', 'Clickatell Gebruikersnaam', 'Clickatell Имя пользователя', '的Clickate用户名', 'Clickatell Adı', 'Clickatell usuário', 'Clickatell Felhasználónév', 'Clickatell Nom d\'utilisateur', 'Clickatell Όνομα Χρήστη', 'Clickatell Benutzername', 'Clickatell Nome utente', 'Clickatell ชื่อผู้ใช้', 'Clickatell رکنیت', 'Clickatell यूजर का नाम', 'Clickatell Username', 'Clickatell Nama', 'Clickatellユーザー名', '하는 Clickatell 아이디', NULL),
+(240, 'clickatell_username', 'Clickatell Username', 'Clickatell ব্যবহারকারীর নাম', 'Nombre de usuario Clickatell', 'Clickatell اسم المستخدم', 'Clickatell Gebruikersnaam', 'Clickatell Имя пользователя', '的Clickate用户名', 'Clickatell Adı', 'Clickatell usuário', 'Clickatell Felhasználónév', 'Clickatell Nom d''utilisateur', 'Clickatell Όνομα Χρήστη', 'Clickatell Benutzername', 'Clickatell Nome utente', 'Clickatell ชื่อผู้ใช้', 'Clickatell رکنیت', 'Clickatell यूजर का नाम', 'Clickatell Username', 'Clickatell Nama', 'Clickatellユーザー名', '하는 Clickatell 아이디', NULL),
 (241, 'clickatell_password', 'Clickatell Password', 'Clickatell পাসওয়ার্ড', 'clickatell contraseña', 'كلمة Clickatell', 'Clickatell Password', 'Clickatell Пароль', 'Clickatell的密码', 'Clickatell Şifre', 'Senha Clickatell', 'Clickatell jelszó', 'Clickatell Mot de passe', 'Clickatell Κωδικός', 'Clickatell Passwort', 'password Clickatell', 'รหัสผ่าน Clickatell', 'Clickatell پاس ورڈ', 'Clickatell पासवर्ड', 'Clickatell Password', 'Sandi Clickatell', 'Clickatellパスワード', '하는 Clickatell 비밀', NULL),
 (242, 'clickatell_api_id', 'Clickatell Api Id', 'Clickatell API ID', 'Clickatell Api Id', 'Clickatell واجهة برمجة التطبيقات معرف', 'Clickatell Api Id', 'Clickatell Апи Id', 'Clickatell的API ID', 'Clickatell Api Kimliği', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'API รหัส Clickatell', 'Clickatell API ID', 'Clickatell एपीआई आईडी', 'Id Clickatell Api', 'Clickatell Api Id', 'Clickatellアピ同上', '하는 Clickatell API 광고 이드', NULL),
 (243, 'twilio_account', 'Twilio Account', 'Twilio অ্যাকাউন্ট', 'cuenta Twilio', 'حساب Twilio', 'Twilio account', 'Счет Twilio', 'Twilio帐户', 'Twilio Hesabı', 'Conta Twilio', 'Twilio fiók', 'compte Twilio', 'Ο λογαριασμός Twilio', 'Twilio Konto', 'conto Twilio', 'บัญชี Twilio', 'Twilio اکاؤنٹ', 'Twilio अकाउंट', 'Twilio Account', 'Akun Twilio', 'Twilioアカウント', 'Twilio 계정', NULL),
@@ -875,7 +878,7 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (256, 'current_password', 'Current Password', 'বর্তমান পাসওয়ার্ড', 'contraseña actual', 'كلمة السر الحالية', 'huidig ​​wachtwoord', 'текущий пароль', '当前密码', 'Şimdiki Şifre', 'senha atual', 'jelenlegi jelszó', 'Mot de passe actuel', 'τρέχων κωδικός πρόσβασης', 'Aktuelles Passwort', 'Password attuale', 'รหัสผ่านปัจจุบัน', 'موجودہ خفیہ لفظ', 'वर्तमान पासवर्ड', 'Codex Secretus Currens', 'kata sandi saat ini', '現在のパスワード', '현재 비밀번호', NULL),
 (257, 'new_password', 'New Password', 'নতুন পাসওয়ার্ড', 'nueva contraseña', 'كلمة السر الجديدة', 'nieuw paswoord', 'новый пароль', '新密码', 'Yeni Şifre', 'Nova senha', 'új jelszó', 'nouveau mot de passe', 'Νέος Κωδικός', 'Neues Kennwort', 'nuova password', 'รหัสผ่านใหม่', 'نیا پاس ورڈ', 'नया पासवर्ड', 'New Password', 'kata sandi baru', '新しいパスワード', '새 비밀번호', NULL),
 (258, 'confirm_new_password', 'Confirm New Password', 'নিশ্চিত কর নতুন গোপননম্বর', 'Confirmar nueva contraseña', 'تأكيد كلمة المرور الجديدة', 'Bevestig nieuw wachtwoord', 'Подтвердите новый пароль', '确认新密码', 'Yeni şifreyi onayla', 'Confirme a nova senha', 'Erősítse meg az új jelszót', 'Confirmer le nouveau mot de passe', 'Επιβεβαιώστε τον καινούριο σας κωδικό', 'Bestätige neues Passwort', 'Conferma la nuova password', 'ยืนยันรหัสผ่านใหม่', 'نئے پاس ورڈ کی توثیق کریں', 'नए पासवर्ड की पुष्टि करें', 'Confirmare New password', 'Konfirmasi password baru', '新しいパスワードを確認', '새 암호를 확인합니다', NULL),
-(259, 'login', 'Login', 'লগইন', 'Iniciar sesión', 'تسجيل الدخول', 'Log in', 'Авторизоваться', '登录', 'Oturum aç', 'Entrar', 'Bejelentkezés', 'S\'identifier', 'Σύνδεση', 'Anmeldung', 'Accesso', 'เข้าสู่ระบบ', 'لاگ ان', 'लॉगिन', 'Login', 'Masuk', 'ログイン', '로그인', NULL),
+(259, 'login', 'Login', 'লগইন', 'Iniciar sesión', 'تسجيل الدخول', 'Log in', 'Авторизоваться', '登录', 'Oturum aç', 'Entrar', 'Bejelentkezés', 'S''identifier', 'Σύνδεση', 'Anmeldung', 'Accesso', 'เข้าสู่ระบบ', 'لاگ ان', 'लॉगिन', 'Login', 'Masuk', 'ログイン', '로그인', NULL),
 (260, 'forgot_your_password', 'Forgot Your Password', 'আপনি কি পাসওয়ার্ড ভুলে গেছেন', 'Olvidaste tu contraseña', 'نسيت رقمك السري', 'Je wachtwoord vergeten', 'Забыли пароль', '忘记密码了吗', 'Şifrenizi mi unuttunuz', 'Esqueceu sua senha', 'Elfelejtetted a jelszavad', 'Mot de passe oublié', 'Ξέχασες τον κωδικό σου', 'Haben Sie Ihr Passwort vergessen', 'Hai dimenticato la password', 'ลืมรหัสผ่านหรือไม่', 'پاس ورڈ بھول گیا', 'क्या आप अपना पासवर्ड भूल गए', 'Forgot Your Password', 'Lupa kata sandi Anda', 'パスワードをお忘れですか', '비밀번호를 잊어 버렸습니까', NULL),
 (261, 'reset_password', 'Reset Password', 'পাসওয়ার্ড রিসেট করুন', 'Restablecer la contraseña', 'اعادة تعيين كلمة السر', 'Reset Password', 'Сброс пароля', '重设密码', 'Şifreyi yenile', 'Trocar a senha', 'Jelszó visszaállítása', 'réinitialiser le mot de passe', 'Επαναφέρετε τον κωδικό πρόσβασης', 'Passwort zurücksetzen', 'Resetta la password', 'รีเซ็ตรหัสผ่าน', 'پاس ورڈ ری سیٹ', 'पासवर्ड रीसेट', 'Reset password', 'Reset password', 'パスワードを再設定する', '암호를 재설정', NULL),
 (262, 'return_to_login_page', 'Return To Login Page', 'ফিরুন লগইন পৃষ্ঠায়', 'Volver a inicio página', 'العودة إلى صفحة تسجيل الدخول', 'Terug naar Inlogpagina', 'Вернуться на страницу входа', '返回到登录页面', 'Sayfa Giriş Return To', 'Retornar à página de login', 'Vissza a bejelentkezéshez Oldal', 'Retour à la page de connexion', 'Επιστροφή για να συνδεθείτε Σελίδα', 'Zurück zur Login-Seite', 'Torna alla pagina di login', 'กลับไปที่หน้าเข้าสู่ระบบ', 'پیج لاگ ان واپس جائیں', 'लौटें लॉगिन करने के लिए पृष्ठ', 'Return To Login', 'Kembali ke halaman login', 'ログインページに戻ります', '로그인 페이지로 돌아 가기', NULL),
@@ -904,11 +907,11 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (284, 'remove', 'Remove', 'অপসারণ', 'retirar', 'إزالة', 'Verwijderen', 'Удалить', '去掉', 'Kaldır', 'Remover', 'eltávolít', 'Retirer', 'Αφαιρώ', 'Entfernen', 'Cancella', 'เอาออก', 'دور', 'हटाना', 'Remove', 'Menghapus', '削除します', '없애다', NULL),
 (285, 'print', 'Print', 'ছাপানো', 'Impresión', 'طباعة', 'Afdrukken', 'Распечатать', '打印', 'baskı', 'Impressão', 'Nyomtatás', 'Impression', 'Αποτύπωμα', 'Drucken', 'Stampare', 'พิมพ์', 'پرنٹ', 'छाप', 'Print', 'Mencetak', '印刷', '인쇄', NULL),
 (286, 'teacher_dashboard', 'Teacher Dashboard', 'গুরু ড্যাশবোর্ড', 'Tablero de instrumentos del profesor', 'المعلم لوحة', 'leraar Dashboard', 'Учитель Dashboard', '教师仪表板', 'Öğretmen Dashboard', 'professor do dashboard', 'tanár Portál', 'Tableau de bord des enseignants', 'ταμπλό δάσκαλος', 'Lehrer-Dashboard', 'Maestro Dashboard', 'ครูแดชบอร์ด', 'ٹیچر ڈیش بورڈ', 'शिक्षक डैशबोर्ड', 'magister Dashboard', 'guru Dashboard', '教師ダッシュボード', '교사 대시 보드', NULL),
-(287, 'study_material', 'Study Material', 'গবেষণা উপাদান', 'Material de estudio', 'مادة الدراسة', 'studiemateriaal', 'учебного материала', '学习材料', 'Eğitim Malzemesi', 'Material de estudo', 'tananyag', 'Matériel d\'étude', 'μελέτη Υλικό', 'Studienmaterial', 'Materiale di studio', 'วัสดุการศึกษา', 'تربیتی مواد', 'अध्ययन सामग्री', 'Material Study', 'Bahan studi', '研究材料', '연구 자료', NULL),
+(287, 'study_material', 'Study Material', 'গবেষণা উপাদান', 'Material de estudio', 'مادة الدراسة', 'studiemateriaal', 'учебного материала', '学习材料', 'Eğitim Malzemesi', 'Material de estudo', 'tananyag', 'Matériel d''étude', 'μελέτη Υλικό', 'Studienmaterial', 'Materiale di studio', 'วัสดุการศึกษา', 'تربیتی مواد', 'अध्ययन सामग्री', 'Material Study', 'Bahan studi', '研究材料', '연구 자료', NULL),
 (288, 'teacher_list', 'Teacher List', 'শিক্ষক তালিকা', 'Lista maestro', 'قائمة المعلم', 'Teacher List', 'Список учителей', '教师名单', 'Öğretmen listesi', 'Lista do professor', 'tanár listája', 'Liste des enseignants', 'Λίστα δάσκαλος', 'Lehrer-Liste', 'Lista Maestro', 'รายการครู', 'ٹیچر لسٹ', 'टीचर सूची', 'magister List', 'Daftar guru', '先生一覧', '교사 목록', NULL),
 (289, 'manage_class_routine', 'Manage Class Routine', 'ক্লাস রুটিন পরিচালনা', 'Manejo de rutina de la clase', 'إدارة الدرجة الروتينية', 'Beheer Class Routine', 'Управление Routine Class', '管理类常规', 'Sınıf Rutin yönet', 'Gerenciar Classe Rotina', 'Kezelés Class Rutin', 'Gérer la classe Routine', 'Διαχειριστείτε Class ρουτίνας', 'Verwalten Klasse Routine', 'Gestire Classe Routine', 'การจัดการชั้นเรียนตามปกติ', 'کلاس ضابطہء انتظام کریں', 'कक्षा नियमित प्रबंधित', 'Class Manage DEFUNCTORIUS', 'Mengelola Kelas Rutin', 'クラスのルーチンを管理します', '클래스 일상적인 관리', NULL),
 (290, 'class_routine_list', 'Class Routine List', 'ক্লাস রুটিন তালিকা', 'Lista de rutina de la clase', 'الطبقة قائمة الروتينية', 'Klasse Routine List', 'Класс Рутинное Список', '常规类名单', 'Sınıf Rutin Liste', 'Classe Lista de rotina', 'Class Rutin listája', 'Classe Liste de routine', 'Κλάση ρουτίνας Λίστα', 'Klasse Routine Liste', 'Lista routine Class', 'ชั้นรายชื่อประจำ', 'کلاس معمول کی فہرست', 'कक्षा नियमित सूची', 'Class List DEFUNCTORIUS', 'Kelas Daftar Rutin', 'クラスルーチン一覧', '클래스 정기 목록', NULL),
-(291, 'add_study_material', 'Add Study Material', 'স্টাডি উপাদান যোগ করুন', 'Añadir Material de Estudio', 'إضافة المواد الدراسية', 'Voeg Studiemateriaal', 'Добавить учебный материал', '添加材料的研究', 'Eğitim Malzemesi ekle', 'Adicionar Material de Estudo', 'Add tananyag', 'Ajouter Matériel d\'étude', 'Προσθέστε Μελέτη Υλικό', 'In Study Material', 'Aggiungere Materiale di studio', 'เพิ่มวัสดุการศึกษา', 'تربیتی مواد شامل کریں', 'अध्ययन सामग्री जोड़े', 'Material Add Study', 'Tambahkan studi Bahan', '研究材料を追加', '연구 자료 추가', NULL),
+(291, 'add_study_material', 'Add Study Material', 'স্টাডি উপাদান যোগ করুন', 'Añadir Material de Estudio', 'إضافة المواد الدراسية', 'Voeg Studiemateriaal', 'Добавить учебный материал', '添加材料的研究', 'Eğitim Malzemesi ekle', 'Adicionar Material de Estudo', 'Add tananyag', 'Ajouter Matériel d''étude', 'Προσθέστε Μελέτη Υλικό', 'In Study Material', 'Aggiungere Materiale di studio', 'เพิ่มวัสดุการศึกษา', 'تربیتی مواد شامل کریں', 'अध्ययन सामग्री जोड़े', 'Material Add Study', 'Tambahkan studi Bahan', '研究材料を追加', '연구 자료 추가', NULL),
 (292, 'file_type', 'File Type', 'ফাইলের ধরন', 'Tipo de archivo', 'نوع الملف', 'Bestandstype', 'Тип файла', '文件类型', 'Dosya tipi', 'Tipo de arquivo', 'Fájltípus', 'Type de fichier', 'Τύπος αρχείου', 'Dateityp', 'Tipo di file', 'ชนิดของไฟล์', 'فائل کی قسم', 'फाइल का प्रकार', 'file Type', 'Jenis File', 'ファイルの種類', '파일 형식', NULL),
 (293, 'select_file_type', 'Select File Type', 'নির্বাচন ফাইল টাইপ', 'Seleccione el tipo de archivo', 'حدد نوع الملف', 'Select File Type', 'Выберите тип файла', '选择文件类型', 'Seçin Dosya Türü', 'Selecionar Tipo de Arquivo', 'Select File Type', 'Sélectionner le type de fichier', 'Επιλογή τύπου αρχείου', 'Dateityp auswählen', 'Selezionare il tipo di file', 'เลือกประเภทไฟล์', 'منتخب فائل کی قسم', 'चुनें फ़ाइल प्रकार', 'File Selecta Type', 'Pilih File Type', 'ファイルタイプを選択します', '선택 파일 형식', NULL),
 (294, 'image', 'Image', 'ভাবমূর্তি', 'Imagen', 'صورة', 'Beeld', 'Образ', '图片', 'görüntü', 'Imagem', 'Kép', 'image', 'Εικόνα', 'Image', 'Immagine', 'ภาพ', 'تصویر', 'छवि', 'Image', 'Gambar', '画像', '영상', NULL),
@@ -927,18 +930,18 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (307, 'attendance_for_class', 'Attendance For Class', 'এ্যাটেনডেন্স বর্গ জন্য', 'Para la asistencia a clase', 'الحضور لفئة', 'Attendance Voor klasse', 'Участники Для класса', '考勤类', 'Sınıfı Seyirci', 'Presença Para a Classe', 'Nézőszám osztályú', 'Participation Pour la classe', 'Συμμετοχή Για την Κλάση', 'Die Teilnahme für die Klasse', 'Partecipazione Per la Classe', 'การเข้าร่วมประชุมสำหรับ Class', 'کلاس کے لئے حاضری', 'उपस्थिति कक्षा के लिए', 'Class enim frequentatio', 'Kehadiran Untuk Kelas', 'クラスの出席', '클래스에 대한 출석', NULL),
 (308, 'print_tabulation_sheet', 'Print Tabulation Sheet', 'প্রিন্ট ট্যাবুলেশন শিট', 'Imprimir hoja de tabulación', 'طباعة ورقة الجدولة', 'Print Tabelleren Sheet', 'Печать Табуляционная Sheet', '打印制表表', 'Baskı Tablolama Sayfası', 'Folha de Tabulação de impressão', 'Nyomtatás táblázatos Sheet', 'Imprimer Tabulation Sheet', 'Εκτύπωση Φύλλο Υπολογισμού', 'Drucken Tabulablatt', 'Stampa Tabulazione Foglio', 'แผ่นแจกแจงพิมพ์', 'پرنٹ ٹیبیولیشن شیٹ', 'प्रिंट सारणीकरण शीट', 'Print tabularia Sheet', 'Cetak Tabulasi Lembar', '印刷集計シート', '인쇄 집계 시트', NULL),
 (309, 'receiver', 'Receiver', 'গ্রাহক', 'Receptor', 'المتلقي', 'Ontvanger', 'Получатель', '接收器', 'alıcı', 'recebedor', 'Receiver', 'Récepteur', 'Δέκτης', 'Empfänger', 'Ricevitore', 'ผู้รับ', 'وصول', 'रिसीवर', 'receptor', 'Penerima', '受信機', '리시버', NULL),
-(310, 'please_select_receiver', 'Please Select Receiver', 'দয়া করে রিসিভার নির্বাচন', 'Por favor seleccione Receptor', 'الرجاء الإختيار استقبال', 'Selecteer Receiver', 'Выберите приемник', '请选择接收器', 'Alıcısı Seçiniz', 'Selecione Receiver', 'Kérjük, válasszon Receiver', 'S\'il vous plaît Sélectionnez Receiver', 'Επιλέξτε Δέκτης', 'Bitte wählen Receiver', 'Selezionare Ricevitore', 'กรุณาเลือกรับสัญญาณ', 'وصول براہ مہربانی منتخب کریں', 'कृपया रिसीवर का चयन करें', 'Select receptorem', 'Silakan Pilih Receiver', 'Receiverを選択してください', '수신기를 선택하세요', NULL),
+(310, 'please_select_receiver', 'Please Select Receiver', 'দয়া করে রিসিভার নির্বাচন', 'Por favor seleccione Receptor', 'الرجاء الإختيار استقبال', 'Selecteer Receiver', 'Выберите приемник', '请选择接收器', 'Alıcısı Seçiniz', 'Selecione Receiver', 'Kérjük, válasszon Receiver', 'S''il vous plaît Sélectionnez Receiver', 'Επιλέξτε Δέκτης', 'Bitte wählen Receiver', 'Selezionare Ricevitore', 'กรุณาเลือกรับสัญญาณ', 'وصول براہ مہربانی منتخب کریں', 'कृपया रिसीवर का चयन करें', 'Select receptorem', 'Silakan Pilih Receiver', 'Receiverを選択してください', '수신기를 선택하세요', NULL),
 (311, 'session_changed', 'Session Changed', 'সেশন পরিবর্তিত', 'sesión Changed', 'جلسة تغيير', 'Session Changed', 'сессия Изменено', '会议改', 'Oturum Değişti', 'sessão Changed', 'Session megváltozott', 'session Changed', 'συνεδρία Άλλαξε', 'Sitzung geändert', 'sessione cambiato', 'เซสชั่นเปลี่ยน', 'سیشن تبدیل کر دیا گیا', 'सत्र बदली गई', 'Sessio Uertit', 'sesi Berubah', 'セッションが変更します', '세션 변경', NULL),
 (312, 'attendance_updated', 'Attendance Updated', 'এ্যাটেনডেন্স Updated', 'La asistencia Actualizado', 'الحضور التحديث', 'Attendance Bijgewerkt', 'Посещаемость Обновлено', '出席更新', 'Seyirci Güncelleme', 'Presença Atualizado', 'Nézőszám Frissítve', 'Participation Mise à jour', 'Συμμετοχή Ενημέρωση', 'Die Teilnahme Aktualisiert', 'La partecipazione Aggiornato', 'ผู้เข้าร่วม Updated', 'حاضری تازہ کاری', 'उपस्थिति Updated', 'Updated frequentatio', 'kehadiran Updated', '出席更新します', '출석 업데이트', NULL),
-(313, 'study_material_info_saved_successfuly', 'Study Material Info Saved Successfuly', 'গবেষণা উপাদান তথ্য সংরক্ষিত successfuly', 'Material de Estudio información guardada exitosamente', 'دراسة المواد معلومات المحفوظة بنجاح', 'Studiemateriaal Info Saved Successfuly', 'Учебного материала Информация Сохраненные успешно', '研究材料信息保存Successfuly', 'Eğitim Malzemesi Bilgisi Kayıtlı başarıyla', 'Material de Estudo Informações com sucesso Salvo', 'Tananyag Info mentése sikerült', 'Matériel d\'étude Infos enregistrées successfuly', 'Μελέτη Υλικό Πληροφορίες Αποθηκευμένες επιτυχώς', 'Study Material Info Gespeichert Erfolgreicher', 'Materiale di studio Info salvata con successo', 'วัสดุการศึกษาข้อมูลที่บันทึกไว้เรียบร้อย', 'تربیتی مواد انفارمیشن محفوظ Successfuly', 'अध्ययन सामग्री जानकारी गयी सफलता से', 'Material Info Saved successfuly Study', 'Studi Bahan Info Disimpan successfuly', '研究材料情報の保存Successfuly', '연구 원재료 정보 저장 Successfuly', NULL),
-(314, 'edit_study_material', 'Edit Study Material', 'সম্পাদনা স্টাডি উপাদান', 'Editar Material de Estudio', 'تحرير المواد الدراسية', 'Bewerken Studiemateriaal', 'Редактирование учебного материала', '编辑学习材料', 'Düzenleme Eğitim Malzemesi', 'Editar Material de Estudo', 'Szerkesztés tananyag', 'Modifier Matériel d\'étude', 'Επεξεργασία Μελέτη Υλικό', 'Bearbeiten Study Material', 'Modifica materiale di studio', 'แก้ไขวัสดุการศึกษา', 'تصیح تربیتی مواد', 'संपादित अध्ययन सामग्री', 'Latin Edit Material', 'Mengedit studi Bahan', '編集研究材料', '편집 연구 자료', NULL),
+(313, 'study_material_info_saved_successfuly', 'Study Material Info Saved Successfuly', 'গবেষণা উপাদান তথ্য সংরক্ষিত successfuly', 'Material de Estudio información guardada exitosamente', 'دراسة المواد معلومات المحفوظة بنجاح', 'Studiemateriaal Info Saved Successfuly', 'Учебного материала Информация Сохраненные успешно', '研究材料信息保存Successfuly', 'Eğitim Malzemesi Bilgisi Kayıtlı başarıyla', 'Material de Estudo Informações com sucesso Salvo', 'Tananyag Info mentése sikerült', 'Matériel d''étude Infos enregistrées successfuly', 'Μελέτη Υλικό Πληροφορίες Αποθηκευμένες επιτυχώς', 'Study Material Info Gespeichert Erfolgreicher', 'Materiale di studio Info salvata con successo', 'วัสดุการศึกษาข้อมูลที่บันทึกไว้เรียบร้อย', 'تربیتی مواد انفارمیشن محفوظ Successfuly', 'अध्ययन सामग्री जानकारी गयी सफलता से', 'Material Info Saved successfuly Study', 'Studi Bahan Info Disimpan successfuly', '研究材料情報の保存Successfuly', '연구 원재료 정보 저장 Successfuly', NULL),
+(314, 'edit_study_material', 'Edit Study Material', 'সম্পাদনা স্টাডি উপাদান', 'Editar Material de Estudio', 'تحرير المواد الدراسية', 'Bewerken Studiemateriaal', 'Редактирование учебного материала', '编辑学习材料', 'Düzenleme Eğitim Malzemesi', 'Editar Material de Estudo', 'Szerkesztés tananyag', 'Modifier Matériel d''étude', 'Επεξεργασία Μελέτη Υλικό', 'Bearbeiten Study Material', 'Modifica materiale di studio', 'แก้ไขวัสดุการศึกษา', 'تصیح تربیتی مواد', 'संपादित अध्ययन सामग्री', 'Latin Edit Material', 'Mengedit studi Bahan', '編集研究材料', '편집 연구 자료', NULL),
 (315, 'parent_dashboard', 'Parent Dashboard', 'পেরেন্ট ড্যাশবোর্ড', 'Tablero de instrumentos de Padres', 'لوحة الأم', 'Parent Dashboard', 'родитель Dashboard', '家长仪表板', 'ebeveyn Kontrol Paneli', 'Painel pai', 'szülő Portál', 'Tableau de bord Parent', 'μητρική ταμπλό', 'Eltern-Dashboard', 'Dashboard Parent', 'แดชบอร์ดสำหรับผู้ปกครอง', 'والدین کا ڈیش بورڈ', 'जनक डैशबोर्ड', 'Parent Dashboard', 'Dashboard orang tua', '親ダッシュボード', '부모 대시 보드', NULL),
-(316, 'exam_marks', 'Exam Marks', 'পরীক্ষার মার্কস', 'marcas de examen', 'علامات الامتحان', 'examen Marks', 'экзамен Marks', '考试马克斯', 'sınav Marks', 'Marcas de exame', 'vizsga Marks', 'Marques d\'examen', 'εξετάσεις σήματα', 'Exam Marks', 'Marks esame', 'Marks สอบ', 'امتحان مارکس', 'परीक्षा मार्क्स', 'IV Marks', 'Marks ujian', '試験マークス', '시험 마크', NULL),
+(316, 'exam_marks', 'Exam Marks', 'পরীক্ষার মার্কস', 'marcas de examen', 'علامات الامتحان', 'examen Marks', 'экзамен Marks', '考试马克斯', 'sınav Marks', 'Marcas de exame', 'vizsga Marks', 'Marques d''examen', 'εξετάσεις σήματα', 'Exam Marks', 'Marks esame', 'Marks สอบ', 'امتحان مارکس', 'परीक्षा मार्क्स', 'IV Marks', 'Marks ujian', '試験マークス', '시험 마크', NULL),
 (317, 'total_mark', 'Total Mark', 'মোট মার্ক', 'Puntuación total', 'عدد الأقسام', 'Totaal Mark', 'Общий балл', '积分', 'Toplam Mark', 'total de Mark', 'Összesen Mark', 'total Mark', 'Σύνολο Mark', 'insgesamt Mark', 'Mark totale', 'มาร์ครวม', 'کل مارک', 'कुल मार्क', 'Mark Total', 'total Mark', '合計マーク', '총 마크', NULL),
 (318, 'mark_obtained', 'Mark Obtained', 'মার্ক প্রাপ্ত', 'Nota obtenida', 'علامة حصل', 'Mark verkregen', 'Марк Получено', '标记所获得', 'Mark elde', 'Mark Obtido', 'Mark kaptunk', 'Mark Obtenu', 'Mark Λαμβάνεται', 'Mark Erhalten', 'Mark Ottenuto', 'มาร์คได้รับ', 'مارک حاصل', 'चिह्न प्राप्त', 'Mark Adepta', 'Mark Diperoleh', 'マーク取得', '마크 획득', NULL),
 (319, 'manage_invoice/payment', 'Manage Invoice/payment', 'ইনভয়েস / পেমেন্ট পরিচালনা', 'Manejo de la factura / pago', 'إدارة فاتورة / دفع', 'Beheer Factuur / betaling', 'Управление счета-фактуры / платежа', '管理发票/付款', 'Fatura / ödeme yönetme', 'Gerenciar fatura / pagamento', 'Kezelés A számla / fizetés', 'Gérer facture / paiement', 'Διαχειριστείτε Τιμολόγιο / πληρωμής', 'Verwalten Rechnung / Zahlung', 'Gestire fattura / pagamento', 'การจัดการใบแจ้งหนี้ / การชำระเงิน', 'انتظام کریں انوائس / ادائیگی', 'चालान / भुगतान का प्रबंधन', 'Cautionem Manage / pretium', 'Mengelola Faktur / pembayaran', '請求書/支払いを管理します', '인보이스 / 결제 관리', NULL),
 (320, 'invoice/payment_list', 'Invoice/payment List', 'ইনভয়েস / পেমেন্ট তালিকা', 'Lista de factura / pago', 'فاتورة / قائمة دفع', 'Factuur / betaling List', 'Счет / Список оплаты', '发票/付款清单', 'Fatura / ödeme listesi', 'Invoice / Lista de pagamento', 'A számla / fizetés listája', 'Facture / Liste de paiement', 'Τιμολόγιο / Λίστα πληρωμής', 'Rechnung / Zahlung Liste', 'Fattura / Lista pagamento', 'ใบแจ้งหนี้ / รายการชำระเงิน', 'انوائس / ادائیگی کی فہرست', 'चालान / भुगतान सूची', 'Cautionem / list pretium', 'Faktur / Daftar pembayaran', '請求書/支払一覧', '송장 / 지불 목록', NULL),
-(321, 'student_dashboard', 'Student Dashboard', 'ছাত্র ড্যাশবোর্ড', 'Tablero de instrumentos del estudiante', 'لوحة طالب', 'student Dashboard', 'Студент Dashboard', '学生仪表板', 'Öğrenci Paneli', 'Painel Student', 'Student Portál', 'Tableau de bord de l\'élève', 'ταμπλό φοιτητής', 'Studenten-Dashboard', 'Dashboard Student', 'แดชบอร์ดนักศึกษา', 'طالب علم کا ڈیش بورڈ', 'छात्र डैशबोर्ड', 'Discipulus Dashboard', 'Mahasiswa Dashboard', '学生ダッシュボード', '학생 대시 보드', NULL),
+(321, 'student_dashboard', 'Student Dashboard', 'ছাত্র ড্যাশবোর্ড', 'Tablero de instrumentos del estudiante', 'لوحة طالب', 'student Dashboard', 'Студент Dashboard', '学生仪表板', 'Öğrenci Paneli', 'Painel Student', 'Student Portál', 'Tableau de bord de l''élève', 'ταμπλό φοιτητής', 'Studenten-Dashboard', 'Dashboard Student', 'แดชบอร์ดนักศึกษา', 'طالب علم کا ڈیش بورڈ', 'छात्र डैशबोर्ड', 'Discipulus Dashboard', 'Mahasiswa Dashboard', '学生ダッシュボード', '학생 대시 보드', NULL),
 (322, 'obtained_marks', 'Obtained Marks', 'প্রাপ্ত মার্কস', 'calificaciones obtenidas', 'العلامات التي تم الحصول عليها', 'verkregen Marks', 'Полученные Marks', '获得商标', 'elde edilen Marks', 'notas obtidas', 'nyert Marks', 'Les notes obtenues', 'λαμβάνονται σήματα', 'erhalten Marks', 'punteggi ottenuti', 'เครื่องหมายที่ได้รับ', 'حاصل مارکس', 'प्राप्त अंकों', 'consecutus Marks', 'Marks diperoleh', '得られマークス', '획득 마크', NULL),
 (323, 'highest_mark', 'Highest Mark', 'সর্বোচ্চ মার্ক', 'Marcos más alto', 'أعلى الأقسام', 'hoogste Mark', 'Самый высокий Марк', '最高分', 'En yüksek işaretle', 'maior Mark', 'legmagasabb Mark', 'le plus élevé Mark', 'υψηλότερη Mark', 'Höchste Mark', 'Massima Mark', 'มาร์คสูงสุด', 'سب سے زیادہ نشان', 'उच्चतम निशान', 'Mark Altissimi', 'Mark tertinggi', '最高点', '최고 마크', NULL),
 (324, 'grade', 'Grade', 'শ্রেণী', 'Grado', 'درجة', 'Rang', 'класс', '年级', 'sınıf', 'Grau', 'Fokozat', 'Qualité', 'Βαθμός', 'Klasse', 'Grado', 'เกรด', 'گریڈ', 'ग्रेड', 'Grade', 'Kelas', 'グレード', '학년', NULL),
@@ -1241,8 +1244,8 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 (620, 'student_imported', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (621, 'some_emails_are_not_available', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (622, '_is_not_available', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(623, 'this_email_id_\"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(624, '\"_is_not_available', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(623, 'this_email_id_"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(624, '"_is_not_available', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (625, 'parent_id', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (626, 'route', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (627, 'country_code', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -5685,22 +5688,15 @@ INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, 
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `last_attendance_0`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `last_attendance_0`
 --
 CREATE TABLE `last_attendance_0` (
-`nisn` longtext
-,`name` longtext
-,`class` varchar(11)
-,`section` longtext
-,`date_time` datetime
-,`status` int(200)
 );
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `librarian`
+-- Table structure for table `librarian`
 --
 
 CREATE TABLE `librarian` (
@@ -5713,7 +5709,7 @@ CREATE TABLE `librarian` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mark`
+-- Table structure for table `mark`
 --
 
 CREATE TABLE `mark` (
@@ -5730,7 +5726,7 @@ CREATE TABLE `mark` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `mark`
+-- Dumping data for table `mark`
 --
 
 INSERT INTO `mark` (`mark_id`, `student_id`, `subject_id`, `class_id`, `section_id`, `exam_id`, `mark_obtained`, `mark_total`, `comment`, `year`) VALUES
@@ -5739,7 +5735,7 @@ INSERT INTO `mark` (`mark_id`, `student_id`, `subject_id`, `class_id`, `section_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `message`
+-- Table structure for table `message`
 --
 
 CREATE TABLE `message` (
@@ -5753,7 +5749,7 @@ CREATE TABLE `message` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `message`
+-- Dumping data for table `message`
 --
 
 INSERT INTO `message` (`message_id`, `message_thread_code`, `message`, `sender`, `timestamp`, `read_status`, `attached_file_name`) VALUES
@@ -5762,7 +5758,7 @@ INSERT INTO `message` (`message_id`, `message_thread_code`, `message`, `sender`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `message_thread`
+-- Table structure for table `message_thread`
 --
 
 CREATE TABLE `message_thread` (
@@ -5774,7 +5770,7 @@ CREATE TABLE `message_thread` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `message_thread`
+-- Dumping data for table `message_thread`
 --
 
 INSERT INTO `message_thread` (`message_thread_id`, `message_thread_code`, `sender`, `reciever`, `last_message_timestamp`) VALUES
@@ -5783,7 +5779,7 @@ INSERT INTO `message_thread` (`message_thread_id`, `message_thread_code`, `sende
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `noticeboard`
+-- Table structure for table `noticeboard`
 --
 
 CREATE TABLE `noticeboard` (
@@ -5799,7 +5795,7 @@ CREATE TABLE `noticeboard` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `online_exam`
+-- Table structure for table `online_exam`
 --
 
 CREATE TABLE `online_exam` (
@@ -5820,7 +5816,7 @@ CREATE TABLE `online_exam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `online_exam`
+-- Dumping data for table `online_exam`
 --
 
 INSERT INTO `online_exam` (`online_exam_id`, `code`, `title`, `class_id`, `section_id`, `subject_id`, `exam_date`, `time_start`, `time_end`, `duration`, `minimum_percentage`, `instruction`, `status`, `running_year`) VALUES
@@ -5829,7 +5825,7 @@ INSERT INTO `online_exam` (`online_exam_id`, `code`, `title`, `class_id`, `secti
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `online_exam_result`
+-- Table structure for table `online_exam_result`
 --
 
 CREATE TABLE `online_exam_result` (
@@ -5846,7 +5842,7 @@ CREATE TABLE `online_exam_result` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `parent`
+-- Table structure for table `parent`
 --
 
 CREATE TABLE `parent` (
@@ -5862,7 +5858,7 @@ CREATE TABLE `parent` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `parent`
+-- Dumping data for table `parent`
 --
 
 INSERT INTO `parent` (`parent_id`, `name`, `email`, `nisn_student`, `password`, `phone`, `address`, `profession`, `authentication_key`) VALUES
@@ -5872,7 +5868,7 @@ INSERT INTO `parent` (`parent_id`, `name`, `email`, `nisn_student`, `password`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `payment`
+-- Table structure for table `payment`
 --
 
 CREATE TABLE `payment` (
@@ -5892,7 +5888,7 @@ CREATE TABLE `payment` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `question_bank`
+-- Table structure for table `question_bank`
 --
 
 CREATE TABLE `question_bank` (
@@ -5907,18 +5903,18 @@ CREATE TABLE `question_bank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `question_bank`
+-- Dumping data for table `question_bank`
 --
 
 INSERT INTO `question_bank` (`question_bank_id`, `online_exam_id`, `question_title`, `type`, `number_of_options`, `options`, `correct_answers`, `mark`) VALUES
-(1, 1, 'pilihan ganda, 1 + 1 = ...', 'multiple_choice', 4, '[\"1\",\"2\",\"3\",\"4\"]', '[\"2\"]', '30'),
+(1, 1, 'pilihan ganda, 1 + 1 = ...', 'multiple_choice', 4, '["1","2","3","4"]', '["2"]', '30'),
 (2, 1, '1 + 1 = 3 ?', 'true_false', NULL, NULL, 'false', '30'),
-(3, 1, '1 .... 1 = 0', 'fill_in_the_blanks', NULL, NULL, '[\"-\"]', '40');
+(3, 1, '1 .... 1 = 0', 'fill_in_the_blanks', NULL, NULL, '["-"]', '40');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `question_paper`
+-- Table structure for table `question_paper`
 --
 
 CREATE TABLE `question_paper` (
@@ -5933,7 +5929,7 @@ CREATE TABLE `question_paper` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `section`
+-- Table structure for table `section`
 --
 
 CREATE TABLE `section` (
@@ -5945,7 +5941,7 @@ CREATE TABLE `section` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `section`
+-- Dumping data for table `section`
 --
 
 INSERT INTO `section` (`section_id`, `name`, `nick_name`, `class_id`, `teacher_id`) VALUES
@@ -5957,7 +5953,7 @@ INSERT INTO `section` (`section_id`, `name`, `nick_name`, `class_id`, `teacher_i
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `settings`
+-- Table structure for table `settings`
 --
 
 CREATE TABLE `settings` (
@@ -5967,7 +5963,7 @@ CREATE TABLE `settings` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `settings`
+-- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`settings_id`, `type`, `description`) VALUES
@@ -5996,14 +5992,14 @@ INSERT INTO `settings` (`settings_id`, `type`, `description`) VALUES
 (26, 'msg91_route', NULL),
 (27, 'msg91_country_code', NULL),
 (28, 'purchase_code', 'AmazCode'),
-(29, 'paypal', '[{\"active\":\"1\",\"mode\":\"sandbox\",\"sandbox_client_id\":\"AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R\",\"production_client_id\":\"SomeId\"}]'),
-(30, 'stripe_keys', '[{\"active\":\"0\",\"testmode\":\"on\",\"public_key\":\"pk_test_c6VvBEbwHFdulFZ62q1IQrar\",\"secret_key\":\"sk_test_9IMkiM6Ykxr1LCe2dJ3PgaxS\",\"public_live_key\":\"pk_live_xxxxxxxxxxxxxxxxxxxxxxxx\",\"secret_live_key\":\"sk_live_xxxxxxxxxxxxxxxxxxxxxxxx\"}]'),
+(29, 'paypal', '[{"active":"1","mode":"sandbox","sandbox_client_id":"AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R","production_client_id":"SomeId"}]'),
+(30, 'stripe_keys', '[{"active":"0","testmode":"on","public_key":"pk_test_c6VvBEbwHFdulFZ62q1IQrar","secret_key":"sk_test_9IMkiM6Ykxr1LCe2dJ3PgaxS","public_live_key":"pk_live_xxxxxxxxxxxxxxxxxxxxxxxx","secret_live_key":"sk_live_xxxxxxxxxxxxxxxxxxxxxxxx"}]'),
 (31, 'disable_frontend', '1');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `student`
+-- Table structure for table `student`
 --
 
 CREATE TABLE `student` (
@@ -6027,7 +6023,7 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `student`
+-- Dumping data for table `student`
 --
 
 INSERT INTO `student` (`student_id`, `nisn`, `name`, `birthplace`, `birthday`, `sex`, `religion`, `blood_group`, `address`, `phone`, `email`, `password`, `parent_id`, `dormitory_id`, `transport_id`, `dormitory_room_number`, `authentication_key`) VALUES
@@ -6039,7 +6035,7 @@ INSERT INTO `student` (`student_id`, `nisn`, `name`, `birthplace`, `birthday`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `subject`
+-- Table structure for table `subject`
 --
 
 CREATE TABLE `subject` (
@@ -6051,7 +6047,7 @@ CREATE TABLE `subject` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `subject`
+-- Dumping data for table `subject`
 --
 
 INSERT INTO `subject` (`subject_id`, `name`, `class_id`, `teacher_id`, `year`) VALUES
@@ -6060,12 +6056,13 @@ INSERT INTO `subject` (`subject_id`, `name`, `class_id`, `teacher_id`, `year`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `teacher`
+-- Table structure for table `teacher`
 --
 
 CREATE TABLE `teacher` (
   `teacher_id` int(11) NOT NULL,
   `nip` longtext COLLATE utf8_unicode_ci,
+  `position` longtext COLLATE utf8_unicode_ci,
   `name` longtext COLLATE utf8_unicode_ci,
   `birthday` longtext COLLATE utf8_unicode_ci,
   `sex` longtext COLLATE utf8_unicode_ci,
@@ -6078,20 +6075,23 @@ CREATE TABLE `teacher` (
   `authentication_key` longtext COLLATE utf8_unicode_ci,
   `designation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `social_links` text COLLATE utf8_unicode_ci,
-  `show_on_website` int(11) DEFAULT '0'
+  `show_on_website` int(11) DEFAULT '0',
+  `photo` longtext COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `teacher`
+-- Dumping data for table `teacher`
 --
 
-INSERT INTO `teacher` (`teacher_id`, `nip`, `name`, `birthday`, `sex`, `religion`, `blood_group`, `address`, `phone`, `email`, `password`, `authentication_key`, `designation`, `social_links`, `show_on_website`) VALUES
-(1, NULL, 'Guru', '07/11/1981', 'male', NULL, NULL, 'Banjarmasin', '0822222222', 'guru@almajaya.com', 'f865b53623b121fd34ee5426c792e5c33af8c227', NULL, NULL, '[{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}]', 1);
+INSERT INTO `teacher` (`teacher_id`, `nip`, `position`, `name`, `birthday`, `sex`, `religion`, `blood_group`, `address`, `phone`, `email`, `password`, `authentication_key`, `designation`, `social_links`, `show_on_website`, `photo`) VALUES
+(1, NULL, NULL, 'Guru', '07/11/1981', 'male', NULL, NULL, 'Banjarmasin', '0822222222', 'guru@almajaya.com', 'f865b53623b121fd34ee5426c792e5c33af8c227', NULL, NULL, '[{"facebook":"","twitter":"","linkedin":""}]', 1, NULL),
+(2, NULL, NULL, 'jdshfbj', '06/21/2019', 'female', NULL, NULL, 'jhdjhbh', 'bhdbh', 'hdbjh', '3bd170dcde9edfe0816f5955e6b6b21c5feef060', NULL, NULL, '[{"facebook":"bdhbj","twitter":"hbdjh","linkedin":"hbdjh"}]', 1, NULL),
+(3, 'nbhui', 'ndbhoi', 'dbnmb', '06/13/2019', 'male', NULL, NULL, 'djhkj', 'jhdkjjk', 'jdhjk', '2322e3b6de8ae6860cf812849727ab4aac88277e', NULL, NULL, '[{"facebook":"jdhkjh","twitter":"jhdjk","linkedin":"sndbnm"}]', 1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transport`
+-- Table structure for table `transport`
 --
 
 CREATE TABLE `transport` (
@@ -6105,532 +6105,488 @@ CREATE TABLE `transport` (
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `last_attendance_0`
+-- Structure for view `last_attendance_0`
 --
 DROP TABLE IF EXISTS `last_attendance_0`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `last_attendance_0`  AS  select `student`.`nisn` AS `nisn`,`student`.`name` AS `name`,`class`.`name` AS `class`,`section`.`name` AS `section`,`fingerprint`.`date_time` AS `date_time`,`fingerprint`.`status` AS `status` from ((((`student` join `fingerprint` on((`student`.`nisn` = `fingerprint`.`pin`))) join `enroll` on((`student`.`student_id` = `enroll`.`enroll_id`))) join `class` on((`enroll`.`class_id` = `class`.`class_id`))) join `section` on((`enroll`.`section_id` = `section`.`section_id`))) where (`fingerprint`.`status` = '0') order by `fingerprint`.`date_time` desc ;
+-- in use(#1267 - Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation '=')
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `academic_syllabus`
+-- Indexes for table `academic_syllabus`
 --
 ALTER TABLE `academic_syllabus`
   ADD PRIMARY KEY (`academic_syllabus_id`);
 
 --
--- Indeks untuk tabel `accountant`
+-- Indexes for table `accountant`
 --
 ALTER TABLE `accountant`
   ADD PRIMARY KEY (`accountant_id`);
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- Indeks untuk tabel `attendance`
+-- Indexes for table `attendance`
 --
 ALTER TABLE `attendance`
   ADD PRIMARY KEY (`attendance_id`);
 
 --
--- Indeks untuk tabel `book`
+-- Indexes for table `book`
 --
 ALTER TABLE `book`
   ADD PRIMARY KEY (`book_id`);
 
 --
--- Indeks untuk tabel `book_request`
+-- Indexes for table `book_request`
 --
 ALTER TABLE `book_request`
   ADD PRIMARY KEY (`book_request_id`);
 
 --
--- Indeks untuk tabel `ci_sessions`
+-- Indexes for table `ci_sessions`
 --
 ALTER TABLE `ci_sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
 
 --
--- Indeks untuk tabel `class`
+-- Indexes for table `class`
 --
 ALTER TABLE `class`
   ADD PRIMARY KEY (`class_id`);
 
 --
--- Indeks untuk tabel `class_routine`
+-- Indexes for table `class_routine`
 --
 ALTER TABLE `class_routine`
   ADD PRIMARY KEY (`class_routine_id`);
 
 --
--- Indeks untuk tabel `document`
+-- Indexes for table `document`
 --
 ALTER TABLE `document`
   ADD PRIMARY KEY (`document_id`);
 
 --
--- Indeks untuk tabel `dormitory`
+-- Indexes for table `dormitory`
 --
 ALTER TABLE `dormitory`
   ADD PRIMARY KEY (`dormitory_id`);
 
 --
--- Indeks untuk tabel `enroll`
+-- Indexes for table `enroll`
 --
 ALTER TABLE `enroll`
   ADD PRIMARY KEY (`enroll_id`);
 
 --
--- Indeks untuk tabel `exam`
+-- Indexes for table `exam`
 --
 ALTER TABLE `exam`
   ADD PRIMARY KEY (`exam_id`);
 
 --
--- Indeks untuk tabel `expense_category`
+-- Indexes for table `expense_category`
 --
 ALTER TABLE `expense_category`
   ADD PRIMARY KEY (`expense_category_id`);
 
 --
--- Indeks untuk tabel `fingerprint`
+-- Indexes for table `fingerprint`
 --
 ALTER TABLE `fingerprint`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `fingerprint_options`
+-- Indexes for table `fingerprint_options`
 --
 ALTER TABLE `fingerprint_options`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `frontend_events`
+-- Indexes for table `frontend_events`
 --
 ALTER TABLE `frontend_events`
   ADD PRIMARY KEY (`frontend_events_id`);
 
 --
--- Indeks untuk tabel `frontend_gallery`
+-- Indexes for table `frontend_gallery`
 --
 ALTER TABLE `frontend_gallery`
   ADD PRIMARY KEY (`frontend_gallery_id`);
 
 --
--- Indeks untuk tabel `frontend_gallery_image`
+-- Indexes for table `frontend_gallery_image`
 --
 ALTER TABLE `frontend_gallery_image`
   ADD PRIMARY KEY (`frontend_gallery_image_id`);
 
 --
--- Indeks untuk tabel `frontend_general_settings`
+-- Indexes for table `frontend_general_settings`
 --
 ALTER TABLE `frontend_general_settings`
   ADD PRIMARY KEY (`frontend_general_settings_id`);
 
 --
--- Indeks untuk tabel `frontend_news`
+-- Indexes for table `frontend_news`
 --
 ALTER TABLE `frontend_news`
   ADD PRIMARY KEY (`frontend_news_id`);
 
 --
--- Indeks untuk tabel `grade`
+-- Indexes for table `grade`
 --
 ALTER TABLE `grade`
   ADD PRIMARY KEY (`grade_id`);
 
 --
--- Indeks untuk tabel `group_message`
+-- Indexes for table `group_message`
 --
 ALTER TABLE `group_message`
   ADD PRIMARY KEY (`group_message_id`);
 
 --
--- Indeks untuk tabel `group_message_thread`
+-- Indexes for table `group_message_thread`
 --
 ALTER TABLE `group_message_thread`
   ADD PRIMARY KEY (`group_message_thread_id`);
 
 --
--- Indeks untuk tabel `invoice`
+-- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`invoice_id`);
 
 --
--- Indeks untuk tabel `language`
+-- Indexes for table `language`
 --
 ALTER TABLE `language`
   ADD PRIMARY KEY (`phrase_id`);
 
 --
--- Indeks untuk tabel `librarian`
+-- Indexes for table `librarian`
 --
 ALTER TABLE `librarian`
   ADD PRIMARY KEY (`librarian_id`);
 
 --
--- Indeks untuk tabel `mark`
+-- Indexes for table `mark`
 --
 ALTER TABLE `mark`
   ADD PRIMARY KEY (`mark_id`);
 
 --
--- Indeks untuk tabel `message`
+-- Indexes for table `message`
 --
 ALTER TABLE `message`
   ADD PRIMARY KEY (`message_id`);
 
 --
--- Indeks untuk tabel `message_thread`
+-- Indexes for table `message_thread`
 --
 ALTER TABLE `message_thread`
   ADD PRIMARY KEY (`message_thread_id`);
 
 --
--- Indeks untuk tabel `noticeboard`
+-- Indexes for table `noticeboard`
 --
 ALTER TABLE `noticeboard`
   ADD PRIMARY KEY (`notice_id`);
 
 --
--- Indeks untuk tabel `online_exam`
+-- Indexes for table `online_exam`
 --
 ALTER TABLE `online_exam`
   ADD PRIMARY KEY (`online_exam_id`);
 
 --
--- Indeks untuk tabel `online_exam_result`
+-- Indexes for table `online_exam_result`
 --
 ALTER TABLE `online_exam_result`
   ADD PRIMARY KEY (`online_exam_result_id`);
 
 --
--- Indeks untuk tabel `parent`
+-- Indexes for table `parent`
 --
 ALTER TABLE `parent`
   ADD PRIMARY KEY (`parent_id`);
 
 --
--- Indeks untuk tabel `payment`
+-- Indexes for table `payment`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`payment_id`);
 
 --
--- Indeks untuk tabel `question_bank`
+-- Indexes for table `question_bank`
 --
 ALTER TABLE `question_bank`
   ADD PRIMARY KEY (`question_bank_id`);
 
 --
--- Indeks untuk tabel `question_paper`
+-- Indexes for table `question_paper`
 --
 ALTER TABLE `question_paper`
   ADD PRIMARY KEY (`question_paper_id`);
 
 --
--- Indeks untuk tabel `section`
+-- Indexes for table `section`
 --
 ALTER TABLE `section`
   ADD PRIMARY KEY (`section_id`);
 
 --
--- Indeks untuk tabel `settings`
+-- Indexes for table `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`settings_id`);
 
 --
--- Indeks untuk tabel `student`
+-- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`student_id`);
 
 --
--- Indeks untuk tabel `subject`
+-- Indexes for table `subject`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`subject_id`);
 
 --
--- Indeks untuk tabel `teacher`
+-- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
   ADD PRIMARY KEY (`teacher_id`);
 
 --
--- Indeks untuk tabel `transport`
+-- Indexes for table `transport`
 --
 ALTER TABLE `transport`
   ADD PRIMARY KEY (`transport_id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `academic_syllabus`
+-- AUTO_INCREMENT for table `academic_syllabus`
 --
 ALTER TABLE `academic_syllabus`
   MODIFY `academic_syllabus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `accountant`
+-- AUTO_INCREMENT for table `accountant`
 --
 ALTER TABLE `accountant`
   MODIFY `accountant_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `attendance`
+-- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
   MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
--- AUTO_INCREMENT untuk tabel `book`
+-- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
   MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `book_request`
+-- AUTO_INCREMENT for table `book_request`
 --
 ALTER TABLE `book_request`
   MODIFY `book_request_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `class`
+-- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
   MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
--- AUTO_INCREMENT untuk tabel `class_routine`
+-- AUTO_INCREMENT for table `class_routine`
 --
 ALTER TABLE `class_routine`
   MODIFY `class_routine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `document`
+-- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
   MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `dormitory`
+-- AUTO_INCREMENT for table `dormitory`
 --
 ALTER TABLE `dormitory`
   MODIFY `dormitory_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `enroll`
+-- AUTO_INCREMENT for table `enroll`
 --
 ALTER TABLE `enroll`
   MODIFY `enroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
--- AUTO_INCREMENT untuk tabel `exam`
+-- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
   MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `expense_category`
+-- AUTO_INCREMENT for table `expense_category`
 --
 ALTER TABLE `expense_category`
   MODIFY `expense_category_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `fingerprint`
+-- AUTO_INCREMENT for table `fingerprint`
 --
 ALTER TABLE `fingerprint`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-
 --
--- AUTO_INCREMENT untuk tabel `fingerprint_options`
+-- AUTO_INCREMENT for table `fingerprint_options`
 --
 ALTER TABLE `fingerprint_options`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `frontend_events`
+-- AUTO_INCREMENT for table `frontend_events`
 --
 ALTER TABLE `frontend_events`
   MODIFY `frontend_events_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `frontend_gallery`
+-- AUTO_INCREMENT for table `frontend_gallery`
 --
 ALTER TABLE `frontend_gallery`
   MODIFY `frontend_gallery_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `frontend_gallery_image`
+-- AUTO_INCREMENT for table `frontend_gallery_image`
 --
 ALTER TABLE `frontend_gallery_image`
   MODIFY `frontend_gallery_image_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `frontend_general_settings`
+-- AUTO_INCREMENT for table `frontend_general_settings`
 --
 ALTER TABLE `frontend_general_settings`
   MODIFY `frontend_general_settings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
--- AUTO_INCREMENT untuk tabel `frontend_news`
+-- AUTO_INCREMENT for table `frontend_news`
 --
 ALTER TABLE `frontend_news`
   MODIFY `frontend_news_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `grade`
+-- AUTO_INCREMENT for table `grade`
 --
 ALTER TABLE `grade`
   MODIFY `grade_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `group_message`
+-- AUTO_INCREMENT for table `group_message`
 --
 ALTER TABLE `group_message`
   MODIFY `group_message_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `group_message_thread`
+-- AUTO_INCREMENT for table `group_message_thread`
 --
 ALTER TABLE `group_message_thread`
   MODIFY `group_message_thread_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `invoice`
+-- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
   MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `language`
+-- AUTO_INCREMENT for table `language`
 --
 ALTER TABLE `language`
   MODIFY `phrase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5050;
-
 --
--- AUTO_INCREMENT untuk tabel `librarian`
+-- AUTO_INCREMENT for table `librarian`
 --
 ALTER TABLE `librarian`
   MODIFY `librarian_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `mark`
+-- AUTO_INCREMENT for table `mark`
 --
 ALTER TABLE `mark`
   MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `message`
+-- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
   MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `message_thread`
+-- AUTO_INCREMENT for table `message_thread`
 --
 ALTER TABLE `message_thread`
   MODIFY `message_thread_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `noticeboard`
+-- AUTO_INCREMENT for table `noticeboard`
 --
 ALTER TABLE `noticeboard`
   MODIFY `notice_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `online_exam`
+-- AUTO_INCREMENT for table `online_exam`
 --
 ALTER TABLE `online_exam`
   MODIFY `online_exam_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `online_exam_result`
+-- AUTO_INCREMENT for table `online_exam_result`
 --
 ALTER TABLE `online_exam_result`
   MODIFY `online_exam_result_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `parent`
+-- AUTO_INCREMENT for table `parent`
 --
 ALTER TABLE `parent`
   MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
--- AUTO_INCREMENT untuk tabel `payment`
+-- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
   MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `question_bank`
+-- AUTO_INCREMENT for table `question_bank`
 --
 ALTER TABLE `question_bank`
   MODIFY `question_bank_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
--- AUTO_INCREMENT untuk tabel `question_paper`
+-- AUTO_INCREMENT for table `question_paper`
 --
 ALTER TABLE `question_paper`
   MODIFY `question_paper_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `section`
+-- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
   MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
--- AUTO_INCREMENT untuk tabel `settings`
+-- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `settings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
 --
--- AUTO_INCREMENT untuk tabel `student`
+-- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
   MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
--- AUTO_INCREMENT untuk tabel `subject`
+-- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
   MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT untuk tabel `teacher`
+-- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT untuk tabel `transport`
+-- AUTO_INCREMENT for table `transport`
 --
 ALTER TABLE `transport`
   MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
