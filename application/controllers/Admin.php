@@ -287,7 +287,7 @@ class Admin extends CI_Controller
                 }
                 $data2['date_added']     = strtotime(date("Y-m-d H:i:s"));
                 $data2['year']           = $running_year;
-                
+
                 $this->db->insert('enroll', $data2);
                 move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
                 $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
@@ -1511,15 +1511,17 @@ class Admin extends CI_Controller
             redirect(site_url('login'), 'refresh');
         }
 
-        $page_data['attendance'] = $this->db->get_where('last_attendance_0', array(date('Y-m-d', 'date_time') => date('Y-m-d')))->result_array();
+        $page_data['attendance'] = $this->db->get_where('last_attendance_0', array(
+            'date' => date('Y-m-d')
+        ))->result_array();
         $page_data['page_name']  =  'daily_attendance';
-        $page_data['page_title'] =  get_phrase('daily_attendance_of_class');
+        $page_data['page_title'] =  get_phrase('daily_attendance');
         $this->load->view('backend/index', $page_data);
     }
 
     function daily_attendance_selector()
     {   if($this->input->post('class_id') == '') {
-            if ($this->finger->get_data_absen('') == FALSE) {
+            if ($this->finger->get_data_absen('') != FALSE) {
                 $this->session->set_flashdata('error_message' , get_phrase('fingerprint_is_not_connected'));
                 redirect(site_url('admin/daily_attendance'), 'refresh');
             }
@@ -1531,6 +1533,22 @@ class Admin extends CI_Controller
 
         redirect(site_url('admin/daily_attendance_view/' . $data['class_id'] . '/' . $data['section_id']), 'refresh');
     }
+
+    function daily_attendance_view($class_id = '', $section_id = '')
+     {
+         if($this->session->userdata('admin_login')!=1)
+            redirect(base_url() , 'refresh');
+
+        $class_name                     = $this->db->get_where('class', array('class_id' => $class_id))->row()->name;
+        $section_name                   = $this->db->get_where('section', array('section_id' => $section_id))->row()->name;
+        $page_data['classx']             = $class_name;
+        $page_data['section']           = $section_name;
+        $page_data['class_id']          = $class_id;
+        $page_data['section_id']        = $section_id;
+        $page_data['page_name']         = 'daily_attendance_view';
+        $page_data['page_title']        = get_phrase('daily_attendance_of_class') . ' ' . $class_name . ' ' . $section_name;
+        $this->load->view('backend/index', $page_data);
+     }
 
     function manage_attendance()
     {
