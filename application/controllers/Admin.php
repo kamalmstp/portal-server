@@ -540,6 +540,12 @@ class Admin extends CI_Controller
             $data['name']     = html_escape($this->input->post('name'));
             $data['email']    = html_escape($this->input->post('email'));
             $data['password'] = sha1($this->input->post('password'));
+            if (html_escape($this->input->post('nip')) != null) {
+                $data['nip'] = html_escape($this->input->post('nip'));
+            }
+            if (html_escape($this->input->post('position')) != null) {
+                $data['position'] = html_escape($this->input->post('position'));
+            }
             if (html_escape($this->input->post('birthday')) != null) {
                 $data['birthday'] = html_escape($this->input->post('birthday'));
             }
@@ -583,6 +589,18 @@ class Admin extends CI_Controller
             $data['name']        = html_escape($this->input->post('name'));
             $data['email']       = html_escape($this->input->post('email'));
 
+            if (html_escape($this->input->post('nip')) != null) {
+                $data['nip'] = html_escape($this->input->post('nip'));
+            }
+            else{
+              $data['nip'] = null;
+            }
+            if (html_escape($this->input->post('position')) != null) {
+                $data['position'] = html_escape($this->input->post('position'));
+            }
+            else{
+              $data['position'] = null;
+            }
             if (html_escape($this->input->post('birthday')) != null) {
                 $data['birthday'] = html_escape($this->input->post('birthday'));
             }
