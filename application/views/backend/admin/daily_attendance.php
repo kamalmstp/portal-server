@@ -80,6 +80,9 @@
                             <td style="text-align: center;" colspan="3">
                                 <?php echo get_phrase('attendance'); ?>
                             </td>
+                            <td style="text-align: center;" rowspan="2">
+                                <?php echo get_phrase(' '); ?>
+                            </td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">
@@ -90,9 +93,6 @@
                             </td>
                             <td style="text-align: center;">
                                 <?php echo get_phrase('home'); ?>
-                            </td>
-                            <td style="text-align: center;" rowspan="2">
-                                <?php echo get_phrase(' '); ?>
                             </td>
                         </tr>
                     </thead>

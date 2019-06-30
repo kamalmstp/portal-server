@@ -248,28 +248,30 @@ class Admin extends CI_Controller
 
         if ($param1 == 'create') {
             $data['name']         = html_escape($this->input->post('name'));
+            $data['blood_group']        = html_escape($this->input->post('blood'));
+            $data['phone']        = html_escape($this->input->post('phone'));
             if(html_escape($this->input->post('birthday')) != null){
               $data['birthday']     = html_escape($this->input->post('birthday'));
             }
+            if(html_escape($this->input->post('birthday')) != null){
+                $data['birthplace']     = html_escape($this->input->post('birthplace'));
+              }
             if($this->input->post('sex') != null){
               $data['sex']          = $this->input->post('sex');
             }
             if(html_escape($this->input->post('address')) != null){
               $data['address']      = html_escape($this->input->post('address'));
             }
-            if(html_escape($this->input->post('phone')) != null){
-              $data['phone']        = html_escape($this->input->post('phone'));
-            }
             if(html_escape($this->input->post('nisn')) != null){
                 $data['nisn'] = html_escape($this->input->post('nisn'));
             }
 
-            $data['email']        = html_escape($this->input->post('email'));
+            //$data['email']        = html_escape($this->input->post('email'));
             $data['password']     = sha1($this->input->post('password'));
 
-            $validation = email_validation($data['email']);
+            //$validation = email_validation($data['email']);
 
-            if($validation == 1) {
+            // if($validation == 1) {
                 $this->db->insert('student', $data);
                 $student_id = $this->db->insert_id();
 
@@ -291,7 +293,7 @@ class Admin extends CI_Controller
                 $this->db->insert('enroll', $data2);
                 move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
                 $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            }
+            //}
             redirect(site_url('admin/student_add'), 'refresh');
         }
         if ($param1 == 'do_update') {
@@ -1521,6 +1523,60 @@ class Admin extends CI_Controller
         $page_data['class_id']          =   $class_id;
         $page_data['class_routine_id']  =   $class_routine_id;
         $this->load->view('backend/admin/class_routine_section_subject_edit' , $page_data);
+    }
+
+    function fingerprint_setting($param1 = '', $param2 = '' , $param3 = ''){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+            if ($param1 == 'create') {
+                $data['class_id']       = $this->input->post('class_id');
+                $data['section_id']   = $this->input->post('section_id');
+                $data['ip']       = html_escape($this->input->post('ip'));
+                $data['password']       = html_escape($this->input->post('password'));
+                $data['nama_mesin']       = html_escape($this->input->post('machine'));
+
+                $this->db->insert('fingerprint_options', $data);
+                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+                redirect(site_url('admin/fingerprint_setting'), 'refresh');
+            }
+            if ($param1 == 'do_update') {
+                $data['class_id']       = $this->input->post('class_id');
+                $data['section_id']   = $this->input->post('section_id');
+                $data['ip']       = html_escape($this->input->post('ip'));
+                $data['password']       = html_escape($this->input->post('password'));
+                $data['nama_mesin']       = html_escape($this->input->post('machine'));
+    
+                $this->db->where('id', $param2);
+                $this->db->update('fingerprint_options', $data);
+                $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+                redirect(site_url('admin/fingerprint_setting'), 'refresh');
+            } else if ($param1 == 'edit') {
+                $page_data['edit_data'] = $this->db->get_where('fingerprint_options', array(
+                    'id' => $param2
+                ))->result_array();
+            }
+            if ($param1 == 'delete') {
+                $this->db->where('id', $param2);
+                $this->db->delete('fingerprint_options');
+                $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+                redirect(site_url('admin/fingerprint_setting/' . $param3), 'refresh');
+            }
+
+        $page_data['fingerprint'] = $this->db->get('fingerprint_options')->result_array();
+        $page_data['page_name']  = 'fingerprint_setting';
+        $page_data['page_title'] = get_phrase('fingerprint_setting');
+        $this->load->view('backend/index.php', $page_data);
+    }
+
+    function get_fingerprint_section($class_id)
+    {
+        $sections = $this->db->get_where('section' , array(
+            'class_id' => $class_id
+        ))->result_array();
+        foreach ($sections as $row) {
+            echo '<option value="' . $row['section_id'] . '">' . $row['name'] . '</option>';
+        }
     }
 
     function daily_attendance()

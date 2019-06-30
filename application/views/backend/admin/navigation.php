@@ -284,6 +284,15 @@
                     </li>
 
             </ul>
+            <ul>
+
+                    <li class="<?php if (( $page_name == 'setting' || $page_name == 'fingerprint_setting')) echo 'active'; ?>">
+                        <a href="<?php echo site_url('admin/fingerprint_setting'); ?>">
+                            <span><i class="entypo-dot"></i><?php echo get_phrase('setting'); ?></span>
+                        </a>
+                    </li>
+
+            </ul>
         </li>
 
 

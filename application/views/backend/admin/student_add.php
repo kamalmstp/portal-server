@@ -152,7 +152,7 @@
 						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('father name');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="father" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+							<input type="text" class="form-control" name="father" value="">
 						</div>
 					</div>
 
@@ -160,39 +160,39 @@
 						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('father profession');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="fatherwork" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+							<input type="text" class="form-control" name="fatherwork" value="">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother name');?></label>
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother_name');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="mother" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+							<input type="text" class="form-control" name="mother" value="">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother profession');?></label>
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother_profession');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="motherwork" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+							<input type="text" class="form-control" name="motherwork" value="">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parents address');?></label>
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parents_address');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="perentsaddress" value="" >
+							<input type="text" class="form-control" name="perentsaddress" value="">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parents contact');?></label>
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parents_phone');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="parentcontact" value="" >
+							<input type="text" class="form-control" name="parentcontact" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
 						</div>
 					</div>
 

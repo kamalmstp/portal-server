@@ -139,8 +139,12 @@
                                 </td>
                                 <td style="text-align: center;">
                                     <?php 
-                                        $coming = $this->db->get_where('last_attendance_0', array('nisn' => $nisn, 'date' => date('Y-m-d'), 1))->row()->time; 
-                                        echo $coming;
+                                        $coming = $this->db->limit(1)->get_where('last_attendance_0', array('nisn' => $nisn, 'date' => date('Y-m-d')))->row()->time; 
+                                        if ($coming == null) {
+                                            echo " - ";
+                                        } else {
+                                            echo $coming." WITA";
+                                        }
                                     ?>
                                 </td>
                                 <td style="text-align: center;">
@@ -148,8 +152,12 @@
                                 </td>
                                 <td style="text-align: center;">
                                     <?php 
-                                        $home = $this->db->get_where('last_attendance_1', array('nisn' => $nisn, 'date' => date('Y-m-d'), 1))->row()->time; 
-                                        echo $home;
+                                        $home = $this->db->limit(1)->get_where('last_attendance_1', array('nisn' => $nisn, 'date' => date('Y-m-d')))->row()->time; 
+                                        if ($home == null) {
+                                            echo " - ";
+                                        }else{
+                                            echo $home." WITA";
+                                        }
                                      ?>
                                 </td>
                                 <td style="text-align: center;">
