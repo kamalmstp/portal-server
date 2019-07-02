@@ -3359,6 +3359,24 @@ class Admin extends CI_Controller
         $this->load->view('backend/index', $data);
     }
 
+    // MANAGE LEARNING
+    function manage_learning($task = "")
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        if ($task == "delete")
+        {
+            $this->crud_model->delete_study_material_info($document_id);
+            redirect(site_url('admin/study_material'), 'refresh');
+        }
+
+        $data['learning_info']    = $this->crud_model->select_learning_device_info();
+        $data['page_name']              = 'manage_learning';
+        $data['page_title']             = get_phrase('manage_learning');
+        $this->load->view('backend/index', $data);
+    }
+
     // MANAGE LIBRARIANS
     function librarian($param1 = '', $param2 = '', $param3 = '')
     {

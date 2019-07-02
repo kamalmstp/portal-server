@@ -11,7 +11,7 @@
             <div class="panel-body">
 
                 <?php
-                echo form_open(site_url('teacher/'), array(
+                echo form_open(site_url('teacher/learning_manage/create'), array(
                     'class' => 'form-horizontal form-groups-bordered validate', 'target' => '_top', 'enctype' => 'multipart/form-data'
                 ));
                 ?>
@@ -21,7 +21,7 @@
                         <select id="subject_id" name="subject_id" class="form-control" required="required">
                             <option value=""><?php echo get_phrase('select_subject'); ?></option>
                             <?php
-                            $subject = $this->db->get('subject')->result_array();
+                            $subject = $this->db->get_where('subject', array('teacher_id' => $this->session->userdata('login_user_id')))->result_array();
                             foreach ($subject as $row):
                                 ?>
                                 <option value="<?php echo $row['subject_id']; ?>"><?php echo $row['name']; ?></option>

@@ -197,6 +197,12 @@
                         <span><?php echo get_phrase('study_material'); ?></span>
                     </a>
                 </li>
+                <li class="<?php if ($page_name == 'manage_learning') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/manage_learning'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('manage_learning'); ?></span>
+                    </a>
+                </li>
             </ul>
         </li>
 

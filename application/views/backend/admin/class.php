@@ -93,7 +93,7 @@
                                     <input type="text" class="form-control" name="name_numeric"/>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('teacher');?></label>
                                 <div class="col-sm-5">
                                     <select name="teacher_id" class="form-control select2" style="width:100%;" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
@@ -108,7 +108,7 @@
 										?>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                               <div class="col-sm-offset-3 col-sm-5">

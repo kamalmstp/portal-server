@@ -646,7 +646,7 @@ else{
     }
 
     /********** LEARNING MANAGE *******************/
-    function learning_manage($task = "", $document_id = "")
+    function learning_manage($task = "", $learning_id = "")
     {
         if ($this->session->userdata('teacher_login') != 1)
         {
@@ -656,9 +656,45 @@ else{
 
         if ($task == "create")
         {
-            $this->crud_model->save_study_material_info();
-            $this->session->set_flashdata('flash_message' , get_phrase('study_material_info_saved_successfuly'));
-            redirect(site_url('teacher/study_material/'), 'refresh');
+            $this->crud_model->save_learning_device();
+            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
+            redirect(site_url('teacher/learning_manage'), 'refresh');
+        }
+
+        if ($task == "add_prota") {
+            $this->crud_model->save_learning_device_prota($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
+            redirect(site_url('teacher/learning_manage'), 'refresh');
+        }
+
+        if ($task == "add_prosem") {
+            $this->crud_model->save_learning_device_prosem($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
+            redirect(site_url('teacher/learning_manage'), 'refresh');
+        }
+
+        if ($task == "add_silabus") {
+            $this->crud_model->save_learning_device_silabus($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
+            redirect(site_url('teacher/learning_manage'), 'refresh');
+        }
+
+        if ($task == "add_rpp") {
+            $this->crud_model->save_learning_device_rpp($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
+            redirect(site_url('teacher/learning_manage'), 'refresh');
+        }
+
+        if ($task == "add_prorem") {
+            $this->crud_model->save_learning_device_prorem($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
+            redirect(site_url('teacher/learning_manage'), 'refresh');
+        }
+
+        if ($task == "add_learning_material") {
+            $this->crud_model->save_learning_device_learning_material($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
+            redirect(site_url('teacher/learning_manage'), 'refresh');
         }
 
         if ($task == "update")
@@ -674,11 +710,43 @@ else{
             redirect(site_url('teacher/study_material/'), 'refresh');
         }
 
-        $data['study_material_info']    = $this->crud_model->select_learning_device_info_for_teacher();
+        $data['learning_info']    = $this->crud_model->select_learning_device_info_for_teacher();
         $data['page_name']              = 'learning_manage';
         $data['page_title']             = get_phrase('learning_manage');
-        $data['teacher_id']             = $this->session->userdata('teacher_id');
+        $data['teacher_id']             = $this->session->userdata('login_user_id');
         $this->load->view('backend/index', $data);
+    }
+
+    function save_learning_device()
+    {
+        $data['academic_syllabus_code'] =   substr(md5(rand(0, 1000000)), 0, 7);
+        $data['title']                  =   html_escape($this->input->post('title'));
+        $data['description']            =   html_escape($this->input->post('description'));
+        $data['class_id']               =   html_escape($this->input->post('class_id'));
+        if ($this->input->post('subject_id') != null) {
+           $data['subject_id']          =   $this->input->post('subject_id');
+        }
+        $data['uploader_type']          =   $this->session->userdata('login_type');
+        $data['uploader_id']            =   $this->session->userdata('login_user_id');
+        $data['year']                   =   $this->db->get_where('settings',array('type'=>'running_year'))->row()->description;
+        $data['timestamp']              =   strtotime(date("Y-m-d H:i:s"));
+        //uploading file using codeigniter upload library
+        $files = $_FILES['file_name'];
+        $this->load->library('upload');
+        $config['upload_path']   =  'uploads/syllabus/';
+        $config['allowed_types'] =  '*';
+        $_FILES['file_name']['name']     = $files['name'];
+        $_FILES['file_name']['type']     = $files['type'];
+        $_FILES['file_name']['tmp_name'] = $files['tmp_name'];
+        $_FILES['file_name']['size']     = $files['size'];
+        $this->upload->initialize($config);
+        $this->upload->do_upload('file_name');
+
+        $data['file_name'] = $_FILES['file_name']['name'];
+
+        $this->db->insert('academic_syllabus', $data);
+        $this->session->set_flashdata('flash_message' , get_phrase('syllabus_uploaded'));
+        redirect(site_url('teacher/academic_syllabus/'. $data['class_id']) , 'refresh');
     }
 
     /*********MANAGE STUDY MATERIAL************/
