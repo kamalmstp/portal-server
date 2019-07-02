@@ -55,12 +55,12 @@
                             </li>
                             <li class="divider"></li>
                             
-                            <li>
+                            <!-- <li>
                                 <a href="#" onclick="confirm_modal('<?php echo site_url('teacher/question_paper/delete/'.$row['question_paper_id']);?>');">
                                     <i class="entypo-trash"></i>
                                     <?php echo get_phrase('delete');?>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </td>

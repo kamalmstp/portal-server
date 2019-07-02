@@ -112,9 +112,17 @@
             </ul>
         </li>
 
+        <!-- manage teachers -->
+        <li class="<?php if ($page_name == 'teacher') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/teacher'); ?>">
+                        <i class="fa flaticon-avatar"></i>
+                        <span><?php echo get_phrase('teacher'); ?></span>
+                    </a>
+                </li>
+
+
         <!-- Manage Users -->
         <li class="<?php if ( $page_name == 'admin' ||
-                              $page_name == 'teacher' ||
                               $page_name == 'parent' ||
                               $page_name == 'librarian' ||
                               $page_name == 'accountant')
@@ -129,13 +137,6 @@
                     <a href="<?php echo site_url('admin/admin'); ?>">
                         <i class="fa entypo-dot"></i>
                         <span><?php echo get_phrase('admin'); ?></span>
-                    </a>
-                </li>
-                <!-- manage teachers -->
-                <li class="<?php if ($page_name == 'teacher') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('admin/teacher'); ?>">
-                        <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('teacher'); ?></span>
                     </a>
                 </li>
                 <!-- manage parents -->

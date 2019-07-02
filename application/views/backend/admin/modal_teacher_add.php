@@ -69,9 +69,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('email').'/'.get_phrase('username');?></label>
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('email');?></label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="email" value="" data-validate="required">
+							<input type="text" class="form-control" name="email" value="">
 						</div>
 					</div>
 
@@ -80,45 +80,6 @@
 
 						<div class="col-sm-5">
 							<input type="password" class="form-control" name="password" value="" data-validate="required">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('social_links');?></label>
-						<div class="col-sm-8">
-							<div class="input-group">
-								<input type="text" class="form-control" name="facebook" placeholder=""
-		              value="">
-								<div class="input-group-addon">
-									<a href="#"><i class="entypo-facebook"></i></a>
-								</div>
-							</div>
-							<br>
-							<div class="input-group">
-								<input type="text" class="form-control" name="twitter" placeholder=""
-		              value="">
-								<div class="input-group-addon">
-									<a href="#"><i class="entypo-twitter"></i></a>
-								</div>
-							</div>
-							<br>
-							<div class="input-group">
-								<input type="text" class="form-control" name="linkedin" placeholder=""
-		              value="">
-								<div class="input-group-addon">
-									<a href="#"><i class="entypo-linkedin"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('show_on_website');?></label>
-						<div class="col-sm-5">
-							<select name="show_on_website" class="form-control selectboxit">
-                  <option value="1"><?php echo get_phrase('yes');?></option>
-                  <option value="0"><?php echo get_phrase('no');?></option>
-              </select>
 						</div>
 					</div>
 

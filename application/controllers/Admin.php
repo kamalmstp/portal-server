@@ -291,39 +291,56 @@ class Admin extends CI_Controller
                 $data2['year']           = $running_year;
 
                 $this->db->insert('enroll', $data2);
+                $data3['student_id'] = $student_id;
+                $data3['profession'] = html_escape($this->input->post('parentprofession'));
+                $data3['address'] = html_escape($this->input->post('parentaddress'));
+                $data3['username'] = "ortu_".html_escape($this->input->post('nisn'));
+                $data3['password']           = sha1($this->input->post('nisn'));
+                $data3['phone']           = html_escape($this->input->post('parentcontact'));
+                
+
+                if (html_escape($this->input->post('parent_name')) != '') {
+                    $data3['name']           = html_escape($this->input->post('parent_name'));
+                }
+                
+                $this->db->insert('parent', $data3);
                 move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
                 $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             //}
             redirect(site_url('admin/student_add'), 'refresh');
         }
         if ($param1 == 'do_update') {
-            $data['name']           = html_escape($this->input->post('name'));
-            $data['email']          = html_escape($this->input->post('email'));
-            if (html_escape($this->input->post('birthday')) != null) {
-                $data['birthday']   = html_escape($this->input->post('birthday'));
+            $data['name']         = html_escape($this->input->post('name'));
+            $data['blood_group']        = html_escape($this->input->post('blood'));
+            $data['phone']        = html_escape($this->input->post('phone'));
+            if(html_escape($this->input->post('birthday')) != null){
+              $data['birthday']     = html_escape($this->input->post('birthday'));
             }
-            if ($this->input->post('sex') != null) {
-                $data['sex']            = $this->input->post('sex');
+            if(html_escape($this->input->post('birthday')) != null){
+                $data['birthplace']     = html_escape($this->input->post('birthplace'));
+              }
+            if($this->input->post('sex') != null){
+              $data['sex']          = $this->input->post('sex');
             }
-            if (html_escape($this->input->post('address')) != null) {
-               $data['address']        = html_escape($this->input->post('address'));
+            if(html_escape($this->input->post('address')) != null){
+              $data['address']      = html_escape($this->input->post('address'));
             }
-            if (html_escape($this->input->post('phone')) != null) {
-                $data['phone']          = html_escape($this->input->post('phone'));
+            if(html_escape($this->input->post('nisn')) != null){
+                $data['nisn'] = html_escape($this->input->post('nisn'));
             }
 
             //student id
-            if(html_escape($this->input->post('nisn')) != null){
-                $data['nisn'] = html_escape($this->input->post('nisn'));
-                $code_validation = code_validation_update($data['nisn'],$param2);
-                if(!$code_validation){
-                    $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
-                    redirect(site_url('admin/student_information/' . $param3), 'refresh');
-                }
-            }
+            // if(html_escape($this->input->post('nisn')) != null){
+            //     $data['nisn'] = html_escape($this->input->post('nisn'));
+            //     $code_validation = code_validation_update($data['nisn'],$param2);
+            //     if(!$code_validation){
+            //         $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
+            //         redirect(site_url('admin/student_information/' . $param3), 'refresh');
+            //     }
+            // }
 
-            $validation = email_validation_for_edit($data['email'], $param2, 'student');
-            if($validation == 1){
+            // $validation = email_validation_for_edit($data['email'], $param2, 'student');
+            // if($validation == 1){
                 $this->db->where('student_id', $param2);
                 $this->db->update('student', $data);
 
@@ -344,10 +361,10 @@ class Admin extends CI_Controller
                 move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $param2 . '.jpg');
                 $this->crud_model->clear_cache();
                 $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-           }
-           else{
-             $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-           }
+        //    }
+        //    else{
+        //      $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
+        //    }
             redirect(site_url('admin/student_information/' . $param3), 'refresh');
         }
     }
@@ -534,10 +551,61 @@ class Admin extends CI_Controller
 
 
     /****MANAGE TEACHERS*****/
+    function import_teacher_csv($param1 = '') {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+        
+        if ($param1 == 'import') {
+
+              move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/import_teacher.csv');
+              $csv = array_map('str_getcsv', file('uploads/import_teacher.csv'));
+              $count = 1;
+              $array_size = sizeof($csv);
+
+            foreach ($csv as $row) {
+                  if ($count == 1) {
+                      $count++;
+                      continue;
+                  }
+                  $data['name']      = $row[0];
+                  $data['nip']      = $row[1];
+                  $data['password']  = sha1($row[2]);
+                
+                    $this->db->insert('teacher', $data);
+            }
+              $this->session->set_flashdata('flash_message', get_phrase('student_imported'));
+              redirect(site_url('admin/teacher_import'), 'refresh');
+           }
+
+        $page_data['page_name']  = 'teacher_import';
+        $page_data['page_title'] = get_phrase('teacher_import');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function generate_teacher_csv()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $file   = fopen("uploads/teacher_import.csv", "w");
+        $line   = array('TeacherName','NIP', 'Password');
+        fputcsv($file, $line, ',');
+       echo $file_path = base_url() . 'uploads/teacher_import.csv';
+    }
+
+    function teacher_import(){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+		$page_data['page_name']  = 'teacher_import';
+		$page_data['page_title'] = get_phrase('teacher_import');
+		$this->load->view('backend/index', $page_data);
+    }
+
     function teacher($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(site_url('login'), 'refresh');
+
         if ($param1 == 'create') {
             $data['name']     = html_escape($this->input->post('name'));
             $data['email']    = html_escape($this->input->post('email'));
@@ -560,30 +628,30 @@ class Admin extends CI_Controller
             if (html_escape($this->input->post('phone')) != null) {
                 $data['phone'] = html_escape($this->input->post('phone'));
             }
-            if (html_escape($this->input->post('designation')) != null) {
-                $data['designation'] = html_escape($this->input->post('designation'));
-            }
-            if ($this->input->post('show_on_website') != null) {
-                $data['show_on_website'] = $this->input->post('show_on_website');
-            }
-            $links = array();
-            $social['facebook'] = html_escape($this->input->post('facebook'));
-            $social['twitter'] = html_escape($this->input->post('twitter'));
-            $social['linkedin'] = html_escape($this->input->post('linkedin'));
-            array_push($links, $social);
-            $data['social_links'] = json_encode($links);
+            // if (html_escape($this->input->post('designation')) != null) {
+            //     $data['designation'] = html_escape($this->input->post('designation'));
+            // }
+            // if ($this->input->post('show_on_website') != null) {
+            //     $data['show_on_website'] = $this->input->post('show_on_website');
+            // }
+            // $links = array();
+            // $social['facebook'] = html_escape($this->input->post('facebook'));
+            // $social['twitter'] = html_escape($this->input->post('twitter'));
+            // $social['linkedin'] = html_escape($this->input->post('linkedin'));
+            // array_push($links, $social);
+            // $data['social_links'] = json_encode($links);
 
-            $validation = email_validation($data['email']);
-            if($validation == 1){
+            // $validation = email_validation($data['email']);
+            // if($validation == 1){
                 $this->db->insert('teacher', $data);
                 $teacher_id = $this->db->insert_id();
                 move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $teacher_id . '.jpg');
                 $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-                $this->email_model->account_opening_email('teacher', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
+            //     $this->email_model->account_opening_email('teacher', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
+            // }
+            // else{
+            //     $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
+            // }
 
             redirect(site_url('admin/teacher'), 'refresh');
         }
@@ -3408,7 +3476,7 @@ class Admin extends CI_Controller
         $data['year']       = $this->db->get_where('settings', array('type'=>'running_year'))->row()->description;
 
         $file   = fopen("uploads/bulk_student.csv", "w");
-        $line   = array('StudentName', 'Id', 'Email', 'Password', 'Phone', 'Address', 'ParentID', 'Gender');
+        $line   = array('StudentName','NISN', 'Password');
         fputcsv($file, $line, ',');
        echo $file_path = base_url() . 'uploads/bulk_student.csv';
     }
@@ -3434,13 +3502,12 @@ class Admin extends CI_Controller
                   $password = $row[3];
 
                   $data['name']      = $row[0];
-                  $data['nisn']  = $row[1];
-                  $data['email']     = $row[2];
-                  $data['password']  = sha1($row[3]);
-                  $data['phone']     = $row[4];
-                  $data['address']   = $row[5];
-                  $data['parent_id'] = $row[6];
-                  $data['sex']       = strtolower($row[7]);
+                  $data['nisn']      = $row[1];
+                  $data['password']  = sha1($row[2]);
+                //   $data['phone']     = $row[4];
+                //   $data['address']   = $row[5];
+                //   $data['parent_id'] = $row[6];
+                //   $data['sex']       = strtolower($row[7]);
                  //student id (code) validation
                  $code_validation = code_validation_insert($data['nisn']);
                  if(!$code_validation){
@@ -3449,8 +3516,8 @@ class Admin extends CI_Controller
                  }
                  //student id validation ends
 
-                  $validation = email_validation($data['email']);
-                  if ($validation == 1) {
+                //   $validation = email_validation($data['email']);
+                //   if ($validation == 1) {
                     $this->db->insert('student', $data);
                     $student_id = $this->db->insert_id();
 
@@ -3462,16 +3529,16 @@ class Admin extends CI_Controller
                     $data2['date_added']  =   strtotime(date("Y-m-d H:i:s"));
                     $data2['year']        =   $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
                     $this->db->insert('enroll' , $data2);
-                  }
-                  else{
-                    if ($array_size == 2) {
-                      $this->session->set_flashdata('error_message', get_phrase('this_email_id_"').$data['email'].get_phrase('"_is_not_available'));
-                      redirect(site_url('admin/student_bulk_add'), 'refresh');
-                    }
-                    elseif($array_size > 2){
-                      $this->session->set_flashdata('error_message', get_phrase('some_email_IDs_are_not_available'));
-                    }
-                  }
+                //   }
+                //   else{
+                //     if ($array_size == 2) {
+                //       $this->session->set_flashdata('error_message', get_phrase('this_email_id_"').$data['email'].get_phrase('"_is_not_available'));
+                //       redirect(site_url('admin/student_bulk_add'), 'refresh');
+                //     }
+                //     elseif($array_size > 2){
+                //       $this->session->set_flashdata('error_message', get_phrase('some_email_IDs_are_not_available'));
+                //     }
+                //   }
 
               }
 

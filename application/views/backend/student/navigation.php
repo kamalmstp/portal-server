@@ -72,7 +72,7 @@
         <li class="<?php if ($page_name == 'class_routine') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/class_routine'); ?>">
                 <i class="entypo-target"></i>
-                <span><?php echo get_phrase('class_routine'); ?></span>
+                <span><?php echo get_phrase('schedule'); ?></span>
             </a>
         </li>
 
@@ -166,12 +166,12 @@
         </li>
 
         <!-- MESSAGE -->
-        <li class="<?php if ($page_name == 'message' || $page_name == 'group_message') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'message' || $page_name == 'group_message') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/message'); ?>">
                 <i class="entypo-mail"></i>
                 <span><?php echo get_phrase('message'); ?></span>
             </a>
-        </li>
+        </li> -->
 
         <!-- ACCOUNT -->
         <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">

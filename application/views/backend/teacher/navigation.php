@@ -82,12 +82,12 @@
         </li>
 
         <!-- TEACHER -->
-        <li class="<?php if ($page_name == 'teacher') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'teacher') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/teacher_list'); ?>">
                 <i class="entypo-users"></i>
                 <span><?php echo get_phrase('teacher'); ?></span>
             </a>
-        </li>
+        </li> -->
 
 
         <!-- SUBJECT -->
@@ -115,7 +115,7 @@
             echo 'opened active'; ?> ">
             <a href="#">
                 <i class="entypo-target"></i>
-                <span><?php echo get_phrase('class_routine'); ?></span>
+                <span><?php echo get_phrase('schedule'); ?></span>
             </a>
             <ul>
                 <?php
@@ -139,6 +139,14 @@
             </a>
         </li>
 
+        <!-- LEARNING DEVICE -->
+        <li class="<?php if ($page_name == 'learning') echo 'active'; ?> ">
+            <a href="<?php echo site_url($account_type.'/learning_manage'); ?>">
+                <i class="entypo-book"></i>
+                <span><?php echo get_phrase('learning_manage'); ?></span>
+            </a>
+        </li>
+
         <!-- ACADEMIC SYLLABUS -->
         <li class="<?php if ($page_name == 'academic_syllabus') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/academic_syllabus'); ?>">
@@ -148,7 +156,7 @@
         </li>
 
         <!-- DAILY ATTENDANCE -->
-        <li class="<?php if ($page_name == 'manage_attendance' ||
+        <!-- <li class="<?php if ($page_name == 'manage_attendance' ||
             $page_name == 'manage_attendance_view')
             echo 'opened active'; ?> ">
             <a href="#">
@@ -167,7 +175,7 @@
                     </li>
                 <?php endforeach; ?>
             </ul>
-        </li>
+        </li> -->
 
         <!-- EXAMS -->
         <li class="<?php if ($page_name == 'marks_manage' || $page_name == 'marks_manage_view' || $page_name == 'question_paper') echo 'opened active'; ?> ">
@@ -198,12 +206,12 @@
         </li>
 
         <!-- TRANSPORT -->
-        <li class="<?php if ($page_name == 'transport') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'transport') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/transport'); ?>">
                 <i class="entypo-location"></i>
                 <span><?php echo get_phrase('transport'); ?></span>
             </a>
-        </li>
+        </li> -->
 
         <!-- NOTICEBOARD -->
         <li class="<?php if ($page_name == 'noticeboard') echo 'active'; ?> ">

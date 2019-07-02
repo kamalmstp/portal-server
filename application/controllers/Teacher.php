@@ -645,6 +645,42 @@ else{
         $this->load->view('backend/index', $page_data);
     }
 
+    /********** LEARNING MANAGE *******************/
+    function learning_manage($task = "", $document_id = "")
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        if ($task == "create")
+        {
+            $this->crud_model->save_study_material_info();
+            $this->session->set_flashdata('flash_message' , get_phrase('study_material_info_saved_successfuly'));
+            redirect(site_url('teacher/study_material/'), 'refresh');
+        }
+
+        if ($task == "update")
+        {
+            $this->crud_model->update_study_material_info($document_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('study_material_info_updated_successfuly'));
+            redirect(site_url('teacher/study_material/'), 'refresh');
+        }
+
+        if ($task == "delete")
+        {
+            $this->crud_model->delete_study_material_info($document_id);
+            redirect(site_url('teacher/study_material/'), 'refresh');
+        }
+
+        $data['study_material_info']    = $this->crud_model->select_learning_device_info_for_teacher();
+        $data['page_name']              = 'learning_manage';
+        $data['page_title']             = get_phrase('learning_manage');
+        $data['teacher_id']             = $this->session->userdata('teacher_id');
+        $this->load->view('backend/index', $data);
+    }
+
     /*********MANAGE STUDY MATERIAL************/
     function study_material($task = "", $document_id = "")
     {

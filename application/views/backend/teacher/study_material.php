@@ -36,10 +36,16 @@
                         echo $name;?>
                 </td>
                 <td>
-                    <a href="<?php echo site_url().'uploads/document/'.$row['file_name']; ?>" class="btn btn-blue btn-icon icon-left">
-                        <i class="entypo-download"></i>
-                        <?php echo get_phrase('download');?>
-                    </a>
+                    <?php 
+                        if ($row['file_name'] != null) {
+                            # code...
+                            echo '<a href= '.base_url().'uploads/document/'.$row['file_name'].' class="btn btn-blue btn-icon icon-left">
+                            <i class="entypo-download"></i>Download</a>';
+                        }else {
+                            # code...
+                            echo 'Nothing File';
+                        }
+                    ?>
                 </td>
                 <td>
                     <a  onclick="showAjaxModal('<?php echo site_url('modal/popup/modal_study_material_edit/'.$row['document_id']);?>');" 
@@ -47,11 +53,11 @@
                             <i class="entypo-pencil"></i>
                             <?php echo get_phrase('edit');?>
                     </a>
-                    <a href="<?php echo site_url('teacher/study_material/delete/'.$row['document_id']);?>" 
+                    <!-- <a href="<?php echo site_url('teacher/study_material/delete/'.$row['document_id']);?>" 
                         class="btn btn-danger btn-sm btn-icon icon-left" onclick="return confirm('Are you sure to delete?');">
                             <i class="entypo-cancel"></i>
                             <?php echo get_phrase('delete');?>
-                    </a>
+                    </a> -->
                 </td>
             </tr>
         <?php } ?>

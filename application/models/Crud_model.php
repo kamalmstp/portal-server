@@ -244,6 +244,37 @@ class Crud_model extends CI_Model {
         return $image_url;
     }
 
+    ////////LEARNING MANAGE////////s
+    function select_learning_device_info(){
+        $this->db->order_by("timestamp", "desc");
+        return $this->db->get('learning_device')->result_array();
+    }
+
+    function select_learning_device_info_for_teacher()
+    {
+        $this->db->order_by("timestamp", "desc");
+        return $this->db->get_where('learning_device',array('teacher_id'=>$this->session->userdata('teacher_id')))->result_array();
+    }
+
+    function save_learning_device(){
+        //$data['timestamp']         = strtotime($this->input->post('timestamp'));
+        $data['teacher_id'] 	   = $this->session->userdata('teacher_id');
+        //$data['class_id'] 	       = $this->input->post('class_id');
+        $data['subject_id']        = $this->input->post('subject_id');
+        $data['prota']             = html_escape($_FILES["file_name"]["name"]);
+        $data['prosem'] 	       = html_escape($_FILES["file_name"]["name"]);
+        $data['silabus'] 	       = html_escape($_FILES["file_name"]["name"]);
+        $data['rpp'] 	           = html_escape($_FILES["file_name"]["name"]);
+        $data['prorem'] 	       = html_escape($_FILES["file_name"]["name"]);
+        $data['learn_material']	   = html_escape($_FILES["file_name"]["name"]);
+        $data['file_type']     	   = html_escape($this->input->post('file_type'));
+        
+        $this->db->insert('document',$data);
+
+        $document_id            = $this->db->insert_id();
+        move_uploaded_file($_FILES["file_name"]["tmp_name"], "uploads/document/" . $_FILES["file_name"]["name"]);
+    }
+
     ////////STUDY MATERIAL//////////
     function save_study_material_info()
     {

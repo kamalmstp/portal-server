@@ -149,34 +149,18 @@
 
 					<!-- orang tua -->
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('father name');?></label>
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('parent_name');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="father" value="">
+							<input type="text" class="form-control" name="parent_name" value="">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('father profession');?></label>
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('parents_profession');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="fatherwork" value="">
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother_name');?></label>
-
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="mother" value="">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('mother_profession');?></label>
-
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="motherwork" value="">
+							<input type="text" class="form-control" name="parentprofession" value="">
 						</div>
 					</div>
 
@@ -184,7 +168,7 @@
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('parents_address');?></label>
 
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="perentsaddress" value="">
+							<input type="text" class="form-control" name="parentaddress" value="">
 						</div>
 					</div>
 

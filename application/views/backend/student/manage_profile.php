@@ -29,16 +29,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('email').'/'.get_phrase('username');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('NISN');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="email" value="<?php echo $row['email'];?>" required/>
+                                    <input type="text" class="form-control" name="nisn" value="<?php echo $row['nisn'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('phone');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('birthplace');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'];?>"/>
+                                    <input type="text" class="form-control" name="birthplace" value="<?php echo $row['birthplace'];?>"/>
                                 </div>
                             </div>
 
@@ -68,6 +68,13 @@
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('address');?></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="address" value="<?php echo $row['address'];?>"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('phone');?></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'];?>"/>
                                 </div>
                             </div>
 

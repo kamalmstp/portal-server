@@ -29,10 +29,19 @@
                         echo $name;?>
                 </td>
                 <td>
-                    <a href="<?php echo base_url().'uploads/document/'.$row['file_name']; ?>" class="btn btn-blue btn-icon icon-left">
+                    <?php 
+                        if ($row['file_name'] != null) {
+                            # code...
+                            echo '<a href= '.base_url().'uploads/document/'.$row['file_name'].' class="btn btn-blue btn-icon icon-left">
+                            <i class="entypo-download"></i>Download</a>';
+                        }else {
+                            echo 'File Not Found';
+                        }
+                    ?>
+                    <!-- <a href="<?php echo base_url().'uploads/document/'.$row['file_name']; ?>" class="btn btn-blue btn-icon icon-left">
                         <i class="entypo-download"></i>
                         Download
-                    </a>
+                    </a> -->
                 </td>
             </tr>
         <?php } ?>

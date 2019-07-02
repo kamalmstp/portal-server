@@ -56,7 +56,6 @@ class Login extends CI_Controller {
       $credential = array('username' => $username, 'password' => sha1($password));
       $credential1 = array('nip' => $username, 'password' => sha1($password));
       $credential2 = array('nisn' => $username, 'password' => sha1($password));
-      $credential3 = array('nisn_student' => $username, 'password' => sha1($password));
       $credential4 = array('email' => $username, 'password' => sha1($password));
       // Checking login credential for admin
       $query = $this->db->get_where('admin', $credential);
@@ -95,7 +94,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for parent
-      $query = $this->db->get_where('parent', $credential3);
+      $query = $this->db->get_where('parent', $credential);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('parent_login', '1');

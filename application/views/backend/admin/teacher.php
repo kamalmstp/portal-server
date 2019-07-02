@@ -1,9 +1,15 @@
 
+<a href="<?php echo site_url('admin/teacher_import');?>"
+    class="btn btn-success pull-right">
+        <i class="entypo-plus-circled"></i>
+        <?php echo get_phrase('import_teacher');?>
+    </a>
             <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('modal/popup/modal_teacher_add/');?>');"
             	class="btn btn-primary pull-right">
                 <i class="entypo-plus-circled"></i>
             	<?php echo get_phrase('add_new_teacher');?>
-                </a>
+            </a>
+
                 <br><br>
                <table class="table table-bordered datatable" id="teachers">
                     <thead>
