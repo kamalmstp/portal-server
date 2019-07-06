@@ -3359,8 +3359,8 @@ class Admin extends CI_Controller
         $this->load->view('backend/index', $data);
     }
 
-    // MANAGE LEARNING
-    function manage_learning($task = "")
+    // MANAGE TEACHING PLANNING
+    function teaching_planning($task = "")
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(site_url('login'), 'refresh');
@@ -3371,9 +3371,9 @@ class Admin extends CI_Controller
             redirect(site_url('admin/study_material'), 'refresh');
         }
 
-        $data['learning_info']    = $this->crud_model->select_learning_device_info();
-        $data['page_name']              = 'manage_learning';
-        $data['page_title']             = get_phrase('manage_learning');
+        $data['info']  = $this->crud_model->select_teaching_planning_info();
+        $data['page_name']      = 'teaching_planning';
+        $data['page_title']     = get_phrase('teaching_planning');
         $this->load->view('backend/index', $data);
     }
 

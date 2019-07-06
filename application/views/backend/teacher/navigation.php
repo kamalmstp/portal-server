@@ -141,9 +141,9 @@
 
         <!-- LEARNING DEVICE -->
         <li class="<?php if ($page_name == 'learning') echo 'active'; ?> ">
-            <a href="<?php echo site_url($account_type.'/learning_manage'); ?>">
+            <a href="<?php echo site_url($account_type.'/teaching_planning'); ?>">
                 <i class="entypo-book"></i>
-                <span><?php echo get_phrase('learning_manage'); ?></span>
+                <span><?php echo get_phrase('teaching_planning'); ?></span>
             </a>
         </li>
 

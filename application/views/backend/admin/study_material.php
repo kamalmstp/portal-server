@@ -9,7 +9,7 @@
         <h3 class="panel-title"><?php echo get_phrase('study_document_manager') ?></h3>
     </div>
     <div class="panel-body">
-        <table class="table table-bordered" id="">
+        <table class="table table-bordered datatable" id="">
             <thead>
                 <tr>
                     <th>#</th>

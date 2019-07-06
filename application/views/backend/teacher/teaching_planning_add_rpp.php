@@ -1,6 +1,6 @@
 <?php 
-$learning_material = $this->db->get_where('learning_device', array('learning_id' => $param2))->result_array();
-foreach ($learning_material as $row){
+$rpp = $this->db->get_where('teaching_planning', array('learning_id' => $param2))->result_array();
+foreach ($rpp as $row){
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -8,20 +8,20 @@ foreach ($learning_material as $row){
             <div class="panel-heading">
                 <div class="panel-title" >
                     <i class="entypo-plus-circled"></i>
-                    <?php echo get_phrase('upload_learning_device'); ?>
+                    <?php echo get_phrase('upload_teaching_planning'); ?>
                 </div>
             </div>
             <div class="panel-body">
 
                 <?php
-                echo form_open(site_url('teacher/learning_manage/add_learning_material/'.$row['learning_id']), array(
+                echo form_open(site_url('teacher/teaching_planning/add_rpp/'.$row['learning_id']), array(
                     'class' => 'form-horizontal form-groups-bordered validate', 'target' => '_top', 'enctype' => 'multipart/form-data'
                 ));
                 ?>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo get_phrase('learning_material'); ?></label>
+                    <label class="col-sm-3 control-label"><?php echo get_phrase('rpp'); ?></label>
                     <div class="col-sm-5">
-                        <input type="file" name="learning_material" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i> Browse"/>
+                        <input type="file" name="rpp" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i> Browse"/>
                         <!-- data-validate="required" data-message-required="<?php echo get_phrase('required'); ?>" -->
                     </div>
                 </div>

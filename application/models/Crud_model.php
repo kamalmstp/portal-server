@@ -245,104 +245,107 @@ class Crud_model extends CI_Model {
     }
 
     ////////LEARNING MANAGE////////s
-    function select_learning_device_info(){
+    function select_teaching_planning_info(){
         $this->db->order_by("timestamp", "desc");
-        return $this->db->get('learning_device')->result_array();
+        return $this->db->get('teaching_planning')->result_array();
     }
 
-    function select_learning_device_info_for_teacher()
+    function select_teaching_planning_info_for_teacher()
     {
         $this->db->order_by("timestamp", "desc");
-        return $this->db->get_where('learning_device',array('teacher_id'=>$this->session->userdata('teacher_id')))->result_array();
+        return $this->db->get_where('teaching_planning',array('teacher_id'=>$this->session->userdata('teacher_id')))->result_array();
     }
 
-    function save_learning_device(){
+    function save_teaching_planning(){
         $teacher_id = $this->session->userdata('teacher_id');
         $data['teacher_id'] 	   = $teacher_id;
-        $data['subject_id']        = $this->db->get_where('subject' , array('teacher_id' => $teacher_id))->row()->subject_id;
+        $data['section_id']        = $this->input->post('section_id');
+        $data['class_id']          = $this->input->post('class_id');
+        $data['subject_id']          = $this->input->post('subject_id');
+        //$data['subject_id']        = $this->db->get_where('subject' , array('teacher_id' => $teacher_id))->row()->subject_id;
         
-        $this->db->insert('learning_device',$data);
+        $this->db->insert('teaching_planning',$data);
     }
 
-    function save_learning_device_prota($learning_id){
+    function save_teaching_planning_prota($learning_id){
         $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
         $name = explode(".", $_FILES["prota"]["name"]);
         $new_name = $nip."_prota_".date('Yms').".".end($name);
         $data['prota']      = $new_name;
-        if (move_uploaded_file($_FILES["prota"]["tmp_name"], "uploads/learning/prota/".$new_name)) {
+        if (move_uploaded_file($_FILES["prota"]["tmp_name"], "uploads/teaching_planning/prota/".$new_name)) {
             # code...
             $this->db->where('learning_id',$learning_id);
-            $this->db->update('learning_device',$data);
+            $this->db->update('teaching_planning',$data);
         } else {
             echo "gagal";
         }
     }
 
-    function save_learning_device_prosem($learning_id){
+    function save_teaching_planning_prosem($learning_id){
         $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
         $name = explode(".", $_FILES["prosem"]["name"]);
         $new_name = $nip."_prosem_".date('Yms').".".end($name);
         $data['prosem']      = $new_name;
-        if (move_uploaded_file($_FILES["prosem"]["tmp_name"], "uploads/learning/prosem/".$new_name)) {
+        if (move_uploaded_file($_FILES["prosem"]["tmp_name"], "uploads/teaching_planning/prosem/".$new_name)) {
             # code...
             $this->db->where('learning_id',$learning_id);
-            $this->db->update('learning_device',$data);
+            $this->db->update('teaching_planning',$data);
         } else {
             echo "gagal";
         }
     }
 
-    function save_learning_device_silabus($learning_id){
+    function save_teaching_planning_silabus($learning_id){
         $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
         $name = explode(".", $_FILES["silabus"]["name"]);
         $new_name = $nip."_silabus_".date('Yms').".".end($name);
         $data['silabus']      = $new_name;
-        if (move_uploaded_file($_FILES["silabus"]["tmp_name"], "uploads/learning/silabus/".$new_name)) {
+        if (move_uploaded_file($_FILES["silabus"]["tmp_name"], "uploads/teaching_planning/silabus/".$new_name)) {
             # code...
             $this->db->where('learning_id',$learning_id);
-            $this->db->update('learning_device',$data);
+            $this->db->update('teaching_planning',$data);
         } else {
             echo "gagal";
         }
     }
 
-    function save_learning_device_rpp($learning_id){
+    function save_teaching_planning_rpp($learning_id){
         $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
         $name = explode(".", $_FILES["rpp"]["name"]);
         $new_name = $nip."_rp_".date('Yms').".".end($name);
         $data['rpp']      = $new_name;
-        if (move_uploaded_file($_FILES["rpp"]["tmp_name"], "uploads/learning/rpp/".$new_name)) {
+        if (move_uploaded_file($_FILES["rpp"]["tmp_name"], "uploads/teaching_planning/rpp/".$new_name)) {
             # code...
             $this->db->where('learning_id',$learning_id);
-            $this->db->update('learning_device',$data);
+            $this->db->update('teaching_planning',$data);
         } else {
             echo "gagal";
         }
     }
 
-    function save_learning_device_prorem($learning_id){
+    function save_teaching_planning_kikd($learning_id){
         $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
-        $name = explode(".", $_FILES["prorem"]["name"]);
-        $new_name = $nip."_prorem_".date('Yms').".".end($name);
-        $data['prorem']      = $new_name;
-        if (move_uploaded_file($_FILES["prorem"]["tmp_name"], "uploads/learning/prorem/".$new_name)) {
+        $name = explode(".", $_FILES["kikd"]["name"]);
+        $new_name = $nip."_kikd_".date('Yms').".".end($name);
+        $data['kikd']      = $new_name;
+        if (move_uploaded_file($_FILES["kikd"]["tmp_name"], "uploads/teaching_planning/kikd/".$new_name)) {
             # code...
             $this->db->where('learning_id',$learning_id);
-            $this->db->update('learning_device',$data);
+            $this->db->update('teaching_planning',$data);
         } else {
             echo "gagal";
         }
     }
 
-    function save_learning_device_learning_material($learning_id){
+    function save_teaching_planning_learn_material($learning_id){
         $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
-        $name = explode(".", $_FILES["learning_material"]["name"]);
+        $name = explode(".", $_FILES["learn_material"]["name"]);
         $new_name = $nip."_material_".date('Yms').".".end($name);
         $data['learn_material']      = $new_name;
-        if (move_uploaded_file($_FILES["learning_material"]["tmp_name"], "uploads/learning/learning_material/".$new_name)) {
+        if (move_uploaded_file($_FILES["learn_material"]["tmp_name"], "uploads/teaching_planning/learn_material/".$new_name)) {
             # code...
             $this->db->where('learning_id',$learning_id);
-            $this->db->update('learning_device',$data);
+            $this->db->update('teaching_planning',$data);
         } else {
             echo "gagal";
         }

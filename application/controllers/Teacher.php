@@ -108,10 +108,10 @@ class Teacher extends CI_Controller
 
     function get_class_section($class_id)
     {
-        $sections = $this->db->get_where('section' , array(
+        $section = $this->db->get_where('section' , array(
             'class_id' => $class_id
         ))->result_array();
-        foreach ($sections as $row) {
+        foreach ($section as $row) {
             echo '<option value="' . $row['section_id'] . '">' . $row['name'] . '</option>';
         }
     }
@@ -646,7 +646,7 @@ else{
     }
 
     /********** LEARNING MANAGE *******************/
-    function learning_manage($task = "", $learning_id = "")
+    function teaching_planning($task = "", $learning_id = "")
     {
         if ($this->session->userdata('teacher_login') != 1)
         {
@@ -656,52 +656,45 @@ else{
 
         if ($task == "create")
         {
-            $this->crud_model->save_learning_device();
-            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
-            redirect(site_url('teacher/learning_manage'), 'refresh');
+            $this->crud_model->save_teaching_planning();
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_planning'), 'refresh');
         }
 
         if ($task == "add_prota") {
-            $this->crud_model->save_learning_device_prota($learning_id);
-            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
-            redirect(site_url('teacher/learning_manage'), 'refresh');
+            $this->crud_model->save_teaching_planning_prota($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_planning'), 'refresh');
         }
 
         if ($task == "add_prosem") {
-            $this->crud_model->save_learning_device_prosem($learning_id);
-            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
-            redirect(site_url('teacher/learning_manage'), 'refresh');
+            $this->crud_model->save_teaching_planning_prosem($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_planning'), 'refresh');
         }
 
         if ($task == "add_silabus") {
-            $this->crud_model->save_learning_device_silabus($learning_id);
-            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
-            redirect(site_url('teacher/learning_manage'), 'refresh');
+            $this->crud_model->save_teaching_planning_silabus($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_planning'), 'refresh');
         }
 
         if ($task == "add_rpp") {
-            $this->crud_model->save_learning_device_rpp($learning_id);
-            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
-            redirect(site_url('teacher/learning_manage'), 'refresh');
+            $this->crud_model->save_teaching_planning_rpp($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_planning'), 'refresh');
         }
 
-        if ($task == "add_prorem") {
-            $this->crud_model->save_learning_device_prorem($learning_id);
-            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
-            redirect(site_url('teacher/learning_manage'), 'refresh');
+        if ($task == "add_kikd") {
+            $this->crud_model->save_teaching_planning_kikd($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_planning'), 'refresh');
         }
 
-        if ($task == "add_learning_material") {
-            $this->crud_model->save_learning_device_learning_material($learning_id);
-            $this->session->set_flashdata('flash_message' , get_phrase('learning_device_saved_successfuly'));
-            redirect(site_url('teacher/learning_manage'), 'refresh');
-        }
-
-        if ($task == "update")
-        {
-            $this->crud_model->update_study_material_info($document_id);
-            $this->session->set_flashdata('flash_message' , get_phrase('study_material_info_updated_successfuly'));
-            redirect(site_url('teacher/study_material/'), 'refresh');
+        if ($task == "add_learn_material") {
+            $this->crud_model->save_teaching_planning_learn_material($learning_id);
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_planning'), 'refresh');
         }
 
         if ($task == "delete")
@@ -710,14 +703,14 @@ else{
             redirect(site_url('teacher/study_material/'), 'refresh');
         }
 
-        $data['learning_info']    = $this->crud_model->select_learning_device_info_for_teacher();
-        $data['page_name']              = 'learning_manage';
-        $data['page_title']             = get_phrase('learning_manage');
+        $data['learning_info']    = $this->crud_model->select_teaching_planning_info_for_teacher();
+        $data['page_name']              = 'teaching_planning';
+        $data['page_title']             = get_phrase('teaching_planning');
         $data['teacher_id']             = $this->session->userdata('login_user_id');
         $this->load->view('backend/index', $data);
     }
 
-    function save_learning_device()
+    function save_teaching_planning()
     {
         $data['academic_syllabus_code'] =   substr(md5(rand(0, 1000000)), 0, 7);
         $data['title']                  =   html_escape($this->input->post('title'));

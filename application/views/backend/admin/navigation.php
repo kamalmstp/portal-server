@@ -197,10 +197,10 @@
                         <span><?php echo get_phrase('study_material'); ?></span>
                     </a>
                 </li>
-                <li class="<?php if ($page_name == 'manage_learning') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('admin/manage_learning'); ?>">
+                <li class="<?php if ($page_name == 'teaching_planning') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/teaching_planning'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('manage_learning'); ?></span>
+                        <span><?php echo get_phrase('teaching_planning'); ?></span>
                     </a>
                 </li>
             </ul>
