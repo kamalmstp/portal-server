@@ -40,7 +40,7 @@
 			</form>
 	    </li> -->
         <div style="text-align: -webkit-center;" id="branding_element">
-            <img src="<?php echo base_url('uploads/logo.png');?>"  style="max-height:21px;"/>
+            <img src="<?php echo base_url('uploads/logo.png');?>"  style="max-height:50px;"/>
             <h4 style="color: #a2a3b7;text-align: -webkit-center;margin-bottom: 25px;font-weight: 300;margin-top: 10px;">
                 <?php echo $system_name;?>
             </h4>
@@ -232,13 +232,13 @@
                                     echo 'opened active'; ?> ">
             <a href="#">
                 <i class="flaticon-calendar-3"></i>
-                <span><?php echo get_phrase('class_routine'); ?></span>
+                <span><?php echo get_phrase('schedule'); ?></span>
             </a>
             <ul>
                 <li class="<?php if ($page_name == 'class_routine_add') echo 'active'; ?> ">
                     <a href="<?php echo site_url('admin/class_routine_add'); ?>">
                         <span><i class="entypo-dot"></i> 
-                            <?php echo get_phrase('add_class_routine'); ?></span>
+                            <?php echo get_phrase('add_schedule'); ?></span>
                     </a>
                 </li>
                 <?php

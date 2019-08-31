@@ -144,7 +144,7 @@ class Student extends CI_Controller
         ))->row()->class_id;
         $page_data['student_id'] = $student_profile->student_id;
         $page_data['page_name']  = 'class_routine';
-        $page_data['page_title'] = get_phrase('class_routine');
+        $page_data['page_title'] = get_phrase('schedule');
         $this->load->view('backend/index', $page_data);
     }
 

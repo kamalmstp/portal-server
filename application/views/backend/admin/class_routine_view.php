@@ -1,7 +1,7 @@
 <a href="<?php echo site_url('admin/class_routine_add');?>"
     class="btn btn-primary pull-right">
         <i class="entypo-plus-circled"></i>
-        <?php echo get_phrase('add_class_routine');?>
+        <?php echo get_phrase('add_schedule');?>
     </a> 
 <br><br><br>
 

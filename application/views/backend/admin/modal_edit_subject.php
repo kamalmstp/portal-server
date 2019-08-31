@@ -22,14 +22,28 @@ foreach ( $edit_data as $row):
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo get_phrase('class');?></label>
                     <div class="col-sm-5 controls">
-                        <select name="class_id" class="form-control">
+                        <input type="hidden" class="form-control" name="class_id" value="<?php echo $row['class_id'];?>"/>
+                        <?php
+                            $class = $this->db->get_where('class', array('class_id' => $row['class_id']))->result_array();
+                            foreach($class as $row2):
+                        ?>
+                        <input type="text" class="form-control" name="class_id2" value="<?php echo $row2['name'];?>" disabled/>
+                        <?php
+                            endforeach;
+                        ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo get_phrase('section');?></label>
+                    <div class="col-sm-5 controls">
+                        <select name="section_id" class="form-control">
                             <?php
-                            $classes = $this->db->get('class')->result_array();
-                            foreach($classes as $row2):
+                            $section = $this->db->get_where('section', array('class_id' => $row['class_id']))->result_array();
+                            foreach($section as $row3):
                             ?>
-                                <option value="<?php echo $row2['class_id'];?>"
-                                    <?php if($row['class_id'] == $row2['class_id'])echo 'selected';?>>
-                                        <?php echo $row2['name'];?>
+                                <option value="<?php echo $row3['section_id'];?>"
+                                    <?php if($row['section_id'] == $row3['section_id'])echo 'selected';?>>
+                                        <?php echo $row3['name'];?>
                                             </option>
                             <?php
                             endforeach;

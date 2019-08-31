@@ -23,6 +23,7 @@
                 	<thead>
                 		<tr>
                     		<th><div><?php echo get_phrase('class');?></div></th>
+                            <th><div><?php echo get_phrase('section');?></div></th>
                     		<th><div><?php echo get_phrase('subject_name');?></div></th>
                     		<th><div><?php echo get_phrase('teacher');?></div></th>
                     		<th><div><?php echo get_phrase('options');?></div></th>
@@ -33,6 +34,7 @@
 											foreach($subjects as $row):?>
                         <tr>
 							<td><?php echo $this->crud_model->get_type_name_by_id('class',$row['class_id']);?></td>
+                            <td><?php echo $this->crud_model->get_type_name_by_id('section',$row['section_id']);?></td>
 							<td><?php echo $row['name'];?></td>
 							<td><?php echo $this->crud_model->get_type_name_by_id('teacher',$row['teacher_id']);?></td>
 							<td>
@@ -83,15 +85,18 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('class');?></label>
                                 <div class="col-sm-5">
-                                    <select name="class_id" class="form-control select2" style="width:100%;" required>
+                                    <select name="class_id" class="form-control select2" style="width:100%;" id="class_id" onchange="return get_class_sections(this.value)" required>
                                     <option value=""><?php echo get_phrase('select_class'); ?></option>
                                     	<?php
 										$classes = $this->db->get('class')->result_array();
 										foreach($classes as $row):
 										?>
-                                    		<option value="<?php echo $row['class_id'];?>"
+                                    		<!-- <option value="<?php echo $row['class_id'];?>"
                                                 <?php if($row['class_id'] == $class_id) echo 'selected';?>>
                                                     <?php echo $row['name'];?>
+                                            </option> -->
+                                            <option value="<?php echo $row['class_id'];?>">
+                                                <?php echo $row['name'];?>
                                             </option>
                                         <?php
 										endforeach;
@@ -99,6 +104,17 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('section');?></label>
+                                    <div class="col-sm-5">
+                                        <select name="section_id" class="form-control select2" id="section_selector_holder">
+                                            <option value=""><?php echo get_phrase('select_class_first');?></option>
+
+                                        </select>
+                                    </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('teacher');?></label>
                                 <div class="col-sm-5">
@@ -138,5 +154,21 @@
 	{
 		var datatable = $("#table_export").dataTable();
 	});
+
+</script>
+
+<script type="text/javascript">
+
+function get_class_sections(class_id) {
+
+    $.ajax({
+        url: '<?php echo site_url('admin/get_class_section/');?>' + class_id ,
+        success: function(response)
+        {
+            jQuery('#section_selector_holder').html(response);
+        }
+    });
+
+}
 
 </script>

@@ -96,7 +96,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-5">
-                            <button type="submit" id= "add_class_routine" class="btn btn-info"><?php echo get_phrase('add_class_routine');?></button>
+                            <button type="submit" id= "add_class_routine" class="btn btn-info"><?php echo get_phrase('add_schedule');?></button>
                         </div>
                     </div>
                 <?php echo form_close();?>

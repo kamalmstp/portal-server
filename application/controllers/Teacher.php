@@ -445,7 +445,7 @@ else{
             redirect(base_url(), 'refresh');
         $page_data['page_name']  = 'class_routine';
         $page_data['class_id']  =   $class_id;
-        $page_data['page_title'] = get_phrase('class_routine');
+        $page_data['page_title'] = get_phrase('schedule');
         $this->load->view('backend/index', $page_data);
     }
 

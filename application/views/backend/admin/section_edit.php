@@ -26,15 +26,6 @@
 								value="<?php echo $row['name'];?>">
 						</div>
 					</div>
-					
-					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('nick_name');?></label>
-                        
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="nick_name" 
-								value="<?php echo $row['nick_name'];?>" >
-						</div> 
-					</div>
 
 					<div class="form-group">
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('class');?></label>
@@ -59,7 +50,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('teacher');?></label>
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('homeroom_teacher');?></label>
                         
 						<div class="col-sm-5">
 							<select name="teacher_id" class="form-control" required>

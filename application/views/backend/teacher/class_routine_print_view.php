@@ -18,7 +18,7 @@
     <center>
         <img src="<?php echo base_url(); ?>uploads/logo.png" style="max-height : 60px;"><br>
         <h3 style="font-weight: 100;"><?php echo $system_name;?></h3>
-        <?php echo get_phrase('class_routine');?><br>
+        <?php echo get_phrase('schedule');?><br>
         <?php echo get_phrase('class') . ' ' . $class_name;?> : <?php echo get_phrase('section');?> <?php echo $section_name;?><br>
     </center>
     <br>

@@ -16,7 +16,7 @@
         <select class="form-control select2" name="reciever" required>
 
             <option value=""><?php echo get_phrase('select_a_user'); ?></option>
-            <optgroup label="<?php echo get_phrase('student'); ?>">
+            <!-- <optgroup label="<?php echo get_phrase('student'); ?>">
                 <?php
                 $students = $this->db->get('student')->result_array();
                 foreach ($students as $row):
@@ -26,7 +26,7 @@
                         - <?php echo $row['name']; ?></option>
 
                 <?php endforeach; ?>
-            </optgroup>
+            </optgroup> -->
             <optgroup label="<?php echo get_phrase('teacher'); ?>">
                 <?php
                 $teachers = $this->db->get('teacher')->result_array();
@@ -38,7 +38,7 @@
 
                 <?php endforeach; ?>
             </optgroup>
-            <optgroup label="<?php echo get_phrase('parent'); ?>">
+            <!-- <optgroup label="<?php echo get_phrase('parent'); ?>">
                 <?php
                 $parents = $this->db->get('parent')->result_array();
                 foreach ($parents as $row):
@@ -48,7 +48,7 @@
                         - <?php echo $row['name']; ?></option>
 
                 <?php endforeach; ?>
-            </optgroup>
+            </optgroup> -->
         </select>
     </div>
 

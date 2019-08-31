@@ -20,14 +20,6 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('nick_name');?></label>
-                        
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="nick_name" value="" >
-						</div> 
-					</div>
-
-					<div class="form-group">
 						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('class');?></label>
                         
 						<div class="col-sm-5">
@@ -47,8 +39,8 @@
 						</div> 
 					</div>
 
-					<!-- <div class="form-group">
-						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('teacher');?></label>
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('homeroom_teacher');?></label>
                         
 						<div class="col-sm-5">
 							<select name="teacher_id" class="form-control" required>
@@ -65,7 +57,7 @@
 								?>
                           </select>
 						</div> 
-					</div> -->
+					</div>
                     
                     <div class="form-group">
 						<div class="col-sm-offset-3 col-sm-5">

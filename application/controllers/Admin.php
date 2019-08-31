@@ -745,6 +745,17 @@ class Admin extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    function teacher_profile($teacher_id)
+    {
+        if ($this->session->userdata('admin_login') != 1) {
+        redirect(site_url('login'), 'refresh');
+        }
+        $page_data['page_name']  = 'teacher_profile';
+		$page_data['page_title'] = get_phrase('teacher_profile');
+        $page_data['teacher_id']  = $teacher_id;
+        $this->load->view('backend/index', $page_data);
+    }
+
     function get_teachers() {
         if ($this->session->userdata('admin_login') != 1)
             redirect(site_url('login'), 'refresh');
@@ -814,6 +825,7 @@ class Admin extends CI_Controller
         if ($param1 == 'create') {
             $data['name']       = html_escape($this->input->post('name'));
             $data['class_id']   = $this->input->post('class_id');
+            $data['section_id']   = $this->input->post('section_id');
             $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
             if ($this->input->post('teacher_id') != null) {
                 $data['teacher_id'] = $this->input->post('teacher_id');
@@ -826,6 +838,7 @@ class Admin extends CI_Controller
         if ($param1 == 'do_update') {
             $data['name']       = html_escape($this->input->post('name'));
             $data['class_id']   = $this->input->post('class_id');
+            $data['section_id']   = $this->input->post('section_id');
             $data['teacher_id'] = $this->input->post('teacher_id');
             $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
 
@@ -859,31 +872,20 @@ class Admin extends CI_Controller
             redirect(site_url('login'), 'refresh');
         if ($param1 == 'create') {
             $data['name']         = html_escape($this->input->post('name'));
-            $data['teacher_id']   = $this->input->post('teacher_id');
-            if ($this->input->post('name_numeric') != null) {
-                $data['name_numeric'] = html_escape($this->input->post('name_numeric'));
-            }
-
+            
             $this->db->insert('class', $data);
-            $class_id = $this->db->insert_id();
-            //create a section by default
-            $data2['class_id']  =   $class_id;
-            $data2['name']      =   'A';
-            $data2['teacher_id']=$data['teacher_id'];
-            $this->db->insert('section' , $data2);
+            // $class_id = $this->db->insert_id();
+            // //create a section by default
+            // $data2['class_id']  =   $class_id;
+            // $data2['name']      =   'A';
+            // $this->db->insert('section' , $data2);
 
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(site_url('admin/classes'), 'refresh');
         }
         if ($param1 == 'do_update') {
             $data['name']         = html_escape($this->input->post('name'));
-            $data['teacher_id']   = $this->input->post('teacher_id');
-            if ($this->input->post('name_numeric') != null) {
-                $data['name_numeric'] = html_escape($this->input->post('name_numeric'));
-            }
-            else{
-               $data['name_numeric'] = null;
-            }
+            
             $this->db->where('class_id', $param2);
             $this->db->update('class', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
@@ -904,6 +906,7 @@ class Admin extends CI_Controller
         $page_data['page_title'] = get_phrase('manage_class');
         $this->load->view('backend/index', $page_data);
     }
+
      function get_subject($class_id)
     {
         $subject = $this->db->get_where('subject' , array(
@@ -1011,9 +1014,6 @@ class Admin extends CI_Controller
             $data['name']       =   html_escape($this->input->post('name'));
             $data['class_id']   =   $this->input->post('class_id');
             $data['teacher_id'] =   $this->input->post('teacher_id');
-            if ($this->input->post('nick_name') != null) {
-               $data['nick_name'] = html_escape($this->input->post('nick_name'));
-            }
             $validation = duplication_of_section_on_create($data['class_id'], $data['name']);
             if($validation == 1){
                 $this->db->insert('section' , $data);
@@ -1030,12 +1030,6 @@ class Admin extends CI_Controller
             $data['name']       =   html_escape($this->input->post('name'));
             $data['class_id']   =   $this->input->post('class_id');
             $data['teacher_id'] =   $this->input->post('teacher_id');
-            if ($this->input->post('nick_name') != null) {
-                $data['nick_name'] = html_escape($this->input->post('nick_name'));
-            }
-            else{
-                $data['nick_name'] = null;
-            }
             $validation = duplication_of_section_on_edit($param2, $data['class_id'], $data['name']);
             if ($validation == 1) {
                $this->db->where('section_id' , $param2);
@@ -1557,7 +1551,7 @@ class Admin extends CI_Controller
         if ($this->session->userdata('admin_login') != 1)
             redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'class_routine_add';
-        $page_data['page_title'] = get_phrase('add_class_routine');
+        $page_data['page_title'] = get_phrase('add_schedule');
         $this->load->view('backend/index', $page_data);
     }
 
@@ -1567,7 +1561,7 @@ class Admin extends CI_Controller
             redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'class_routine_view';
         $page_data['class_id']  =   $class_id;
-        $page_data['page_title'] = get_phrase('class_routine');
+        $page_data['page_title'] = get_phrase('schedule');
         $this->load->view('backend/index', $page_data);
     }
 

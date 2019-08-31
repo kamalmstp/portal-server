@@ -25,8 +25,7 @@
                 		<tr>
                     		<th><div>#</div></th>
                     		<th><div><?php echo get_phrase('class_name');?></div></th>
-                    		<th><div><?php echo get_phrase('numeric_name');?></div></th>
-                    		<th><div><?php echo get_phrase('teacher');?></div></th>
+                    		
                     		<th><div><?php echo get_phrase('options');?></div></th>
 						</tr>
 					</thead>
@@ -35,13 +34,6 @@
                         <tr>
                             <td><?php echo $count++;?></td>
 							<td><?php echo $row['name'];?></td>
-							<td><?php echo $row['name_numeric'];?></td>
-							<td>
-                                <?php
-                                    if($row['teacher_id'] != '' || $row['teacher_id'] != 0) 
-                                        echo $this->crud_model->get_type_name_by_id('teacher',$row['teacher_id']);
-                                ?>
-                            </td>
 							<td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -87,28 +79,6 @@
                                     <input type="text" class="form-control" name="name" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>"/>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('name_numeric');?></label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="name_numeric"/>
-                                </div>
-                            </div>
-                            <!-- <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('teacher');?></label>
-                                <div class="col-sm-5">
-                                    <select name="teacher_id" class="form-control select2" style="width:100%;" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
-                                        <option value=""><?php echo get_phrase('select_teacher');?></option>
-                                    	<?php 
-										$teachers = $this->db->get('teacher')->result_array();
-										foreach($teachers as $row):
-										?>
-                                    	<option value="<?php echo $row['teacher_id'];?>"><?php echo $row['name'];?></option>
-                                        <?php
-										endforeach;
-										?>
-                                    </select>
-                                </div>
-                            </div> -->
                         </div>
                         <div class="form-group">
                               <div class="col-sm-offset-3 col-sm-5">

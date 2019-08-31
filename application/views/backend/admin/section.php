@@ -36,8 +36,7 @@
 									<tr>
 										<th>#</th>
 										<th><?php echo get_phrase('section_name');?></th>
-										<th><?php echo get_phrase('nick_name');?></th>
-										<th><?php echo get_phrase('teacher');?></th>
+										<th><?php echo get_phrase('homeroom_teacher');?></th>
 										<th><?php echo get_phrase('options');?></th>
 									</tr>
 								</thead>
@@ -53,7 +52,6 @@
 									<tr>
 										<td><?php echo $count++;?></td>
 										<td><?php echo $row['name'];?></td>
-										<td><?php echo $row['nick_name'];?></td>
 										<td>
 											<?php if ($row['teacher_id'] != '' || $row['teacher_id'] != 0)
 													echo $this->db->get_where('teacher' , array('teacher_id' => $row['teacher_id']))->row()->name;

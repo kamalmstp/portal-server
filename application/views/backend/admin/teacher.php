@@ -11,17 +11,78 @@
             </a>
 
                 <br><br>
-               <table class="table table-bordered datatable" id="teachers">
+                <table class="table table-bordered datatable">
                     <thead>
                         <tr>
-                            <th width="60"><div><?php echo get_phrase('id');?></div></th>
-                            <th width="80"><div><?php echo get_phrase('photo');?></div></th>
+                            <th width="10"><div><?php echo get_phrase('#');?></div></th>
+                            <th width="50"><div><?php echo get_phrase('photo');?></div></th>
                             <th><div><?php echo get_phrase('name');?></div></th>
-                            <th><div><?php echo get_phrase('email').'/'.get_phrase('username');?></div></th>
-                            <th><div><?php echo get_phrase('phone');?></div></th>
+                            <th><div><?php echo get_phrase('position');?></div></th>
+                            <th><div><?php echo get_phrase('status');?></div></th>
                             <th><div><?php echo get_phrase('options');?></div></th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                                $no = 1;
+                                $teacher = $this->db->get('teacher')->result_array();
+                                foreach($teachers as $row):?>
+                        <tr>
+                            <td><?php echo $no++;?></td>
+                            <td><img src="<?php echo $this->crud_model->get_image_url('teacher',$row['teacher_id']);?>" class="img-circle" width="40" /></td>
+                            <td><?php echo $row['name']; ?>
+                            </td>
+                            <td><?php echo $row['position'] ?></td>
+                            <td>
+                                <?php 
+                                    if ($row['status'] == 1) {
+                                        //echo '<span class="badge badge-pill badge-success">Online</span>'; ?>
+                                        <div class="badge btn-success">Online</div>
+                                <?php
+                                    } else { ?>
+                                        <div class="badge btn-secondary"><i>Offline</i></div>
+                                <?php    }
+                                    
+                                ?>
+                            </td>
+                            <td>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        Action <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+
+                                        <!-- TEACHER PROFILE LINK -->
+                                        <li>
+                                            <a href="<?php echo site_url('admin/teacher_profile/'.$row['teacher_id']);?>">
+                                                <i class="entypo-user"></i>
+                                                    <?php echo get_phrase('information');?>
+                                                </a>
+                                        </li>
+
+                                        <!-- teacher EDITING LINK -->
+                                        <li>
+                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/modal_teacher_edit/'.$row['teacher_id']);?>');">
+                                                <i class="entypo-pencil"></i>
+                                                    <?php echo get_phrase('edit');?>
+                                                </a>
+                                        </li>
+
+                                        <li class="divider"></li>
+                                        <li>
+                                          <a href="#" onclick="confirm_modal('<?php echo site_url('admin/teacher/delete/'.$row['teacher_id']);?>');">
+                                            <i class="entypo-trash"></i>
+                                              <?php echo get_phrase('delete');?>
+                                          </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
                 </table>
 
 
@@ -30,38 +91,7 @@
 <script type="text/javascript">
 
 	jQuery(document).ready(function($) {
-        $.fn.dataTable.ext.errMode = 'throw';
-        $('#teachers').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax":{
-                "url": "<?php echo site_url('admin/get_teachers') ?>",
-                "dataType": "json",
-                "type": "POST",
-            },
-            "columns": [
-                { "data": "teacher_id" },
-                { "data": "photo" },
-                { "data": "name" },
-                { "data": "email" },
-                { "data": "phone" },
-                { "data": "options" },
-            ],
-            "columnDefs": [
-                {
-                    "targets": [1,5],
-                    "orderable": false
-                },
-            ]
-        });
+        $('.datatable').DataTable();
 	});
-
-    function teacher_edit_modal(teacher_id) {
-        showAjaxModal('<?php echo site_url('modal/popup/modal_teacher_edit/');?>' + teacher_id);
-    }
-
-    function teacher_delete_confirm(teacher_id) {
-        confirm_modal('<?php echo site_url('admin/teacher/delete/');?>' + teacher_id);
-    }
 
 </script>
