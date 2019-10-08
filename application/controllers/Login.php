@@ -46,6 +46,12 @@ class Login extends CI_Controller {
         if ($this->session->userdata('accountant_login') == 1)
             redirect(site_url('accountant/dashboard'), 'refresh');
 
+        if ($this->session->userdata('headmaster_login') == 1)
+            redirect(site_url('headmaster/dashboard'), 'refresh');
+
+        if ($this->session->userdata('administration_login') == 1)
+            redirect(site_url('administration/dashboard'), 'refresh');
+
         $this->load->view('backend/login');
     }
 
@@ -54,9 +60,10 @@ class Login extends CI_Controller {
       $username = $this->input->post('username');
       $password = $this->input->post('password');
       $credential = array('username' => $username, 'password' => sha1($password));
-      $credential1 = array('nip' => $username, 'password' => sha1($password));
-      $credential2 = array('nisn' => $username, 'password' => sha1($password));
-      $credential4 = array('email' => $username, 'password' => sha1($password));
+      $teacher = array('nip' => $username, 'password' => sha1($password));
+      $student = array('nisn' => $username, 'password' => sha1($password));
+      $credential2 = array('email' => $username, 'password' => sha1($password));
+      $headmaster = array('nip' => $username, 'password' => sha1($password), 'position' => 'headmaster');
       // Checking login credential for admin
       $query = $this->db->get_where('admin', $credential);
       if ($query->num_rows() > 0) {
@@ -69,20 +76,41 @@ class Login extends CI_Controller {
           redirect(site_url('admin/dashboard'), 'refresh');
       }
 
-      // Checking login credential for teacher
-      $query = $this->db->get_where('teacher', $credential1);
+      $query = $this->db->get_where('administration', $credential);
       if ($query->num_rows() > 0) {
           $row = $query->row();
-          $this->session->set_userdata('teacher_login', '1');
-          $this->session->set_userdata('teacher_id', $row->teacher_id);
-          $this->session->set_userdata('login_user_id', $row->teacher_id);
+          $this->session->set_userdata('administration_login', '1');
+          $this->session->set_userdata('administration_id', $row->administration_id);
+          $this->session->set_userdata('login_user_id', $row->administration_id);
           $this->session->set_userdata('name', $row->name);
-          $this->session->set_userdata('login_type', 'teacher');
-          redirect(site_url('teacher/dashboard'), 'refresh');
+          $this->session->set_userdata('login_type', 'administration');
+          redirect(site_url('administration/dashboard'), 'refresh');
+      }
+
+      // Checking login credential for teacher
+      $query = $this->db->get_where('teacher', $teacher);
+      if ($query->num_rows() > 0) {
+          $row = $query->row();
+          if ($row->position == "teacher") {
+            $this->session->set_userdata('teacher_login', '1');
+            $this->session->set_userdata('teacher_id', $row->teacher_id);
+            $this->session->set_userdata('login_user_id', $row->teacher_id);
+            $this->session->set_userdata('name', $row->name);
+            $this->session->set_userdata('login_type', 'teacher');
+            redirect(site_url('teacher/dashboard'), 'refresh');
+          }elseif ($row->position == "headmaster") {
+            $this->session->set_userdata('headmaster_login', '1');
+            $this->session->set_userdata('headmaster_id', $row->teacher_id);
+            $this->session->set_userdata('login_user_id', $row->teacher_id);
+            $this->session->set_userdata('name', $row->name);
+            $this->session->set_userdata('login_type', 'headmaster');
+            redirect(site_url('headmaster/dashboard'), 'refresh');
+          }
+          
       }
 
       // Checking login credential for student
-      $query = $this->db->get_where('student', $credential2);
+      $query = $this->db->get_where('student', $student);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('student_login', '1');
@@ -106,7 +134,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for librarian
-      $query = $this->db->get_where('librarian', $credential4);
+      $query = $this->db->get_where('librarian', $credential2);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('librarian_login', '1');
@@ -118,7 +146,7 @@ class Login extends CI_Controller {
       }
 
       // Checking login credential for accountant
-      $query = $this->db->get_where('accountant', $credential4);
+      $query = $this->db->get_where('accountant', $credential2);
       if ($query->num_rows() > 0) {
           $row = $query->row();
           $this->session->set_userdata('accountant_login', '1');

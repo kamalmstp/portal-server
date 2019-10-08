@@ -478,6 +478,47 @@
             </ul>
         </li>
 
+        <!-- Mail -->
+        <li class="<?php if ( 
+                              $page_name == 'mail_in' ||
+                              $page_name == 'mail_out' ||
+                              $page_name == 'mail_creat' ||
+                              $page_name == 'mail_hystory')
+                                echo 'opened active has-sub';?>">
+            <a href="#">
+                <i class="flaticon-doc"></i>
+                <span><?php echo get_phrase('mailing'); ?></span>
+            </a>
+            <ul>
+                <!-- LIBRARY -->
+                <li class="<?php if ($page_name == 'mail_in') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/book'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('mail_in'); ?></span>
+                    </a>
+                </li>
+
+                <!-- TRANSPORT -->
+                
+                <li class="<?php if ($page_name == 'mail_out') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/transport'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('mail_out'); ?></span>
+                    </a>
+                </li>
+               
+
+                <!-- DORMITORY -->
+                <li class="<?php if ($page_name == 'mail_create') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/dormitory'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('mail_creat'); ?></span>
+                    </a>
+                </li>
+               
+            </ul>
+        </li>
+
         <!-- SETTINGS -->
         <li class="<?php
         if ($page_name == 'system_settings' ||
