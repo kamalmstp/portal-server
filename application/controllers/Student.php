@@ -48,6 +48,28 @@ class Student extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    /***ADMIN DASHBOARD***/
+    function my_profile($param1 ='', $param2 ='')
+    {
+        if ($this->session->userdata('student_login') != 1)
+            redirect(base_url(), 'refresh');
+
+        if ($param1 == 'kontak') {
+            $data['telepon']     = html_escape($this->input->post('telepon'));
+            $data['no_hp']     = html_escape($this->input->post('no_hp'));
+            $data['email_siswa']    = html_escape($this->input->post('email_siswa'));
+
+            $this->db->where('student_id', $this->session->userdata('student_id'));
+            $this->db->update('student', $data);
+            redirect(site_url('student/my_profile/'), 'refresh');
+        }
+
+        $page_data['page_name']  = 'my_profile';
+        $page_data['page_title'] = get_phrase('my_profile');
+        $page_data['data']  = $this->db->get_where('student', array('student_id' => $this->session->userdata('student_id')))->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+
 
     /****MANAGE TEACHERS*****/
     function teacher_list($param1 = '', $param2 = '', $param3 = '')
