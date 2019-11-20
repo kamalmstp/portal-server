@@ -46,6 +46,14 @@
             </a>
         </li>
 
+              <!-- My Profile -->
+        <li class="<?php if ($page_name == 'my_profile') echo 'active'; ?> ">
+            <a href="<?php echo site_url($account_type.'/my_profile'); ?>">
+                <i class="entypo-doc"></i>
+                <span><?php echo get_phrase('my_profile'); ?></span>
+            </a>
+        </li>
+
 
 
         <!-- TEACHER -->
@@ -92,13 +100,6 @@
             </a>
         </li>
 
-        <!-- ACADEMIC SYLLABUS -->
-        <li class="<?php if ($page_name == 'academic_syllabus') echo 'active'; ?> ">
-            <a href="<?php echo site_url($account_type.'/academic_syllabus/'.$this->session->userdata('login_user_id')); ?>">
-                <i class="entypo-doc"></i>
-                <span><?php echo get_phrase('academic_syllabus'); ?></span>
-            </a>
-        </li>
 
         <!-- Exam marks -->
         <li class="<?php if ($page_name == 'student_marksheet') echo 'active'; ?> ">
