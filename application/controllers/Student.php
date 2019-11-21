@@ -54,6 +54,47 @@ class Student extends CI_Controller
         if ($this->session->userdata('student_login') != 1)
             redirect(base_url(), 'refresh');
 
+        if ($param1 == 'ayah') {
+            $data['nama_ayah']     = html_escape($this->input->post('nama_ayah'));
+            $data['nik_ayah']     = html_escape($this->input->post('nik_ayah'));
+            $data['tahun_ayah']    = html_escape($this->input->post('tahun_ayah'));
+            $data['pendidikan_ayah']    = html_escape($this->input->post('pendidikan_ayah'));
+            $data['pekerjaan_ayah']    = html_escape($this->input->post('pekerjaan_ayah'));
+            $data['penghasilan_ayah']    = html_escape($this->input->post('penghasilan_ayah'));
+            $data['khusus_ayah']    = html_escape($this->input->post('khusus_ayah'));
+
+            $this->db->where('student_id', $this->session->userdata('student_id'));
+            $this->db->update('student', $data);
+            redirect(site_url('student/my_profile/'), 'refresh');
+        }
+
+        if ($param1 == 'ibu') {
+            $data['nama_ibu']     = html_escape($this->input->post('nama_ibu'));
+            $data['nik_ibu']     = html_escape($this->input->post('nik_ibu'));
+            $data['tahun_ibu']    = html_escape($this->input->post('tahun_ibu'));
+            $data['pendidikan_ibu']    = html_escape($this->input->post('pendidikan_ibu'));
+            $data['pekerjaan_ibu']    = html_escape($this->input->post('pekerjaan_ibu'));
+            $data['penghasilan_ibu']    = html_escape($this->input->post('penghasilan_ibu'));
+            $data['khusus_ibu']    = html_escape($this->input->post('khusus_ibu'));
+
+            $this->db->where('student_id', $this->session->userdata('student_id'));
+            $this->db->update('student', $data);
+            redirect(site_url('student/my_profile/'), 'refresh');
+        }
+
+        if ($param1 == 'wali') {
+            $data['nama_wali']     = html_escape($this->input->post('nama_wali'));
+            $data['nik_wali']     = html_escape($this->input->post('nik_wali'));
+            $data['tahun_wali']    = html_escape($this->input->post('tahun_wali'));
+            $data['pendidikan_wali']    = html_escape($this->input->post('pendidikan_wali'));
+            $data['pekerjaan_wali']    = html_escape($this->input->post('pekerjaan_wali'));
+            $data['penghasilan_wali']    = html_escape($this->input->post('penghasilan_wali'));
+
+            $this->db->where('student_id', $this->session->userdata('student_id'));
+            $this->db->update('student', $data);
+            redirect(site_url('student/my_profile/'), 'refresh');
+        }
+
         if ($param1 == 'kontak') {
             $data['telepon']     = html_escape($this->input->post('telepon'));
             $data['no_hp']     = html_escape($this->input->post('no_hp'));
@@ -485,6 +526,28 @@ class Student extends CI_Controller
         if ($param1 == 'update_profile_info') {
             $data['name']     = html_escape($this->input->post('name'));
             $data['email']    = html_escape($this->input->post('email'));
+            $data['kitas']    = html_escape($this->input->post('kitas'));
+            $data['no_akta']    = html_escape($this->input->post('no_akta'));
+            $data['agama']    = html_escape($this->input->post('agama'));
+            $data['negara']    = html_escape($this->input->post('negara'));
+            $data['khusus_siswa']    = html_escape($this->input->post('khusus_siswa'));
+            $data['rt']    = html_escape($this->input->post('rt'));
+            $data['rw']    = html_escape($this->input->post('rw'));
+            $data['dusun']    = html_escape($this->input->post('dusun'));
+            $data['kelurahan']    = html_escape($this->input->post('kelurahan'));
+            $data['kec']    = html_escape($this->input->post('kec'));
+            $data['kode_pos']    = html_escape($this->input->post('kode_pos'));
+            $data['tinggal']    = html_escape($this->input->post('tinggal'));
+            $data['transportasi']    = html_escape($this->input->post('transportasi'));
+            $data['kks']    = html_escape($this->input->post('kks'));
+            $data['anak_ke']    = html_escape($this->input->post('anak_ke'));
+            $data['no_kps']    = html_escape($this->input->post('no_kps'));
+            $data['no_kip']    = html_escape($this->input->post('no_kip'));
+            $data['nama_kip']    = html_escape($this->input->post('nama_kip'));
+            $data['alasan_pip']    = html_escape($this->input->post('alasan_pip'));
+            $data['bank']    = html_escape($this->input->post('bank'));
+            $data['no_rek']    = html_escape($this->input->post('no_rek'));
+            $data['nama_rek']    = html_escape($this->input->post('nama_rek'));
             if ($this->input->post('phone') != null) {
                 $data['phone']    = html_escape($this->input->post('phone'));
             }
@@ -498,17 +561,20 @@ class Student extends CI_Controller
                 $data['sex']      = $this->input->post('sex');
             }
 
-            $validation = email_validation_for_edit($data['email'], $this->session->userdata('student_id'), 'student');
-            if($validation == 1){
+            // $validation = email_validation_for_edit($data['email'], $this->session->userdata('student_id'), 'student');
+            // if($validation == 1){
 
-                $this->db->where('student_id', $this->session->userdata('student_id'));
-                $this->db->update('student', $data);
-                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $this->session->userdata('student_id') . '.jpg');
-                $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message', get_phrase('this_email_id_is_not_available'));
-            }
+            //     $this->db->where('student_id', $this->session->userdata('student_id'));
+            //     $this->db->update('student', $data);
+            //     move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $this->session->userdata('student_id') . '.jpg');
+            //     $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
+            // }
+            // else{
+            //     $this->session->set_flashdata('error_message', get_phrase('this_email_id_is_not_available'));
+            // }
+
+            $this->db->where('student_id', $this->session->userdata('student_id'));
+            $this->db->update('student', $data);
 
             redirect(site_url('student/manage_profile/'), 'refresh');
         }

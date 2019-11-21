@@ -208,7 +208,7 @@
                             </div> 
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('penerima_KPS/PKH*');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('penerima_KPS/PKH');?></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="" value="<?php echo $row[''];?>"/>
                                 </div>
@@ -250,35 +250,35 @@
                             </div> 
 
                            <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('terima_fisik_kartu*');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('terima_fisik_kartu');?></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="" value="<?php echo $row[''];?>"/>
                                 </div>
                             </div> 
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('alasan_layak_pip*');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('alasan_layak_pip');?></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="alasan_pip" value="<?php echo $row['alasan_pip'];?>"/>
                                 </div>
                             </div> 
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('bank*');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('bank');?></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="bank" value="<?php echo $row['bank'];?>"/>
                                 </div>
                             </div> 
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('no_rekening_bank*');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('no_rekening_bank');?></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="no_rek" value="<?php echo $row['no_rek'];?>"/>
                                 </div>
                             </div> 
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('rekening_atas_nama*');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('rekening_atas_nama');?></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="nama_rek" value="<?php echo $row['nama_rek'];?>"/>
                                 </div>
@@ -305,54 +305,54 @@
                     <?php 
                     foreach($data as $row):
                         ?>
-                        <?php echo form_open(site_url('student/manage_profile/update_profile_info'), array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
+                        <?php echo form_open(site_url('student/my_profile/ayah/'.$this->session->userdata('student_id')), array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('nama_ayah_kandung');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="nama_ayah" value="<?php echo $row['nama_ayah'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('NIK_ayah');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="nik_ayah" value="<?php echo $row['nik_ayah'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('tahun_lahir');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="tahun_ayah" value="<?php echo $row['tahun_ayah'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('pendidikan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="pendidikan_ayah" value="<?php echo $row['pendidikan_ayah'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('pekerjaan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="pekerjaan_ayah" value="<?php echo $row['pekerjaan_ayah'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('penghasilan_bulanan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="penghasilan_ayah" value="<?php echo $row['penghasilan_ayah'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('bekebutuhan_khusus');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="khusus_ayah" value="<?php echo $row['khusus_ayah'];?>" required/>
                                 </div>
                             </div>
 
@@ -374,61 +374,56 @@
                     <?php 
                     foreach($data as $row):
                         ?>
-                        <?php echo form_open(site_url('student/manage_profile/update_profile_info'), array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
+                        <?php echo form_open(site_url('student/my_profile/ibu/'.$this->session->userdata('student_id')), array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('nama_lengkap_ibu');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="nama_ibu" value="<?php echo $row['nama_ibu'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('NIK_ibu');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="nik_ibu" value="<?php echo $row['nik_ibu'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('tahun_lahir');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="tahun_ibu" value="<?php echo $row['tahun_ibu'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('pendidikan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="pendidikan_ibu" value="<?php echo $row['pendidikan_ibu'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('pekerjaan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="pekerjaan_ibu" value="<?php echo $row['pekerjaan_ibu'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('penghasilan_bulanan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="penghasilan_ibu" value="<?php echo $row['penghasilan_ibu'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('bekebutuhan_khusus');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="khusus_ibu" value="<?php echo $row['khusus_ibu'];?>" required/>
                                 </div>
                             </div>
-
-
-
-
-
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-5">
@@ -448,47 +443,47 @@
                     <?php 
                     foreach($data as $row):
                         ?>
-                        <?php echo form_open(site_url('student/manage_profile/update_profile_info'), array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
+                        <?php echo form_open(site_url('student/my_profile/wali/'.$this->session->userdata('student_id')), array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('nama_wali');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="nama_wali" value="<?php echo $row['nama_wali'];?>" required/>
                                 </div>
                             </div>    
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('NIK_wali');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="nik_wali" value="<?php echo $row['nik_wali'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('tahun_lahir');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="tahun_wali" value="<?php echo $row['tahun_wali'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('pendidikan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="pendidikan_wali" value="<?php echo $row['pendidikan_wali'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('pekerjaan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="pekerjaan_wali" value="<?php echo $row['pekerjaan_wali'];?>" required/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('penghasilan_bulanan');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="" value="<?php echo $row[''];?>" required/>
+                                    <input type="text" class="form-control" name="penghasilan_wali" value="<?php echo $row['penghasilan_wali'];?>" required/>
                                 </div>
                             </div>
 
