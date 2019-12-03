@@ -44,7 +44,7 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                         <div class="login-fancy pos-r">
                             <div class="text-center">
                                 <div style="padding: 25px;" class="d-none d-md-block"></div>
-                                <img src="<?php echo base_url().'uploads/logo.png'; ?>" height="200" />
+                                <img src="<?php echo base_url().'assets/images/logo1.png'; ?>" height="200" />
                                 <h2 class="text-white mb-20"></h2>
                                 <!-- <h4 class="text-white mb-20"><?php echo get_settings('system_name');?></h4> -->
                             </div>

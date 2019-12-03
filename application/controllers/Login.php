@@ -31,6 +31,9 @@ class Login extends CI_Controller {
         if ($this->session->userdata('admin_login') == 1)
             redirect(site_url('admin/dashboard'), 'refresh');
 
+        if ($this->session->userdata('super_login') == 1)
+            redirect(site_url('super/dashboard'), 'refresh');
+
         if ($this->session->userdata('teacher_login') == 1)
             redirect(site_url('teacher/dashboard'), 'refresh');
 
@@ -74,6 +77,16 @@ class Login extends CI_Controller {
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'admin');
           redirect(site_url('admin/dashboard'), 'refresh');
+      }
+
+      $query = $this->db->get_where('superadmin', $credential);
+      if ($query->num_rows() > 0) {
+          $row = $query->row();
+          $this->session->set_userdata('super_login', '1');
+          $this->session->set_userdata('super_id', $row->super_id);
+          $this->session->set_userdata('name', $row->name);
+          $this->session->set_userdata('login_type', 'superadmin');
+          redirect(site_url('superadmin/dashboard'), 'refresh');
       }
 
       $query = $this->db->get_where('administration', $credential);
