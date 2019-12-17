@@ -76,11 +76,11 @@
 
         <!-- manage teachers -->
         <li class="<?php if ($page_name == 'teacher') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/teacher'); ?>">
-                        <i class="fa flaticon-avatar"></i>
-                        <span><?php echo get_phrase('teacher'); ?></span>
-                    </a>
-                </li>
+            <a href="<?php echo site_url('superadmin/teacher'); ?>">
+                <i class="fa flaticon-avatar"></i>
+                <span><?php echo get_phrase('teacher'); ?></span>
+            </a>
+        </li>
 
 
         <!-- Manage Users -->
@@ -91,7 +91,7 @@
                                 echo 'opened active has-sub';?>">
             <a href="#">
                 <i class="fa flaticon-users"></i>
-                <span><?php echo get_phrase('manage_users'); ?></span>
+                <span><?php echo get_phrase('staff_user'); ?></span>
             </a>
             <ul>
                 <!-- manage admins -->
@@ -140,12 +140,12 @@
             <ul>
                 <li class="<?php if ($page_name == 'class') echo 'active'; ?> ">
                     <a href="<?php echo site_url('superadmin/classes'); ?>">
-                        <span><i class="entypo-dot"></i> <?php echo get_phrase('manage_classes'); ?></span>
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('classes'); ?></span>
                     </a>
                 </li>
                 <li class="<?php if ($page_name == 'section') echo 'active'; ?> ">
                     <a href="<?php echo site_url('superadmin/section'); ?>">
-                        <span><i class="entypo-dot"></i> <?php echo get_phrase('manage_sections'); ?></span>
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('sections'); ?></span>
                     </a>
                 </li>
                 <li class="<?php if ($page_name == 'academic_syllabus') echo 'active'; ?> ">
@@ -157,12 +157,6 @@
                     <a href="<?php echo site_url('superadmin/study_material'); ?>">
                         <i class="entypo-dot"></i>
                         <span><?php echo get_phrase('study_material'); ?></span>
-                    </a>
-                </li>
-                <li class="<?php if ($page_name == 'teaching_planning') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/teaching_planning'); ?>">
-                        <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('teaching_planning'); ?></span>
                     </a>
                 </li>
             </ul>
@@ -197,12 +191,6 @@
                 <span><?php echo get_phrase('schedule'); ?></span>
             </a>
             <ul>
-                <li class="<?php if ($page_name == 'class_routine_add') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/class_routine_add'); ?>">
-                        <span><i class="entypo-dot"></i> 
-                            <?php echo get_phrase('add_schedule'); ?></span>
-                    </a>
-                </li>
                 <?php
                 $classes = $this->db->get('class')->result_array();
                 foreach ($classes as $row):
@@ -394,33 +382,6 @@
                 <span><?php echo get_phrase('manage_office'); ?></span>
             </a>
             <ul>
-                <!-- LIBRARY -->
-                <li class="<?php if ($page_name == 'book') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/book'); ?>">
-                        <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('library'); ?></span>
-                    </a>
-                </li>
-
-                <!-- TRANSPORT -->
-                <!-- Sementara
-                <li class="<?php if ($page_name == 'transport') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/transport'); ?>">
-                        <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('transport'); ?></span>
-                    </a>
-                </li>
-                -->
-
-                <!-- DORMITORY -->
-                <!-- Sementara
-                <li class="<?php if ($page_name == 'dormitory') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/dormitory'); ?>">
-                        <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('dormitory'); ?></span>
-                    </a>
-                </li>
-                -->
 
                 <!-- NOTICEBOARD -->
                 <li class="<?php if ($page_name == 'noticeboard' || $page_name == 'noticeboard_edit') echo 'active'; ?> ">
@@ -452,7 +413,7 @@
                 <span><?php echo get_phrase('mailing'); ?></span>
             </a>
             <ul>
-                <!-- LIBRARY -->
+                
                 <li class="<?php if ($page_name == 'mail_in') echo 'active'; ?> ">
                     <a href="<?php echo site_url('superadmin/book'); ?>">
                         <i class="entypo-dot"></i>
@@ -460,17 +421,13 @@
                     </a>
                 </li>
 
-                <!-- TRANSPORT -->
-                
                 <li class="<?php if ($page_name == 'mail_out') echo 'active'; ?> ">
                     <a href="<?php echo site_url('superadmin/transport'); ?>">
                         <i class="entypo-dot"></i>
                         <span><?php echo get_phrase('mail_out'); ?></span>
                     </a>
                 </li>
-               
-
-                <!-- DORMITORY -->
+ 
                 <li class="<?php if ($page_name == 'mail_create') echo 'active'; ?> ">
                     <a href="<?php echo site_url('superadmin/dormitory'); ?>">
                         <i class="entypo-dot"></i>
@@ -481,57 +438,6 @@
             </ul>
         </li>
 
-        <!-- SETTINGS -->
-        <li class="<?php
-        if ($page_name == 'system_settings' ||
-            $page_name == 'frontend_pages' ||
-            $page_name == 'manage_language' ||
-            $page_name == 'sms_settings'||
-            $page_name == 'payment_settings')
-              echo 'opened active';
-        ?> ">
-            <a href="#">
-                <i class="flaticon-interface-7"></i>
-                <span><?php echo get_phrase('settings'); ?></span>
-            </a>
-            <ul>
-                <li class="<?php if ($page_name == 'system_settings') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/system_settings'); ?>">
-                        <span><i class="entypo-dot"></i> <?php echo get_phrase('general_settings'); ?></span>
-                    </a>
-                </li>
-
-                <!-- Sementara
-                <li class="<?php if ($page_name == 'frontend_pages') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/frontend_pages'); ?>">
-                        <span><i class="entypo-dot"></i> <?php echo get_phrase('school_website'); ?></span>
-                    </a>
-                </li>
-                -->
-
-                <li class="<?php if ($page_name == 'sms_settings') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/sms_settings'); ?>">
-                        <span><i class="entypo-dot"></i> <?php echo get_phrase('sms_settings'); ?></span>
-                    </a>
-                </li>
-
-                <!-- Sementara
-                <li class="<?php if ($page_name == 'manage_language') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/manage_language'); ?>">
-                        <span><i class="entypo-dot"></i> <?php echo get_phrase('language_settings'); ?></span>
-                    </a>
-                </li>
-                -->
-
-                <!-- Sementara
-                <li class="<?php if ($page_name == 'payment_settings') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('superadmin/payment_settings'); ?>">
-                        <span><i class="entypo-dot"></i> <?php echo get_phrase('payment_settings'); ?></span>
-                    </a>
-                </li>
-                -->
-            </ul>
-        </li>
 
         <!-- Session selector -->
         <li class="root-level" style="border-top: 1px solid #262a44; padding: 10px 0px;text-align: -webkit-center;">
@@ -540,7 +446,7 @@
                 
                 <div class="form-group">
                     <select name="running_year" class="form-control" onchange="submit()" 
-                         style="width: 60%;background-color: #232640;border-color: #242742;color: #a1a2b6;">
+                         style="width: 60%;background-color: #232640;border-color: #242742;color: #a1a2b6;" disabled>
                         <?php $running_year = $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;?>
                         <?php for($i = 0; $i < 10; $i++):?>
                             <option value="<?php echo (2016+$i);?>-<?php echo (2016+$i+1);?>"

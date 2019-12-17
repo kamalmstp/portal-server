@@ -1,10 +1,4 @@
-
-<a href="<?php echo site_url('admin/student_add');?>"
-    class="btn btn-primary pull-right">
-        <i class="entypo-plus-circled"></i>
-        <?php echo get_phrase('add_new_student');?>
-    </a>
-<br><br><br>
+<br><br>
 
 <div class="row">
     <div class="col-md-12">

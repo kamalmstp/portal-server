@@ -140,20 +140,47 @@
         </li>
 
         <!-- LEARNING DEVICE -->
-        <li class="<?php if ($page_name == 'learning') echo 'active'; ?> ">
-            <a href="<?php echo site_url($account_type.'/teaching_planning'); ?>">
-                <i class="entypo-book"></i>
+        <li class="<?php if ($page_name == 'teaching_prota' || $page_name == 'teaching_promes' || $page_name == 'teaching_rpp' || $page_name == 'teaching_silabus' || $page_name == 'teaching_kikd') echo 'opened active'; ?> ">
+            <a href="#">
+                <i class="entypo-doc"></i>
                 <span><?php echo get_phrase('teaching_planning'); ?></span>
             </a>
+            <ul>
+                <li class="<?php if ($page_name == 'teaching_prota') echo 'active'; ?> ">
+                    <a href="<?php echo site_url($account_type.'/teaching_prota'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('prota'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'teaching_promes') echo 'active'; ?> ">
+                    <a href="<?php echo site_url($account_type.'/teaching_promes'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('promes'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'teaching_rpp') echo 'active'; ?> ">
+                    <a href="<?php echo site_url($account_type.'/teaching_rpp'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('rpp'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'teaching_silabus') echo 'active'; ?> ">
+                    <a href="<?php echo site_url($account_type.'/teaching_silabus'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('silabus'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'teaching_kikd') echo 'active'; ?> ">
+                    <a href="<?php echo site_url($account_type.'/teaching_kikd'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('kikd'); ?></span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <!-- ACADEMIC SYLLABUS -->
-        <li class="<?php if ($page_name == 'academic_syllabus') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'academic_syllabus') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/academic_syllabus'); ?>">
                 <i class="entypo-doc"></i>
                 <span><?php echo get_phrase('academic_syllabus'); ?></span>
             </a>
-        </li>
+        </li> -->
 
         <!-- DAILY ATTENDANCE -->
         <!-- <li class="<?php if ($page_name == 'manage_attendance' ||
@@ -198,12 +225,12 @@
         </li>
 
         <!-- LIBRARY -->
-        <li class="<?php if ($page_name == 'book') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'book') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/book'); ?>">
                 <i class="entypo-book"></i>
                 <span><?php echo get_phrase('library'); ?></span>
             </a>
-        </li>
+        </li> -->
 
         <!-- TRANSPORT -->
         <!-- <li class="<?php if ($page_name == 'transport') echo 'active'; ?> ">
