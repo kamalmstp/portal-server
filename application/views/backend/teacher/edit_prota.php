@@ -5,12 +5,13 @@
 		        <h3 class="panel-title">Data <?php echo $page_title; ?></h3>
 		    </div>
 		    <div class="panel-body">
-                <?php echo form_open(site_url('teacher/save_silabus'), array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
+                <?php echo form_open(site_url('teacher/update_prota'), array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
                     <div class="form-group">
                         <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('name');?></label>
 
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" name="name" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus required>
+                            <input type="hidden" class="form-control" name="id" value="<?=$edit->id?>">
+                            <input type="text" class="form-control" name="name" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="<?=$edit->name?>" required>
                         </div>
                     </div>
 
@@ -26,7 +27,7 @@
                                 $classes = $this->db->get('class')->result_array();
                                 foreach($classes as $row):
                                     ?>
-                                    <option value="<?php echo $row['class_id'];?>">
+                                    <option value="<?php echo $row['class_id'];?>"<?php if($row['class_id'] == $edit->class) echo 'selected';?>>
                                         <?php echo $row['name'];?>
                                     </option>
                                 <?php
@@ -48,7 +49,7 @@
                                 foreach($subject as $row):
                                     $cls = $this->db->get_where('class', array('class_id' => $row['class_id']))->row();
                                     ?>
-                                    <option value="<?php echo $row['subject_id'];?>">
+                                    <option value="<?php echo $row['subject_id'];?>" <?php if($row['subject_id'] == $edit->section) echo 'selected';?>>
                                         <?php echo $row['name']." - ".$cls->name;?>
                                     </option>
                                 <?php
@@ -73,7 +74,7 @@
 
 						<div class="col-sm-5">
 
-							<input type="file" name="silabus" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i> Browse" />
+							<input type="file" name="prota" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i> Browse" required/>
 
 						</div>
 					</div>
@@ -87,7 +88,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-5">
-                            <button type="submit" class="btn btn-info"><?php echo get_phrase('add_silabus');?></button>
+                            <button type="submit" class="btn btn-info"><?php echo get_phrase('update_prota');?></button>
                         </div>
                     </div>
                 <?php echo form_close();?>
@@ -113,7 +114,7 @@
                     <tbody>
                     <?php 
                         $running_year 		=   $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
-						$data = $this->db->get_where('silabus', array('id_teacher' => $this->session->userdata('teacher_id'), 'year' => $running_year))->result_array();
+						$data = $this->db->get_where('prota', array('id_teacher' => $this->session->userdata('teacher_id'), 'year' => $running_year))->result_array();
 						foreach ($data as $row) {
 						$class = $this->db->get_where('class', array('class_id' => $row['class']))->row();
 						$section = $this->db->get_where('subject', array('subject_id' => $row['section']))->row();
@@ -131,7 +132,7 @@
 
                                     <!-- TEACHER PROFILE LINK -->
                                     <li>
-                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/view_silabus/'.$row['id']);?>');">
+                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/view_prota/'.$row['id']);?>');">
                                         <!-- <a href="<?php echo site_url('admin/teacher_profile/'.$row['id']);?>"> -->
                                             <i class="entypo-doc"></i>
                                                 <?php echo get_phrase('view_file');?>
@@ -140,7 +141,7 @@
 
                                     <!-- teacher EDITING LINK -->
                                     <li>
-                                        <a href="<?php echo site_url('teacher/edit_silabus/'.$row['id']);?>">
+                                        <a href="<?php echo site_url('teacher/edit_prota/'.$row['id']);?>">
                                             <i class="entypo-pencil"></i>
                                                 <?php echo get_phrase('edit');?>
                                             </a>
@@ -148,7 +149,7 @@
 
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="#" onclick="confirm_modal('<?php echo site_url('teacher/del_silabus/'.$row['id']);?>');">
+                                        <a href="#" onclick="confirm_modal('<?php echo site_url('teacher/del_prota/'.$row['id']);?>');">
                                         <i class="entypo-trash"></i>
                                             <?php echo get_phrase('delete');?>
                                         </a>

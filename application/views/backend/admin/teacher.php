@@ -35,14 +35,15 @@
                             <td><?php echo $row['position'] ?></td>
                             <td>
                                 <?php 
-                                    if ($row['status'] == 1) {
-                                        //echo '<span class="badge badge-pill badge-success">Online</span>'; ?>
-                                        <div class="badge btn-success">Online</div>
-                                <?php
-                                    } else { ?>
-                                        <div class="badge btn-secondary"><i>Offline</i></div>
-                                <?php    }
-                                    
+                                    $get = $this->db->get_where('online', array('user_id' => $row['teacher_id']));
+                                    if ($get->num_rows() > 0) {
+                                        $status = $get->result_array();
+                                        foreach ($status as $stts) {
+                                            echo '<div class="badge btn-success">Online <br><i>('.$stts['at'].')</i></div>';
+                                        }
+                                    }else {
+                                        echo '<div class="badge btn-secondary"><i>Offline</i></div>';
+                                    }
                                 ?>
                             </td>
                             <td>

@@ -76,6 +76,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->admin_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'admin');
+
+          $data['session'] = 'admin';
+          $data['user_id'] = $row->admin_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('admin/dashboard'), 'refresh');
       }
 
@@ -86,6 +92,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('super_id', $row->super_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'superadmin');
+
+          $data['session'] = 'superadmin';
+          $data['user_id'] = $row->super_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('superadmin/dashboard'), 'refresh');
       }
 
@@ -97,6 +109,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->administration_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'administration');
+
+          $data['session'] = 'administration';
+          $data['user_id'] = $row->administration_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('administration/dashboard'), 'refresh');
       }
 
@@ -110,6 +128,12 @@ class Login extends CI_Controller {
             $this->session->set_userdata('login_user_id', $row->teacher_id);
             $this->session->set_userdata('name', $row->name);
             $this->session->set_userdata('login_type', 'teacher');
+
+            $data['session'] = 'teacher';
+            $data['user_id'] = $row->teacher_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
             redirect(site_url('teacher/dashboard'), 'refresh');
           }elseif ($row->position == "headmaster") {
             $this->session->set_userdata('headmaster_login', '1');
@@ -117,6 +141,11 @@ class Login extends CI_Controller {
             $this->session->set_userdata('login_user_id', $row->teacher_id);
             $this->session->set_userdata('name', $row->name);
             $this->session->set_userdata('login_type', 'headmaster');
+            $data['session'] = 'headmaster';
+            $data['user_id'] = $row->teacher_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
             redirect(site_url('headmaster/dashboard'), 'refresh');
           }
           
@@ -131,6 +160,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->student_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'student');
+
+          $data['session'] = 'student';
+          $data['user_id'] = $row->student_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('student/dashboard'), 'refresh');
       }
 
@@ -143,6 +178,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->parent_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'parent');
+
+          $data['session'] = 'parent';
+          $data['user_id'] = $row->parent_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('parents/dashboard'), 'refresh');
       }
 
@@ -155,6 +196,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->librarian_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'librarian');
+
+          $data['session'] = 'librarian';
+          $data['user_id'] = $row->librarian_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('librarian/dashboard'), 'refresh');
       }
 
@@ -167,6 +214,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->accountant_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'accountant');
+
+          $data['session'] = 'accountant';
+          $data['user_id'] = $row->accountant_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('accountant/dashboard'), 'refresh');
       }
 
