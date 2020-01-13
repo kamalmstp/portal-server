@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  date      : April, 2019
  *  Ekattor School Management System
  *  http://almazayaislamicschool.sch.id/
- *  
+ *
  */
 class Home extends CI_Controller {
 
@@ -21,10 +21,16 @@ class Home extends CI_Controller {
   }
 
   // default function
-  public function index() {
+  public function index0() {
     $page_data['page_name']  = 'home';
     $page_data['page_title'] = get_phrase('home');
     $this->load->view('frontend/'.$this->theme.'/index', $page_data);
+  }
+
+  public function index() {
+    $page_data['page_name']  = 'schedule';
+    $page_data['page_title'] = get_phrase('schedule');
+    $this->load->view('backend/index1', $page_data);
   }
 
   // noticeboard
@@ -38,6 +44,12 @@ class Home extends CI_Controller {
     $page_data['per_page']    = $config['per_page'];
     $page_data['page_name']  = 'noticeboard';
     $page_data['page_title'] = get_phrase('noticeboard');
+    $this->load->view('frontend/'.$this->theme.'/index', $page_data);
+  }
+
+  function schedule() {
+    $page_data['page_name']  = 'schedule';
+    $page_data['page_title'] = get_phrase('schedule');
     $this->load->view('frontend/'.$this->theme.'/index', $page_data);
   }
 

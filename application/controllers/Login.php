@@ -3,12 +3,12 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-/*  
+/*
  *  @author   : Al-Mazaya
  *  date    : 14 Mei, 2019
  *  SMA Al-Mazaya Islamic School
  *  http://almazayaislamicschool.sch.id/
- *  
+ *
  */
 
 class Login extends CI_Controller {
@@ -76,6 +76,18 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->admin_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'admin');
+
+          $cek_ol = $this->db->get_where('online', array('user_id' => $row->admin_id, 'at' => 'portal', 'session' => 'admin'));
+          if ($cek_ol->num_rows() > 0) {
+            // code...
+          }else {
+            // code...
+            $data['session'] = 'admin';
+            $data['user_id'] = $row->admin_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
+          }
           redirect(site_url('admin/dashboard'), 'refresh');
       }
 
@@ -86,6 +98,18 @@ class Login extends CI_Controller {
           $this->session->set_userdata('super_id', $row->super_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'superadmin');
+
+          $cek_ol = $this->db->get_where('online', array('user_id' => $row->super_id, 'at' => 'portal', 'session' => 'superadmin'));
+          if ($cek_ol->num_rows() > 0) {
+            // code...
+          }else {
+            // code...
+            $data['session'] = 'superadmin';
+            $data['user_id'] = $row->super_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
+          }
           redirect(site_url('superadmin/dashboard'), 'refresh');
       }
 
@@ -97,6 +121,18 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->administration_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'administration');
+
+          $cek_ol = $this->db->get_where('online', array('user_id' => $row->administration_id, 'at' => 'portal', 'session' => 'administration'));
+          if ($cek_ol->num_rows() > 0) {
+            // code...
+          }else {
+            // code...
+            $data['session'] = 'administration';
+            $data['user_id'] = $row->administration_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
+          }
           redirect(site_url('administration/dashboard'), 'refresh');
       }
 
@@ -104,22 +140,47 @@ class Login extends CI_Controller {
       $query = $this->db->get_where('teacher', $teacher);
       if ($query->num_rows() > 0) {
           $row = $query->row();
-          if ($row->position == "teacher") {
+          if ($row->position == "Teacher") {
             $this->session->set_userdata('teacher_login', '1');
             $this->session->set_userdata('teacher_id', $row->teacher_id);
             $this->session->set_userdata('login_user_id', $row->teacher_id);
             $this->session->set_userdata('name', $row->name);
             $this->session->set_userdata('login_type', 'teacher');
+
+            $cek_ol = $this->db->get_where('online', array('user_id' => $row->teacher_id, 'at' => 'portal', 'session' => 'teacher'));
+            if ($cek_ol->num_rows() > 0) {
+              // code...
+            }else {
+              // code...
+              $data['session'] = 'teacher';
+              $datsa['user_id'] = $row->teacher_id;
+              $data['at'] = 'portal';
+              $data['status'] = 'Online';
+              $this->db->insert('online',$data);
+            }
             redirect(site_url('teacher/dashboard'), 'refresh');
-          }elseif ($row->position == "headmaster") {
+
+          }elseif ($row->position == "Headmaster") {
             $this->session->set_userdata('headmaster_login', '1');
             $this->session->set_userdata('headmaster_id', $row->teacher_id);
             $this->session->set_userdata('login_user_id', $row->teacher_id);
             $this->session->set_userdata('name', $row->name);
             $this->session->set_userdata('login_type', 'headmaster');
+
+            $cek_ol = $this->db->get_where('online', array('user_id' => $row->teacher_id, 'at' => 'portal', 'session' => 'headmaster'));
+            if ($cek_ol->num_rows() > 0) {
+              // code...
+            }else {
+              // code...
+              $data['session'] = 'headmaster';
+              $datsa['user_id'] = $row->teacher_id;
+              $data['at'] = 'portal';
+              $data['status'] = 'Online';
+              $this->db->insert('online',$data);
+            }
             redirect(site_url('headmaster/dashboard'), 'refresh');
           }
-          
+
       }
 
       // Checking login credential for student
@@ -131,6 +192,18 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->student_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'student');
+
+          $cek_ol = $this->db->get_where('online', array('user_id' => $row->student_id, 'at' => 'portal', 'session' => 'student'));
+          if ($cek_ol->num_rows() > 0) {
+            // code...
+          }else {
+            // code...
+            $data['session'] = 'student';
+            $datsa['user_id'] = $row->student_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
+          }
           redirect(site_url('student/dashboard'), 'refresh');
       }
 
@@ -143,6 +216,12 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->parent_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'parent');
+
+          $data['session'] = 'parent';
+          $data['user_id'] = $row->parent_id;
+          $data['at'] = 'portal';
+          $data['status'] = 'Online';
+          $this->db->insert('online',$data);
           redirect(site_url('parents/dashboard'), 'refresh');
       }
 
@@ -155,6 +234,18 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->librarian_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'librarian');
+
+          $cek_ol = $this->db->get_where('online', array('user_id' => $row->librarian_id, 'at' => 'portal', 'session' => 'librarian'));
+          if ($cek_ol->num_rows() > 0) {
+            // code...
+          }else {
+            // code...
+            $data['session'] = 'librarian';
+            $datsa['user_id'] = $row->librarian_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
+          }
           redirect(site_url('librarian/dashboard'), 'refresh');
       }
 
@@ -167,6 +258,18 @@ class Login extends CI_Controller {
           $this->session->set_userdata('login_user_id', $row->accountant_id);
           $this->session->set_userdata('name', $row->name);
           $this->session->set_userdata('login_type', 'accountant');
+
+          $cek_ol = $this->db->get_where('online', array('user_id' => $row->accountant_id, 'at' => 'portal', 'session' => 'accountant'));
+          if ($cek_ol->num_rows() > 0) {
+            // code...
+          }else {
+            // code...
+            $data['session'] = 'accountant';
+            $datsa['user_id'] = $row->accountant_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            $this->db->insert('online',$data);
+          }
           redirect(site_url('accountant/dashboard'), 'refresh');
       }
 
@@ -275,9 +378,12 @@ class Login extends CI_Controller {
     /*     * *****LOGOUT FUNCTION ****** */
 
     function logout() {
-        $this->session->sess_destroy();
-        $this->session->set_flashdata('logout_notification', 'logged_out');
-        redirect(site_url('login'), 'refresh');
+      $this->db->where(array('user_id' => $this->session->userdata('login_user_id'), 'at' => 'portal'));
+      $this->db->delete('online');
+
+      $this->session->sess_destroy();
+      $this->session->set_flashdata('logout_notification', 'logged_out');
+      redirect(site_url('login'), 'refresh');
     }
 
 }

@@ -258,10 +258,11 @@ class Crud_model extends CI_Model {
 
     function save_teaching_planning(){
         $teacher_id = $this->session->userdata('teacher_id');
-        $data['teacher_id'] 	   = $teacher_id;
-        $data['section_id']        = $this->input->post('section_id');
-        $data['class_id']          = $this->input->post('class_id');
-        $data['subject_id']          = $this->input->post('subject_id');
+        $data['name']              = $this->input->post('name');
+        $data['class']          = $this->input->post('class_id');
+        $data['subject']          = $this->input->post('subject_id');
+        $data['id_teacher'] 	   = $teacher_id;
+        $data['year']        = "";
         //$data['subject_id']        = $this->db->get_where('subject' , array('teacher_id' => $teacher_id))->row()->subject_id;
         
         $this->db->insert('teaching_planning',$data);
@@ -281,7 +282,7 @@ class Crud_model extends CI_Model {
         }
     }
 
-    function save_teaching_planning_prosem($learning_id){
+    function save_teaching_planning_prosem(){
         $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
         $name = explode(".", $_FILES["prosem"]["name"]);
         $new_name = $nip."_prosem_".date('Yms').".".end($name);
@@ -316,8 +317,13 @@ class Crud_model extends CI_Model {
         $data['rpp']      = $new_name;
         if (move_uploaded_file($_FILES["rpp"]["tmp_name"], "uploads/teaching_planning/rpp/".$new_name)) {
             # code...
-            $this->db->where('learning_id',$learning_id);
-            $this->db->update('teaching_planning',$data);
+            $teacher_id = $this->session->userdata('teacher_id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['subject']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']        = "";
+            $this->db->insert('rpp',$data);
         } else {
             echo "gagal";
         }

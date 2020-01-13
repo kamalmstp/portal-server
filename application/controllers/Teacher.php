@@ -2,14 +2,6 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-/*
- *  @author   : Al-Mazaya
- *  date    : 14 Mei, 2019
- *  SMA Al-Mazaya Islamic School
- *  http://almazayaislamicschool.sch.id/
- *  
- */
-
 class Teacher extends CI_Controller
 {
 
@@ -680,9 +672,9 @@ else{
         }
 
         if ($task == "add_rpp") {
-            $this->crud_model->save_teaching_planning_rpp($learning_id);
+            $this->crud_model->save_teaching_planning_rpp();
             $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
-            redirect(site_url('teacher/teaching_planning'), 'refresh');
+            redirect(site_url('teacher/teaching_rpp'), 'refresh');
         }
 
         if ($task == "add_kikd") {
@@ -741,6 +733,438 @@ else{
         $this->session->set_flashdata('flash_message' , get_phrase('syllabus_uploaded'));
         redirect(site_url('teacher/academic_syllabus/'. $data['class_id']) , 'refresh');
     }
+
+    function teaching_prota()
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $page_data['page_name']  = 'teaching_prota';
+        $page_data['page_title'] = get_phrase('Prota');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function teaching_promes()
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+        
+        $page_data['page_name']  = 'teaching_promes';
+        $page_data['page_title'] = get_phrase('Promes');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function teaching_rpp()
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+        
+        $page_data['data'] = $this->db->get('rpp')->result_array();
+        $page_data['page_name']  = 'teaching_rpp';
+        $page_data['page_title'] = get_phrase('rpp');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function teaching_silabus()
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+        
+        $page_data['page_name']  = 'teaching_silabus';
+        $page_data['page_title'] = get_phrase('silabus');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function teaching_kikd()
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+        
+        $page_data['page_name']  = 'teaching_kikd';
+        $page_data['page_title'] = get_phrase('kikd');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function save_rpp(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["rpp"]["name"]);
+        $new_name = $nip."_rp_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["rpp"]["tmp_name"], "uploads/teaching_planning/rpp/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->insert('rpp',$data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_rpp'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function save_silabus(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["silabus"]["name"]);
+        $new_name = $nip."_slb_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["silabus"]["tmp_name"], "uploads/teaching_planning/silabus/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->insert('silabus',$data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_silabus'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function save_kikd(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["kikd"]["name"]);
+        $new_name = $nip."_kikd_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["kikd"]["tmp_name"], "uploads/teaching_planning/kikd/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->insert('kikd',$data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_kikd'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function save_prota(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["prota"]["name"]);
+        $new_name = $nip."_prota_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["prota"]["tmp_name"], "uploads/teaching_planning/prota/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->insert('prota',$data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_prota'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function save_promes(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["promes"]["name"]);
+        $new_name = $nip."_promes_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["promes"]["tmp_name"], "uploads/teaching_planning/promes/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->insert('promes',$data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_saved_successfuly'));
+            redirect(site_url('teacher/teaching_promes'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function edit_kikd($id){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $page_data['edit'] = $this->db->get_where('kikd', array('id' => $id))->row();
+        $page_data['page_name']  = 'edit_kikd';
+        $page_data['page_title'] = get_phrase('kikd');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function edit_rpp($id){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $page_data['edit'] = $this->db->get_where('rpp', array('id' => $id))->row();
+        $page_data['page_name']  = 'edit_rpp';
+        $page_data['page_title'] = get_phrase('rpp');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function edit_silabus($id){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $page_data['edit'] = $this->db->get_where('silabus', array('id' => $id))->row();
+        $page_data['page_name']  = 'edit_silabus';
+        $page_data['page_title'] = get_phrase('silabus');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function edit_prota($id){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $page_data['edit'] = $this->db->get_where('prota', array('id' => $id))->row();
+        $page_data['page_name']  = 'edit_prota';
+        $page_data['page_title'] = get_phrase('prota');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function edit_promes($id){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $page_data['edit'] = $this->db->get_where('promes', array('id' => $id))->row();
+        $page_data['page_name']  = 'edit_promes';
+        $page_data['page_title'] = get_phrase('promes');
+        
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function update_promes(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["promes"]["name"]);
+        $new_name = $nip."_promes_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["promes"]["tmp_name"], "uploads/teaching_planning/promes/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $id                 = $this->input->post('id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->where('id', $id);
+            $this->db->update('promes', $data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_updated_successfuly'));
+            redirect(site_url('teacher/teaching_promes'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function update_prota(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["prota"]["name"]);
+        $new_name = $nip."_prota_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["prota"]["tmp_name"], "uploads/teaching_planning/prota/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $id                 = $this->input->post('id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->where('id', $id);
+            $this->db->update('prota', $data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_updated_successfuly'));
+            redirect(site_url('teacher/teaching_prota'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function update_rpp(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["rpp"]["name"]);
+        $new_name = $nip."_rpp_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["rpp"]["tmp_name"], "uploads/teaching_planning/rpp/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $id                 = $this->input->post('id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->where('id', $id);
+            $this->db->update('rpp', $data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_updated_successfuly'));
+            redirect(site_url('teacher/teaching_rpp'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function update_silabus(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["silabus"]["name"]);
+        $new_name = $nip."_slb_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["silabus"]["tmp_name"], "uploads/teaching_planning/silabus/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $id                 = $this->input->post('id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->where('id', $id);
+            $this->db->update('silabus', $data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_updated_successfuly'));
+            redirect(site_url('teacher/teaching_silabus'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
+    function update_kikd(){
+        if ($this->session->userdata('teacher_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
+            redirect(base_url(), 'refresh');
+        }
+
+        $nip = $this->db->get_where('teacher', array('teacher_id' => $this->session->userdata('teacher_id')))->row()->nip;
+        $name = explode(".", $_FILES["kikd"]["name"]);
+        $new_name = $nip."_kikd_".date('Yms').".".end($name);
+        $data['file']      = $new_name;
+        if (move_uploaded_file($_FILES["kikd"]["tmp_name"], "uploads/teaching_planning/kikd/".$new_name)) {
+            # code...
+            $teacher_id = $this->session->userdata('teacher_id');
+            $id                 = $this->input->post('id');
+            $data['name']              = $this->input->post('name');
+            $data['class']          = $this->input->post('class_id');
+            $data['section']          = $this->input->post('subject_id');
+            $data['id_teacher'] 	   = $teacher_id;
+            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+            $this->db->where('id', $id);
+            $this->db->update('kikd', $data);
+            
+            $this->session->set_flashdata('flash_message' , get_phrase('teaching_planning_updated_successfuly'));
+            redirect(site_url('teacher/teaching_kikd'), 'refresh');
+        } else {
+            echo "gagal";
+        }
+    }
+
 
     /*********MANAGE STUDY MATERIAL************/
     function study_material($task = "", $document_id = "")
