@@ -34,26 +34,10 @@
 										?>
 										<tr>
 											<td><?=$kls['cn']." (".$kls['sn'].")";?></td>
-											<?php
-												$cek = $this->db->get_where('journal', array('date' => date('Y-m-d'), 'section_id' => $kls['sid']));
-												if ($cek->num_rows() > 0) {
-													$data = $cek->row();
-													?>
-													<td>
-														<?php echo $this->db->get_where('subject', array('subject_id' => $data->subject_id))->row()->name;?>
-													</td>
-													<td>
-														<?=$data->duration;?>
-													</td>
-													<td>
-														<?php echo $this->db->get_where('teacher', array('teacher_id' => $data->teacher_id))->row()->name;?>
-													</td>
-											<?php	}else{
-											 ?>
+											
 											<td>-</td>
 											<td>-</td>
 											<td>-</td>
-										<?php }?>
 										</tr>
 									<?php }
                 ?>
