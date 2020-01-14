@@ -33,6 +33,12 @@ class Home extends CI_Controller {
     $this->load->view('backend/index1', $page_data);
   }
 
+  function schedule_data(){
+    $json_data = $this->db->get_where('class_routine', array('day' = date('l')))->result_array();
+
+    echo json_encode($json_data);
+  }
+
   // noticeboard
   function noticeboard() {
     $count_notice = $this->db->get_where('noticeboard', array('show_on_website' => 1))->num_rows();

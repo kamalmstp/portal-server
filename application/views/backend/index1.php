@@ -27,7 +27,7 @@
 		" >
 		<?php include 'schedule/navigation.php';?>
 		<div class="main-content">
-
+			
 			<?php include 'schedule/table.php';?>
 
 			<?php include 'footer.php';?>

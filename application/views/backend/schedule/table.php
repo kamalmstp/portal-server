@@ -1,3 +1,6 @@
+<a href="<?=site_url('login');?>" class="btn btn-primary pull-right">
+	<?php echo get_phrase('login_portal');?>
+</a>
 <hr />
 <div class="row">
 	<div class="col-md-12">
@@ -43,7 +46,7 @@
 														<?=$data->duration;?>
 													</td>
 													<td>
-														<?=$data->teacher_id;?>
+														<?php echo $this->db->get_where('teacher', array('teacher_id' => $data->teacher_id))->row()->name;?>
 													</td>
 											<?php	}else{
 											 ?>
