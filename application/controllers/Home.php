@@ -28,9 +28,39 @@ class Home extends CI_Controller {
   }
 
   public function index() {
+    $this->db->select('c.name as cname, s.name as sname, s.section_id');
+    $this->db->from('section s');
+    $this->db->join('class c', 's.class_id = c.class_id');
+    $sql = $this->db->get();
+
     $page_data['page_name']  = 'schedule';
     $page_data['page_title'] = get_phrase('schedule');
+    $page_data['class'] = $sql->result_array();
     $this->load->view('backend/index1', $page_data);
+  }
+
+  function data_schedule(){
+    // $data = $this->db->get_where('class_routine', array('day' => date('l')))->result_array();
+    $this->db->select('c.name as cn, sc.name as scn, sb.name as sbn, t.name as tn, cr.time_start as crts, cr.time_start_min as crtsm, cr.time_end as crte, cr.time_end_min as crtem');
+    $this->db->from('class_routine cr');
+    $this->db->join('class c', 'cr.class_id = c.class_id');
+    $this->db->join('section sc', 'cr.section_id = sc.section_id');
+    $this->db->join('subject sb', 'cr.subject_id = sb.subject_id');
+    $this->db->join('teacher t', 'sb.teacher_id = t.teacher_id');
+    $this->db->where('cr.day', date('l'));
+    $this->db->order_by('cr.time_start', 'asc');
+    $this->db->order_by('cr.time_start_min', 'asc');
+    $query = $this->db->get();
+    $data = $query->result_array();
+
+    echo json_encode($data);
+  }
+
+  function data_agenda(){
+    $data = $this->db->get('noticeboard')->result_array();
+    // $data = $this->db->select('class_routine');
+
+    echo json_encode($data);
   }
 
   // noticeboard

@@ -140,7 +140,7 @@
             <i class="entypo-gauge"></i>
             <span><?php echo get_phrase('JAM KE - '); ?></span>
             <h1 style="color: #a2a3b7;text-align: -webkit-center;margin-bottom: 25px;font-weight: 300;margin-top: 10px;">
-              ---
+              <span id="ke"> </span>
             </h1>
 
             </a>
@@ -151,7 +151,7 @@
             <i class="entypo-gauge"></i>
             <span><?php echo get_phrase('AGENDA'); ?></span>
             <h3 style="color: #a2a3b7;text-align: -webkit-center;margin-bottom: 25px;font-weight: 300;margin-top: 10px;">
-              Tidak Ada Agenda Hari Ini
+             <span id="agenda"></span>
             </h3>
 
             </a>
@@ -166,11 +166,66 @@
 
   function waktu(){
     var waktu = new Date();
+    var hh = waktu.getHours();
+    var mm = waktu.getMinutes();
+    var ss = waktu.getSeconds();
+    var isi = '';
     setTimeout("waktu()", 1000);
     document.getElementById("jam").innerHTML = waktu.getHours();
     document.getElementById("menit").innerHTML = waktu.getMinutes();
     document.getElementById("detik").innerHTML = waktu.getSeconds();
+
+    if ((hh+''+mm) >= 715 && (hh+''+mm) <= 759) {
+      isi = 'Dhuha & Tahfidzh';
+    } else if(hh == 8 && mm <= 44){
+      isi = '1';
+    } else if((hh+''+mm) >= 845 && (hh+''+mm) <= 929){
+      isi = '2';
+    } else if((hh+''+mm) >= 930 && (hh+''+mm) <= 1014){
+      isi = '3';
+    } else if((hh+''+mm) >= 1015 && (hh+''+mm) <= 1059){
+      isi = 'Break 1';
+    } else if(hh == 11 && mm <= 44){
+      isi = '4';
+    } else if((hh+''+mm) >= 1145 && (hh+''+mm) <= 1219){
+      isi = '5';
+    } else if((hh+''+mm) >= 1220 && (hh+''+mm) <= 1314){
+      isi = 'Break 2';
+    } else if((hh+''+mm) >= 1315 && (hh+''+mm) <= 1350){
+      isi = '6';
+    } else if(hh == 14 && mm <= 44){
+      isi = '7';
+    } else if((hh+''+mm) >= 1445 && (hh+''+mm) <= 1529){
+      isi = '8';
+    } else if((hh+''+mm) >= 1530 && (hh+''+mm) <= 1559){
+      isi = 'Ashar';
+    } else {
+      isi = 'Get Home';
+    }
+    
+    
+    document.getElementById("ke").innerHTML = isi;
+    //document.getElementById("agenda").innerHTML = 'agenda';
   }
+
+  agenda();
+  function agenda(){
+		$.ajax({
+			type: 'POST',
+			url:'<?php echo base_url("home/data_agenda") ?>',
+			dataType:'json',
+			success: function(data){
+				console.log(data);
+				// var baris='';
+				// for(var i=0;i<data.length;i++){
+				// 	baris += data[i].notice;
+				// }
+				// $('#agenda').html(baris);
+			}
+		});
+		// window.setTimeout("agenda()", 1000);
+	}
+
 </script>
 <script type="text/javascript">
 	const secondHand = document.querySelector('.jarum_detik');

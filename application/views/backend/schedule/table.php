@@ -6,7 +6,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-primary">
 		    <div class="panel-heading">
-		        <h3 class="panel-title"><?php echo get_phrase('SCHEDULE IN TODAY') ?></h3>
+		        <h3 class="panel-title"><?php echo $page_title; ?></h3>
 		    </div>
 		    <div class="panel-body">
 			<div class="tabs-vertical-env">
@@ -17,30 +17,22 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-                  <th><?php echo get_phrase('class') ?></th>
-									<th><?php echo get_phrase('subject');?></th>
-									<th><?php echo get_phrase('duration');?></th>
-                  <th><?php echo get_phrase('teacher');?></th>
+									<td>Class</td>
+									<td>Subject</td>
+									<td>Time</td>
+									<td>Teacher</td>
 								</tr>
 							</thead>
-							<tbody>
-                <?php
-									$this->db->select('section.section_id as sid, class.name as cn, section.name as sn');
-									$this->db->from('section');
-									$this->db->join('class','section.class_id = class.class_id');
-									$kelas = $this->db->get()->result_array();
-
-									foreach ($kelas as $kls) {
-										?>
+							<tbody id="target">
+								<!-- <?php foreach ($class as $row) { ?>
 										<tr>
-											<td><?=$kls['cn']." (".$kls['sn'].")";?></td>
-											
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
+											<td><input type="hidden" id="class_id" value="<?=$row['section_id'];?>">
+											<p><?=$row['cname']." (".$row['sname'].")";?></p></td>
+											<td id="subject"></td>
+											<td></td>
+											<td></td>
 										</tr>
-									<?php }
-                ?>
+								<?php } ?> -->
 							</tbody>
 						</table>
 					</div>
@@ -51,3 +43,30 @@
 		</div>
 	</div>
 </div>
+
+<script>
+
+window.setTimeout("ambilData()", 1000);
+
+	function ambilData(){
+		$.ajax({
+			type: 'POST',
+			url:'<?php echo base_url("home/data_schedule") ?>',
+			dataType:'json',
+			success: function(data){
+				// console.log(data);
+				var baris='';
+				for(var i=0;i<data.length;i++){
+					baris += '<tr>'+
+								'<td>'+data[i].cn+' ('+data[i].scn+') </td>'+
+								'<td>'+data[i].sbn+'</td>'+
+								'<td>'+data[i].crts+':'+data[i].crtsm+' - '+data[i].crte+':'+data[i].crtem+'</td>'+
+								'<td>'+data[i].tn+'</td>'+
+							'</tr>';
+				}
+				$('#target').html(baris);
+			}
+		});
+		window.setTimeout("ambilData()", 1000);
+	}
+</script>
