@@ -49,6 +49,11 @@
 window.setTimeout("ambilData()", 1000);
 
 	function ambilData(){
+		var waktu = new Date();
+		var hh = waktu.getHours();
+		var mm = waktu.getMinutes();
+		var ss = waktu.getSeconds();
+
 		$.ajax({
 			type: 'POST',
 			url:'<?php echo base_url("home/data_schedule") ?>',
@@ -57,16 +62,26 @@ window.setTimeout("ambilData()", 1000);
 				// console.log(data);
 				var baris='';
 				for(var i=0;i<data.length;i++){
-					baris += '<tr>'+
+					if (data[i].stts == null) {
+						baris += '<tr>'+
 								'<td>'+data[i].cn+' ('+data[i].scn+') </td>'+
 								'<td>'+data[i].sbn+'</td>'+
 								'<td>'+data[i].crts+':'+data[i].crtsm+' - '+data[i].crte+':'+data[i].crtem+'</td>'+
-								'<td>'+data[i].tn+'</td>'+
+								'<td>'+data[i].tn+' - '+'<div class="badge btn-secondary"><i>Offline</i></div>'+'</td>'+
 							'</tr>';
+					} else {
+						baris += '<tr>'+
+								'<td>'+data[i].cn+' ('+data[i].scn+') </td>'+
+								'<td>'+data[i].sbn+'</td>'+
+								'<td>'+data[i].crts+':'+data[i].crtsm+' - '+data[i].crte+':'+data[i].crtem+'</td>'+
+								'<td>'+data[i].tn+' - '+'<div class="badge btn-success">'+data[i].stts+'</div>'+'</td>'+
+							'</tr>';
+					}
 				}
 				$('#target').html(baris);
-			}
-		});
+				}
+			});
+
 		window.setTimeout("ambilData()", 1000);
 	}
 </script>

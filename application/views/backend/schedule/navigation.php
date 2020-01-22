@@ -175,33 +175,63 @@
     document.getElementById("menit").innerHTML = waktu.getMinutes();
     document.getElementById("detik").innerHTML = waktu.getSeconds();
 
-    if ((hh+''+mm) >= 715 && (hh+''+mm) <= 759) {
+    if ((hh+''+mm) >= 715 && (hh+''+mm) <= 839) {
       isi = 'Dhuha & Tahfidzh';
-    } else if(hh == 8 && mm <= 44){
+    } else if((hh+''+mm) >= 840 && (hh+''+mm) <= 919){
       isi = '1';
-    } else if((hh+''+mm) >= 845 && (hh+''+mm) <= 929){
+    } else if((hh+''+mm) >= 920 && (hh+''+mm) <= 959){
       isi = '2';
-    } else if((hh+''+mm) >= 930 && (hh+''+mm) <= 1014){
-      isi = '3';
-    } else if((hh+''+mm) >= 1015 && (hh+''+mm) <= 1059){
+    } else if(hh == 10 && mm <= 29){
       isi = 'Break 1';
-    } else if(hh == 11 && mm <= 44){
+    } else if((hh+''+mm) >= 1030 && hh == 11 && mm < 10){
+      isi = '3';
+    } else if((hh+''+mm) >= 1110 && (hh+''+mm) <= 1149){
       isi = '4';
-    } else if((hh+''+mm) >= 1145 && (hh+''+mm) <= 1219){
+    } else if((hh+''+mm) >= 1150 && (hh+''+mm) <= 1239){
+      isi = 'Break 2 & Dzuhur';
+    } else if((hh+''+mm) >= 1240 && (hh+''+mm) <= 1319){
       isi = '5';
-    } else if((hh+''+mm) >= 1220 && (hh+''+mm) <= 1314){
-      isi = 'Break 2';
-    } else if((hh+''+mm) >= 1315 && (hh+''+mm) <= 1350){
+    } else if((hh+''+mm) >= 1320 && (hh+''+mm) <= 1359){
       isi = '6';
-    } else if(hh == 14 && mm <= 44){
+    } else if(hh == 14 && mm <= 19){
+      isi = 'Break 3';
+    } else if((hh+''+mm) >= 1420 && (hh+''+mm) <= 1459){
       isi = '7';
-    } else if((hh+''+mm) >= 1445 && (hh+''+mm) <= 1529){
+    } else if(hh == 15 && mm <= 39){
       isi = '8';
-    } else if((hh+''+mm) >= 1530 && (hh+''+mm) <= 1559){
+    } else if((hh+''+mm) >= 1540 && (hh+''+mm) <= 1559){
       isi = 'Ashar';
     } else {
       isi = 'Get Home';
     }
+
+    // if ((hh+''+mm) >= 715 && (hh+''+mm) <= 759) {
+    //   isi = 'Dhuha & Tahfidzh';
+    // } else if(hh == 8 && mm <= 44){
+    //   isi = '1';
+    // } else if((hh+''+mm) >= 845 && (hh+''+mm) <= 929){
+    //   isi = '2';
+    // } else if((hh+''+mm) >= 930 && (hh+''+mm) <= 1014){
+    //   isi = '3';
+    // } else if((hh+''+mm) >= 1015 && (hh+''+mm) <= 1059){
+    //   isi = 'Break 1';
+    // } else if(hh == 11 && mm <= 44){
+    //   isi = '4';
+    // } else if((hh+''+mm) >= 1145 && (hh+''+mm) <= 1219){
+    //   isi = '5';
+    // } else if((hh+''+mm) >= 1220 && (hh+''+mm) <= 1314){
+    //   isi = 'Break 2';
+    // } else if((hh+''+mm) >= 1315 && (hh+''+mm) <= 1350){
+    //   isi = '6';
+    // } else if(hh == 14 && mm <= 44){
+    //   isi = '7';
+    // } else if((hh+''+mm) >= 1445 && (hh+''+mm) <= 1529){
+    //   isi = '8';
+    // } else if((hh+''+mm) >= 1530 && (hh+''+mm) <= 1559){
+    //   isi = 'Ashar';
+    // } else {
+    //   isi = 'Get Home';
+    // }
     
     
     document.getElementById("ke").innerHTML = isi;
