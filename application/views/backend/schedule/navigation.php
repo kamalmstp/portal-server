@@ -19,68 +19,66 @@
   }
 
 </style>
-
 <style type="text/css">
+  .jam_analog_malasngoding {
+    background: #e7f2f7;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 8px solid #52b6f0;
+    border-radius: 50%;
+    padding: 10px;
+    margin:10px auto;
+  }
 
+  .xxx {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
 
-.jam_analog_malasngoding {
-  background: #e7f2f7;
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border: 8px solid #52b6f0;
-  border-radius: 50%;
-  padding: 10px;
-  margin:10px auto;
-}
+  .jarum {
+    position: absolute;
+    width: 50%;
+    background: #232323;
+    top: 50%;
+    transform: rotate(90deg);
+    transform-origin: 100%;
+    transition: all 0.05s cubic-bezier(0.1, 2.7, 0.58, 1);
+  }
 
-.xxx {
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
+  .lingkaran_tengah {
+    width: 12px;
+    height: 12px;
+    background: #232323;
+    border: 2px solid #52b6f0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -7px;
+    margin-top: -7px;
+    border-radius: 50%;
+  }
 
-.jarum {
-  position: absolute;
-  width: 50%;
-  background: #232323;
-  top: 50%;
-  transform: rotate(90deg);
-  transform-origin: 100%;
-  transition: all 0.05s cubic-bezier(0.1, 2.7, 0.58, 1);
-}
+  .jarum_detik {
+    height: 2px;
+    border-radius: 1px;
+    background: #F0C952;
+  }
 
-.lingkaran_tengah {
-  width: 12px;
-  height: 12px;
-  background: #232323;
-  border: 2px solid #52b6f0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -7px;
-  margin-top: -7px;
-  border-radius: 50%;
-}
+  .jarum_menit {
+    height: 2px;
+    border-radius: 2px;
+  }
 
-.jarum_detik {
-  height: 2px;
-  border-radius: 1px;
-  background: #F0C952;
-}
-
-.jarum_menit {
-  height: 2px;
-  border-radius: 2px;
-}
-
-.jarum_jam {
-  height: 4px;
-  border-radius: 2px;
-  width: 35%;
-  left: 15%;
-}
+  .jarum_jam {
+    height: 4px;
+    border-radius: 2px;
+    width: 35%;
+    left: 15%;
+  }
 </style>
+
 <div class="sidebar-menu">
     <header class="logo-env" >
         <!-- logo collapse icon -->
@@ -204,35 +202,6 @@
     } else {
       isi = 'Get Home';
     }
-
-    // if ((hh+''+mm) >= 715 && (hh+''+mm) <= 759) {
-    //   isi = 'Dhuha & Tahfidzh';
-    // } else if(hh == 8 && mm <= 44){
-    //   isi = '1';
-    // } else if((hh+''+mm) >= 845 && (hh+''+mm) <= 929){
-    //   isi = '2';
-    // } else if((hh+''+mm) >= 930 && (hh+''+mm) <= 1014){
-    //   isi = '3';
-    // } else if((hh+''+mm) >= 1015 && (hh+''+mm) <= 1059){
-    //   isi = 'Break 1';
-    // } else if(hh == 11 && mm <= 44){
-    //   isi = '4';
-    // } else if((hh+''+mm) >= 1145 && (hh+''+mm) <= 1219){
-    //   isi = '5';
-    // } else if((hh+''+mm) >= 1220 && (hh+''+mm) <= 1314){
-    //   isi = 'Break 2';
-    // } else if((hh+''+mm) >= 1315 && (hh+''+mm) <= 1350){
-    //   isi = '6';
-    // } else if(hh == 14 && mm <= 44){
-    //   isi = '7';
-    // } else if((hh+''+mm) >= 1445 && (hh+''+mm) <= 1529){
-    //   isi = '8';
-    // } else if((hh+''+mm) >= 1530 && (hh+''+mm) <= 1559){
-    //   isi = 'Ashar';
-    // } else {
-    //   isi = 'Get Home';
-    // }
-    
     
     document.getElementById("ke").innerHTML = isi;
     //document.getElementById("agenda").innerHTML = 'agenda';
@@ -246,11 +215,11 @@
 			dataType:'json',
 			success: function(data){
 				console.log(data);
-				// var baris='';
-				// for(var i=0;i<data.length;i++){
-				// 	baris += data[i].notice;
-				// }
-				// $('#agenda').html(baris);
+				var baris='';
+				for(var i=0;i<data.length;i++){
+					baris += data[i].notice+"<br>";
+				}
+				$('#agenda').html(baris);
 			}
 		});
 		// window.setTimeout("agenda()", 1000);
