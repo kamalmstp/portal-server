@@ -161,6 +161,7 @@
 
 <script>
   window.setTimeout("waktu()", 1000);
+  window.setTimeout("agenda()", 1000);
 
   function waktu(){
     var waktu = new Date();
@@ -207,7 +208,6 @@
     //document.getElementById("agenda").innerHTML = 'agenda';
   }
 
-  agenda();
   function agenda(){
 		$.ajax({
 			type: 'POST',
@@ -222,7 +222,7 @@
 				$('#agenda').html(baris);
 			}
 		});
-		// window.setTimeout("agenda()", 1000);
+		window.setTimeout("agenda()", 1000);
 	}
 
 </script>
