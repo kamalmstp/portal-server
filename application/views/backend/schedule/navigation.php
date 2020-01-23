@@ -177,7 +177,7 @@
 
     if ((hh+''+mm) >= 715 && (hh+''+mm) <= 839) {
       isi = 'Dhuha & Tahfidzh';
-    } else if((hh+''+mm) >= 840 && (hh+''+mm) <= 919){
+    } else if((hh+''+mm) >= 840 && (hh+''+mm) <= 919 || mm <= 9){
       isi = '1';
     } else if((hh+''+mm) >= 920 && (hh+''+mm) <= 959){
       isi = '2';
@@ -187,9 +187,9 @@
       isi = '3';
     } else if((hh+''+mm) >= 1110 && (hh+''+mm) <= 1149){
       isi = '4';
-    } else if((hh+''+mm) >= 1150 && (hh+''+mm) <= 1239){
+    } else if((hh+''+mm) >= 1150 && (hh+''+mm) <= 1239 || mm <= 9){
       isi = 'Break 2 & Dzuhur';
-    } else if((hh+''+mm) >= 1240 && (hh+''+mm) <= 1319){
+    } else if((hh+''+mm) >= 1240 && (hh+''+mm) <= 1319 || mm <= 9){
       isi = '5';
     } else if((hh+''+mm) >= 1320 && (hh+''+mm) <= 1359){
       isi = '6';
