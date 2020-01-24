@@ -22,39 +22,9 @@
 			</li>
 			-->
 		</ul>
-       
 
 		<ul class="user-info pull-right pull-none-xsm" style="margin-top: 6px;">
-			<li class="dropdown pull-left">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<i class="fa fa-envelope"></i>
-					<span class="label label-success">4</span>
-				</a>
-				<ul class="dropdown-menu">
-				<li class="header">You have 4 messages</li>
-				<li>
-					<!-- inner menu: contains the actual data -->
-					<ul class="menu">
-					<li><!-- start message -->
-						<a href="#">
-						<div class="pull-left">
-							<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-						</div>
-						<h4>
-							Support Team
-							<small><i class="fa fa-clock-o"></i> 5 mins</small>
-						</h4>
-						<p>Why not buy a new awesome theme?</p>
-						</a>
-					</li>
-					<!-- end message -->
-					</ul>
-				</li>
-				<li class="footer"><a href="#">See All Messages</a></li>
-				</ul>
-			</li>
-			<li class="profile-info dropdown pull-right"><!-- add class "pull-right" if you want to place this from right -->
-				
+			<li class="profile-info dropdown pull-right">	
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<?php if ($account_type == "headmaster"){ ?>
 						<img src="<?php echo $this->crud_model->get_image_url('teacher', 'teacher_id');?>" alt="" class="img-circle" width="44">
@@ -109,7 +79,49 @@
 					
 				</ul>
 			</li>
-		
+		</ul>
+
+		<ul class="user-info pull-right pull-none-xsm" style="margin-right: 20px;">
+			<li class="profile-info dropdown pull-right">	
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<div style="margin-top: 14px;
+							    font-size: 10px;
+							    text-align: left;
+							    padding-left: 53px;
+								color: #707696;">
+						<i class="fa fa-envelope" style="font-size: 30px;"></i><span class="label label-success">0</span>
+					</div>
+				</a>
+				<ul class="dropdown-menu">
+					
+					<li class="caret"></li>
+					
+					<!-- <li>
+						<a href="#">
+						<img src="<?php echo $this->crud_model->get_image_url($account_type, $account_type_id);?>" alt="" class="img-circle" width="44">
+							<b>Mustapa Ahmad Kamal</b>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+						<img src="<?php echo $this->crud_model->get_image_url($account_type, $account_type_id);?>" alt="" class="img-circle" width="44">
+							<b>Mustapa Ahmad Kamal</b>
+						</a>
+					</li> -->
+					<li>
+						<p href="#" style="text-align: center;margin:10px">
+							<b>Tidak Ada Pesan</b>
+						</p>
+					</li>
+					<li style="text-align: center;">--------------------------</li>
+					<li>
+						<a href="<?php echo site_url($account_type . '/message');?>" style="text-align: center;">
+							<?php echo get_phrase('See All Message');?>
+						</a>
+					</li>
+					
+				</ul>
+			</li>
 		</ul>
 	</div>
 
