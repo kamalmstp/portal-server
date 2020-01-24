@@ -19,68 +19,66 @@
   }
 
 </style>
-
 <style type="text/css">
+  .jam_analog_malasngoding {
+    background: #e7f2f7;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 8px solid #52b6f0;
+    border-radius: 50%;
+    padding: 10px;
+    margin:10px auto;
+  }
 
+  .xxx {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
 
-.jam_analog_malasngoding {
-  background: #e7f2f7;
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border: 8px solid #52b6f0;
-  border-radius: 50%;
-  padding: 10px;
-  margin:10px auto;
-}
+  .jarum {
+    position: absolute;
+    width: 50%;
+    background: #232323;
+    top: 50%;
+    transform: rotate(90deg);
+    transform-origin: 100%;
+    transition: all 0.05s cubic-bezier(0.1, 2.7, 0.58, 1);
+  }
 
-.xxx {
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
+  .lingkaran_tengah {
+    width: 12px;
+    height: 12px;
+    background: #232323;
+    border: 2px solid #52b6f0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -7px;
+    margin-top: -7px;
+    border-radius: 50%;
+  }
 
-.jarum {
-  position: absolute;
-  width: 50%;
-  background: #232323;
-  top: 50%;
-  transform: rotate(90deg);
-  transform-origin: 100%;
-  transition: all 0.05s cubic-bezier(0.1, 2.7, 0.58, 1);
-}
+  .jarum_detik {
+    height: 2px;
+    border-radius: 1px;
+    background: #F0C952;
+  }
 
-.lingkaran_tengah {
-  width: 12px;
-  height: 12px;
-  background: #232323;
-  border: 2px solid #52b6f0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -7px;
-  margin-top: -7px;
-  border-radius: 50%;
-}
+  .jarum_menit {
+    height: 2px;
+    border-radius: 2px;
+  }
 
-.jarum_detik {
-  height: 2px;
-  border-radius: 1px;
-  background: #F0C952;
-}
-
-.jarum_menit {
-  height: 2px;
-  border-radius: 2px;
-}
-
-.jarum_jam {
-  height: 4px;
-  border-radius: 2px;
-  width: 35%;
-  left: 15%;
-}
+  .jarum_jam {
+    height: 4px;
+    border-radius: 2px;
+    width: 35%;
+    left: 15%;
+  }
 </style>
+
 <div class="sidebar-menu">
     <header class="logo-env" >
         <!-- logo collapse icon -->
@@ -125,9 +123,7 @@
             	</div>
             </div>
             <h1 style="color: #a2a3b7;border:1px;text-align: -webkit-center;margin-bottom: 5px;font-weight: 300;margin-top: 10px;">
-            <span id="jam"></span> :
-            <span id="menit"></span> :
-            <span id="detik"></span>
+            <span id="jam"></span>
             </h1>
             <h4 style="color: #a2a3b7;text-align: -webkit-center;">
               <?=date('l, d M Y');?>
@@ -163,97 +159,84 @@
 
 <script>
   window.setTimeout("waktu()", 1000);
+  window.setTimeout("agenda()", 1000);
+  window.setTimeout("www()", 1000);
+
+  function www(){
+    var time = Date.now();
+    var gmt = -(new Date()).getTimezoneOffset()/60;
+    var detik = Math.floor(time/1000);
+    seconds = ('0' + detik % 60).slice(-2);
+    var menit = Math.floor(detik/60);
+    minutes = ('0' + menit % 60).slice(-2);
+    var jam = Math.floor(menit/60);
+    hours = ('0' + (jam+gmt) % 24).slice(-2);
+    var view = hours + " : " + minutes + " : " + seconds;
+
+    document.getElementById("jam").innerHTML = view;
+    window.setTimeout("www()", 1000);
+  }
 
   function waktu(){
-    var waktu = new Date();
-    var hh = waktu.getHours();
-    var mm = waktu.getMinutes();
-    var ss = waktu.getSeconds();
+    var time = Date.now();
+    var gmt = -(new Date()).getTimezoneOffset()/60;
+    var detik = Math.floor(time/1000);
+    seconds = ('0' + detik % 60).slice(-2);
+    var menit = Math.floor(detik/60);
+    minutes = ('0' + menit % 60).slice(-2);
+    var jam = Math.floor(menit/60);
+    hours = ('0' + (jam+gmt) % 24).slice(-2);
+    var hh = hours + "" + minutes;
+
     var isi = '';
     setTimeout("waktu()", 1000);
-    document.getElementById("jam").innerHTML = waktu.getHours();
-    document.getElementById("menit").innerHTML = waktu.getMinutes();
-    document.getElementById("detik").innerHTML = waktu.getSeconds();
 
-    if ((hh+''+mm) >= 715 && (hh+''+mm) <= 839) {
+    if (hh >= 0715 && hh <= 0839) {
       isi = 'Dhuha & Tahfidzh';
-    } else if((hh+''+mm) >= 840 && (hh+''+mm) <= 919){
+    } else if(hh >= 0840 && hh <= 0919) {
       isi = '1';
-    } else if((hh+''+mm) >= 920 && (hh+''+mm) <= 959){
+    } else if(hh >= 0920 && hh <= 0959){
       isi = '2';
-    } else if(hh == 10 && mm <= 29){
+    } else if(hh >= 1000 && hh <= 1029){
       isi = 'Break 1';
-    } else if((hh+''+mm) >= 1030 && hh == 11 && mm < 10){
+    } else if(hh >= 1030 && hh <= 1109){
       isi = '3';
-    } else if((hh+''+mm) >= 1110 && (hh+''+mm) <= 1149){
+    } else if(hh >= 1110 && hh <= 1149){
       isi = '4';
-    } else if((hh+''+mm) >= 1150 && (hh+''+mm) <= 1239){
+    } else if(hh >= 1150 && hh <= 1239){
       isi = 'Break 2 & Dzuhur';
-    } else if((hh+''+mm) >= 1240 && (hh+''+mm) <= 1319){
+    } else if(hh >= 1240 && hh <= 1319){
       isi = '5';
-    } else if((hh+''+mm) >= 1320 && (hh+''+mm) <= 1359){
+    } else if(hh >= 1320 && hh <= 1359){
       isi = '6';
-    } else if(hh == 14 && mm <= 19){
+    } else if(hh >= 1400 && hh <= 1419){
       isi = 'Break 3';
-    } else if((hh+''+mm) >= 1420 && (hh+''+mm) <= 1459){
+    } else if(hh >= 1420 && hh <= 1459){
       isi = '7';
-    } else if(hh == 15 && mm <= 39){
+    } else if(hh >= 1500 && hh <= 1539){
       isi = '8';
-    } else if((hh+''+mm) >= 1540 && (hh+''+mm) <= 1559){
+    } else if(hh >= 1540 && hh <= 1559){
       isi = 'Ashar';
     } else {
       isi = 'Get Home';
     }
-
-    // if ((hh+''+mm) >= 715 && (hh+''+mm) <= 759) {
-    //   isi = 'Dhuha & Tahfidzh';
-    // } else if(hh == 8 && mm <= 44){
-    //   isi = '1';
-    // } else if((hh+''+mm) >= 845 && (hh+''+mm) <= 929){
-    //   isi = '2';
-    // } else if((hh+''+mm) >= 930 && (hh+''+mm) <= 1014){
-    //   isi = '3';
-    // } else if((hh+''+mm) >= 1015 && (hh+''+mm) <= 1059){
-    //   isi = 'Break 1';
-    // } else if(hh == 11 && mm <= 44){
-    //   isi = '4';
-    // } else if((hh+''+mm) >= 1145 && (hh+''+mm) <= 1219){
-    //   isi = '5';
-    // } else if((hh+''+mm) >= 1220 && (hh+''+mm) <= 1314){
-    //   isi = 'Break 2';
-    // } else if((hh+''+mm) >= 1315 && (hh+''+mm) <= 1350){
-    //   isi = '6';
-    // } else if(hh == 14 && mm <= 44){
-    //   isi = '7';
-    // } else if((hh+''+mm) >= 1445 && (hh+''+mm) <= 1529){
-    //   isi = '8';
-    // } else if((hh+''+mm) >= 1530 && (hh+''+mm) <= 1559){
-    //   isi = 'Ashar';
-    // } else {
-    //   isi = 'Get Home';
-    // }
-    
     
     document.getElementById("ke").innerHTML = isi;
-    //document.getElementById("agenda").innerHTML = 'agenda';
   }
 
-  agenda();
   function agenda(){
 		$.ajax({
 			type: 'POST',
 			url:'<?php echo base_url("home/data_agenda") ?>',
 			dataType:'json',
 			success: function(data){
-				console.log(data);
-				// var baris='';
-				// for(var i=0;i<data.length;i++){
-				// 	baris += data[i].notice;
-				// }
-				// $('#agenda').html(baris);
+				var baris='';
+				for(var i=0;i<data.length;i++){
+					baris += data[i].notice+"<br>";
+				}
+				$('#agenda').html(baris);
 			}
 		});
-		// window.setTimeout("agenda()", 1000);
 	}
 
 </script>
