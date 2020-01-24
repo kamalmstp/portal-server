@@ -24,15 +24,6 @@
 								</tr>
 							</thead>
 							<tbody id="target">
-								<!-- <?php foreach ($class as $row) { ?>
-										<tr>
-											<td><input type="hidden" id="class_id" value="<?=$row['section_id'];?>">
-											<p><?=$row['cname']." (".$row['sname'].")";?></p></td>
-											<td id="subject"></td>
-											<td></td>
-											<td></td>
-										</tr>
-								<?php } ?> -->
 							</tbody>
 						</table>
 					</div>

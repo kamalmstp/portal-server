@@ -33,24 +33,24 @@ class Home extends CI_Controller {
     $page_data['class'] = $sql->result_array();
     $this->load->view('backend/index1', $page_data);
   }
+  
 
   function data_schedule(){
     // $data = $this->db->get_where('class_routine', array('day' => date('l')))->result_array();
-    $this->db->select('c.name as cn, sc.name as scn, sb.name as sbn, t.name as tn, cr.time_start as crts, cr.time_start_min as crtsm, cr.time_end as crte, cr.time_end_min as crtem, o.status as stts');
-    $this->db->from('class_routine cr');
-    $this->db->join('class c', 'cr.class_id = c.class_id');
-    $this->db->join('section sc', 'cr.section_id = sc.section_id');
-    $this->db->join('subject sb', 'cr.subject_id = sb.subject_id');
-    $this->db->join('teacher t', 'sb.teacher_id = t.teacher_id');
-    $this->db->join('online o', 't.teacher_id = o.user_id', 'left');
-    $this->db->where('cr.day', date('l'));
-    $this->db->where('cr.time_start', date('H'));
-    $this->db->order_by('cr.time_start', 'asc');
-    $this->db->order_by('cr.time_start_min', 'asc');
-    $query = $this->db->get();
-    $data = $query->result_array();
-
-    echo json_encode($data);
+        $this->db->select('c.name as cn, sc.name as scn, sb.name as sbn, t.name as tn, cr.time_start as crts, cr.time_start_min as crtsm, cr.time_end as crte, cr.time_end_min as crtem, o.status as stts');
+        $this->db->from('class_routine cr');
+        $this->db->join('class c', 'cr.class_id = c.class_id');
+        $this->db->join('section sc', 'cr.section_id = sc.section_id');
+        $this->db->join('subject sb', 'cr.subject_id = sb.subject_id');
+        $this->db->join('teacher t', 'sb.teacher_id = t.teacher_id');
+        $this->db->join('online o', 't.teacher_id = o.user_id', 'left');
+        $this->db->where('cr.day', date('l'));
+        $this->db->where('CAST(concat(HOUR(now()), ":", minute(now())) AS time) BETWEEN CAST(concat(time_start,":",time_start_min) AS time) and CAST(concat(time_end,":",time_end_min) AS time)');
+        $this->db->order_by('cr.time_start', 'asc');
+        $this->db->order_by('cr.time_start_min', 'asc');
+        $query = $this->db->get();
+        $data = $query->result_array();
+        echo json_encode($data);
   }
 
   function data_agenda(){
