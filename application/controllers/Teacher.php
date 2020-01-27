@@ -388,8 +388,99 @@ else{
     {
         if ($this->session->userdata('teacher_login') != 1)
             redirect(site_url('login'), 'refresh');
+
+        if ($param1 == 'identitas_sekolah') {
+            $data['nama_sekolah']        = html_escape($this->input->post('nama_sekolah'));
+            $data['npsn']        = html_escape($this->input->post('npsn'));
+            $data['alamat_sekolah']        = html_escape($this->input->post('alamat_sekolah'));
+
+            $this->db->where('teacher_id', $this->session->userdata('teacher_id'));
+            $this->db->update('teacher', $data);
+
+            redirect(site_url('teacher/manage_profile/'), 'refresh');
+        }
+        if ($param1 == 'identitas_pendidikan') {
+            $data['nama_lengkap']        = html_escape($this->input->post('nama_lengkap'));
+            $data['nik']        = html_escape($this->input->post('nik'));
+            $data['sex']        = html_escape($this->input->post('sex'));
+            $data['tempat_lahir']        = html_escape($this->input->post('tempat_lahir'));
+            $data['birthday']        = html_escape($this->input->post('birthday'));
+            $data['nama_ibu_kandung']        = html_escape($this->input->post('nama_ibu_kandung'));
+
+            $this->db->where('teacher_id', $this->session->userdata('teacher_id'));
+            $this->db->update('teacher', $data);
+
+            redirect(site_url('teacher/manage_profile/'), 'refresh');
+        }
+        if ($param1 == 'data_pribadi') {
+            $data['address']        = html_escape($this->input->post('address'));
+            $data['rt']        = html_escape($this->input->post('rt'));
+            $data['rw']        = html_escape($this->input->post('rw'));
+            $data['nama_dusun']        = html_escape($this->input->post('nama_dusun'));
+            $data['kec']        = html_escape($this->input->post('kec'));
+            $data['kode_pos']        = html_escape($this->input->post('kode_pos'));
+            $data['religion']        = html_escape($this->input->post('religion'));
+            $data['npwp_guru']        = html_escape($this->input->post('npwp_guru'));
+            $data['nama_wajib_pajak']        = html_escape($this->input->post('nama_wajib_pajak'));
+            $data['kewarganegaraan']        = html_escape($this->input->post('kewarganegaraan'));
+            $data['status_perkawinan']        = html_escape($this->input->post('status_perkawinan'));
+            $data['nama_suami']        = html_escape($this->input->post('nama_suami'));
+            $data['nip_suami']        = html_escape($this->input->post('nip_suami'));
+            $data['pekerjaan_suami']        = html_escape($this->input->post('pekerjaan_suami'));
+            
+            $this->db->where('teacher_id', $this->session->userdata('teacher_id'));
+            $this->db->update('teacher', $data);
+
+            redirect(site_url('teacher/manage_profile/'), 'refresh');
+        }
+        if ($param1 == 'kepegawaian') {
+            $data['status_kepegawaiaan']        = html_escape($this->input->post('status_kepegawaiaan'));
+            $data['nip']        = html_escape($this->input->post('nip'));
+            $data['niy']        = html_escape($this->input->post('niy'));
+            $data['nuptk']        = html_escape($this->input->post('nuptk'));
+            $data['jenis_ptk']        = html_escape($this->input->post('jenis_ptk'));
+            $data['sk_pengangkatan']        = html_escape($this->input->post('sk_pengangkatan'));
+            $data['tmt_pengangkatan']        = html_escape($this->input->post('tmt_pengangkatan'));
+            $data['lembaga_pengangkatan']        = html_escape($this->input->post('lembaga_pengangkatan'));
+            $data['sk_cpns']        = html_escape($this->input->post('sk_cpns'));
+            $data['tmt_pns']        = html_escape($this->input->post('tmt_pns'));
+            $data['pangkat']        = html_escape($this->input->post('pangkat'));
+            $data['sumber_gaji']        = html_escape($this->input->post('sumber_gaji'));
+            $data['kartu_pegawai']        = html_escape($this->input->post('kartu_pegawai'));
+            $data['kartu_istri']        = html_escape($this->input->post('kartu_istri'));
+            
+            $this->db->where('teacher_id', $this->session->userdata('teacher_id'));
+            $this->db->update('teacher', $data);
+
+            redirect(site_url('teacher/manage_profile/'), 'refresh');
+        }
+        if ($param1 == 'kopetensi_khusus') {
+            $data['lisensi']        = html_escape($this->input->post('lisensi'));
+            $data['keahlian']        = html_escape($this->input->post('keahlian'));
+            $data['khusus']        = html_escape($this->input->post('khusus'));
+            $data['keahlian_braile']        = html_escape($this->input->post('keahlian_braile'));
+            $data['bahasa_isyarat']        = html_escape($this->input->post('bahasa_isyarat'));
+            
+            $this->db->where('teacher_id', $this->session->userdata('teacher_id'));
+            $this->db->update('teacher', $data);
+
+            redirect(site_url('teacher/manage_profile/'), 'refresh');
+        }
+        if ($param1 == 'kontak') {
+            $data['telepon_rumah']        = html_escape($this->input->post('telepon_rumah'));
+            $data['phone']        = html_escape($this->input->post('phone'));
+            $data['email']        = html_escape($this->input->post('email'));
+            $data['id_bank']        = html_escape($this->input->post('id_bank'));
+            $data['no_req_bank']        = html_escape($this->input->post('no_req_bank'));
+            $data['req_atas_nama']        = html_escape($this->input->post('req_atas_nama'));
+            
+            $this->db->where('teacher_id', $this->session->userdata('teacher_id'));
+            $this->db->update('teacher', $data);
+
+            redirect(site_url('teacher/manage_profile/'), 'refresh');
+        }
         if ($param1 == 'update_profile_info') {
-            $data['name']        = html_escape($this->input->post('name'));
+            $data['name']        = html_escape($this->input->post('name'));            
             $data['email']       = html_escape($this->input->post('email'));
             $validation = email_validation_for_edit($data['email'], $this->session->userdata('teacher_id'), 'teacher');
             if ($validation == 1) {
@@ -422,6 +513,7 @@ else{
             }
             redirect(site_url('teacher/manage_profile/'), 'refresh');
         }
+
         $page_data['page_name']  = 'manage_profile';
         $page_data['page_title'] = get_phrase('manage_profile');
         $page_data['edit_data']  = $this->db->get_where('teacher', array(
