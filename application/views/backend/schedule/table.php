@@ -1,6 +1,26 @@
-<a href="<?=site_url('login');?>" class="btn btn-primary pull-right">
-	<?php echo get_phrase('login_portal');?>
-</a>
+<?php 
+	$jenis = $this->session->userdata('login_type');
+
+	if ($this->session->userdata('admin_login') == 1 ||
+		$this->session->userdata('accountant_login') == 1 ||
+		$this->session->userdata('administration_login') == 1 ||
+		$this->session->userdata('headmaster_login') == 1 ||
+		$this->session->userdata('librarian_login') == 1 ||
+		$this->session->userdata('parent_login') == 1 ||
+		$this->session->userdata('student_login') == 1 ||
+		$this->session->userdata('superadmin_login') == 1 ||
+		$this->session->userdata('tacher_login') == 1){?>
+		<a href="<?=site_url($jenis.'/dashboard');?>" class="btn btn-primary pull-right">
+			<?php echo get_phrase('Dashboard');?>
+		</a>
+		<a href="<?=site_url('login/logout');?>" class="btn btn-danger pull-right">
+			<?php echo get_phrase('Logout');?>
+		</a>
+<?php }else{ ?>
+		<a href="<?=site_url('login');?>" class="btn btn-primary pull-right">
+			<?php echo get_phrase('login_portal');?>
+		</a>
+	<?php } ?>
 <hr />
 <div class="row">
 	<div class="col-md-12">

@@ -1,0 +1,15 @@
+
+nama_sekolah npsn alamat_sekolah nama_lengkap 
+nik tempat_lahir
+nama_ibu_kandung 
+rt rw nama_dusun kec kode_pos 
+npwp nama_wajib_pajak kewarganegaraan 
+status_perkawinan nama_suami nip_suami
+pekerjaan_suami status_kepegawaian 
+niy nuptk jenis_ptk sk_pengangkatan
+tmt_pengangkatan lembaga_pengangkatan 
+sk_cpns tmt_pns
+pangkat sumber_gaji kartu_pegawai 
+kartu_istri lisensi keahlian khusus 
+keahlian_braile bahasa_isyarat telepon_rumah 
+id_bank no_req_bank req_atas_nama
