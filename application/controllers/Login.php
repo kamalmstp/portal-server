@@ -3,14 +3,6 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-/*
- *  @author   : Al-Mazaya
- *  date    : 14 Mei, 2019
- *  SMA Al-Mazaya Islamic School
- *  http://almazayaislamicschool.sch.id/
- *
- */
-
 class Login extends CI_Controller {
 
     function __construct() {
@@ -25,7 +17,6 @@ class Login extends CI_Controller {
         $this->output->set_header("Expires: Mon, 26 Jul 2010 05:00:00 GMT");
     }
 
-    //Default function, redirects to logged in user area
     public function index() {
 
         if ($this->session->userdata('admin_login') == 1)
@@ -55,10 +46,12 @@ class Login extends CI_Controller {
         if ($this->session->userdata('administration_login') == 1)
             redirect(site_url('administration/dashboard'), 'refresh');
 
+        if ($this->session->userdata('marketing_login') == 1)
+            redirect(site_url('marketing/dashboard'), 'refresh');
+
         $this->load->view('backend/login');
     }
 
-    //Validating login from ajax request
     function validate_login() {
       $username = $this->input->post('username');
       $password = $this->input->post('password');
@@ -67,7 +60,7 @@ class Login extends CI_Controller {
       $student = array('nisn' => $username, 'password' => sha1($password));
       $credential2 = array('email' => $username, 'password' => sha1($password));
       $headmaster = array('nip' => $username, 'password' => sha1($password), 'position' => 'headmaster');
-      // Checking login credential for admin
+      
       $query = $this->db->get_where('admin', $credential);
       if ($query->num_rows() > 0) {
           $row = $query->row();
@@ -86,6 +79,7 @@ class Login extends CI_Controller {
             $data['user_id'] = $row->admin_id;
             $data['at'] = 'portal';
             $data['status'] = 'Online';
+            activity_log("login", "Login Portal");
             $this->db->insert('online',$data);
           }
           redirect(site_url('admin/dashboard'), 'refresh');
@@ -108,6 +102,7 @@ class Login extends CI_Controller {
             $data['user_id'] = $row->super_id;
             $data['at'] = 'portal';
             $data['status'] = 'Online';
+            activity_log("login", "Login Portal");
             $this->db->insert('online',$data);
           }
           redirect(site_url('superadmin/dashboard'), 'refresh');
@@ -131,9 +126,34 @@ class Login extends CI_Controller {
             $data['user_id'] = $row->administration_id;
             $data['at'] = 'portal';
             $data['status'] = 'Online';
+            activity_log("login", "Login Portal");
             $this->db->insert('online',$data);
           }
           redirect(site_url('administration/dashboard'), 'refresh');
+      }
+
+      $query = $this->db->get_where('marketing', $credential);
+      if ($query->num_rows() > 0) {
+          $row = $query->row();
+          $this->session->set_userdata('marketing_login', '1');
+          $this->session->set_userdata('marketing_id', $row->marketing_id);
+          $this->session->set_userdata('login_user_id', $row->marketing_id);
+          $this->session->set_userdata('name', $row->name);
+          $this->session->set_userdata('login_type', 'marketing');
+
+          $cek_ol = $this->db->get_where('online', array('user_id' => $row->marketing_id, 'at' => 'portal', 'session' => 'marketing'));
+          if ($cek_ol->num_rows() > 0) {
+            // code...
+          }else {
+            // code...
+            $data['session'] = 'marketing';
+            $data['user_id'] = $row->marketing_id;
+            $data['at'] = 'portal';
+            $data['status'] = 'Online';
+            activity_log("login", "Login Portal");
+            $this->db->insert('online',$data);
+          }
+          redirect(site_url('marketing/dashboard'), 'refresh');
       }
 
       // Checking login credential for teacher
@@ -153,9 +173,10 @@ class Login extends CI_Controller {
             }else {
               // code...
               $data['session'] = 'teacher';
-              $datsa['user_id'] = $row->teacher_id;
+              $data['user_id'] = $row->teacher_id;
               $data['at'] = 'portal';
               $data['status'] = 'Online';
+              activity_log("login", "Login Portal");
               $this->db->insert('online',$data);
             }
             redirect(site_url('teacher/dashboard'), 'refresh');
@@ -173,9 +194,10 @@ class Login extends CI_Controller {
             }else {
               // code...
               $data['session'] = 'headmaster';
-              $datsa['user_id'] = $row->teacher_id;
+              $data['user_id'] = $row->teacher_id;
               $data['at'] = 'portal';
               $data['status'] = 'Online';
+              activity_log("login", "Login Portal");
               $this->db->insert('online',$data);
             }
             redirect(site_url('headmaster/dashboard'), 'refresh');
@@ -199,9 +221,10 @@ class Login extends CI_Controller {
           }else {
             // code...
             $data['session'] = 'student';
-            $datsa['user_id'] = $row->student_id;
+            $data['user_id'] = $row->student_id;
             $data['at'] = 'portal';
             $data['status'] = 'Online';
+            activity_log("login", "Login Portal");
             $this->db->insert('online',$data);
           }
           redirect(site_url('student/dashboard'), 'refresh');
@@ -221,6 +244,7 @@ class Login extends CI_Controller {
           $data['user_id'] = $row->parent_id;
           $data['at'] = 'portal';
           $data['status'] = 'Online';
+          activity_log("login", "Login Portal");
           $this->db->insert('online',$data);
           redirect(site_url('parents/dashboard'), 'refresh');
       }
@@ -241,9 +265,10 @@ class Login extends CI_Controller {
           }else {
             // code...
             $data['session'] = 'librarian';
-            $datsa['user_id'] = $row->librarian_id;
+            $data['user_id'] = $row->librarian_id;
             $data['at'] = 'portal';
             $data['status'] = 'Online';
+            activity_log("login", "Login Portal");
             $this->db->insert('online',$data);
           }
           redirect(site_url('librarian/dashboard'), 'refresh');
@@ -265,9 +290,10 @@ class Login extends CI_Controller {
           }else {
             // code...
             $data['session'] = 'accountant';
-            $datsa['user_id'] = $row->accountant_id;
+            $data['user_id'] = $row->accountant_id;
             $data['at'] = 'portal';
             $data['status'] = 'Online';
+            activity_log("login", "Login Portal");
             $this->db->insert('online',$data);
           }
           redirect(site_url('accountant/dashboard'), 'refresh');
@@ -277,13 +303,10 @@ class Login extends CI_Controller {
       redirect(site_url('login'), 'refresh');
     }
 
-    /*     * *DEFAULT NOR FOUND PAGE**** */
-
     function four_zero_four() {
         $this->load->view('four_zero_four');
     }
 
-    // PASSWORD RESET BY EMAIL
     function forgot_password()
     {
         redirect(site_url('login'), 'refresh');
@@ -374,10 +397,9 @@ class Login extends CI_Controller {
         $this->session->set_flashdata('reset_error', get_phrase('password_reset_was_failed'));
         redirect(site_url('login/forgot_password'), 'refresh');
     }
-
-    /*     * *****LOGOUT FUNCTION ****** */
-
+    
     function logout() {
+      activity_log("logout", "Logout Portal");      
       $this->db->where(array('user_id' => $this->session->userdata('login_user_id'), 'at' => 'portal'));
       $this->db->delete('online');
 

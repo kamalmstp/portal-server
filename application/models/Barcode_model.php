@@ -2,13 +2,6 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-	/*	
-	   *	Developed by: DBCinfotech
-       *	Date	: 20 November, 2015
-       *	Bizpro Stock Manager ERP
-       *	http://codecanyon.net/user/dbcinfotech
-    */
-
 class Barcode_model extends CI_Model
 {
 	function __construct()
