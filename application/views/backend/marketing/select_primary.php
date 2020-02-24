@@ -8,7 +8,7 @@
     </div>
   </div> -->
 
-<?php 
+<?php
   // $list = $this->db->get_where('marketing_school', array('level' => 'SD'))->result_array();
   $tes = $this->db->get('marketing_plan')->result_array();
   $id = array();

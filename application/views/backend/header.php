@@ -19,7 +19,6 @@
 					<i class="entypo-paper-plane"></i> Home Schedule
 				</a>
 			</li>
-
 		</ul>
 
 		<ul class="user-info pull-right pull-none-xsm" style="margin-top: 6px;">

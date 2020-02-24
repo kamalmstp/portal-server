@@ -1,4 +1,4 @@
-<?php 
+<?php
     $running_year = $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
     $start = $this->db->get_where('marketing_time', array('running_year' => $running_year))->row()->start_at;
     $end = $this->db->get_where('marketing_time', array('running_year' => $running_year))->row()->end_at;
@@ -14,7 +14,7 @@
             <h3 style="color: #696969;"><?php echo get_phrase('promotion_plan_for'); ?></h3>
             <strong><h3 style="color: #696969;">"<?php echo get_phrase('primary_school'); ?>"</h3></strong>
             <h4 style="color: #696969;">
-                <?php 
+                <?php
                     echo date("d M Y", $start)." - ".date("d M Y", $end);
                 ?>
             </h4>
@@ -39,7 +39,7 @@
         <a href="<?php echo site_url('marketing/plan_primary/rejected');?>" class="btn btn-<?php echo $status == 'rejected' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('rejected');?>
         </a>
-        <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/select_primary/');?>');" class="btn btn-success pull-right">
+        <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/select_primary');?>');" class="btn btn-success pull-right">
             <i class="entypo-plus-circled"></i>
             <?php echo get_phrase('select_school');?>
         </a>
@@ -59,7 +59,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php 
+                <?php
                 $no = '1';
                 foreach($school as $row):?>
                 <tr>
