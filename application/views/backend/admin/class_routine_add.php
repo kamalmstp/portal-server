@@ -54,8 +54,8 @@
                             <div class="col-md-3">
                                 <select name="time_start_min" id= "starting_minute" class="form-control selectboxit">
                                     <option value=""><?php echo get_phrase('minutes');?></option>
-                                    <?php for($i = 0; $i <= 11 ; $i++):?>
-                                        <option value="<?php echo $i * 5;?>"><?php echo $i * 5;?></option>
+                                    <?php for($i = 0; $i <= 59 ; $i++):?>
+                                        <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                     <?php endfor;?>
                                 </select>
                             </div>
@@ -81,8 +81,8 @@
                             <div class="col-md-3">
                                 <select name="time_end_min" id= "ending_minute" class="form-control selectboxit">
                                     <option value=""><?php echo get_phrase('minutes');?></option>  
-                                    <?php for($i = 0; $i <= 11 ; $i++):?>
-                                        <option value="<?php echo $i * 5;?>"><?php echo $i * 5;?></option>
+                                    <?php for($i = 0; $i <= 59 ; $i++):?>
+                                        <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                     <?php endfor;?>
                                 </select>
                             </div>

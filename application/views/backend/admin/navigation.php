@@ -160,6 +160,20 @@
                         <span><?php echo get_phrase('accountant'); ?></span>
                     </a>
                 </li>
+                <!-- administration -->
+                <li class="<?php if ($page_name == 'administration') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/administration'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('administration'); ?></span>
+                    </a>
+                </li>
+                <!-- marketing -->
+                <li class="<?php if ($page_name == 'marketing') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/marketing'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('marketing'); ?></span>
+                    </a>
+                </li>
             </ul>
         </li>
 

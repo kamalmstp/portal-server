@@ -66,8 +66,8 @@ $edit_data		=	$this->db->get_where('class_routine' , array('class_routine_id' =>
                         <div class="col-md-3">
                             <select name="time_start_min" class="form-control" required>
                             <option value=""><?php echo get_phrase('minutes');?></option>
-                                <?php for($i = 0; $i <= 11 ; $i++):?>
-                                    <option value="<?php echo $i * 5;?>" <?php if (($i * 5) == $time_start_min) echo 'selected';?>><?php echo $i * 5;?></option>
+                                <?php for($i = 0; $i <= 59 ; $i++):?>
+                                    <option value="<?php echo $i;?>" <?php if (($i) == $time_start_min) echo 'selected';?>><?php echo $i;?></option>
                                 <?php endfor;?>
                             </select>
                         </div>

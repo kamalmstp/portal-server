@@ -716,6 +716,75 @@ class Crud_model extends CI_Model {
         $this->db->insert('online_exam', $data);
     }
 
+    function create_primary_school(){
+        $data['name'] = html_escape($this->input->post('name'));
+        $data['address'] = html_escape($this->input->post('address'));
+        $data['contact'] = html_escape($this->input->post('contact'));
+        $data['phone'] = $this->input->post('phone');
+        $data['level'] = 'SD';
+
+        $this->db->insert('marketing_school', $data);
+    }
+
+    function update_primary_school(){
+        $data['name'] = html_escape($this->input->post('name'));
+        $data['address'] = html_escape($this->input->post('address'));
+        $data['contact'] = html_escape($this->input->post('contact'));
+        $data['phone'] = $this->input->post('phone');
+
+        $this->db->where('school_id', $this->input->post('school_id'));
+        $this->db->update('marketing_school', $data);
+    }
+
+    function create_middle_school(){
+        $data['name'] = html_escape($this->input->post('name'));
+        $data['address'] = html_escape($this->input->post('address'));
+        $data['contact'] = html_escape($this->input->post('contact'));
+        $data['phone'] = $this->input->post('phone');
+        $data['level'] = 'SMP';
+
+        $this->db->insert('marketing_school', $data);
+    }
+
+    function update_middle_school(){
+        $data['name'] = html_escape($this->input->post('name'));
+        $data['address'] = html_escape($this->input->post('address'));
+        $data['contact'] = html_escape($this->input->post('contact'));
+        $data['phone'] = $this->input->post('phone');
+
+        $this->db->where('school_id', $this->input->post('school_id'));
+        $this->db->update('marketing_school', $data);
+    }
+
+    function create_marketing_time(){
+        $data['start_at'] = strtotime(html_escape($this->input->post('start_at')));
+        $data['end_at'] = strtotime(html_escape($this->input->post('end_at')));
+        $data['running_year'] = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+
+        $this->db->insert('marketing_time', $data);
+    }
+
+    function update_marketing_time(){
+        $data['name'] = html_escape($this->input->post('name'));
+        $data['address'] = html_escape($this->input->post('address'));
+        $data['contact'] = html_escape($this->input->post('contact'));
+        $data['phone'] = $this->input->post('phone');
+
+        $this->db->where('school_id', $this->input->post('school_id'));
+        $this->db->update('marketing_school', $data);
+    }
+
+    function create_permission(){
+        $data['plan_id'] = html_escape($this->input->post('plan_id'));
+        $data['status_plan'] = html_escape($this->input->post('status_plan'));
+        $data['topick'] = html_escape($this->input->post('topick'));
+        $data['person'] = $this->session->userdata('name');
+        $data['user_id'] = $this->session->userdata('login_user_id');
+        $data['timestamp_plan'] = strtotime(date('Y-m-d') . ' ' . date('H:i:s'));
+
+        $this->db->insert('marketing_plan_status', $data);
+    }
+
     function update_online_exam(){
 
         $data['title'] = html_escape($this->input->post('exam_title'));

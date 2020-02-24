@@ -1,7 +1,7 @@
-<a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('modal/popup/accountant_add');?>');"
+<a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('modal/popup/marketing_add');?>');"
     class="btn btn-primary pull-right">
         <i class="entypo-plus-circled"></i>
-        <?php echo get_phrase('add_new_accountant');?>
+        <?php echo get_phrase('add_new_marketing');?>
 </a>
 <br><br>
 
@@ -17,12 +17,12 @@
     <tbody>
         <?php
         $count = 1;
-        $accountants   =   $this->db->get('accountant')->result_array();
-        foreach($accountants as $row): ?>
+        $marketing   =   $this->db->get('marketing')->result_array();
+        foreach($marketing as $row): ?>
             <tr>
                 <td><?php echo $count++;?></td>
                 <td><?php echo $row['name'];?></td>
-                <td><?php echo $row['email'];?></td>
+                <td><?php echo $row['username'];?></td>
                 <td>
 
                     <div class="btn-group">
@@ -32,7 +32,7 @@
                         <ul class="dropdown-menu dropdown-default pull-right" role="menu">
 
                             <li>
-                                <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/accountant_edit/' . $row['accountant_id']);?>')">
+                                <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/marketing_edit/'.$row['marketing_id']);?>');">
                                     <i class="entypo-pencil"></i>
                                     <?php echo get_phrase('edit');?>
                                 </a>
@@ -40,7 +40,7 @@
                             <li class="divider"></li>
 
                             <li>
-                                <a href="#" onclick="confirm_modal('<?php echo site_url('admin/accountant/delete/' . $row['accountant_id']);?>');">
+                                <a href="#" onclick="confirm_modal('<?php echo site_url('admin/marketing/delete/'.$row['marketing_id']);?>');">
                                     <i class="entypo-trash"></i>
                                     <?php echo get_phrase('delete');?>
                                 </a>
@@ -61,8 +61,7 @@
 
     jQuery(document).ready(function($)
     {
-        $('#table_export').dataTable(
-        );
+        $('#table_export').dataTable();
     });
 
 </script>
