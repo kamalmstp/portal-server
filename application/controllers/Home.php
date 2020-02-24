@@ -33,7 +33,7 @@ class Home extends CI_Controller {
     $page_data['class'] = $sql->result_array();
     $this->load->view('backend/index1', $page_data);
   }
-  
+
 
   function data_schedule(){
     // $data = $this->db->get_where('class_routine', array('day' => date('l')))->result_array();
@@ -46,8 +46,7 @@ class Home extends CI_Controller {
         $this->db->join('online o', 't.teacher_id = o.user_id', 'left');
         $this->db->where('cr.day', date('l'));
         $this->db->where('CAST(concat(HOUR(now()), ":", minute(now())) AS time) BETWEEN CAST(concat(time_start,":",time_start_min) AS time) and CAST(concat(time_end,":",time_end_min) AS time)');
-        $this->db->order_by('cr.time_start', 'asc');
-        $this->db->order_by('cr.time_start_min', 'asc');
+        $this->db->order_by('sc.section_id', 'asc');
         $query = $this->db->get();
         $data = $query->result_array();
         echo json_encode($data);
