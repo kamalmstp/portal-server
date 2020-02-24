@@ -2,38 +2,30 @@
 <div class="row">
 	<div class="col-md-12">
 
-    	<!------CONTROL TABS START------->
 		<ul class="nav nav-tabs bordered">
 
 			<li class="active">
             	<a href="#list" data-toggle="tab"><i class="entypo-lock"></i>
-					<?php echo get_phrase('change_password');?></a></li>
-
-            <li class="">
-                <a href="#list2" data-toggle="tab"><i class="entypo-lock"></i>
-                    <?php echo get_phrase('identitas_sekolah');?></a></li>
+					<?php echo get_phrase('change_pass');?></a></li>
 
             <li class="">
                 <a href="#list3" data-toggle="tab"><i class="entypo-lock"></i>
-                    <?php echo get_phrase('identitas_pendidikan');?></a></li>
+                    <?php echo get_phrase('pendidikan');?></a></li>
             <li class="">
                 <a href="#list4" data-toggle="tab"><i class="entypo-lock"></i>
-                    <?php echo get_phrase('data_pribadi');?></a></li>
+                    <?php echo get_phrase('biodata');?></a></li>
             <li class="">
                 <a href="#list5" data-toggle="tab"><i class="entypo-lock"></i>
                     <?php echo get_phrase('kepegawaian');?></a></li>
             <li class="">
                 <a href="#list6" data-toggle="tab"><i class="entypo-lock"></i>
-                    <?php echo get_phrase('kopetensi_khusus');?></a></li>
+                    <?php echo get_phrase('khusus');?></a></li>
             <li class="">
                 <a href="#list7" data-toggle="tab"><i class="entypo-lock"></i>
                     <?php echo get_phrase('kontak');?></a></li>
 		</ul>
-    	<!------CONTROL TABS END------->
-
 
 		<div class="tab-content">
-        	<!----EDITING FORM STARTS---->
 			<div class="tab-pane box active" id="list" style="padding: 5px">
                 <div class="box-content padded">
 					<?php
@@ -69,42 +61,6 @@
                     ?>
                 </div>
 			</div>
-            
-            <div class="tab-pane box" id="list2" style="padding: 5px">
-                    <div class="box-content padded">
-                        <?php
-                        foreach($edit_data as $row):
-                            ?>
-                            <?php echo form_open(site_url('teacher/manage_profile/identitas_sekolah') , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?php echo get_phrase('nama_sekolah');?></label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="nama_sekolah" value="<?php echo $row['nama_sekolah'];?>" required/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?php echo get_phrase('NPSN');?></label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="npsn" value="<?php echo $row['npsn'];?>" required/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?php echo get_phrase('alamat_sekolah');?></label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="alamat_sekolah" value="<?php echo $row['alamat_sekolah'];?>" required/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class="col-sm-offset-3 col-sm-5">
-                                      <button type="submit" class="btn btn-info"><?php echo get_phrase('update_profile');?></button>
-                                  </div>
-                                    </div>
-                            </form>
-                            <?php
-                        endforeach;
-                        ?>
-                    </div>
-            </div>
 
             <div class="tab-pane box" id="list3" style="padding: 5px">
                 <div class="box-content padded">
@@ -472,9 +428,9 @@
                     ?>
                 </div>
             </div>
-            <!----EDITING FORM ENDS---> 
+            <!----EDITING FORM ENDS--->
 		</div>
-        
-        
+
+
 	</div>
 </div>

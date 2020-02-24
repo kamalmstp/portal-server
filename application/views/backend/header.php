@@ -11,20 +11,19 @@
 					<span class="input-group-addon"><i class="entypo-search"></i></span>
 					<input type="text" class="form-control" placeholder="Search student">
 				</div>
-				
+
 			</li> -->
-			
-			<!-- Sementara
+
 			<li>
 				<a href="<?php echo site_url('home');?>" target="_blank">
-					<i class="entypo-paper-plane"></i> Website
+					<i class="entypo-paper-plane"></i> Home Schedule
 				</a>
 			</li>
-			-->
+
 		</ul>
 
 		<ul class="user-info pull-right pull-none-xsm" style="margin-top: 6px;">
-			<li class="profile-info dropdown pull-right">	
+			<li class="profile-info dropdown pull-right">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<?php if ($account_type == "headmaster"){ ?>
 						<img src="<?php echo $this->crud_model->get_image_url('teacher', 'teacher_id');?>" alt="" class="img-circle" width="44">
@@ -49,12 +48,12 @@
 						<p style="<?php if($this->session->userdata('login_type') == 'admin') echo'margin-top: 0px'; ?>"><?php echo $this->session->userdata('login_type');?></p>
 					</div>
 				</a>
-				
+
 				<ul class="dropdown-menu">
-					
+
 					<!-- Reverse Caret -->
 					<li class="caret"></li>
-					
+
 					<!-- Profile sub-links -->
 					<li>
 						<a href="<?php echo site_url($account_type . '/manage_profile');?>">
@@ -62,27 +61,27 @@
 							<?php echo get_phrase('edit_profile');?>
 						</a>
 					</li>
-					
+
 					<li>
 						<a href="<?php echo site_url($account_type . '/manage_profile');?>">
 							<i class="flaticon-lock"></i>
 							<?php echo get_phrase('change_password');?>
 						</a>
 					</li>
-					
+
 					<li>
 						<a href="<?php echo site_url('login/logout');?>">
 							<i class="flaticon-paper-plane-1"></i>
 							<?php echo get_phrase('log_out');?>
 						</a>
 					</li>
-					
+
 				</ul>
 			</li>
 		</ul>
 
 		<ul class="user-info pull-right pull-none-xsm" style="margin-right: 20px;">
-			<li class="profile-info dropdown pull-right">	
+			<li class="profile-info dropdown pull-right">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<div style="margin-top: 14px;
 							    font-size: 10px;
@@ -93,9 +92,9 @@
 					</div>
 				</a>
 				<ul class="dropdown-menu">
-					
+
 					<li class="caret"></li>
-					
+
 					<!-- <li>
 						<a href="#">
 						<img src="<?php echo $this->crud_model->get_image_url($account_type, $account_type_id);?>" alt="" class="img-circle" width="44">
@@ -119,7 +118,7 @@
 							<?php echo get_phrase('See All Message');?>
 						</a>
 					</li>
-					
+
 				</ul>
 			</li>
 		</ul>
