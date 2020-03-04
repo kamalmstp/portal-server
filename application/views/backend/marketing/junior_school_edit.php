@@ -12,7 +12,7 @@ foreach ( $edit_data as $row):
             	</div>
             </div>
 			<div class="panel-body">
-                <?php echo form_open(site_url('marketing/middle_school/edit/'.$row['school_id']) , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
+                <?php echo form_open(site_url('marketing/junior_school/edit/'.$row['school_id']) , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo get_phrase('name');?></label>

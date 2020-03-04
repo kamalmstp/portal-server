@@ -64,7 +64,7 @@
                 </table>
             <?php }else{?>
                 <center>
-                    <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/plan_status_primary/'.$plan_id);?>');"
+                    <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/plan_status_elementary/'.$plan_id);?>');"
                          class="btn btn-success" id="submit_button" type="submit">
                         <i class="entypo-plus"></i> Create</a>
                 </center>

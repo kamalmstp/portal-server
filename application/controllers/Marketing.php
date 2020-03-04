@@ -34,7 +34,7 @@ class Marketing extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
-    function primary_school($param1 = "", $param2 = ""){
+    function elementary_school($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
 
@@ -42,30 +42,30 @@ class Marketing extends CI_Controller
             $page_data['school'] = $this->db->get_where('marketing_school', array('level' => 'SD'))->result_array();
         }
         if ($param1 == 'create') {
-            $this->crud_model->create_primary_school();
-            activity_log("add","Menambah Data Primary School");
+            $this->crud_model->create_elementary_school();
+            activity_log("add","Menambah Data elementary School");
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(site_url('marketing/primary_school'), 'refresh');
+            redirect(site_url('marketing/elementary_school'), 'refresh');
         }
         if ($param1 == 'edit') {
-            $this->crud_model->update_primary_school();
-            activity_log("edit","Mengubah Data Primary School");
+            $this->crud_model->update_elementary_school();
+            activity_log("edit","Mengubah Data elementary School");
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated_successfully'));
-            redirect(site_url('marketing/primary_school'), 'refresh');
+            redirect(site_url('marketing/elementary_school'), 'refresh');
         }
         if ($param1 == 'delete') {
             $this->db->where('school_id', $param2);
             $this->db->delete('marketing_school');
-            activity_log("delete","Menghapus Data Primary School");
+            activity_log("delete","Menghapus Data elementary School");
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(site_url('marketing/primary_school'), 'refresh');
+            redirect(site_url('marketing/elementary_school'), 'refresh');
         }
-        $page_data['page_name'] = 'primary_school';
-        $page_data['page_title'] = get_phrase('primary_school');
+        $page_data['page_name'] = 'elementary_school';
+        $page_data['page_title'] = get_phrase('elementary_school');
         $this->load->view('backend/index', $page_data);
     }
 
-    function middle_school($param1 = "", $param2 = ""){
+    function junior_school($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
 
@@ -73,30 +73,30 @@ class Marketing extends CI_Controller
             $page_data['school'] = $this->db->get_where('marketing_school', array('level' => 'SMP'))->result_array();
         }
         if ($param1 == 'create') {
-            $this->crud_model->create_middle_school();
-            activity_log("add","Menambah Data Middle School");
+            $this->crud_model->create_junior_school();
+            activity_log("add","Menambah Data Junior High School");
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(site_url('marketing/middle_school'), 'refresh');
+            redirect(site_url('marketing/junior_school'), 'refresh');
         }
         if ($param1 == 'edit') {
-            $this->crud_model->update_middle_school();
-            activity_log("edit","Mengubah Data Middle School");
+            $this->crud_model->update_junior_school();
+            activity_log("edit","Mengubah Data Junior High School");
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated_successfully'));
-            redirect(site_url('marketing/middle_school'), 'refresh');
+            redirect(site_url('marketing/junior_school'), 'refresh');
         }
         if ($param1 == 'delete') {
             $this->db->where('school_id', $param2);
             $this->db->delete('marketing_school');
-            activity_log("delete","Menghapus Data Middle School");
+            activity_log("delete","Menghapus Data Junior High School");
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(site_url('marketing/middle_school'), 'refresh');
+            redirect(site_url('marketing/junior_school'), 'refresh');
         }
-        $page_data['page_name'] = 'middle_school';
-        $page_data['page_title'] = get_phrase('middle_school');
+        $page_data['page_name'] = 'junior_school';
+        $page_data['page_title'] = get_phrase('junior_high_school');
         $this->load->view('backend/index', $page_data);
     }
 
-    function plan_primary($param1 = "", $param2 = ""){
+    function plan_elementary($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
         
@@ -115,7 +115,7 @@ class Marketing extends CI_Controller
             $page_data['school'] = $query->result_array();
         }
         if ($param1 == 'select') {
-            // $this->crud_model->select_primary();
+            // $this->crud_model->select_elementary();
             $id = $_POST['id'];
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $timestamp = strtotime(date("Y-m-d H:i:s"));
@@ -127,30 +127,30 @@ class Marketing extends CI_Controller
                 $data['timestamp'] = $timestamp;
                 $this->db->insert('marketing_plan', $data); 
             }
-            redirect(site_url('marketing/plan_primary'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
         if ($param1 == 'create') {
             $this->crud_model->create_online_exam();
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(site_url('marketing/plan_primary'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
         if ($param1 == 'edit') {
             $this->crud_model->update_online_exam();
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated_successfully'));
-            redirect(site_url('marketing/plan_primary'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
         if ($param1 == 'delete') {
             $this->db->where('school_id', $param2);
             $this->db->delete('marketing_school');
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(site_url('marketing/plan_primary'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
-        $page_data['page_name'] = 'plan_primary';
-        $page_data['page_title'] = get_phrase('plan_primary');
+        $page_data['page_name'] = 'plan_elementary';
+        $page_data['page_title'] = get_phrase('plan_elementary');
         $this->load->view('backend/index', $page_data);
     }
 
-    function plan_middle($param1 = "", $param2 = ""){
+    function plan_junior($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
         
@@ -183,7 +183,7 @@ class Marketing extends CI_Controller
         }
 
         if ($param1 == 'select') {
-            // $this->crud_model->select_primary();
+            // $this->crud_model->select_elementary();
             $id = $_POST['id'];
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $timestamp = strtotime(date("Y-m-d H:i:s"));
@@ -195,31 +195,31 @@ class Marketing extends CI_Controller
                 $data['timestamp'] = $timestamp;
                 $this->db->insert('marketing_plan', $data); 
             }
-            redirect(site_url('marketing/plan_middle'), 'refresh');
+            redirect(site_url('marketing/plan_junior'), 'refresh');
         }
 
         if ($param1 == 'create') {
             $this->crud_model->create_online_exam();
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(site_url('marketing/plan_middle'), 'refresh');
+            redirect(site_url('marketing/plan_junior'), 'refresh');
         }
         if ($param1 == 'edit') {
             $this->crud_model->update_online_exam();
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated_successfully'));
-            redirect(site_url('marketing/plan_middle'), 'refresh');
+            redirect(site_url('marketing/plan_junior'), 'refresh');
         }
         if ($param1 == 'delete') {
             $this->db->where('school_id', $param2);
             $this->db->delete('marketing_school');
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(site_url('marketing/plan_middle'), 'refresh');
+            redirect(site_url('marketing/plan_junior'), 'refresh');
         }
-        $page_data['page_name'] = 'plan_middle';
-        $page_data['page_title'] = get_phrase('plan_middle');
+        $page_data['page_name'] = 'plan_junior';
+        $page_data['page_title'] = get_phrase('plan_junior_high_school');
         $this->load->view('backend/index', $page_data);
     }
 
-    function plan_primary_view($id, $param1 = "", $param2 = ""){
+    function plan_elementary_view($id, $param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
 
@@ -227,15 +227,15 @@ class Marketing extends CI_Controller
         $plan_id = $sql->plan_id;
         $school_id = $sql->school_id;
 
-        $page_data['page_name'] = 'plan_primary_view';
+        $page_data['page_name'] = 'plan_elementary_view';
         $page_data['plan_id'] = $plan_id;
         $page_data['school_id'] = $school_id;
         $page_data['plan_status'] = $this->db->get_where('marketing_plan_status', array('plan_id' => $id));
-        $page_data['page_title'] = get_phrase('plan_primary_view');
+        $page_data['page_title'] = get_phrase('plan_elementary_view');
         $this->load->view('backend/index', $page_data);
     }
 
-    function proses_primary($param1 = "", $param2 = ""){
+    function proses_elementary($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
         
@@ -250,7 +250,7 @@ class Marketing extends CI_Controller
             $this->db->insert('marketing_plan_status', $data);
 
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(site_url('marketing/plan_primary_view/'.$id), 'refresh');
+            redirect(site_url('marketing/plan_elementary_view/'.$id), 'refresh');
         }
     }
 

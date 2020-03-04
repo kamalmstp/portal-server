@@ -1,7 +1,7 @@
 <hr>
 <div class="row">
     <div class="col-md-12">
-        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('modal/popup/middle_school_add/');?>');"
+        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('modal/popup/elementary_school_add/');?>');"
             class="btn btn-primary pull-right">
             <i class="entypo-plus-circled"></i>
             <?php echo get_phrase('add_school');?>
@@ -48,7 +48,7 @@
                             <ul class="dropdown-menu dropdown-default pull-right" role="menu">
                                 <!-- EDITING LINK -->
                                 <li>
-                                    <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/middle_school_edit/'.$row['school_id']);?>');">
+                                    <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/elementary_school_edit/'.$row['school_id']);?>');">
                                         <i class="entypo-pencil"></i>
                                             <?php echo get_phrase('edit');?>
                                         </a>
@@ -57,7 +57,7 @@
 
                                 <!-- DELETION LINK -->
                                 <li>
-                                    <a href="#" onclick="confirm_modal('<?php echo site_url('marketing/middle_school/delete/'.$row['school_id']);?>');">
+                                    <a href="#" onclick="confirm_modal('<?php echo site_url('marketing/elementary_school/delete/'.$row['school_id']);?>');">
                                     <i class="entypo-trash"></i>
                                         <?php echo get_phrase('delete');?>
                                     </a>

@@ -716,7 +716,7 @@ class Crud_model extends CI_Model {
         $this->db->insert('online_exam', $data);
     }
 
-    function create_primary_school(){
+    function create_elementary_school(){
         $data['name'] = html_escape($this->input->post('name'));
         $data['address'] = html_escape($this->input->post('address'));
         $data['contact'] = html_escape($this->input->post('contact'));
@@ -726,7 +726,7 @@ class Crud_model extends CI_Model {
         $this->db->insert('marketing_school', $data);
     }
 
-    function update_primary_school(){
+    function update_elementary_school(){
         $data['name'] = html_escape($this->input->post('name'));
         $data['address'] = html_escape($this->input->post('address'));
         $data['contact'] = html_escape($this->input->post('contact'));
@@ -736,7 +736,7 @@ class Crud_model extends CI_Model {
         $this->db->update('marketing_school', $data);
     }
 
-    function create_middle_school(){
+    function create_junior_school(){
         $data['name'] = html_escape($this->input->post('name'));
         $data['address'] = html_escape($this->input->post('address'));
         $data['contact'] = html_escape($this->input->post('contact'));
@@ -746,7 +746,7 @@ class Crud_model extends CI_Model {
         $this->db->insert('marketing_school', $data);
     }
 
-    function update_middle_school(){
+    function update_junior_school(){
         $data['name'] = html_escape($this->input->post('name'));
         $data['address'] = html_escape($this->input->post('address'));
         $data['contact'] = html_escape($this->input->post('contact'));

@@ -1,4 +1,4 @@
-<form class="" action="<?php echo site_url('marketing/plan_middle/select') ?>" method="post">
+<form class="" action="<?php echo site_url('marketing/plan_primary/select') ?>" method="post">
   <!-- <div class="form-group">
     <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('group_name');?></label>
 
@@ -16,14 +16,14 @@
     $id[] = $row['school_id'];
   }
   $this->db->where_not_in('school_id', $id);
-  $list = $this->db->get_where('marketing_school', array('level' => 'SMP'))->result_array();
+  $list = $this->db->get_where('marketing_school', array('level' => 'SD'))->result_array();
 ?>
 <br/>
 <div class="col-md-12" style="margin-top: 10px;">
     <table  class="table table-bordered table-striped">
-      <span class="col-md-6" style="font-size: 13px; color: #616161; text-align: left; padding: 0; margin: 0;"><u><?php echo 'Middle School List'; ?></u></span>
+      <span class="col-md-6" style="font-size: 13px; color: #616161; text-align: left; padding: 0; margin: 0;"><u><?php echo 'Elementary School List'; ?></u></span>
       <span class="col-md-4 pull-right" style="text-align: right; color: #616161;">
-        <input type="checkbox" id="middle_school" onchange="checkAllBoxes(this)">&nbsp;<?php echo get_phrase('check_all'); ?>
+        <input type="checkbox" id="elementary_school" onchange="checkAllBoxes(this)">&nbsp;<?php echo get_phrase('check_all'); ?>
       </span>
       <thead>
         <tr>
@@ -35,7 +35,7 @@
       <?php foreach ($list as $row):?>
         <tr>
           <td width = "10%">
-            <input type="checkbox" class="middle_school" name="id[]" value="<?php echo $row['school_id']; ?>">
+            <input type="checkbox" class="elementary_school" name="id[]" value="<?php echo $row['school_id']; ?>">
           </td>
           <td width = "40%"><?php echo $row['name']; ?></td>
           <td width = "30%"><?php echo $row['contact']." (".$row['phone'].")"; ?></td>

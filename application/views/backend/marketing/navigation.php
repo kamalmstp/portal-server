@@ -46,22 +46,22 @@
         </li>
 
         <!-- MASTER DATA -->
-        <li class="<?php if ($page_name == 'primary_school' || $page_name == 'middle_school' || $page_name == 'marketing_time') echo 'opened active';?> ">
+        <li class="<?php if ($page_name == 'elementary_school' || $page_name == 'junior_school' || $page_name == 'marketing_time') echo 'opened active';?> ">
             <a href="#">
                 <i class="entypo-book"></i>
                 <span><?php echo get_phrase('master_data'); ?></span>
             </a>
             <ul>
-                <li class="<?php if ($page_name == 'primary_school') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('marketing/primary_school'); ?>">
+                <li class="<?php if ($page_name == 'elementary_school') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/elementary_school'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('primary_school_data'); ?></span>
+                        <span><?php echo get_phrase('elementary_school_data'); ?></span>
                     </a>
                 </li>
-                <li class="<?php if ($page_name == 'middle_school') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('marketing/middle_school'); ?>">
+                <li class="<?php if ($page_name == 'junior_school') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/junior_school'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('middle_school_data'); ?></span>
+                        <span><?php echo get_phrase('junior_high_school_data'); ?></span>
                     </a>
                 </li>
                 <li class="<?php if ($page_name == 'marketing_time') echo 'active'; ?> ">
@@ -74,50 +74,50 @@
         </li>
 
         <!-- PLANNING PROMOTION -->
-        <li class="<?php if ($page_name == 'plan_primary' || $page_name == 'plan_middle' || $page_name == 'plan_primary_view' || $page_name == 'plan_middle_view') echo 'opened active';?> ">
+        <li class="<?php if ($page_name == 'plan_elementary' || $page_name == 'plan_junior' || $page_name == 'plan_elementary_view' || $page_name == 'plan_junior_view') echo 'opened active';?> ">
             <a href="#">
                 <i class="flaticon-layers"></i>
                 <span><?php echo get_phrase('promotion_plan'); ?></span>
             </a>
             <ul>
-                <li class="<?php if ($page_name == 'plan_primary') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('marketing/plan_primary'); ?>">
+                <li class="<?php if ($page_name == 'plan_elementary') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/plan_elementary'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('primary_school_plan'); ?></span>
+                        <span><?php echo get_phrase('elementary_school_plan'); ?></span>
                     </a>
                 </li>
-                <li class="<?php if ($page_name == 'plan_middle') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('marketing/plan_middle'); ?>">
+                <li class="<?php if ($page_name == 'plan_junior') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/plan_junior'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('middle_school_plan'); ?></span>
+                        <span><?php echo get_phrase('junior_school_plan'); ?></span>
                     </a>
                 </li>
             </ul>
         </li>
 
         <!-- GO TO SCHOOL -->
-        <li class="<?php if ($page_name == 'primary_school_plan' || $page_name == 'middle_school_plan') echo 'opened active';?> ">
+        <li class="<?php if ($page_name == 'elementary_school_plan' || $page_name == 'junior_school_plan') echo 'opened active';?> ">
             <a href="#">
                 <i class="flaticon-layers"></i>
                 <span><?php echo get_phrase('go_to_school'); ?></span>
             </a>
             <ul>
-                <li class="<?php if ($page_name == 'primary_school_plan') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('marketing/primary_school_plan'); ?>">
+                <li class="<?php if ($page_name == 'elementary_school_plan') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/elementary_school_plan'); ?>">
                         <i class="entypo-dot"></i>
                         <span><?php echo get_phrase('schedule_marketing'); ?></span>
                     </a>
                 </li>
-                <li class="<?php if ($page_name == 'middle_school_plan') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('marketing/middle_school_plan'); ?>">
+                <li class="<?php if ($page_name == 'junior_school_plan') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/junior_school_plan'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('primary_school'); ?></span>
+                        <span><?php echo get_phrase('elementary_school'); ?></span>
                     </a>
                 </li>
-                <li class="<?php if ($page_name == 'middle_school_plan') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('marketing/middle_school_plan'); ?>">
+                <li class="<?php if ($page_name == 'junior_school_plan') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/junior_school_plan'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('middle_school'); ?></span>
+                        <span><?php echo get_phrase('junior_school'); ?></span>
                     </a>
                 </li>
             </ul>

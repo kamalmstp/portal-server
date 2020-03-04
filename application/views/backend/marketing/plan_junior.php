@@ -12,7 +12,7 @@
             <div class="icon"><i class="entypo-chart-area"></i></div>
 
             <h3 style="color: #696969;"><?php echo get_phrase('promotion_plan_for'); ?></h3>
-            <strong><h3 style="color: #696969;">"<?php echo get_phrase('middle_school'); ?>"</h3></strong>
+            <strong><h3 style="color: #696969;">"<?php echo get_phrase('junior_high_school'); ?>"</h3></strong>
             <h4 style="color: #696969;">
                 <?php 
                     echo date("d M Y", $start)." - ".date("d M Y", $end);
@@ -24,22 +24,22 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <a href="<?php echo site_url('marketing/plan_middle');?>" class="btn btn-<?php echo $status == 'active' ? 'primary' : 'white'; ?>">
+        <a href="<?php echo site_url('marketing/plan_junior');?>" class="btn btn-<?php echo $status == 'active' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('all_data');?>
         </a>
-        <a href="<?php echo site_url('marketing/plan_middle/permission');?>" class="btn btn-<?php echo $status == 'permission' ? 'primary' : 'white'; ?>">
+        <a href="<?php echo site_url('marketing/plan_junior/permission');?>" class="btn btn-<?php echo $status == 'permission' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('permission');?>
         </a>
-        <a href="<?php echo site_url('marketing/plan_middle/waiting');?>" class="btn btn-<?php echo $status == 'waiting' ? 'primary' : 'white'; ?>">
+        <a href="<?php echo site_url('marketing/plan_junior/waiting');?>" class="btn btn-<?php echo $status == 'waiting' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('waiting');?>
         </a>
-        <a href="<?php echo site_url('marketing/plan_middle/approved');?>" class="btn btn-<?php echo $status == 'approved' ? 'primary' : 'white'; ?>">
+        <a href="<?php echo site_url('marketing/plan_junior/approved');?>" class="btn btn-<?php echo $status == 'approved' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('approved');?>
         </a>
-        <a href="<?php echo site_url('marketing/plan_middle/rejected');?>" class="btn btn-<?php echo $status == 'rejected' ? 'primary' : 'white'; ?>">
+        <a href="<?php echo site_url('marketing/plan_junior/rejected');?>" class="btn btn-<?php echo $status == 'rejected' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('rejected');?>
         </a>
-        <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/select_middle/');?>');" class="btn btn-success pull-right">
+        <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/select_junior/');?>');" class="btn btn-success pull-right">
             <i class="entypo-plus-circled"></i>
             <?php echo get_phrase('select_school');?>
         </a>
