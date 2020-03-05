@@ -27,9 +27,9 @@
         </div>
     </header>
 
-    <div style=""></div>	
+    <div style=""></div>
     <ul id="main-menu" class="">
-    
+
         <div style="text-align: -webkit-center;" id="branding_element">
             <img src="<?php echo base_url('uploads/logo.png');?>"  style="max-height:21px;"/>
             <h4 style="color: #a2a3b7;text-align: -webkit-center;margin-bottom: 25px;font-weight: 300;margin-top: 10px;">
@@ -134,9 +134,9 @@
         <li class="root-level" style="border-top: 1px solid #262a44; padding: 10px 0px;text-align: -webkit-center;">
             <?php echo form_open(site_url('admin/change_session') , array('id' => 'session_change'));?>
             <li>
-                
+
                 <div class="form-group">
-                    <select name="running_year" class="form-control" onchange="submit()" 
+                    <select name="running_year" class="form-control" onchange="submit()"
                          style="width: 60%;background-color: #232640;border-color: #242742;color: #a1a2b6;" disabled>
                         <?php $running_year = $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;?>
                         <?php for($i = 0; $i < 10; $i++):?>
