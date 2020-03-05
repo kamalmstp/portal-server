@@ -9,13 +9,13 @@
             </div>
 			<div class="panel-body">
 
-            <?php echo form_open(site_url('marketing/proses_elementary/reconfirm/') , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
+            <?php echo form_open(site_url('marketing/reconfirm_elementary/reconfirm/') , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('status');?></label>
 						<div class="col-sm-5">
                             <input type="hidden" class="form-control" name="plan_id" value="<?=$param2?>" >
-							<input type="text" class="form-control" name="status_plan" value="Re-confirm" disabled>
+							<input type="text" class="form-control" name="status_result" value="Re-confirm" disabled>
 						</div>
 					</div>
 

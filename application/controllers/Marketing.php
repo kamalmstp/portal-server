@@ -537,10 +537,18 @@ class Marketing extends CI_Controller
         $plan_id = $sql->plan_id;
         $school_id = $sql->school_id;
 
+        $query = $this->db->select('*')
+                                ->from('marketing_plan_status')
+                                ->where('plan_id',$id)
+                                ->order_by('status_id','desc')
+                                ->limit(1)
+                                ->get();
+
         $page_data['page_name'] = 'plan_elementary_view';
         $page_data['plan_id'] = $plan_id;
         $page_data['school_id'] = $school_id;
         $page_data['plan_status'] = $this->db->get_where('marketing_plan_status', array('plan_id' => $id));
+        $page_data['status'] = $query;
         $page_data['page_title'] = get_phrase('plan_elementary_view');
         $this->load->view('backend/index', $page_data);
     }
@@ -589,10 +597,29 @@ class Marketing extends CI_Controller
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(site_url('marketing/plan_elementary_view/'.$id), 'refresh');
         }
-        if ($param1 == 'permission_add') {
+        if ($param1 == 'reconfirm') {
             $id = $this->input->post('plan_id');
             $data['plan_id'] = $this->input->post('plan_id');
-            $data['status_plan'] = 'Permission';
+            $data['status_plan'] = 'Re-confirm Permission';
+            $data['topick'] = html_escape($this->input->post('topick'));
+            $data['person'] = $this->session->userdata('name');
+            $data['user_id'] = $this->session->userdata('login_user_id');
+            $data['timestamp_plan'] = strtotime(date('Y-m-d H:i:s'));
+            $this->db->insert('marketing_plan_status', $data);
+
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(site_url('marketing/plan_elementary_view/'.$id), 'refresh');
+        }
+    }
+
+    function reconfirm_elementary($param1 = "", $param2 = ""){
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+        
+        if ($param1 == 'reconfirm') {
+            $id = $this->input->post('plan_id');
+            $data['plan_id'] = $this->input->post('plan_id');
+            $data['status_plan'] = 'Re-confirm Permission';
             $data['topick'] = html_escape($this->input->post('topick'));
             $data['person'] = $this->session->userdata('name');
             $data['user_id'] = $this->session->userdata('login_user_id');
