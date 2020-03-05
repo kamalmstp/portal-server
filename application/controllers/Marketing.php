@@ -114,6 +114,51 @@ class Marketing extends CI_Controller
             $page_data['status'] = 'active';
             $page_data['school'] = $query->result_array();
         }
+        if ($param1 == 'waiting') {
+            $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
+            $this->db->select('*');
+            $this->db->from('marketing_plan mp'); 
+            $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
+            $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
+            $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
+            $this->db->where('ms.level','SD');
+            $this->db->where('mps.status_result','Waiting');
+            $this->db->where('mt.time_id',$time->time_id);
+            $query = $this->db->get();
+
+            $page_data['status'] = 'waiting';
+            $page_data['school'] = $query->result_array();
+        }
+        if ($param1 == 'approved') {
+            $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
+            $this->db->select('*');
+            $this->db->from('marketing_plan mp'); 
+            $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
+            $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
+            $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
+            $this->db->where('ms.level','SD');
+            $this->db->where('mps.status_result','Approved');
+            $this->db->where('mt.time_id',$time->time_id);
+            $query = $this->db->get();
+
+            $page_data['status'] = 'approved';
+            $page_data['school'] = $query->result_array();
+        }
+        if ($param1 == 'rejected') {
+            $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
+            $this->db->select('*');
+            $this->db->from('marketing_plan mp'); 
+            $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
+            $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
+            $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
+            $this->db->where('ms.level','SD');
+            $this->db->where('mps.status_result','Rejected');
+            $this->db->where('mt.time_id',$time->time_id);
+            $query = $this->db->get();
+
+            $page_data['status'] = 'rejected';
+            $page_data['school'] = $query->result_array();
+        }
         if ($param1 == 'select') {
             // $this->crud_model->select_elementary();
             $id = $_POST['id'];
@@ -219,7 +264,7 @@ class Marketing extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
-    function plan_elementary_view($id, $param1 = "", $param2 = ""){
+    function plan_elementary_view($id,  $param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
 
@@ -235,10 +280,50 @@ class Marketing extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    function plan_elementary_status($status_id = "", $task = "", $type = ""){
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $sql = $this->db->get_where('marketing_plan_status' , array('status_id' => $status_id))->row();
+        $id = $sql->plan_id;
+
+        if ($task == 'add') {
+            if ($type == 'waiting') {
+                $this->crud_model->add_status_waiting($status_id);
+            }
+            elseif ($type == 'approved') {
+                $this->crud_model->add_status_approved($status_id);
+            }
+            elseif ($type == 'rejected') {
+                $this->crud_model->add_status_rejected($status_id);
+            }
+            redirect(site_url('marketing/plan_elementary_view/'.$id), 'refresh');
+        }
+    }
+
+    function load_result_type($type, $status_id) {
+        $page_data['result_type'] = $type;
+        $page_data['status_id'] = $status_id;
+        $this->load->view('backend/marketing/status_add_'.$type, $page_data);
+    }
+
     function proses_elementary($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
         
+        if ($param1 == 'permission_add') {
+            $id = $this->input->post('plan_id');
+            $data['plan_id'] = $this->input->post('plan_id');
+            $data['status_plan'] = 'Permission';
+            $data['topick'] = html_escape($this->input->post('topick'));
+            $data['person'] = $this->session->userdata('name');
+            $data['user_id'] = $this->session->userdata('login_user_id');
+            $data['timestamp_plan'] = strtotime(date('Y-m-d H:i:s'));
+            $this->db->insert('marketing_plan_status', $data);
+
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(site_url('marketing/plan_elementary_view/'.$id), 'refresh');
+        }
         if ($param1 == 'permission_add') {
             $id = $this->input->post('plan_id');
             $data['plan_id'] = $this->input->post('plan_id');

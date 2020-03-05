@@ -785,6 +785,39 @@ class Crud_model extends CI_Model {
         $this->db->insert('marketing_plan_status', $data);
     }
 
+    function add_status_approved($status_id){       
+        $data['status_id']          = $status_id;
+        $data['result_date']        = html_escape($this->input->post('result_date'));
+        $data['result_time']        = html_escape($this->input->post('result_time'));
+        $data['result']             = html_escape($this->input->post('result'));
+        $data['status_result']      = 'Approved';
+        $data['timestamp_result']   = strtotime(date('Y-m-d') . ' ' . date('H:i:s'));
+        
+        $this->db->where('status_id', $status_id);
+        $this->db->update('marketing_plan_status', $data);
+    }
+
+    function add_status_rejected($status_id){       
+        $data['status_id']          = $status_id;
+        $data['result']             = html_escape($this->input->post('result'));
+        $data['status_result']      = 'Rejected';
+        $data['timestamp_result']   = strtotime(date('Y-m-d') . ' ' . date('H:i:s'));
+        
+        $this->db->where('status_id', $status_id);
+        $this->db->update('marketing_plan_status', $data);
+    }
+
+    function add_status_waiting($status_id){       
+        $data['status_id']          = $status_id;
+        $data['result_date']        = html_escape($this->input->post('result_date'));
+        $data['result']             = html_escape($this->input->post('result'));
+        $data['status_result']      = 'Waiting';
+        $data['timestamp_result']   = strtotime(date('Y-m-d') . ' ' . date('H:i:s'));
+        
+        $this->db->where('status_id', $status_id);
+        $this->db->update('marketing_plan_status', $data);
+    }
+
     function update_online_exam(){
 
         $data['title'] = html_escape($this->input->post('exam_title'));
