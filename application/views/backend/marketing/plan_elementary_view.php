@@ -3,7 +3,9 @@
     $address = $this->db->get_where('marketing_school', array('school_id' => $school_id))->row()->address;
     $contact = $this->db->get_where('marketing_school', array('school_id' => $school_id))->row()->contact;
     $phone = $this->db->get_where('marketing_school', array('school_id' => $school_id))->row()->phone;
-    $status_id = $this->db->get_where('marketing_plan_status', array('plan_id' => $plan_id))->row()->status_id;
+    $query = $this->db->select('*')->from('marketing_plan_status')->where('plan_id',$plan_id)->order_by('status_id','desc')->limit(1)->get();
+    $sql = $query->row();
+    $status_id = $sql->status_id;
 ?>
 <hr>
 
@@ -99,8 +101,8 @@
     <div class="col-md-6">
     </div>
     <div class="col-md-6">
-        <?php if ($plan_status->num_rows() > 0) {
-                $row = $plan_status->row();
+        <?php if ($status->num_rows() > 0) {
+                $row = $status->row();
                 if($row->status_result == NULL) { ?>
                 <div class="panel panel-primary" data-collapsed="0">
                     <div class="panel-heading">
