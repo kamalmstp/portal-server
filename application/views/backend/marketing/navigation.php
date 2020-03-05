@@ -73,6 +73,64 @@
             </ul>
         </li>
 
+        <!-- Manage Students -->
+        <li class="<?php if ($page_name == 'student_add' ||
+                                $page_name == 'student_bulk_add' ||
+                                    $page_name == 'student_information' ||
+                                        $page_name == 'student_marksheet' ||
+                                            $page_name == 'student_promotion' ||
+                                              $page_name == 'student_profile')
+                                                echo 'opened active has-sub';
+        ?> ">
+            <a href="#">
+                <i class="fa flaticon-avatar"></i>
+                <span><?php echo get_phrase('manage_students'); ?></span>
+            </a>
+            <ul>
+                <!-- STUDENT ADMISSION -->
+                <li class="<?php if ($page_name == 'student_add') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/student_add'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('add_student'); ?></span>
+                    </a>
+                </li>
+
+                <!-- STUDENT BULK ADMISSION -->
+                <li class="<?php if ($page_name == 'student_bulk_add') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/student_bulk_add'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('import_student'); ?></span>
+                    </a>
+                </li>
+
+                <!-- STUDENT INFORMATION -->
+                <li class="<?php if ($page_name == 'student_information' || $page_name == 'student_marksheet') echo 'opened active'; ?> ">
+                    <a href="#">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('student_information'); ?></span>
+                    </a>
+                    <ul>
+                        <?php
+                        $classes = $this->db->get('class')->result_array();
+                        foreach ($classes as $row):
+                            ?>
+                            <li class="<?php if ($page_name == 'student_information' && $class_id == $row['class_id'] || $page_name == 'student_marksheet' && $class_id == $row['class_id']) echo 'active'; ?>">
+                            <!--<li class="<?php if ($page_name == 'student_information' && $page_name == 'student_marksheet' && $class_id == $row['class_id']) echo 'active'; ?>">-->
+                                <a href="<?php echo site_url('marketing/student_information/' . $row['class_id']); ?>">
+                                    <span><?php echo get_phrase('class'); ?> <?php echo $row['name']; ?></span>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+
+                <!-- STUDENT PROMOTION -->
+                <!-- <li class="<?php if ($page_name == 'student_promotion') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('marketing/student_promotion'); ?>">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('student_promotion'); ?></span>
+                    </a>
+                </li> -->
+
+            </ul>
+        </li>
+
         <!-- PLANNING PROMOTION -->
         <li class="<?php if ($page_name == 'plan_elementary' || $page_name == 'plan_junior' || $page_name == 'plan_elementary_view' || $page_name == 'plan_junior_view') echo 'opened active';?> ">
             <a href="#">

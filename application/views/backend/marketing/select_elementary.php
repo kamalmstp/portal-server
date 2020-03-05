@@ -1,4 +1,4 @@
-<form class="" action="<?php echo site_url('marketing/plan_primary/select') ?>" method="post">
+<form class="" action="<?php echo site_url('marketing/plan_elementary/select') ?>" method="post">
   <!-- <div class="form-group">
     <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('group_name');?></label>
 

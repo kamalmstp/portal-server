@@ -27,9 +27,9 @@
         <a href="<?php echo site_url('marketing/plan_elementary');?>" class="btn btn-<?php echo $status == 'active' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('all_data');?>
         </a>
-        <a href="<?php echo site_url('marketing/plan_elementary/permission');?>" class="btn btn-<?php echo $status == 'permission' ? 'primary' : 'white'; ?>">
+        <!-- <a href="<?php echo site_url('marketing/plan_elementary/permission');?>" class="btn btn-<?php echo $status == 'permission' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('permission');?>
-        </a>
+        </a> -->
         <a href="<?php echo site_url('marketing/plan_elementary/waiting');?>" class="btn btn-<?php echo $status == 'waiting' ? 'primary' : 'white'; ?>">
             <?php echo get_phrase('waiting');?>
         </a>
@@ -72,9 +72,26 @@
                         ?>
                     </td>
                     <td style="text-align: center;">
-                        <button class="btn btn-white btn-xs">
-                            <?php echo get_phrase('no_action');?>
-                        </button>
+                        <?php 
+                            // $sql = $this->db->get_where('marketing_plan_status', array('plan_id' => $row['plan_id']))->row();
+                            $query = $this->db->select('*')
+                                ->from('marketing_plan_status')
+                                ->where('plan_id',$row['plan_id'])
+                                ->order_by('status_id','desc')
+                                ->limit(1)
+                                ->get();
+                            $sql = $query->row();
+
+                            if ($sql->status_result == 'Waiting') {
+                                echo '<button class="btn btn-warning btn-xs">'.$sql->status_result.'</button>';
+                            } else if ($sql->status_result == 'Approved') {
+                                echo '<button class="btn btn-success btn-xs">'.$sql->status_result.'</button>';
+                            } else if ($sql->status_result == 'Rejected') {
+                                echo '<button class="btn btn-danger btn-xs">'.$sql->status_result.'</button>';
+                            } else {
+                                echo '<button class="btn btn-white btn-xs">No Action</button>';
+                            }
+                         ?>
                     </td>
                     <td>
                         <?php
@@ -82,14 +99,6 @@
                          ?>
                     </td>
                     <td style="text-align: center;">
-                        <?php if ($row['status'] == 'pending'): ?>
-                            <a href="#" onclick="confirm_modal('<?php echo site_url('marketing/manage_online_exam_status/'.$row['online_exam_id'].'/published'); ?>', 'generic_confirmation');" type="button" class = "btn btn-success btn-sm"><i class="fa fa-share-alt" aria-hidden="true"></i> <?php echo get_phrase('publish_now'); ?></a>
-                        <?php elseif ($row['status'] == 'published'): ?>
-                            <a href="#" onclick="confirm_modal('<?php echo site_url('marketing/manage_online_exam_status/'.$row['online_exam_id'].'/expired'); ?>', 'generic_confirmation');" type="button" class = "btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i> <?php echo get_phrase('cancel_now'); ?></a>
-                        <?php elseif($row['status'] == 'expired'): ?>
-                            <a href="#" type="button" class = "btn btn-primary btn-sm"><i class="fa fa-ban" aria-hidden="true"></i> <?php echo get_phrase('expired'); ?></a>
-                        <?php endif; ?>
-
                         <a href="<?php echo site_url('marketing/plan_elementary_view/'.$row['plan_id']); ?>" type="button" class = "btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo get_phrase('view_result'); ?></a>
                     </td>
                 </tr>

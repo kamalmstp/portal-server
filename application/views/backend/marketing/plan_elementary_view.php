@@ -3,6 +3,7 @@
     $address = $this->db->get_where('marketing_school', array('school_id' => $school_id))->row()->address;
     $contact = $this->db->get_where('marketing_school', array('school_id' => $school_id))->row()->contact;
     $phone = $this->db->get_where('marketing_school', array('school_id' => $school_id))->row()->phone;
+    $status_id = $this->db->get_where('marketing_plan_status', array('plan_id' => $plan_id))->row()->status_id;
 ?>
 <hr>
 
@@ -55,8 +56,18 @@
                             <tr>
                                 <td><?=$row['status_plan'];?></td>
                                 <td><?=$row['topick'];?></td>
-                                <td><?php if ($row['status_result'] == NULL) {echo 'Waiting';} else {echo $row['status_result'];} ?></td>
-                                <td></td>
+                                <td>
+                                    <?php if ($row['status_result'] == NULL) {
+                                            echo "<button class='btn btn-info btn-xs'>Process</button>";
+                                        } else if ($row['status_result'] == 'Waiting') {
+                                            echo "<button class='btn btn-warning btn-xs'>".$row['status_result']."</button>";
+                                        } else if ($row['status_result'] == 'Approved') {
+                                            echo "<button class='btn btn-success btn-xs'>".$row['status_result']."</button>";
+                                        } else {
+                                            echo "<button class='btn btn-danger btn-xs'>".$row['status_result']."</button>";
+                                        } ?>
+                                </td>
+                                <td><?=$row['result']."<br>at ".$row['result_date']." ".$row['result_time'];?></td>
                                 <td></td>
                             </tr>
                         <?php } ?>
@@ -85,15 +96,64 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-       
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+        <?php if ($plan_status->num_rows() > 0) {
+                $row = $plan_status->row();
+                if($row->status_result == NULL) { ?>
+                <div class="panel panel-primary" data-collapsed="0">
+                    <div class="panel-heading">
+                        <div class="panel-title" >
+                            <i class="entypo-plus-circled"></i>
+                            <?php echo get_phrase('add_result');?>
+                        </div>
+                    </div>
+                    <div class="panel-body">   
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><?php echo get_phrase('result_status');?></label>
+                            <div class="col-sm-8">
+                                <select class="selectboxit" name="status_type" id="status_type">
+                                    <option value=""><?php echo get_phrase('select_status_type');?></option>
+                                    <option value="waiting"><?php echo get_phrase('waiting');?></option>
+                                    <option value="approved"><?php echo get_phrase('approved');?></option>
+                                    <option value="rejected"><?php echo get_phrase('rejected');?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div id="status_holder"></div>
+                    </div>
+                </div>
+                <?php } else if($row->status_result == 'Waiting') {?>
+                    <center>
+                    <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/plan_reconfirm_elementary/'.$plan_id);?>');"
+                         class="btn btn-info" id="submit_button" type="submit">
+                        <i class="entypo-plus"></i> Re-confirm permission</a>
+                    </center>
+                <?php }else{}?>
+        <?php }else{?>
+
+        <?php } ?>
     </div>
 </div>
 
-<!-----  DATA TABLE EXPORT CONFIGURATIONS ---->
 <script type="text/javascript">
-	jQuery(document).ready(function($)
-    {
-        $('#table_export').dataTable();
+
+    $(document).ready(function() {
+        $('#status_type').on('change', function() {
+            var status_type = $(this).val();
+            if (status_type == '') {
+                $('#status_holder').html('<div class="alert alert-danger">Please select a status type</div>');
+                return;
+            }
+            var status_id = '<?php echo $status_id;?>';
+            $.ajax({
+                url: '<?php echo site_url('marketing/load_result_type/');?>' + status_type + '/' + status_id
+            }).done(function(response) {
+                $('#status_holder').html(response);
+            });
+        });
     });
+    
 </script>
