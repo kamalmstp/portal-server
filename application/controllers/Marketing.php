@@ -34,6 +34,271 @@ class Marketing extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    function student_add()
+	{
+		if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+		$page_data['page_name']  = 'student_add';
+		$page_data['page_title'] = get_phrase('add_student');
+		$this->load->view('backend/index', $page_data);
+	}
+
+	function student_bulk_add()
+	{
+		if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+		$page_data['page_name']  = 'student_bulk_add';
+		$page_data['page_title'] = get_phrase('add_bulk_student');
+		$this->load->view('backend/index', $page_data);
+	}
+
+    function student_profile($student_id)
+    {
+        if ($this->session->userdata('marketing_login') != 1) {
+        redirect(site_url('login'), 'refresh');
+        }
+        $page_data['page_name']  = 'student_profile';
+        $page_data['page_title'] = get_phrase('student_profile');
+        $page_data['student_id']  = $student_id;
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function get_sections($class_id)
+    {
+        $page_data['class_id'] = $class_id;
+        $this->load->view('backend/marketing/student_bulk_add_sections' , $page_data);
+    }
+
+	function student_information($class_id = '')
+	{
+		if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+		$page_data['page_name']  	= 'student_information';
+		$page_data['page_title'] 	= get_phrase('student_information'). " - ".get_phrase('class')." : ".
+											$this->crud_model->get_class_name($class_id);
+		$page_data['class_id'] 	= $class_id;
+		$this->load->view('backend/index', $page_data);
+	}
+
+    function get_students($class_id, $running_year) {
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $columns = array(
+            0 => 'id',
+            1 => 'photo',
+            2 => 'name',
+            3 => 'address',
+            4 => 'email',
+            5 => 'options',
+            6 => 'id'
+        );
+
+        $limit = html_escape($this->input->post('length'));
+        $start = html_escape($this->input->post('start'));
+        $order = $columns[$this->input->post('order')[0]['column']];
+        $dir   = $this->input->post('order')[0]['dir'];
+
+        $totalData = $this->ajaxload->all_students_count();
+        $totalFiltered = $totalData;
+
+        if(empty($this->input->post('search')['value'])) {
+            $students = $this->ajaxload->all_students($limit,$start,$order,$dir);
+        }
+        else {
+            $search = $this->input->post('search')['value'];
+            $students =  $this->ajaxload->student_search($limit,$start,$search,$order,$dir);
+            $totalFiltered = $this->ajaxload->student_search_count($search);
+        }
+
+        $data = array();
+        if(!empty($students)) {
+            foreach ($students as $row) {
+                $nestedData['id'] = $row->enroll_code;
+                $nestedData['photo'] = '1';
+                $nestedData['name'] = '2';
+                $nestedData['address'] = '3';
+                $nestedData['email'] = '4';
+                $nestedData['options'] = '5';
+
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($this->input->post('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
+    function student_marksheet($student_id = '') {
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+        $class_id     = $this->db->get_where('enroll' , array(
+            'student_id' => $student_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
+        ))->row()->class_id;
+        $student_name = $this->db->get_where('student' , array('student_id' => $student_id))->row()->name;
+        $class_name   = $this->db->get_where('class' , array('class_id' => $class_id))->row()->name;
+        $page_data['page_name']  =   'student_marksheet';
+        $page_data['page_title'] =   get_phrase('marksheet_for') . ' ' . $student_name . ' (' . get_phrase('class') . ' ' . $class_name . ')';
+        $page_data['student_id'] =   $student_id;
+        $page_data['class_id']   =   $class_id;
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function student_marksheet_print_view($student_id , $exam_id) {
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $class_id     = $this->db->get_where('enroll' , array(
+            'student_id' => $student_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
+        ))->row()->class_id;
+        $class_name   = $this->db->get_where('class' , array('class_id' => $class_id))->row()->name;
+
+        $page_data['student_id'] =   $student_id;
+        $page_data['class_id']   =   $class_id;
+        $page_data['exam_id']    =   $exam_id;
+        $this->load->view('backend/marketing/student_marksheet_print_view', $page_data);
+    }
+
+    function student($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $running_year = $this->db->get_where('settings' , array(
+            'type' => 'running_year'
+        ))->row()->description;
+
+        if ($param1 == 'create') {
+            $data['name']         = html_escape($this->input->post('name'));
+            $data['blood_group']        = html_escape($this->input->post('blood'));
+            $data['phone']        = html_escape($this->input->post('phone'));
+            if(html_escape($this->input->post('birthday')) != null){
+              $data['birthday']     = html_escape($this->input->post('birthday'));
+            }
+            if(html_escape($this->input->post('birthday')) != null){
+                $data['birthplace']     = html_escape($this->input->post('birthplace'));
+              }
+            if($this->input->post('sex') != null){
+              $data['sex']          = $this->input->post('sex');
+            }
+            if(html_escape($this->input->post('address')) != null){
+              $data['address']      = html_escape($this->input->post('address'));
+            }
+            if(html_escape($this->input->post('nisn')) != null){
+                $data['nisn'] = html_escape($this->input->post('nisn'));
+            }
+            $data['password']     = sha1($this->input->post('password'));
+
+            $this->db->insert('student', $data);
+            activity_log("add", "Menambahkan Data Siswa");
+            $student_id = $this->db->insert_id();
+
+            $data2['student_id']     = $student_id;
+            $data2['enroll_code']    = substr(md5(rand(0, 1000000)), 0, 7);
+
+            if($this->input->post('class_id') != null){
+            $data2['class_id']       = $this->input->post('class_id');
+            }
+            if ($this->input->post('section_id') != '') {
+                $data2['section_id'] = $this->input->post('section_id');
+            }
+            if (html_escape($this->input->post('roll')) != '') {
+                $data2['roll']           = html_escape($this->input->post('roll'));
+            }
+            $data2['date_added']     = strtotime(date("Y-m-d H:i:s"));
+            $data2['year']           = $running_year;
+
+            $this->db->insert('enroll', $data2);
+            $data3['student_id'] = $student_id;
+            $data3['profession'] = html_escape($this->input->post('parentprofession'));
+            $data3['address'] = html_escape($this->input->post('parentaddress'));
+            $data3['username'] = "ortu_".html_escape($this->input->post('nisn'));
+            $data3['password']           = sha1($this->input->post('nisn'));
+            $data3['phone']           = html_escape($this->input->post('parentcontact'));
+            
+
+            if (html_escape($this->input->post('parent_name')) != '') {
+                $data3['name']           = html_escape($this->input->post('parent_name'));
+            }
+            
+            $this->db->insert('parent', $data3);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(site_url('marketing/student_add'), 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']         = html_escape($this->input->post('name'));
+            $data['blood_group']        = html_escape($this->input->post('blood'));
+            $data['phone']        = html_escape($this->input->post('phone'));
+            if(html_escape($this->input->post('birthday')) != null){
+              $data['birthday']     = html_escape($this->input->post('birthday'));
+            }
+            if(html_escape($this->input->post('birthday')) != null){
+                $data['birthplace']     = html_escape($this->input->post('birthplace'));
+              }
+            if($this->input->post('sex') != null){
+              $data['sex']          = $this->input->post('sex');
+            }
+            if(html_escape($this->input->post('address')) != null){
+              $data['address']      = html_escape($this->input->post('address'));
+            }
+            if(html_escape($this->input->post('nisn')) != null){
+                $data['nisn'] = html_escape($this->input->post('nisn'));
+            }
+
+            //student id
+            // if(html_escape($this->input->post('nisn')) != null){
+            //     $data['nisn'] = html_escape($this->input->post('nisn'));
+            //     $code_validation = code_validation_update($data['nisn'],$param2);
+            //     if(!$code_validation){
+            //         $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
+            //         redirect(site_url('marketing/student_information/' . $param3), 'refresh');
+            //     }
+            // }
+
+            // $validation = email_validation_for_edit($data['email'], $param2, 'student');
+            // if($validation == 1){
+            $this->db->where('student_id', $param2);
+            $this->db->update('student', $data);
+            activity_log("edit", "Mengedit Data Siswa");
+
+            $data2['section_id'] = $this->input->post('section_id');
+            if (html_escape($this->input->post('roll')) != null) {
+                $data2['roll'] = html_escape($this->input->post('roll'));
+            }
+            else{
+                $data2['roll'] = null;
+            }
+            $running_year = $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
+            $this->db->where('student_id' , $param2);
+            $this->db->where('year' , $running_year);
+            $this->db->update('enroll' , array(
+                'section_id' => $data2['section_id'] , 'roll' => $data2['roll']
+            ));
+
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $param2 . '.jpg');
+            $this->crud_model->clear_cache();
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+
+            redirect(site_url('marketing/student_information/' . $param3), 'refresh');
+        }
+    }
+
+    function delete_student($student_id = '', $class_id = '') {
+      $this->crud_model->delete_student($student_id);
+      activity_log("delete", "Menghapus Data Siswa");
+      $this->session->set_flashdata('flash_message' , get_phrase('student_deleted'));
+      redirect(site_url('marketing/student_information/' . $class_id), 'refresh');
+    }
+
     function elementary_school($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
