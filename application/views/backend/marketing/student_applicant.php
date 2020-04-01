@@ -1,37 +1,14 @@
 
-<!-- <a href="<?php echo site_url('marketing/student_add');?>"
+<a href="<?php echo site_url('marketing/student_new');?>"
     class="btn btn-primary pull-right">
         <i class="entypo-plus-circled"></i>
-        <?php echo get_phrase('add_new_student');?>
+        <?php echo get_phrase('add_student_new');?>
     </a>
-<br><br> -->
+<br>
 <br>
 
 <div class="row">
     <div class="col-md-12">
-
-        <ul class="nav nav-tabs bordered">
-            <li class="active">
-                <a href="#home" data-toggle="tab">
-                    <span class="visible-xs"><i class="entypo-users"></i></span>
-                    <span class="hidden-xs"><?php echo get_phrase('all_students');?></span>
-                </a>
-            </li>
-        <?php
-            $query = $this->db->get_where('section' , array('class_id' => $class_id));
-            if ($query->num_rows() > 0):
-                $sections = $query->result_array();
-                foreach ($sections as $row):
-        ?>
-            <li>
-                <a href="#<?php echo $row['section_id'];?>" data-toggle="tab">
-                    <span class="visible-xs"><i class="entypo-user"></i></span>
-                    <span class="hidden-xs"><?php echo get_phrase('section');?> <?php echo $row['name'];?> ( <?php echo $row['nick_name'];?> )</span>
-                </a>
-            </li>
-        <?php endforeach;?>
-        <?php endif;?>
-        </ul>
 
         <div class="tab-content">
             <div class="tab-pane active" id="home">
@@ -39,46 +16,24 @@
                 <table class="table table-bordered datatable">
                     <thead>
                         <tr>
-                            <th width="80"><div><?php echo get_phrase('id_no');?></div></th>
-                            <th width="80"><div><?php echo get_phrase('photo');?></div></th>
+                            <th width="10"><div><?php echo get_phrase('#');?></div></th>
                             <th><div><?php echo get_phrase('name');?></div></th>
-                            <th class="span3"><div><?php echo get_phrase('address');?></div></th>
-                            <th><div><?php echo get_phrase('email').'/'.get_phrase('username');?></div></th>
+                            <th><div><?php echo get_phrase('address');?></div></th>
+                            <th><div><?php echo get_phrase('phone');?></div></th>
+                            <th><div><?php echo get_phrase('school_name');?></div></th>
                             <th><div><?php echo get_phrase('options');?></div></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                                $students   =   $this->db->get_where('enroll' , array(
-                                    'class_id' => $class_id , 'year' => $running_year
-                                ))->result_array();
-                                foreach($students as $row):?>
+                            $no = 1;
+                            foreach($student as $row):?>
                         <tr>
-                            <td><?php echo $this->db->get_where('student' , array(
-                                    'student_id' => $row['student_id']
-                                ))->row()->nisn;?></td>
-                            <td><img src="<?php echo $this->crud_model->get_image_url('student',$row['student_id']);?>" class="img-circle" width="30" /></td>
-                            <td>
-                                <?php
-                                    echo $this->db->get_where('student' , array(
-                                        'student_id' => $row['student_id']
-                                    ))->row()->name;
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                    echo $this->db->get_where('student' , array(
-                                        'student_id' => $row['student_id']
-                                    ))->row()->address;
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                    echo $this->db->get_where('student' , array(
-                                        'student_id' => $row['student_id']
-                                    ))->row()->email;
-                                ?>
-                            </td>
+                            <td><?=$no++;?></td>
+                            <td><?=$row['name'];?></td>
+                            <td><?=$row['address'];?></td>
+                            <td><?=$row['phone'];?></td>
+                            <td><?=$this->db->get_where('marketing_school', array('school_id' => $row['school_id']))->row()->name;?></td>
                             <td>
 
                                 <div class="btn-group">
@@ -89,13 +44,13 @@
 
                                         <!-- STUDENT PROFILE LINK -->
                                         <li>
-                                            <a href="<?php echo site_url('marketing/student_profile/'.$row['student_id']);?>">
+                                            <a href="<?php echo site_url('marketing/student_profile/'.$row['applicant_id']);?>">
                                                 <i class="entypo-user"></i>
                                                     <?php echo get_phrase('profile');?>
                                                 </a>
                                         </li>
                                         <li>
-                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/student_id/'.$row['student_id']);?>');">
+                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/student_id/'.$row['applicant_id']);?>');">
                                                 <i class="entypo-vcard"></i>
                                                 <?php echo get_phrase('generate_id');?>
                                             </a>
