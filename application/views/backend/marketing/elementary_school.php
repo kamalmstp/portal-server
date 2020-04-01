@@ -64,7 +64,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="<?php echo site_url('marketing/view_visit/'.$row['school_id']); ?>" type="button" class = "btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo get_phrase('view_visited'); ?></a>
+                        <!-- <a href="<?php echo site_url('marketing/view_visit/'.$row['school_id']); ?>" type="button" class = "btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo get_phrase('view_visited'); ?></a> -->
                     </td>
                 </tr>
                 <?php endforeach;?>

@@ -34,22 +34,16 @@ class Marketing extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
-    function student_add()
+    function student_new()
 	{
 		if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
 
-		$page_data['page_name']  = 'student_add';
-		$page_data['page_title'] = get_phrase('add_student');
-		$this->load->view('backend/index', $page_data);
-	}
+        $school = $this->db->get('marketing_school')->result_array();
 
-	function student_bulk_add()
-	{
-		if ($this->session->userdata('marketing_login') != 1)
-            redirect(site_url('login'), 'refresh');
-		$page_data['page_name']  = 'student_bulk_add';
-		$page_data['page_title'] = get_phrase('add_bulk_student');
+        $page_data['school']  = $school;
+		$page_data['page_name']  = 'student_new';
+		$page_data['page_title'] = get_phrase('add_student_new');
 		$this->load->view('backend/index', $page_data);
 	}
 
@@ -137,36 +131,6 @@ class Marketing extends CI_Controller
         echo json_encode($json_data);
     }
 
-    function student_marksheet($student_id = '') {
-        if ($this->session->userdata('marketing_login') != 1)
-            redirect(site_url('login'), 'refresh');
-        $class_id     = $this->db->get_where('enroll' , array(
-            'student_id' => $student_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-        ))->row()->class_id;
-        $student_name = $this->db->get_where('student' , array('student_id' => $student_id))->row()->name;
-        $class_name   = $this->db->get_where('class' , array('class_id' => $class_id))->row()->name;
-        $page_data['page_name']  =   'student_marksheet';
-        $page_data['page_title'] =   get_phrase('marksheet_for') . ' ' . $student_name . ' (' . get_phrase('class') . ' ' . $class_name . ')';
-        $page_data['student_id'] =   $student_id;
-        $page_data['class_id']   =   $class_id;
-        $this->load->view('backend/index', $page_data);
-    }
-
-    function student_marksheet_print_view($student_id , $exam_id) {
-        if ($this->session->userdata('marketing_login') != 1)
-            redirect(site_url('login'), 'refresh');
-
-        $class_id     = $this->db->get_where('enroll' , array(
-            'student_id' => $student_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-        ))->row()->class_id;
-        $class_name   = $this->db->get_where('class' , array('class_id' => $class_id))->row()->name;
-
-        $page_data['student_id'] =   $student_id;
-        $page_data['class_id']   =   $class_id;
-        $page_data['exam_id']    =   $exam_id;
-        $this->load->view('backend/marketing/student_marksheet_print_view', $page_data);
-    }
-
     function student($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('marketing_login') != 1)
@@ -178,61 +142,27 @@ class Marketing extends CI_Controller
 
         if ($param1 == 'create') {
             $data['name']         = html_escape($this->input->post('name'));
-            $data['blood_group']        = html_escape($this->input->post('blood'));
+            $data['birthplace']   = html_escape($this->input->post('birthplace'));
+            $data['birthday']     = html_escape($this->input->post('birthday'));
+            $data['sex']          = html_escape($this->input->post('sex'));
+            $data['address']      = html_escape($this->input->post('address'));
             $data['phone']        = html_escape($this->input->post('phone'));
-            if(html_escape($this->input->post('birthday')) != null){
-              $data['birthday']     = html_escape($this->input->post('birthday'));
-            }
-            if(html_escape($this->input->post('birthday')) != null){
-                $data['birthplace']     = html_escape($this->input->post('birthplace'));
-              }
-            if($this->input->post('sex') != null){
-              $data['sex']          = $this->input->post('sex');
-            }
-            if(html_escape($this->input->post('address')) != null){
-              $data['address']      = html_escape($this->input->post('address'));
-            }
-            if(html_escape($this->input->post('nisn')) != null){
-                $data['nisn'] = html_escape($this->input->post('nisn'));
-            }
-            $data['password']     = sha1($this->input->post('password'));
+            $data['email']        = html_escape($this->input->post('email'));
+            $data['nama_ayah']    = html_escape($this->input->post('father_name'));
+            $data['nama_ibu']     = html_escape($this->input->post('mother_name'));
+            $data['nama_wali']    = html_escape($this->input->post('wali_name'));
+            $data['no_hp']        = html_escape($this->input->post('parentcontact'));
+            $data['school_id']    = html_escape($this->input->post('school'));
+            $data['ket']          = html_escape($this->input->post('note'));
+            $data['status']       = 'Applicant';
+            $data['user']         = $this->session->userdata('marketing_id');
+            $data['date_time']    = strtotime(date("Y-m-d H:i:s"));
 
-            $this->db->insert('student', $data);
-            activity_log("add", "Menambahkan Data Siswa");
-            $student_id = $this->db->insert_id();
-
-            $data2['student_id']     = $student_id;
-            $data2['enroll_code']    = substr(md5(rand(0, 1000000)), 0, 7);
-
-            if($this->input->post('class_id') != null){
-            $data2['class_id']       = $this->input->post('class_id');
-            }
-            if ($this->input->post('section_id') != '') {
-                $data2['section_id'] = $this->input->post('section_id');
-            }
-            if (html_escape($this->input->post('roll')) != '') {
-                $data2['roll']           = html_escape($this->input->post('roll'));
-            }
-            $data2['date_added']     = strtotime(date("Y-m-d H:i:s"));
-            $data2['year']           = $running_year;
-
-            $this->db->insert('enroll', $data2);
-            $data3['student_id'] = $student_id;
-            $data3['profession'] = html_escape($this->input->post('parentprofession'));
-            $data3['address'] = html_escape($this->input->post('parentaddress'));
-            $data3['username'] = "ortu_".html_escape($this->input->post('nisn'));
-            $data3['password']           = sha1($this->input->post('nisn'));
-            $data3['phone']           = html_escape($this->input->post('parentcontact'));
+            $this->db->insert('student_applicant', $data);
+            activity_log("add", "Menambahkan Data Pendaftaran Siswa");
             
-
-            if (html_escape($this->input->post('parent_name')) != '') {
-                $data3['name']           = html_escape($this->input->post('parent_name'));
-            }
-            
-            $this->db->insert('parent', $data3);
-            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(site_url('marketing/student_add'), 'refresh');
+            redirect(site_url('marketing/student_applicant'), 'refresh');
         }
         if ($param1 == 'do_update') {
             $data['name']         = html_escape($this->input->post('name'));
@@ -291,6 +221,19 @@ class Marketing extends CI_Controller
             redirect(site_url('marketing/student_information/' . $param3), 'refresh');
         }
     }
+    
+    function student_applicant()
+	{
+		if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $student = $this->db->get('student_applicant')->result_array();
+
+		$page_data['page_name']  	= 'student_applicant';
+        $page_data['page_title'] 	= get_phrase('student_applicant_information');
+        $page_data['student']       = $student;
+		$this->load->view('backend/index', $page_data);
+	}
 
     function delete_student($student_id = '', $class_id = '') {
       $this->crud_model->delete_student($student_id);
@@ -469,7 +412,7 @@ class Marketing extends CI_Controller
         if ($param1 == '') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->where('ms.level','SMP');
@@ -478,20 +421,51 @@ class Marketing extends CI_Controller
             $page_data['status'] = 'active';
             $page_data['school'] = $query->result_array();
         }
-
-        if ($param1 == 'permission') {
+        if ($param1 == 'waiting') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
             $this->db->from('marketing_plan mp'); 
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
+            $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
             $this->db->where('ms.level','SMP');
+            $this->db->where('mps.status_result','Waiting');
             $this->db->where('mt.time_id',$time->time_id);
             $query = $this->db->get();
-            $page_data['status'] = 'active';
+
+            $page_data['status'] = 'waiting';
             $page_data['school'] = $query->result_array();
         }
+        if ($param1 == 'approved') {
+            $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
+            $this->db->select('*');
+            $this->db->from('marketing_plan mp'); 
+            $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
+            $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
+            $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
+            $this->db->where('ms.level','SMP');
+            $this->db->where('mps.status_result','Approved');
+            $this->db->where('mt.time_id',$time->time_id);
+            $query = $this->db->get();
 
+            $page_data['status'] = 'approved';
+            $page_data['school'] = $query->result_array();
+        }
+        if ($param1 == 'rejected') {
+            $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
+            $this->db->select('*');
+            $this->db->from('marketing_plan mp'); 
+            $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
+            $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
+            $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
+            $this->db->where('ms.level','SMP');
+            $this->db->where('mps.status_result','Rejected');
+            $this->db->where('mt.time_id',$time->time_id);
+            $query = $this->db->get();
+
+            $page_data['status'] = 'rejected';
+            $page_data['school'] = $query->result_array();
+        }
         if ($param1 == 'select') {
             // $this->crud_model->select_elementary();
             $id = $_POST['id'];
@@ -505,24 +479,23 @@ class Marketing extends CI_Controller
                 $data['timestamp'] = $timestamp;
                 $this->db->insert('marketing_plan', $data); 
             }
-            redirect(site_url('marketing/plan_junior'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
-
         if ($param1 == 'create') {
             $this->crud_model->create_online_exam();
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(site_url('marketing/plan_junior'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
         if ($param1 == 'edit') {
             $this->crud_model->update_online_exam();
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated_successfully'));
-            redirect(site_url('marketing/plan_junior'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
         if ($param1 == 'delete') {
             $this->db->where('school_id', $param2);
             $this->db->delete('marketing_school');
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(site_url('marketing/plan_junior'), 'refresh');
+            redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
         $page_data['page_name'] = 'plan_junior';
         $page_data['page_title'] = get_phrase('plan_junior_high_school');
@@ -571,6 +544,51 @@ class Marketing extends CI_Controller
                 $this->crud_model->add_status_rejected($status_id);
             }
             redirect(site_url('marketing/plan_elementary_view/'.$id), 'refresh');
+        }
+    }
+
+    function plan_junior_view($id,  $param1 = "", $param2 = ""){
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $sql = $this->db->get_where('marketing_plan' , array('plan_id' => $id))->row();
+        $plan_id = $sql->plan_id;
+        $school_id = $sql->school_id;
+
+        $query = $this->db->select('*')
+                                ->from('marketing_plan_status')
+                                ->where('plan_id',$id)
+                                ->order_by('status_id','desc')
+                                ->limit(1)
+                                ->get();
+
+        $page_data['page_name'] = 'plan_junior_view';
+        $page_data['plan_id'] = $plan_id;
+        $page_data['school_id'] = $school_id;
+        $page_data['plan_status'] = $this->db->get_where('marketing_plan_status', array('plan_id' => $id));
+        $page_data['status'] = $query;
+        $page_data['page_title'] = get_phrase('plan_junior_view');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function plan_junior_status($status_id = "", $task = "", $type = ""){
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $sql = $this->db->get_where('marketing_plan_status' , array('status_id' => $status_id))->row();
+        $id = $sql->plan_id;
+
+        if ($task == 'add') {
+            if ($type == 'waiting') {
+                $this->crud_model->add_status_waiting($status_id);
+            }
+            elseif ($type == 'approved') {
+                $this->crud_model->add_status_approved($status_id);
+            }
+            elseif ($type == 'rejected') {
+                $this->crud_model->add_status_rejected($status_id);
+            }
+            redirect(site_url('marketing/plan_junior_view/'.$id), 'refresh');
         }
     }
 
@@ -628,6 +646,57 @@ class Marketing extends CI_Controller
 
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(site_url('marketing/plan_elementary_view/'.$id), 'refresh');
+        }
+    }
+
+    function proses_junior($param1 = "", $param2 = ""){
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+        
+        if ($param1 == 'permission_add') {
+            $id = $this->input->post('plan_id');
+            $data['plan_id'] = $this->input->post('plan_id');
+            $data['status_plan'] = 'Permission';
+            $data['topick'] = html_escape($this->input->post('topick'));
+            $data['person'] = $this->session->userdata('name');
+            $data['user_id'] = $this->session->userdata('login_user_id');
+            $data['timestamp_plan'] = strtotime(date('Y-m-d H:i:s'));
+            $this->db->insert('marketing_plan_status', $data);
+
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(site_url('marketing/plan_junior_view/'.$id), 'refresh');
+        }
+        if ($param1 == 'reconfirm') {
+            $id = $this->input->post('plan_id');
+            $data['plan_id'] = $this->input->post('plan_id');
+            $data['status_plan'] = 'Re-confirm Permission';
+            $data['topick'] = html_escape($this->input->post('topick'));
+            $data['person'] = $this->session->userdata('name');
+            $data['user_id'] = $this->session->userdata('login_user_id');
+            $data['timestamp_plan'] = strtotime(date('Y-m-d H:i:s'));
+            $this->db->insert('marketing_plan_status', $data);
+
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(site_url('marketing/plan_junior_view/'.$id), 'refresh');
+        }
+    }
+
+    function reconfirm_junior($param1 = "", $param2 = ""){
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+        
+        if ($param1 == 'reconfirm') {
+            $id = $this->input->post('plan_id');
+            $data['plan_id'] = $this->input->post('plan_id');
+            $data['status_plan'] = 'Re-confirm Permission';
+            $data['topick'] = html_escape($this->input->post('topick'));
+            $data['person'] = $this->session->userdata('name');
+            $data['user_id'] = $this->session->userdata('login_user_id');
+            $data['timestamp_plan'] = strtotime(date('Y-m-d H:i:s'));
+            $this->db->insert('marketing_plan_status', $data);
+
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(site_url('marketing/plan_junior_view/'.$id), 'refresh');
         }
     }
 
