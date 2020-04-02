@@ -4,16 +4,16 @@ if (!defined('BASEPATH'))
 
 class Marketing extends CI_Controller
 {
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->database();
-        $this->load->library('session');
-        $this->load->model(array('Ajaxdataload_model' => 'ajaxload'));
+  	function __construct()
+    {
+  		parent::__construct();
+  		$this->load->database();
+      $this->load->library('session');
+      $this->load->model(array('Ajaxdataload_model' => 'ajaxload'));
 
-       /*cache control*/
-		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-		$this->output->set_header('Pragma: no-cache');
+     /*cache control*/
+  		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+  		$this->output->set_header('Pragma: no-cache');
     }
 
     public function index()
@@ -35,17 +35,17 @@ class Marketing extends CI_Controller
     }
 
     function student_new()
-	{
-		if ($this->session->userdata('marketing_login') != 1)
-            redirect(site_url('login'), 'refresh');
+    {
+		  if ($this->session->userdata('marketing_login') != 1)
+        redirect(site_url('login'), 'refresh');
 
-        $school = $this->db->get('marketing_school')->result_array();
+      $school = $this->db->get('marketing_school')->result_array();
 
-        $page_data['school']  = $school;
-		$page_data['page_name']  = 'student_new';
-		$page_data['page_title'] = get_phrase('add_student_new');
-		$this->load->view('backend/index', $page_data);
-	}
+      $page_data['school']  = $school;
+  		$page_data['page_name']  = 'student_new';
+  		$page_data['page_title'] = get_phrase('add_student_new');
+  		$this->load->view('backend/index', $page_data);
+  	}
 
     function student_profile($student_id)
     {
@@ -58,14 +58,63 @@ class Marketing extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    function manage_profile($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('marketing_login') != 1)
+            redirect(site_url('login'), 'refresh');
+        if ($param1 == 'update_profile_info') {
+            $data['name']  = html_escape($this->input->post('name'));
+            $data['email'] = html_escape($this->input->post('email'));
+
+            $marketing_id = $param2;
+
+            // $validation = email_validation_for_edit($data['email'], $marketing_id, 'marketing');
+            // if($validation == 1){
+                $this->db->where('marketing_id', $this->session->userdata('marketing_id'));
+                $this->db->update('marketing', $data);
+                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/marketing_image/' . $this->session->userdata('marketing_id') . '.jpg');
+                $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
+            // }
+            // else{
+            //     $this->session->set_flashdata('error_message', get_phrase('this_email_id_is_not_available'));
+            // }
+            redirect(site_url('marketing/manage_profile'), 'refresh');
+        }
+        if ($param1 == 'change_password') {
+            $data['password']             = sha1($this->input->post('password'));
+            $data['new_password']         = sha1($this->input->post('new_password'));
+            $data['confirm_new_password'] = sha1($this->input->post('confirm_new_password'));
+
+            $current_password = $this->db->get_where('marketing', array(
+                'marketing_id' => $this->session->userdata('marketing_id')
+            ))->row()->password;
+            if ($current_password == $data['password'] && $data['new_password'] == $data['confirm_new_password']) {
+                $this->db->where('marketing_id', $this->session->userdata('marketing_id'));
+                $this->db->update('marketing', array(
+                    'password' => $data['new_password']
+                ));
+                $this->session->set_flashdata('flash_message', get_phrase('password_updated'));
+            } else {
+                $this->session->set_flashdata('error_message', get_phrase('password_mismatch'));
+            }
+            redirect(site_url('marketing/manage_profile'), 'refresh');
+        }
+        $page_data['page_name']  = 'manage_profile';
+        $page_data['page_title'] = get_phrase('manage_profile');
+        $page_data['edit_data']  = $this->db->get_where('marketing', array(
+            'marketing_id' => $this->session->userdata('marketing_id')
+        ))->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+
     function get_sections($class_id)
     {
         $page_data['class_id'] = $class_id;
         $this->load->view('backend/marketing/student_bulk_add_sections' , $page_data);
     }
 
-	function student_information($class_id = '')
-	{
+    function student_information($class_id = '')
+    {
 		if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
 
@@ -153,6 +202,7 @@ class Marketing extends CI_Controller
             $data['nama_wali']    = html_escape($this->input->post('wali_name'));
             $data['no_hp']        = html_escape($this->input->post('parentcontact'));
             $data['school_id']    = html_escape($this->input->post('school'));
+            $data['department']   = html_escape($this->input->post('depart'));
             $data['ket']          = html_escape($this->input->post('note'));
             $data['status']       = 'Applicant';
             $data['user']         = $this->session->userdata('marketing_id');
@@ -160,7 +210,7 @@ class Marketing extends CI_Controller
 
             $this->db->insert('student_applicant', $data);
             activity_log("add", "Menambahkan Data Pendaftaran Siswa");
-            
+
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(site_url('marketing/student_applicant'), 'refresh');
         }
@@ -221,19 +271,19 @@ class Marketing extends CI_Controller
             redirect(site_url('marketing/student_information/' . $param3), 'refresh');
         }
     }
-    
+
     function student_applicant()
-	{
-		if ($this->session->userdata('marketing_login') != 1)
-            redirect(site_url('login'), 'refresh');
+  	{
+  		if ($this->session->userdata('marketing_login') != 1)
+              redirect(site_url('login'), 'refresh');
 
-        $student = $this->db->get('student_applicant')->result_array();
+      $student = $this->db->get('student_applicant')->result_array();
 
-		$page_data['page_name']  	= 'student_applicant';
-        $page_data['page_title'] 	= get_phrase('student_applicant_information');
-        $page_data['student']       = $student;
-		$this->load->view('backend/index', $page_data);
-	}
+  		$page_data['page_name']  	= 'student_applicant';
+      $page_data['page_title'] 	= get_phrase('student_applicant_information');
+      $page_data['student']       = $student;
+  		$this->load->view('backend/index', $page_data);
+  	}
 
     function delete_student($student_id = '', $class_id = '') {
       $this->crud_model->delete_student($student_id);
@@ -307,13 +357,13 @@ class Marketing extends CI_Controller
     function plan_elementary($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
-        
+
         $year = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
 
         if ($param1 == '') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->where('ms.level','SD');
@@ -325,7 +375,7 @@ class Marketing extends CI_Controller
         if ($param1 == 'waiting') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
@@ -340,7 +390,7 @@ class Marketing extends CI_Controller
         if ($param1 == 'approved') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
@@ -355,7 +405,7 @@ class Marketing extends CI_Controller
         if ($param1 == 'rejected') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
@@ -378,7 +428,7 @@ class Marketing extends CI_Controller
                 $data['school_id'] = $p;
                 $data['time_id'] = $time->time_id;
                 $data['timestamp'] = $timestamp;
-                $this->db->insert('marketing_plan', $data); 
+                $this->db->insert('marketing_plan', $data);
             }
             redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
@@ -406,7 +456,7 @@ class Marketing extends CI_Controller
     function plan_junior($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
-        
+
         $year = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
 
         if ($param1 == '') {
@@ -424,7 +474,7 @@ class Marketing extends CI_Controller
         if ($param1 == 'waiting') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
@@ -439,7 +489,7 @@ class Marketing extends CI_Controller
         if ($param1 == 'approved') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
@@ -454,7 +504,7 @@ class Marketing extends CI_Controller
         if ($param1 == 'rejected') {
             $time = $this->db->get_where('marketing_time', array('running_year' => $year))->row();
             $this->db->select('*');
-            $this->db->from('marketing_plan mp'); 
+            $this->db->from('marketing_plan mp');
             $this->db->join('marketing_school ms', 'ms.school_id=mp.school_id');
             $this->db->join('marketing_time mt', 'mt.time_id=mp.time_id');
             $this->db->join('marketing_plan_status mps', 'mp.plan_id=mps.plan_id');
@@ -477,7 +527,7 @@ class Marketing extends CI_Controller
                 $data['school_id'] = $p;
                 $data['time_id'] = $time->time_id;
                 $data['timestamp'] = $timestamp;
-                $this->db->insert('marketing_plan', $data); 
+                $this->db->insert('marketing_plan', $data);
             }
             redirect(site_url('marketing/plan_elementary'), 'refresh');
         }
@@ -598,10 +648,18 @@ class Marketing extends CI_Controller
         $this->load->view('backend/marketing/status_add_'.$type, $page_data);
     }
 
+    function load_grade_type($type) {
+        $school = $this->db->get('marketing_school')->result_array();
+
+        $page_data['school']  = $school;
+        $page_data['grade_type'] = $type;
+        $this->load->view('backend/marketing/student_new_'.$type, $page_data);
+    }
+
     function proses_elementary($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
-        
+
         if ($param1 == 'permission_add') {
             $id = $this->input->post('plan_id');
             $data['plan_id'] = $this->input->post('plan_id');
@@ -633,7 +691,7 @@ class Marketing extends CI_Controller
     function reconfirm_elementary($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
-        
+
         if ($param1 == 'reconfirm') {
             $id = $this->input->post('plan_id');
             $data['plan_id'] = $this->input->post('plan_id');
@@ -652,7 +710,7 @@ class Marketing extends CI_Controller
     function proses_junior($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
-        
+
         if ($param1 == 'permission_add') {
             $id = $this->input->post('plan_id');
             $data['plan_id'] = $this->input->post('plan_id');
@@ -684,7 +742,7 @@ class Marketing extends CI_Controller
     function reconfirm_junior($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(site_url('login'), 'refresh');
-        
+
         if ($param1 == 'reconfirm') {
             $id = $this->input->post('plan_id');
             $data['plan_id'] = $this->input->post('plan_id');
@@ -745,7 +803,7 @@ class Marketing extends CI_Controller
     function marketing_time($param1 = "", $param2 = ""){
         if ($this->session->userdata('marketing_login') != 1)
             redirect(base_url(), 'refresh');
-        
+
         if ($param1 == 'create') {
             $this->crud_model->create_marketing_time();
             activity_log("add","Menambah Data Marketing Time");

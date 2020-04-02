@@ -111,7 +111,7 @@
                             <?php echo get_phrase('add_result');?>
                         </div>
                     </div>
-                    <div class="panel-body">   
+                    <div class="panel-body">
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo get_phrase('result_status');?></label>
                             <div class="col-sm-8">
@@ -157,5 +157,5 @@
             });
         });
     });
-    
+
 </script>
