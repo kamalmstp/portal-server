@@ -277,19 +277,21 @@ class Marketing extends CI_Controller
   		if ($this->session->userdata('marketing_login') != 1)
               redirect(site_url('login'), 'refresh');
 
-      $student = $this->db->get('student_applicant')->result_array();
+        $student = $this->db->get('student_applicant')->result_array();
 
   		$page_data['page_name']  	= 'student_applicant';
-      $page_data['page_title'] 	= get_phrase('student_applicant_information');
-      $page_data['student']       = $student;
+        $page_data['page_title'] 	= get_phrase('student_applicant_information');
+        $page_data['student']       = $student;
   		$this->load->view('backend/index', $page_data);
   	}
 
-    function delete_student($student_id = '', $class_id = '') {
-      $this->crud_model->delete_student($student_id);
-      activity_log("delete", "Menghapus Data Siswa");
-      $this->session->set_flashdata('flash_message' , get_phrase('student_deleted'));
-      redirect(site_url('marketing/student_information/' . $class_id), 'refresh');
+    function delete_student($student_id = '') {
+        $this->db->where('applicant_id', $student_id);
+        $this->db->delete('student_applicant');
+        activity_log("delete","Menghapus Data Siswa Baru");
+
+        $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+        redirect(site_url('marketing/student_applicant'), 'refresh');
     }
 
     function elementary_school($param1 = "", $param2 = ""){

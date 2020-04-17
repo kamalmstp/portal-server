@@ -1,7 +1,5 @@
 <?php 
-$edit_data		=	$this->db->get_where('enroll' , array(
-	'student_id' => $param2 , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-))->result_array();
+$edit_data		=	$this->db->get_where('student_applicant' , array('applicant_id' => $param2))->result_array();
 foreach ($edit_data as $row):
 ?>
 <div class="row">
@@ -15,30 +13,8 @@ foreach ($edit_data as $row):
             </div>
 			<div class="panel-body">
 				
-                <?php echo form_open(site_url('admin/student/do_update/'.$row['student_id'].'/'.$row['class_id'])  , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
+                <?php echo form_open(site_url('marketing/student/do_update/'.$row['student_id']) , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
                 
-                	
-	
-					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('photo');?></label>
-                        
-						<div class="col-sm-5">
-							<div class="fileinput fileinput-new" data-provides="fileinput">
-								<div class="fileinput-new thumbnail" style="width: 100px; height: 100px;" data-trigger="fileinput">
-									<img src="<?php echo $this->crud_model->get_image_url('student' , $row['student_id']);?>" alt="...">
-								</div>
-								<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
-								<div>
-									<span class="btn btn-white btn-file">
-										<span class="fileinput-new">Select image</span>
-										<span class="fileinput-exists">Change</span>
-										<input type="file" name="userfile" accept="image/*">
-									</span>
-									<a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
-								</div>
-							</div>
-						</div>
-					</div>
 	
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('name');?></label>
