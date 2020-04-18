@@ -15,7 +15,7 @@
 
             	<div class="col-sm-8">
             		<select name="depart" class="form-control">
-                    <option value=""><?php echo get_phrase('select');?></option>
+                    <option value="-"><?php echo get_phrase('select');?></option>
                     <option value="SCIENCE"><?php echo get_phrase('SCIENCE');?></option>
                     <option value="SOCIAL"><?php echo get_phrase('SOCIAL');?></option>
                 </select>

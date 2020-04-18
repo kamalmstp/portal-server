@@ -214,61 +214,53 @@ class Marketing extends CI_Controller
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(site_url('marketing/student_applicant'), 'refresh');
         }
-        if ($param1 == 'do_update') {
+        if ($param1 == 'do_update_smp') {
+            
             $data['name']         = html_escape($this->input->post('name'));
-            $data['blood_group']        = html_escape($this->input->post('blood'));
+            $data['birthplace']   = html_escape($this->input->post('birthplace'));
+            $data['birthday']     = html_escape($this->input->post('birthday'));
+            $data['sex']          = html_escape($this->input->post('sex'));
+            $data['address']      = html_escape($this->input->post('address'));
             $data['phone']        = html_escape($this->input->post('phone'));
-            if(html_escape($this->input->post('birthday')) != null){
-              $data['birthday']     = html_escape($this->input->post('birthday'));
-            }
-            if(html_escape($this->input->post('birthday')) != null){
-                $data['birthplace']     = html_escape($this->input->post('birthplace'));
-              }
-            if($this->input->post('sex') != null){
-              $data['sex']          = $this->input->post('sex');
-            }
-            if(html_escape($this->input->post('address')) != null){
-              $data['address']      = html_escape($this->input->post('address'));
-            }
-            if(html_escape($this->input->post('nisn')) != null){
-                $data['nisn'] = html_escape($this->input->post('nisn'));
-            }
+            $data['email']        = html_escape($this->input->post('email'));
+            $data['nama_ayah']    = html_escape($this->input->post('father_name'));
+            $data['nama_ibu']     = html_escape($this->input->post('mother_name'));
+            $data['nama_wali']    = html_escape($this->input->post('wali_name'));
+            $data['no_hp']        = html_escape($this->input->post('parentcontact'));
+            $data['school_id']    = html_escape($this->input->post('school'));
+            $data['ket']          = html_escape($this->input->post('note'));
+            $data['status']       = 'Applicant';
+            
+            $this->db->where('applicant_id', $param2);
+            $this->db->update('student_applicant', $data);
+            activity_log("edit", "Mengedit Data Siswa Baru");
 
-            //student id
-            // if(html_escape($this->input->post('nisn')) != null){
-            //     $data['nisn'] = html_escape($this->input->post('nisn'));
-            //     $code_validation = code_validation_update($data['nisn'],$param2);
-            //     if(!$code_validation){
-            //         $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
-            //         redirect(site_url('marketing/student_information/' . $param3), 'refresh');
-            //     }
-            // }
+            redirect(site_url('marketing/student_applicant/'), 'refresh');
+        }
 
-            // $validation = email_validation_for_edit($data['email'], $param2, 'student');
-            // if($validation == 1){
-            $this->db->where('student_id', $param2);
-            $this->db->update('student', $data);
-            activity_log("edit", "Mengedit Data Siswa");
+        if ($param1 == 'do_update_sma') {
+            
+            $data['name']         = html_escape($this->input->post('name'));
+            $data['birthplace']   = html_escape($this->input->post('birthplace'));
+            $data['birthday']     = html_escape($this->input->post('birthday'));
+            $data['sex']          = html_escape($this->input->post('sex'));
+            $data['address']      = html_escape($this->input->post('address'));
+            $data['phone']        = html_escape($this->input->post('phone'));
+            $data['email']        = html_escape($this->input->post('email'));
+            $data['nama_ayah']    = html_escape($this->input->post('father_name'));
+            $data['nama_ibu']     = html_escape($this->input->post('mother_name'));
+            $data['nama_wali']    = html_escape($this->input->post('wali_name'));
+            $data['no_hp']        = html_escape($this->input->post('parentcontact'));
+            $data['school_id']    = html_escape($this->input->post('school'));
+            $data['department']   = html_escape($this->input->post('depart'));
+            $data['ket']          = html_escape($this->input->post('note'));
+            $data['status']       = 'Applicant';
+            
+            $this->db->where('applicant_id', $param2);
+            $this->db->update('student_applicant', $data);
+            activity_log("edit", "Mengedit Data Siswa Baru");
 
-            $data2['section_id'] = $this->input->post('section_id');
-            if (html_escape($this->input->post('roll')) != null) {
-                $data2['roll'] = html_escape($this->input->post('roll'));
-            }
-            else{
-                $data2['roll'] = null;
-            }
-            $running_year = $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
-            $this->db->where('student_id' , $param2);
-            $this->db->where('year' , $running_year);
-            $this->db->update('enroll' , array(
-                'section_id' => $data2['section_id'] , 'roll' => $data2['roll']
-            ));
-
-            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $param2 . '.jpg');
-            $this->crud_model->clear_cache();
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-
-            redirect(site_url('marketing/student_information/' . $param3), 'refresh');
+            redirect(site_url('marketing/student_applicant/'), 'refresh');
         }
     }
 

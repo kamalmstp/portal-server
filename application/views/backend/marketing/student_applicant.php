@@ -59,7 +59,8 @@
 
                                         <!-- STUDENT PROFILE LINK -->
                                         <li>
-                                            <a href="<?php echo site_url('admin/student_profile/'.$row['applicant_id']);?>">
+                                            <!-- <a href="<?php echo site_url('admin/student_profile/'.$row['applicant_id']);?>"> -->
+                                            <a href="#">
                                                 <i class="entypo-user"></i>
                                                     <?php echo get_phrase('profile');?>
                                                 </a>
@@ -118,7 +119,7 @@
                             <td><?=$row1['name_sc'];?></td>
                             <td>
 
-                            <div class="btn-group">
+                                <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                                         Action <span class="caret"></span>
                                     </button>
@@ -126,7 +127,8 @@
 
                                         <!-- STUDENT PROFILE LINK -->
                                         <li>
-                                            <a href="<?php echo site_url('admin/student_profile/'.$row1['applicant_id']);?>">
+                                            <!-- <a href="<?php echo site_url('admin/student_profile/'.$row1['applicant_id']);?>"> -->
+                                            <a href="#">
                                                 <i class="entypo-user"></i>
                                                     <?php echo get_phrase('profile');?>
                                                 </a>
@@ -134,7 +136,7 @@
 
                                         <!-- STUDENT EDITING LINK -->
                                         <li>
-                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/modal_student_edit/'.$row1['applicant_id']);?>');">
+                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/modal_student_edit1/'.$row1['applicant_id']);?>');">
                                                 <i class="entypo-pencil"></i>
                                                     <?php echo get_phrase('edit');?>
                                                 </a>
@@ -148,8 +150,6 @@
                                         </li>
                                     </ul>
                                 </div>
-
-                            </td>
                         </tr>
                         <?php endforeach;?>
                     </tbody>
@@ -176,7 +176,7 @@
                             $this->db->join('marketing_school sc', 'sc.school_id=s.school_id');
                             $this->db->where('sc.level','SMP');
                             $sma = $this->db->get()->result_array();
-                            foreach($student_sma as $row2):?>
+                            foreach($sma as $row2):?>
                         <tr>
                             <td><?=$no++;?></td>
                             <td><?=$row2['name_s'];?></td>
@@ -193,7 +193,8 @@
 
                                         <!-- STUDENT PROFILE LINK -->
                                         <li>
-                                            <a href="<?php echo site_url('admin/student_profile/'.$row2['applicant_id']);?>">
+                                            <!-- <a href="<?php echo site_url('admin/student_profile/'.$row2['applicant_id']);?>"> -->
+                                            <a href="#">
                                                 <i class="entypo-user"></i>
                                                     <?php echo get_phrase('profile');?>
                                                 </a>
@@ -201,7 +202,7 @@
 
                                         <!-- STUDENT EDITING LINK -->
                                         <li>
-                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/modal_student_edit/'.$row2['applicant_id']);?>');">
+                                            <a href="#" onclick="showAjaxModal('<?php echo site_url('modal/popup/modal_student_edit2/'.$row2['applicant_id']);?>');">
                                                 <i class="entypo-pencil"></i>
                                                     <?php echo get_phrase('edit');?>
                                                 </a>
