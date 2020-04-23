@@ -48,6 +48,33 @@ class Student extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    function ibadah()
+    {
+        if ($this->session->userdata('student_login') != 1)
+            redirect(base_url(), 'refresh');
+        $page_data['page_name']  = 'ibadah';
+        $page_data['page_title'] = get_phrase('ibadah_ramadhan');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function tugas()
+    {
+        if ($this->session->userdata('student_login') != 1)
+            redirect(base_url(), 'refresh');
+        $page_data['page_name']  = 'tugas';
+        $page_data['page_title'] = get_phrase('tugas_harian');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function history()
+    {
+        if ($this->session->userdata('student_login') != 1)
+            redirect(base_url(), 'refresh');
+        $page_data['page_name']  = 'history';
+        $page_data['page_title'] = get_phrase('history_ramadhan');
+        $this->load->view('backend/index', $page_data);
+    }
+
     /***ADMIN DASHBOARD***/
     function my_profile($param1 ='', $param2 ='')
     {

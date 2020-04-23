@@ -386,6 +386,32 @@
             </ul>
         </li>
 
+        <!-- Manage Users -->
+        <li class="<?php if ( $page_name == 'create_daily_activity' ||
+                              $page_name == 'manage_daily_activity' ||
+                              $page_name == 'librarian' ||
+                              $page_name == 'accountant')
+                                echo 'opened active has-sub';?>">
+            <a href="#">
+                <i class="fa flaticon-users"></i>
+                <span><?php echo get_phrase('daily_activity'); ?></span>
+            </a>
+            <ul>
+                <li class="<?php if ($page_name == 'create_daily_activity') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/create_daily_activity'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('create_daily_activity'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'manage_daily_activity') echo 'active'; ?> ">
+                    <a href="<?php echo site_url('admin/manage_daily_activity'); ?>">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('manage_daily_activity'); ?></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         
 
         <!-- PAYMENT -->

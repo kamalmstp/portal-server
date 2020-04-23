@@ -1079,4 +1079,21 @@ class Crud_model extends CI_Model {
         $exams = $this->db->where($match)->get('online_exam_result')->result_array();
         return $exams;
     }
+
+    function create_daily_activity(){
+        $data['code']  = substr(md5(uniqid(rand(), true)), 0, 7);
+        $data['title'] = html_escape($this->input->post('title'));
+        $data['user'] = $this->input->post('user');
+        $data['instruction'] = html_escape($this->input->post('instruction'));
+        $data['start_date'] = strtotime(html_escape($this->input->post('start_date')));
+        $data['end_date'] = strtotime(html_escape($this->input->post('end_date')));
+        $data['duration'] = strtotime(date('Y-m-d', $data['end_date'])) - strtotime(date('Y-m-d', $data['start_date']));
+        $data['running_year'] = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+
+        /*print_r($data);
+        echo '<br/>';
+        echo gmdate("H:i:s", '18305');
+        die();*/
+        $this->db->insert('daily_activity', $data);
+    }
 }

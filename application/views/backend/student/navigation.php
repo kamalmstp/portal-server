@@ -54,6 +54,27 @@
             </a>
         </li>
 
+        <li class="<?php if ($page_name == 'ibadah') echo 'active'; ?> ">
+            <a href="<?php echo site_url($account_type.'/ibadah'); ?>">
+                <i class="entypo-doc"></i>
+                <span><?php echo get_phrase('ibadah_harian'); ?></span>
+            </a>
+        </li>
+
+        <li class="<?php if ($page_name == 'tugas') echo 'active'; ?> ">
+            <a href="<?php echo site_url($account_type.'/tugas'); ?>">
+                <i class="entypo-doc"></i>
+                <span><?php echo get_phrase('tugas_harian'); ?></span>
+            </a>
+        </li>
+
+        <li class="<?php if ($page_name == 'history') echo 'active'; ?> ">
+            <a href="<?php echo site_url($account_type.'/history'); ?>">
+                <i class="entypo-doc"></i>
+                <span><?php echo get_phrase('history_ramadhan'); ?></span>
+            </a>
+        </li>
+
 
 
         <!-- TEACHER -->
@@ -69,40 +90,40 @@
 
 
         <!-- SUBJECT -->
-        <li class="<?php if ($page_name == 'subject') echo ' active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'subject') echo ' active'; ?> ">
             <a href="<?php echo site_url($account_type.'/subject'); ?>">
                 <i class="entypo-docs"></i>
                 <span><?php echo get_phrase('subject'); ?></span>
             </a>
-        </li>
+        </li> -->
 
         <!-- CLASS ROUTINE -->
-        <li class="<?php if ($page_name == 'class_routine') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'class_routine') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/class_routine'); ?>">
                 <i class="entypo-target"></i>
                 <span><?php echo get_phrase('schedule'); ?></span>
             </a>
-        </li>
+        </li> -->
 
         <!-- Attendance -->
-        <li class="<?php if ($page_name == 'manage_attendace') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'manage_attendace') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/manage_attendace'); ?>">
                 <i class="fa fa-line-chart"></i>
                 <span><?php echo get_phrase('attendance'); ?></span>
             </a>
-        </li>
+        </li> -->
 
 		<!-- STUDY MATERIAL -->
-        <li class="<?php if ($page_name == 'study_material') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'study_material') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/study_material'); ?>">
                 <i class="entypo-book-open"></i>
                 <span><?php echo get_phrase('study_material'); ?></span>
             </a>
-        </li>
+        </li> -->
 
 
         <!-- Exam marks -->
-        <li class="<?php if ($page_name == 'student_marksheet') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'student_marksheet') echo 'active'; ?> ">
             <a href="<?php echo site_url($account_type.'/student_marksheet/'.$this->session->userdata('login_user_id')); ?>">
                 <i class="entypo-graduation-cap"></i>
                 <span><?php echo get_phrase('exam_marks'); ?></span>
@@ -114,7 +135,7 @@
                 <i class="fa fa-feed"></i>
                 <span><?php echo get_phrase('online_exam'); ?></span>
             </a>
-        </li>
+        </li> -->
 
         <!-- PAYMENT -->
         <!-- sementara
@@ -127,7 +148,7 @@
         -->
 
         <!-- LIBRARY -->
-        <li class="<?php if ($page_name == 'book' || $page_name == 'book_request') echo 'opened active';?> ">
+        <!-- <li class="<?php if ($page_name == 'book' || $page_name == 'book_request') echo 'opened active';?> ">
             <a href="#">
                 <i class="entypo-book"></i>
                 <span><?php echo get_phrase('library'); ?></span>
@@ -146,7 +167,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> -->
 
         <!-- TRANSPORT -->
         <!-- sementara

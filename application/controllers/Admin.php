@@ -3526,20 +3526,7 @@ class Admin extends CI_Controller
                   $data['name']      = $row[0];
                   $data['nisn']      = $row[1];
                   $data['password']  = sha1($row[2]);
-                //   $data['phone']     = $row[4];
-                //   $data['address']   = $row[5];
-                //   $data['parent_id'] = $row[6];
-                //   $data['sex']       = strtolower($row[7]);
-                 //student id (code) validation
-                 $code_validation = code_validation_insert($data['nisn']);
-                 if(!$code_validation){
-                     $this->session->set_flashdata('error_message' , get_phrase('this_id_no_is_not_available'));
-                     redirect(site_url('admin/student_add'), 'refresh');
-                 }
-                 //student id validation ends
-
-                //   $validation = email_validation($data['email']);
-                //   if ($validation == 1) {
+                 
                     $this->db->insert('student', $data);
                     $student_id = $this->db->insert_id();
 
@@ -3551,17 +3538,7 @@ class Admin extends CI_Controller
                     $data2['date_added']  =   strtotime(date("Y-m-d H:i:s"));
                     $data2['year']        =   $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
                     $this->db->insert('enroll' , $data2);
-                //   }
-                //   else{
-                //     if ($array_size == 2) {
-                //       $this->session->set_flashdata('error_message', get_phrase('this_email_id_"').$data['email'].get_phrase('"_is_not_available'));
-                //       redirect(site_url('admin/student_bulk_add'), 'refresh');
-                //     }
-                //     elseif($array_size > 2){
-                //       $this->session->set_flashdata('error_message', get_phrase('some_email_IDs_are_not_available'));
-                //     }
-                //   }
-
+                
               }
 
 
@@ -3827,5 +3804,87 @@ class Admin extends CI_Controller
         $page_data['page_title'] = get_phrase('result');
         $page_data['online_exam_id'] = $online_exam_id;
         $this->load->view('backend/index',$page_data);
+    }
+
+    function create_daily_activity(){
+        $page_data['page_name'] = 'add_daily_activity';
+        $page_data['page_title'] = get_phrase('add_an_daily_activity');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function manage_daily_activity($param1 = "", $param2 = ""){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $running_year = get_settings('running_year');
+
+        if ($param1 == '') {
+            $match = array('status !=' => 'expired', 'running_year' => $running_year);
+            $page_data['status'] = 'active';
+            $this->db->order_by("activity_id", "desc");
+            $page_data['daily_activity'] = $this->db->where($match)->get('daily_activity')->result_array();
+        }
+
+        if ($param1 == 'expired') {
+            $match = array('status' => 'expired', 'running_year' => $running_year);
+            $page_data['status'] = 'expired';
+            $this->db->order_by("exam_date", "dsc");
+            $page_data['online_exams'] = $this->db->where($match)->get('online_exam')->result_array();
+        }
+
+        if ($param1 == 'create') {
+            if ($this->input->post('user') != '') {
+                $this->crud_model->create_daily_activity();
+                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+                redirect(site_url('admin/manage_daily_activity'), 'refresh');
+            }
+            else {
+                $this->session->set_flashdata('error_message' , get_phrase('make_sure_to_select_user'));
+                redirect(site_url('admin/manage_daily_activity'), 'refresh');
+            }
+        }
+        if ($param1 == 'edit') {
+            if ($this->input->post('class_id') > 0 && $this->input->post('section_id') > 0 && $this->input->post('subject_id') > 0) {
+                $this->crud_model->update_online_exam();
+                $this->session->set_flashdata('flash_message' , get_phrase('data_updated_successfully'));
+                redirect(site_url('admin/manage_daily_activity'), 'refresh');
+            }
+            else{
+                $this->session->set_flashdata('error_message' , get_phrase('make_sure_to_select_valid_class_').','.get_phrase('_section_and_subject'));
+                redirect(site_url('admin/manage_daily_activity'), 'refresh');
+            }
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('online_exam_id', $param2);
+            $this->db->delete('online_exam');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(site_url('admin/manage_daily_activity'), 'refresh');
+        }
+        $page_data['page_name'] = 'manage_daily_activity';
+        $page_data['page_title'] = get_phrase('manage_daily_activity');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function manage_daily_activity_detail($activity_id = "", $task = "", $type = ""){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        if ($task == 'add') {
+            if ($type == 'multiple_choice') {
+                $this->crud_model->add_multiple_choice_question_to_online_exam($activity_id);
+            }
+            elseif ($type == 'true_false') {
+                $this->crud_model->add_true_false_question_to_online_exam($activity_id);
+            }
+            elseif ($type == 'fill_in_the_blanks') {
+                $this->crud_model->add_fill_in_the_blanks_question_to_online_exam($activity_id);
+            }
+            redirect(site_url('admin/manage_daily_activity_detail/'.$activity_id), 'refresh');
+        }
+
+        $page_data['activity_id'] = $activity_id;
+        $page_data['page_name'] = 'manage_daily_activity_detail';
+        $page_data['page_title'] = $this->db->get_where('daily_activity', array('activity_id'=>$activity_id))->row()->title;
+        $this->load->view('backend/index', $page_data);
     }
 }
