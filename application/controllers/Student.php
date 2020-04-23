@@ -57,11 +57,62 @@ class Student extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    function data_ibadah(){
+        // $data = $this->db->get_where('class_routine', array('day' => date('l')))->result_array();
+            $this->db->select('ab.activity_bank_id as id, ab.time_start as waktu, ab.activity_title as judul, ar.student_id as student');
+            $this->db->from('activity_bank ab');
+            $this->db->join('activity_result ar', 'ar.activity_bank_id = ab.activity_bank_id', 'left');
+            $this->db->where('type','Ibadah');
+            $this->db->where('CAST(concat(HOUR(now()), ":", minute(now())) AS time) >= CAST(ab.time_start AS time)');
+            $this->db->order_by('ab.time_start', 'asc');
+            $query = $this->db->get();
+            $data = $query->result_array();
+            echo json_encode($data);
+      }
+
+    function new_activity($id){
+        if ($this->session->userdata('student_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $data['activity_bank_id']      = $id;
+        $data['student_id']      = $this->session->userdata('student_id');
+        $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
+        $data['time_server']  =  strtotime(date("Y-m-d H:i:s"));
+        $data['date']      = date("Y-m-d");
+        $this->db->insert('activity_result', $data);
+
+        redirect(site_url('student/ibadah'), 'refresh');
+    }
+
+    function new_activity1($id){
+        if ($this->session->userdata('student_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $data['activity_bank_id']      = $id;
+        $data['student_id']      = $this->session->userdata('student_id');
+        $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
+        $data['time_server']  =  strtotime(date("Y-m-d H:i:s"));
+        $data['date']      = date("Y-m-d");
+        $this->db->insert('activity_result', $data);
+
+        redirect(site_url('student/tugas'), 'refresh');
+    }
+
     function tugas()
     {
         if ($this->session->userdata('student_login') != 1)
             redirect(base_url(), 'refresh');
+        
+        $this->db->select('ab.activity_bank_id as id, ab.time_start as waktu, ab.activity_title as judul, ar.student_id as student');
+        $this->db->from('activity_bank ab');
+        $this->db->join('activity_result ar', 'ar.activity_bank_id = ab.activity_bank_id', 'left');
+        $this->db->where('type','Tugas');
+        $this->db->order_by('ab.time_start', 'asc');
+        $query = $this->db->get();
+        $data = $query->result_array();
+
         $page_data['page_name']  = 'tugas';
+        $page_data['tugas']  = $data;
         $page_data['page_title'] = get_phrase('tugas_harian');
         $this->load->view('backend/index', $page_data);
     }
