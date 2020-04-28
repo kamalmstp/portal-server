@@ -19,20 +19,18 @@
                     </thead>
 
                     <tbody>
-                        <?php foreach($tugas as $row): 
-                            if ($row['student'] == null) {?>
+                        <?php foreach($tugas as $row): ?>
                             <tr class="gradeA">
-                                <th width="10%"></th>
-                                <th width="80%"><?=$row['judul'];?></th>
-                                <td><div class="btn-group"><a href="<?php echo site_url('student/new_activity1/'.$row['id']);?>"><button class="btn btn-default">Absen</button></a></div></td>
+                                <td width="10%"></td>
+                                <td width="80%"><?=$row['activity_title'];?></td>
+                                <?php $stts = $this->db->get_where('activity_result', array('activity_bank_id' => $row['activity_bank_id'], 'student_id' => $this->session->userdata('student_id'), 'date' => date('Y-m-d')));
+                                    if($stts->num_rows() > 0){
+                                        echo '<td><div class="btn-group"><a href="#"><button class="btn btn-success">Done</button></a></div></td>';
+                                    }else{
+                                        echo '<td><div class="btn-group"><a href="'.site_url('student/tugas_add/'.$row['activity_bank_id']).'"><button class="btn btn-default">Absen</button></a></div></td>';
+                                    }
+                                 ?>
                             </tr>
-                            <?php } else { ?>
-                                <tr class="gradeA">
-                                <th width="10%"></th>
-                                <th width="80%"><?=$row['judul'];?></th>
-                                <td><div class="btn-group"><a href="#"><button class="btn btn-success">Success</button></a></div></td>
-                            </tr>
-                            <?php }?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

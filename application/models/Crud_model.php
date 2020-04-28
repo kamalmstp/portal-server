@@ -1096,4 +1096,14 @@ class Crud_model extends CI_Model {
         die();*/
         $this->db->insert('daily_activity', $data);
     }
+
+    function get_ibadah(){
+        $ibadah = $this->db->get_where('activity_bank', array('type' => 'Ibadah'));
+        return $ibadah;
+    }
+
+    function get_tugas(){
+        $tugas = $this->db->get_where('activity_bank', array('type' => 'Tugas'));
+        return $tugas;
+    }
 }

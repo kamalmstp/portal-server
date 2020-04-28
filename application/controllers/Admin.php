@@ -3887,4 +3887,5 @@ class Admin extends CI_Controller
         $page_data['page_title'] = $this->db->get_where('daily_activity', array('activity_id'=>$activity_id))->row()->title;
         $this->load->view('backend/index', $page_data);
     }
+    
 }
