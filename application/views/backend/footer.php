@@ -1,7 +1,7 @@
 <!-- Footer -->
 <footer class="main">
-	&copy; 2019 
+	&copy; 2020  
 	<a href="http://almazayaislamicschool.sch.id"
-    	target="_blank">SMA Al-Mazaya</a>
+    	target="_blank">Al-Mazaya</a>
 	| Almazaya, Integrated School Management System
 </footer>

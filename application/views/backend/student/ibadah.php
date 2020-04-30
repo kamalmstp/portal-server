@@ -38,8 +38,20 @@
                                  ?>
                             </tr>
                             <?php 
-                            }else{
-                            ?>
+                            }elseif($row['status'] == 2){
+                                ?>
+                                <tr class="gradeA">
+                                    <td width="10%"><?=$row['time_start'];?></td>
+                                    <td width="80%"><?=$row['activity_title'];?></td>
+                                    <?php $stts = $this->db->get_where('activity_result', array('activity_bank_id' => $row['activity_bank_id'], 'student_id' => $this->session->userdata('student_id'), 'date' => date('Y-m-d')));
+                                        if($stts->num_rows() > 0){
+                                            echo '<td><div class="btn-group"><a href="#"><button class="btn btn-success">Done</button></a></div></td>';
+                                        }else{
+                                            echo '<td><div class="btn-group"><a href="'.site_url('student/ibadah_add2/'.$row['activity_bank_id']).'"><button class="btn btn-default">Absen</button></a></div></td>';
+                                        }
+                                     ?>
+                                </tr>
+                            <?php }else{ ?>
                             <tr class="gradeA">
                                 <td width="10%"><?=$row['time_start'];?></td>
                                 <td width="80%"><?=$row['activity_title'];?></td>
@@ -47,7 +59,7 @@
                                     if($stts->num_rows() > 0){
                                         echo '<td><div class="btn-group"><a href="#"><button class="btn btn-success">Done</button></a></div></td>';
                                     }else{
-                                        echo '<td><div class="btn-group"><a href="'.site_url('student/new_activity/'.$row['activity_bank_id']).'"><button class="btn btn-default">Absen</button></a></div></td>';
+                                        echo '<td><div class="btn-group"><a href="'.site_url('student/ibadah_add/'.$row['activity_bank_id']).'"><button class="btn btn-default">Absen</button></a></div></td>';
                                     }
                                  ?>
                             </tr>

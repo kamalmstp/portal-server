@@ -68,24 +68,16 @@
             </a>
         </li>
 
-        <li class="<?php if ($page_name == 'activity_report' || $page_name == 'report') echo 'opened active';?> ">
+        <li class="<?php if ($page_name == 'activity_report' || $page_name == 'book_request') echo 'opened active';?> ">
             <a href="#">
                 <i class="entypo-book"></i>
                 <span><?php echo get_phrase('report_kegiatan'); ?></span>
             </a>
             <ul>
-                <li class="<?php if ($page_name == 'daily_report') echo 'active'; ?> ">
-                    <a href="<?php echo site_url($account_type.'/daily_report'); ?>">
+                <li class="<?php if ($page_name == 'activity_report') echo 'active'; ?> ">
+                    <a href="<?php echo site_url($account_type.'/activity_report'); ?>">
                         <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('report_harian'); ?></span>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="<?php if ($page_name == 'report') echo 'active'; ?> ">
-                    <a href="<?php echo site_url($account_type.'/report'); ?>">
-                        <i class="entypo-dot"></i>
-                        <span><?php echo get_phrase('report_semua'); ?></span>
+                        <span><?php echo get_phrase('report'); ?></span>
                     </a>
                 </li>
             </ul>

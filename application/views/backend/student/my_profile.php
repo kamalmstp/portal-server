@@ -74,7 +74,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('NISN');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="nisn" value="<?php echo $row['nisn'];?>" disabled/>
+                                    <input type="text" class="form-control" name="nisn" value="<?php echo $row['nisn'];?>" required/>
                                 </div>
                             </div>
 

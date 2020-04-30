@@ -53,7 +53,19 @@ class Student extends CI_Controller
     {
         if ($this->session->userdata('student_login') != 1)
             redirect(base_url(), 'refresh');
+        
+        $sekarang = new DateTime();
+        $menit = $sekarang -> getOffset() / 60;
             
+        $tanda = ($menit < 0 ? -1 : 1);
+        $menit = abs($menit);
+        $jam = floor($menit / 60);
+        $menit -= $jam * 60;
+            
+        $offset = sprintf('%+d:%02d', $tanda * $jam, $menit);
+        $sql = 'SET time_zone = "'.$offset.'"';
+        
+        $this->db->query($sql);
         
         $this->db->select('*');
         $this->db->from('activity_bank');
@@ -87,7 +99,18 @@ class Student extends CI_Controller
         $page_data['page_title'] = get_phrase('add_ibadah');
         $this->load->view('backend/index', $page_data);
     }
+    
+    function ibadah_add2($id)
+    {
+        if ($this->session->userdata('student_login') != 1)
+            redirect(base_url(), 'refresh');
 
+        $page_data['page_name']  = 'ibadah_add2';
+        $page_data['id']  = $id;
+        $page_data['page_title'] = get_phrase('add_ibadah');
+        $this->load->view('backend/index', $page_data);
+    }
+    
     function tadarus_add($id)
     {
         if ($this->session->userdata('student_login') != 1)
@@ -103,26 +126,40 @@ class Student extends CI_Controller
         if ($this->session->userdata('student_login') != 1)
             redirect(site_url('login'), 'refresh');
 
-        $waktu = strtotime(date('Y-m-d H:i:s'));
-
-        $namafile = $this->session->userdata('student_id')."_".$waktu.".jpg";
-        $data['activity_bank_id']      = $this->input->post('id');
-        $data['student_id']      = $this->session->userdata('student_id');
-        $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
-        $data['time_server']  =  strtotime(date("Y-m-d H:i:s"));
-        $data['date']      = date("Y-m-d");
-        $data['gambar_start']      = $namafile;
-        $data['surah_start']      = html_escape($this->input->post('surah_start'));
-        $data['halaman_start']      = html_escape($this->input->post('halaman_start'));
-        $data['waktu_start']      = strtotime(date("Y-m-d H:i:s"));
-        $data['result']      = 'start';
-
-        $up = move_uploaded_file($_FILES['images_start']['tmp_name'], 'uploads/ramadhan/' . $namafile);
-        if ($up) {
-            $this->db->insert('activity_result', $data);
-        } else {
-            echo "Upload Gagal!";
-        }
+            $this->load->library('upload');
+        
+            $config['upload_path'] = './uploads/ramadhan/';
+            $config['allowed_types'] = '*';
+            $config['encrypt_name'] = TRUE;
+     
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('images_start')){
+                $gbr = $this->upload->data();
+                //Compress Image
+                $config['image_library']='gd2';
+                $config['source_image']='./uploads/ramadhan/'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+                $config['new_image']= './uploads/ramadhan/'.$gbr['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+    
+                $nama      = $gbr['file_name'];
+                $data['activity_bank_id']      = $this->input->post('id');
+                $data['student_id']      = $this->session->userdata('student_id');
+                $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
+                $data['time_server']  =  strtotime(date("Y-m-d H:i:s"));
+                $data['date']      = date("Y-m-d");
+                $data['gambar_start']      = $nama;
+                $data['surah_start']      = html_escape($this->input->post('surah_start'));
+                $data['halaman_start']      = html_escape($this->input->post('halaman_start'));
+                $data['waktu_start']      = strtotime(date("Y-m-d H:i:s"));
+                $data['result']      = 'start';
+                $this->db->insert('activity_result', $data);
+            }
         redirect(site_url('student/ibadah'), 'refresh');
     }
 
@@ -141,26 +178,42 @@ class Student extends CI_Controller
         if ($this->session->userdata('student_login') != 1)
             redirect(site_url('login'), 'refresh');
 
-        $waktu = strtotime(date('Y-m-d H:i:s'));
-        $id = $this->input->post('id');
-        $namafile = $this->session->userdata('student_id')."_".$waktu.".jpg";
-        $data['note']      = html_escape($this->input->post('note'));
-        $data['gambar_end']      = $namafile;
-        $data['surah_end']      = html_escape($this->input->post('surah_end'));
-        $data['halaman_end']      = html_escape($this->input->post('halaman_end'));
-        $data['waktu_end']      = strtotime(date("Y-m-d H:i:s"));
-        $data['result']      = 'finish';
-
-        $up = move_uploaded_file($_FILES['images_end']['tmp_name'], 'uploads/ramadhan/' . $namafile);
-        if ($up) {
-            $this->db->where('activity_result_id', $id);
-            $this->db->update('activity_result', $data);
-        } else {
-            echo "Upload Gagal!";
-        }
+            $this->load->library('upload');
+        
+            $config['upload_path'] = './uploads/ramadhan/';
+            $config['allowed_types'] = '*';
+            $config['encrypt_name'] = TRUE;
+     
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('images_end')){
+                $gbr = $this->upload->data();
+                //Compress Image
+                $config['image_library']='gd2';
+                $config['source_image']='./uploads/ramadhan/'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+                $config['new_image']= './uploads/ramadhan/'.$gbr['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+    
+                $nama      = $gbr['file_name'];
+                $id = $this->input->post('id');
+                $data['note']      = html_escape($this->input->post('note'));
+                $data['gambar_end']      = $nama;
+                $data['surah_end']      = html_escape($this->input->post('surah_end'));
+                $data['halaman_end']      = html_escape($this->input->post('halaman_end'));
+                $data['waktu_end']      = strtotime(date("Y-m-d H:i:s"));
+                $data['result']      = 'finish';
+                
+                $this->db->where('activity_result_id', $id);
+                $this->db->update('activity_result', $data);
+            }
         redirect(site_url('student/ibadah'), 'refresh');
     }
-
+    
     function menghafal(){
         if ($this->session->userdata('student_login') != 1)
             redirect(site_url('login'), 'refresh');
@@ -205,22 +258,37 @@ class Student extends CI_Controller
         if ($this->session->userdata('student_login') != 1)
             redirect(site_url('login'), 'refresh');
 
-        $waktu = strtotime(date('Y-m-d H:i:s'));
+        $this->load->library('upload');
+        
+        $config['upload_path'] = './uploads/ramadhan/';
+        $config['allowed_types'] = '*';
+        $config['encrypt_name'] = TRUE;
+ 
+        $this->upload->initialize($config);
+        if ($this->upload->do_upload('images')){
+            $gbr = $this->upload->data();
+            //Compress Image
+            $config['image_library']='gd2';
+            $config['source_image']='./uploads/ramadhan/'.$gbr['file_name'];
+            $config['create_thumb']= FALSE;
+            $config['maintain_ratio']= FALSE;
+            $config['quality']= '50%';
+            $config['width']= 600;
+            $config['height']= 400;
+            $config['new_image']= './uploads/ramadhan/'.$gbr['file_name'];
+            $this->load->library('image_lib', $config);
+            $this->image_lib->resize();
 
-        $namafile = $this->session->userdata('student_id')."_".$waktu.".jpg";
-        $data['activity_bank_id']      = $this->input->post('id');
-        $data['student_id']      = $this->session->userdata('student_id');
-        $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
-        $data['time_server']  =  strtotime(date("Y-m-d H:i:s"));
-        $data['date']      = date("Y-m-d");
-        $data['note']      = html_escape($this->input->post('note'));
-        $data['gambar']      = $namafile;
+            $nama      = $gbr['file_name'];
+            $data['activity_bank_id']      = $this->input->post('id');
+            $data['student_id']      = $this->session->userdata('student_id');
+            $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
+            $data['time_server']  =  strtotime(date("Y-m-d H:i:s"));
+            $data['date']      = date("Y-m-d");
+            $data['note']      = html_escape($this->input->post('note'));
+            $data['gambar']      = $nama;
 
-        $up = move_uploaded_file($_FILES['images']['tmp_name'], 'uploads/ramadhan/' . $namafile);
-        if ($up) {
             $this->db->insert('activity_result', $data);
-        } else {
-            echo "Upload Gagal!";
         }
         redirect(site_url('student/ibadah'), 'refresh');
     }
@@ -231,7 +299,7 @@ class Student extends CI_Controller
 
         $waktu = strtotime(date('Y-m-d H:i:s'));
 
-        // $namafile = $this->session->userdata('student_id')."_".$waktu.".jpg";
+        $namafile = $this->session->userdata('student_id')."_".$waktu.".jpg";
         $data['activity_bank_id']      = $this->input->post('id');
         $data['student_id']      = $this->session->userdata('student_id');
         $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
@@ -247,6 +315,30 @@ class Student extends CI_Controller
             // echo "Upload Gagal!";
         // }
         redirect(site_url('student/tugas'), 'refresh');
+    }
+    
+    function new_activity2(){
+        if ($this->session->userdata('student_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $waktu = strtotime(date('Y-m-d H:i:s'));
+
+        $namafile = $this->session->userdata('student_id')."_".$waktu.".jpg";
+        $data['activity_bank_id']      = $this->input->post('id');
+        $data['student_id']      = $this->session->userdata('student_id');
+        $data['time_hp']      = strtotime(date("Y-m-d H:i:s"));
+        $data['time_server']  =  strtotime(date("Y-m-d H:i:s"));
+        $data['date']      = date("Y-m-d");
+        $data['note']      = html_escape($this->input->post('note'));
+        // $data['gambar']      = $namafile;
+
+        // $up = move_uploaded_file($_FILES['images']['tmp_name'], 'uploads/ramadhan/' . $namafile);
+        // if ($up) {
+            $this->db->insert('activity_result', $data);
+        // } else {
+            // echo "Upload Gagal!";
+        // }
+        redirect(site_url('student/ibadah'), 'refresh');
     }
 
     function tugas()
@@ -279,6 +371,15 @@ class Student extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    function history()
+    {
+        if ($this->session->userdata('student_login') != 1)
+            redirect(base_url(), 'refresh');
+        $page_data['page_name']  = 'history';
+        $page_data['page_title'] = get_phrase('history_ramadhan');
+        $this->load->view('backend/index', $page_data);
+    }
+    
     function activity_report()
     {
         if ($this->session->userdata('student_login') != 1)
@@ -288,25 +389,6 @@ class Student extends CI_Controller
         $activity = $this->db->get_where('activity_bank', array('type' => 'Ibadah'))->result_array();
         $tugas = $this->db->get_where('activity_bank', array('type' => 'Tugas'))->result_array();
 
-        $date1 = "24-04-2020";
-        $date2 = "23-05-2020";
-        $pecahTgl1 = explode("-", $date1);
-        $tgl1 = $pecahTgl1[0];
-        $bln1 = $pecahTgl1[1];
-        $thn1 = $pecahTgl1[2];
-
-        $i = 0;
-        $sum = 0;
-        do {
-            $tanggal = date("d-m-Y", mktime(0, 0, 0, $bln1, $tgl1+$i, $thn1));
-            if (date("w", mktime(0, 0, 0, $bln1, $tgl1+$i, $thn1)) == 0)
-            {
-                $sum++;
-                echo $tanggal."<br>";
-            }
-            $i++;
-        } while ($tanggal != $date2);
-
         $page_data['page_name']  = 'activity_report';
         $page_data['tanggal']  = $tanggal;
         $page_data['activity']  = $activity;
@@ -314,70 +396,6 @@ class Student extends CI_Controller
         $page_data['page_title'] = get_phrase('report_kegiatan');
         $this->load->view('backend/index', $page_data);
     }
-
-    function report()
-    {
-        if ($this->session->userdata('student_login') != 1)
-            redirect(base_url(), 'refresh');
-        
-        $tanggal = $this->db->get_where('daily_activity', array('activity_id' => 4))->row();
-        $activity = $this->db->get_where('activity_bank', array('type' => 'Ibadah'))->result_array();
-        $tugas = $this->db->get_where('activity_bank', array('type' => 'Tugas'))->result_array();
-
-        // $date1 = "24-04-2020";
-        // $date2 = "23-05-2020";
-        // $pecahTgl1 = explode("-", $date1);
-        // $tgl1 = $pecahTgl1[0];
-        // $bln1 = $pecahTgl1[1];
-        // $thn1 = $pecahTgl1[2];
-
-        // $i = 0;
-        // $sum = 0;
-        // do {
-        //     $tanggal = date("d-m-Y", mktime(0, 0, 0, $bln1, $tgl1+$i, $thn1));
-        //     if (date("w", mktime(0, 0, 0, $bln1, $tgl1+$i, $thn1)) == 0)
-        //     {
-        //         $sum++;
-        //         echo $tanggal."<br>";
-        //     }
-        //     $i++;
-        // } while ($tanggal != $date2);
-
-        $page_data['page_name']  = 'report';
-        $page_data['tanggal']  = $tanggal;
-        $page_data['activity']  = $activity;
-        $page_data['tugas']  = $tugas;
-        $page_data['page_title'] = get_phrase('report_kegiatan');
-        $this->load->view('backend/index', $page_data);
-    }
-
-    function report_selector()
-    {   if($this->input->post('time') == '') {
-            $this->session->set_flashdata('error_message' , get_phrase('please_select_time_report'));
-            redirect(site_url('student/report'), 'refresh');
-        }
-
-        $data['time']       = $this->input->post('time');
-        
-        redirect(site_url('student/report_view/'.$data['time']), 'refresh');
-    }
-
-    function report_view($time)
-     {
-         if($this->session->userdata('student_login')!=1)
-            redirect(base_url() , 'refresh');
-
-        $tanggal = $this->db->get_where('daily_activity', array('activity_id' => 4))->row();
-        $activity = $this->db->get_where('activity_bank', array('type' => 'Ibadah'))->result_array();
-        $tugas = $this->db->get_where('activity_bank', array('type' => 'Tugas'))->result_array();
-
-        $page_data['page_name']  = 'report_view';
-        $page_data['tanggal']  = $tanggal;
-        $page_data['activity']  = $activity;
-        $page_data['tugas']  = $tugas;
-        $page_data['page_title'] = get_phrase('report_kegiatan');
-        $this->load->view('backend/index', $page_data);
-     }
 
     /***ADMIN DASHBOARD***/
     function my_profile($param1 ='', $param2 ='')
@@ -892,17 +910,17 @@ class Student extends CI_Controller
                 $data['sex']      = $this->input->post('sex');
             }
 
-            $validation = email_validation_for_edit($data['email'], $this->session->userdata('student_id'), 'student');
-            if($validation == 1){
+            // $validation = email_validation_for_edit($data['email'], $this->session->userdata('student_id'), 'student');
+            // if($validation == 1){
 
-                $this->db->where('student_id', $this->session->userdata('student_id'));
-                $this->db->update('student', $data);
-                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $this->session->userdata('student_id') . '.jpg');
-                $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message', get_phrase('this_email_id_is_not_available'));
-            }
+            //     $this->db->where('student_id', $this->session->userdata('student_id'));
+            //     $this->db->update('student', $data);
+            //     move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $this->session->userdata('student_id') . '.jpg');
+            //     $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
+            // }
+            // else{
+            //     $this->session->set_flashdata('error_message', get_phrase('this_email_id_is_not_available'));
+            // }
 
             $this->db->where('student_id', $this->session->userdata('student_id'));
             $this->db->update('student', $data);

@@ -3888,4 +3888,34 @@ class Admin extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
     
+    function tugas_add()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+
+        $page_data['page_name']  = 'tugas_add';
+        $page_data['page_title'] = get_phrase('add_tugas');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function tugas_create()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+
+        $img = $_POST['image'];
+        $folderPath = base_url("upload/");
+        
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = 'gambar.png';
+        
+        $file = $folderPath . $fileName;
+        file_put_contents($file, $image_base64);
+
+        redirect(site_url('admin/tugas'), 'refresh');
+    }
 }
